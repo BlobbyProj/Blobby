@@ -7,9 +7,12 @@ ObjectManager::~ObjectManager()
 		delete objects[i];
 }
 
-void ObjectManager::add(Object *object)
-{
+unsigned int ObjectManager::add(Object *object)
+{	
+	unsigned int oid = objects.size();
+	object->oid(oid);
 	objects.push_back(object);
+	return oid;
 }
 
 void ObjectManager::step()
@@ -26,13 +29,16 @@ void ObjectManager::events(SDL_Event *event)
 		objects[i]->events(event);
 }
 
-void ObjectManager::draw(Screen *screen)
+void ObjectManager::draw()
 {
+
 	int i;
-	screen->clear(0,0,0);
+	screen->clear(global_background[0],global_background[1],global_background[2]);
+	
 	for( i = 0; i < objects.size(); i++)
 	{
-		if (objects[i]->visible() == 1)
+		objects[i]->draw();
+/*		if (objects[i]->visible() == 1)
 		{
 			if (screen->surface_exist(objects[i]->iid()))
 			{
@@ -44,7 +50,7 @@ void ObjectManager::draw(Screen *screen)
 			{
 ERROR("Image " << objects[i]->iid() << " failed to load")
 			}
-		}
+		}*/
 	}
 	screen->flip();
 }

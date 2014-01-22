@@ -135,6 +135,20 @@ bool Screen::surface_exist( unsigned int IID )
 		return 1;
 }
 
+int Screen::surface_width( unsigned int IID )
+{
+	if (surface_exist(IID))
+		return images[IID]->w;
+	else
+		return -1;
+}
 
+int Screen::surface_height( unsigned int IID )
+{
+	if (surface_exist(IID))
+		return images[IID]->h;
+	else
+		return -1;
+}
 
 

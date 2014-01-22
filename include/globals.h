@@ -4,6 +4,16 @@
 //g++ main.cxx screen.cxx objectmanager.cxx bug.cxx -o main -lmingw32 -lSDLmain -lSDL -static-libgcc -static-libstdc++
 #define DEBUG
 
+class Screen;
+extern Screen *screen;
+
+class ObjectManager;
+extern ObjectManager *objmgr;
+
+//Global settings
+extern int global_gamestate;
+extern char global_background[3];
+
 #ifdef DEBUG
 #include <iostream>
 #define FLAG std::cerr<<__LINE__<<": Flagged"<<std::endl;

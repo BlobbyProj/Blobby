@@ -4,7 +4,7 @@
 #include "SDL/SDL.h"
 #include <string>
 #include <vector>
-#include "main.h"
+#include "globals.h"
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
     const int rmask = 0xff000000;
@@ -25,6 +25,7 @@ class Screen {
 		int Width;
 		int Height;
 		int BPP;
+		
 	public:
 		Screen(int width, int height, int bpp);
 		~Screen();
@@ -41,6 +42,9 @@ class Screen {
 		bool surface_delete( unsigned int IID );
 		bool surface_apply( int x, int y, unsigned int IID);
 		bool surface_exist( unsigned int IID );
+		
+		int surface_width( unsigned int IID );
+		int surface_height( unsigned int IID );
 };
 
 #endif
