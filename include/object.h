@@ -6,19 +6,19 @@
 
 class Object {
 	protected:
-		double X;
-		double Y;
-		unsigned int OID;
-		unsigned int *IID;
-		bool Visible;
+		double x;
+		double y;
+		unsigned int oid;
+		unsigned int *iid;
+		bool visible;
 		
 	public:
-		double x() { return X; }
-		double y() { return Y; }
-		unsigned int iid(unsigned int val) { return IID[val]; }	
-		bool visible() { return Visible; }
+		double get_x() { return x; }
+		double get_y() { return y; }
+		unsigned int get_iid(unsigned int val) { return iid[val]; }	
+		bool get_visible() { return visible; }
 		
-		void oid(unsigned int val) { OID = val; }
+		void set_oid(unsigned int val) { oid = val; }
 		
 		virtual void step()=0;
 		virtual void events(SDL_Event *event)=0;

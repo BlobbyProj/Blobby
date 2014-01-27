@@ -17,7 +17,7 @@ class Button : public Object {
 		void (*function)();
 		
 	public:
-		Button(double x, double y, unsigned int iid, unsigned int iid_pressed, bool visible, void (*otherFunction)());
+		Button(double X, double Y, unsigned int IID, unsigned int IID_Pressed, bool Visible, void (*otherFunction)());
 		
 		void step() {};
 		void events(SDL_Event *event);

@@ -4,35 +4,28 @@
 #include "SDL/SDL.h"
 #include <string>
 #include <vector>
+#include <map>
+#include <functional>
 #include "globals.h"
 
-#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-    const int rmask = 0xff000000;
-    const int gmask = 0x00ff0000;
-    const int bmask = 0x0000ff00;
-    const int amask = 0x000000ff;
-#else
-    const int rmask = 0x000000ff;
-    const int gmask = 0x0000ff00;
-    const int bmask = 0x00ff0000;
-    const int amask = 0xff000000;
-#endif
+
 
 class Screen {
 	private:
 		SDL_Surface *screen;
-		std::vector<SDL_Surface*> images;
-		int Width;
-		int Height;
-		int BPP;
+		//std::vector<SDL_Surface*> images;
+		std::map<unsigned int,SDL_Surface*> *images;
+		int width;
+		int height;
+		int bpp;
 		
 	public:
-		Screen(int width, int height, int bpp);
+		Screen(int Width, int Height, int BPP);
 		~Screen();
 		
-		int width() { return Width; }
-		int height() { return Height; }
-		int bpp() { return BPP; }
+		int get_width() { return width; }
+		int get_height() { return height; }
+		int get_bpp() { return bpp; }
 		
 		bool clear(int R, int G, int B);
 		bool flip();

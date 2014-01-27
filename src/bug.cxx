@@ -1,18 +1,18 @@
 #include "bug.h"
 
-Bug::Bug(double x, double y, unsigned int iid, bool visible)
+Bug::Bug(double X, double Y, unsigned int IID, bool Visible)
 {	
-	X = x;
-	Y = y;
-	IID = new unsigned int;
-	IID[0] = iid;
+	x = X;
+	y = Y;
+	iid = new unsigned int;
+	iid[0] = IID;
 	vel = 0.5;
-	Visible = visible;
+	visible = Visible;
 }
 
 Bug::~Bug()
 {
-	delete IID;
+	delete iid;
 }
 
 void Bug::events(SDL_Event *event)
@@ -43,21 +43,21 @@ void Bug::events(SDL_Event *event)
 
 void Bug::step()
 {
-	X = X + xvel;
-	Y = Y + yvel;
+	x = x + xvel;
+	y = y + yvel;
 }
 
 void Bug::draw()
 {
-	if (Visible == 1)
+	if (visible == 1)
 	{
-		if (screen->surface_exist(IID[0]))
+		if (screen->surface_exist(iid[0]))
 		{
-			screen->surface_apply( static_cast<int>(X), static_cast<int>(Y), IID[0] );
+			screen->surface_apply( static_cast<int>(x), static_cast<int>(y), iid[0] );
 		}
 		else
 		{
-ERROR("Image " << IID[0] << " failed to load")
+ERROR("Image " << iid[0] << " failed to load")
 		}
 	}
 }

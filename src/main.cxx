@@ -11,7 +11,6 @@ int main( int argc, char* args[] )
 	int i;
 	
 	SDL_Event event;
-	
 	objmgr->add(new Bug(10,10,screen->surface_load("images/block.bmp"),1));
 	
 	objmgr->add(new Button(50,50,screen->surface_load("images/ButtonRedUnpressed.bmp"),screen->surface_load("images/ButtonRedPressed.bmp"),1,ButtonRed));

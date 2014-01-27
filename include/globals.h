@@ -10,6 +10,8 @@ extern Screen *screen;
 class ObjectManager;
 extern ObjectManager *objmgr;
 
+//extern std::map<unsigned int,int> img;
+
 //Global settings
 extern int global_gamestate;
 extern char global_background[3];

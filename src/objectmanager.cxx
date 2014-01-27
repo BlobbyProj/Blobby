@@ -10,7 +10,7 @@ ObjectManager::~ObjectManager()
 unsigned int ObjectManager::add(Object *object)
 {	
 	unsigned int oid = objects.size();
-	object->oid(oid);
+	object->set_oid(oid);
 	objects.push_back(object);
 	return oid;
 }

@@ -11,7 +11,7 @@ class Bug : public Object {
 		double xvel;
 		double yvel;
 	public:
-		Bug(double x, double y, unsigned int iid, bool visible);
+		Bug(double X, double Y, unsigned int IID, bool Visible);
 		~Bug();
 		
 		void step();

@@ -1,0 +1,7 @@
+82: images/block.bmp : 1 : 907971791
+82: images/ButtonRedUnpressed.bmp : 2 : 269520140
+82: images/ButtonRedPressed.bmp : 3 : 1045643722
+82: images/ButtonGreenUnpressed.bmp : 4 : 1515722179
+82: images/ButtonGreenPressed.bmp : 5 : 1247346150
+82: images/ButtonBlueUnpressed.bmp : 6 : 2031357734
+82: images/ButtonBluePressed.bmp : 7 : 2247300798

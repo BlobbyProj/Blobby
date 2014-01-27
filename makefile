@@ -3,7 +3,7 @@ SDIR = src
 ODIR = obj
 	
 CC = g++
-CFLAGS = -I$(IDIR)
+CFLAGS = -I$(IDIR)  -std=c++0x
 LFLAGS = -static-libgcc -static-libstdc++
 LIBS = -lmingw32 -lSDLmain -lSDL
 
