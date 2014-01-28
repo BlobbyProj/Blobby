@@ -1,8 +1,8 @@
 #include <iostream>
 #include "globals.h"
-#include "screen.h"
+#include "screenmanager.h"
 #include "objectmanager.h"
-#include "bug.h"
+#include "playercharacter.h"
 #include "button.h"
 
 int main( int argc, char* args[] )
@@ -11,11 +11,13 @@ int main( int argc, char* args[] )
 	int i;
 	
 	SDL_Event event;
-	objmgr->add(new Bug(10,10,screen->surface_load("images/block.bmp"),1));
+	unsigned int pc = objmgr->add(new PlayerCharacter(10,10,"images/block.bmp",1));
 	
-	objmgr->add(new Button(50,50,screen->surface_load("images/ButtonRedUnpressed.bmp"),screen->surface_load("images/ButtonRedPressed.bmp"),1,ButtonRed));
-	objmgr->add(new Button(50,150,screen->surface_load("images/ButtonGreenUnpressed.bmp"),screen->surface_load("images/ButtonGreenPressed.bmp"),1,ButtonGreen));
-	objmgr->add(new Button(50,250,screen->surface_load("images/ButtonBlueUnpressed.bmp"),screen->surface_load("images/ButtonBluePressed.bmp"),1,ButtonBlue));
+	objmgr->add(new Button(50,50,"images/ButtonRedUnpressed.bmp","images/ButtonRedPressed.bmp",1,ButtonRed));
+	objmgr->add(new Button(50,150,"images/ButtonGreenUnpressed.bmp","images/ButtonGreenPressed.bmp",1,ButtonGreen));
+	objmgr->add(new Button(50,250,"images/ButtonBlueUnpressed.bmp","images/ButtonBluePressed.bmp",1,ButtonBlue));
+	
+	objmgr->load_surfaces();
 	
     //While the user hasn't quit
     while( quit == false )
@@ -38,11 +40,10 @@ int main( int argc, char* args[] )
 		objmgr->step();
 		
     }
-
+	
     //Free the surface and quit SDL
 	delete objmgr;
 	delete screen;
-    SDL_Quit();
 
     return 0;
 }

@@ -2,7 +2,7 @@
 #define BUTTON_H
 
 #include "globals.h"
-#include "screen.h"
+#include "screenmanager.h"
 #include "object.h"
 
 void ButtonRed();
@@ -17,11 +17,13 @@ class Button : public Object {
 		void (*function)();
 		
 	public:
-		Button(double X, double Y, unsigned int IID, unsigned int IID_Pressed, bool Visible, void (*otherFunction)());
+		Button(double X, double Y, std::string filename_unpressed, std::string filename_pressed, bool Visible, void (*otherFunction)());
+		~Button();
 		
 		void step() {};
 		void events(SDL_Event *event);
 		void draw();
+		void load_surfaces();
 };
 
 #endif

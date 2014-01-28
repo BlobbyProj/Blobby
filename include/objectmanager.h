@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "globals.h"
-#include "screen.h"
+#include "screenmanager.h"
 #include "object.h"
 
 class ObjectManager {
@@ -13,10 +13,13 @@ class ObjectManager {
 	public:
 		~ObjectManager();
 		
+		unsigned int add(Object *object);
+		unsigned int del(unsigned int val);
+		
 		void step();
 		void events(SDL_Event *event);
 		void draw();
-		unsigned int add(Object *object);
+		void load_surfaces();
 };
 
 #endif

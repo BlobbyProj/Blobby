@@ -15,6 +15,12 @@ unsigned int ObjectManager::add(Object *object)
 	return oid;
 }
 
+unsigned int ObjectManager::del(unsigned int val)
+{
+	delete objects[val];
+	objects.erase(objects.begin()+val);
+}
+
 void ObjectManager::step()
 {
 	int i;
@@ -38,19 +44,15 @@ void ObjectManager::draw()
 	for( i = 0; i < objects.size(); i++)
 	{
 		objects[i]->draw();
-/*		if (objects[i]->visible() == 1)
-		{
-			if (screen->surface_exist(objects[i]->iid()))
-			{
-				screen->surface_apply( static_cast<int>(objects[i]->x())
-									 , static_cast<int>(objects[i]->y())
-									 , objects[i]->iid() );
-			}
-			else
-			{
-ERROR("Image " << objects[i]->iid() << " failed to load")
-			}
-		}*/
 	}
 	screen->flip();
+}
+
+void ObjectManager::load_surfaces()
+{
+	int i;
+	for ( i = 0; i < objects.size(); i++)
+	{
+		objects[i]->load_surfaces();
+	}
 }
