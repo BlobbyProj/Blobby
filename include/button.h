@@ -5,19 +5,21 @@
 #include "screenmanager.h"
 #include "object.h"
 
-void ButtonRed();
-void ButtonGreen();
-void ButtonBlue();
+void ButtonPlay(bool init,std::string *filenames);
+void ButtonQuit(bool init,std::string *filenames);
+void ButtonPause(bool init,std::string *filenames);
+void ButtonResume(bool init,std::string *filenames);
+void ButtonMainMenu(bool init,std::string *filenames);
 
 class Button : public Object {
 	private:
 		bool pressed;
 		int width;
 		int height;
-		void (*function)();
+		void (*function)(bool,std::string*);
 		
 	public:
-		Button(double X, double Y, std::string filename_unpressed, std::string filename_pressed, bool Visible, void (*otherFunction)());
+		Button(double X, double Y, void (*otherFunction)(bool,std::string*));
 		~Button();
 		
 		void step() {};

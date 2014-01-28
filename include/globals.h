@@ -5,14 +5,20 @@
 #define DEBUG
 
 class ScreenManager;
-extern ScreenManager *screen;
+extern ScreenManager *screen_manager;
 
 class ObjectManager;
-extern ObjectManager *objmgr;
+extern ObjectManager *object_manager;
+
+class LevelManager;
+extern LevelManager *level_manager;
+
 
 //Global settings
 extern int global_gamestate;
+extern bool global_paused;
 extern char global_background[3];
+extern unsigned int global_background_key;
 
 #ifdef DEBUG
 #include <iostream>

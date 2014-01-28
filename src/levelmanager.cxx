@@ -1,0 +1,45 @@
+#include "levelmanager.h"
+#include "objectmanager.h"
+#include "screenmanager.h"
+#include "button.h"
+#include "sprite.h"
+
+void LevelManager::step()
+{
+	if (global_paused != previous_paused)
+	{
+		switch(global_paused)
+		{
+			case 0:
+				object_manager->pause_objects_clear();
+				break;
+			case 1:
+				object_manager->pause_objects_add(new Sprite(20,20,"images/Menu.bmp"));
+				object_manager->pause_objects_add(new Sprite(120,50,"images/PauseTitle.bmp"));
+				object_manager->pause_objects_add(new Button(120,180,ButtonResume));
+				object_manager->pause_objects_add(new Button(120,320,ButtonMainMenu));
+				break;
+		}
+	}
+	if (global_gamestate != previous_gamestate)
+	{
+		object_manager->objects_clear();
+		switch(global_gamestate)
+		{
+			case 0:
+				object_manager->objects_add(new Sprite(20,20,"images/Menu.bmp"));
+				object_manager->objects_add(new Sprite(120,50,"images/MenuTitle.bmp"));
+				object_manager->objects_add(new Button(120,180,ButtonPlay));
+				object_manager->objects_add(new Button(120,320,ButtonQuit));
+				break;
+			case 1:
+				object_manager->objects_add(new Button(580,30,ButtonPause));
+				break;
+		}
+	}
+	screen_manager->surface_pare();
+	object_manager->load_surfaces();
+	
+	previous_paused = global_paused;
+	previous_gamestate = global_gamestate;
+}

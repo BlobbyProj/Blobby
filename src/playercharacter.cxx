@@ -1,6 +1,6 @@
 #include "playercharacter.h"
 
-PlayerCharacter::PlayerCharacter(double X, double Y, std::string filename, bool Visible)
+PlayerCharacter::PlayerCharacter(double X, double Y, std::string filename)
 {	
 	x = X;
 	y = Y;
@@ -11,10 +11,7 @@ PlayerCharacter::PlayerCharacter(double X, double Y, std::string filename, bool 
 	num_keys = 1;
 	keys = new unsigned int[num_keys];
 	
-	loaded = 0;
-	
 	vel = 0.5;
-	visible = Visible;
 }
 
 PlayerCharacter::~PlayerCharacter()
@@ -22,7 +19,7 @@ PlayerCharacter::~PlayerCharacter()
 	int i;
 	for (i = 0; i < num_keys; i++)
 	{
-		screen->surface_dereference(keys[i]);
+		screen_manager->surface_dereference(keys[i]);
 	}
 
 	delete filenames;
@@ -65,9 +62,9 @@ void PlayerCharacter::draw()
 {
 	if (visible == 1 && loaded == 1)
 	{
-		if (screen->surface_exist(keys[0]))
+		if (screen_manager->surface_exist(keys[0]))
 		{
-			screen->surface_apply( static_cast<int>(x), static_cast<int>(y), keys[0], 0 );
+			screen_manager->surface_apply( static_cast<int>(x), static_cast<int>(y), keys[0], 0 );
 		}
 		else
 		{
@@ -83,8 +80,8 @@ void PlayerCharacter::load_surfaces()
 		int i;
 		for (i = 0; i < num_keys; i++)
 		{
-			keys[i] = screen->surface_load(filenames,1);
-			screen->surface_reference(keys[i]);
+			keys[i] = screen_manager->surface_load(filenames,1);
+			screen_manager->surface_reference(keys[i]);
 		}
 		loaded = 1;
 	}

@@ -9,12 +9,20 @@
 class ObjectManager {
 	private:
 		std::vector<Object*> objects;
+		std::vector<Object*> pause_objects;
 		
 	public:
 		~ObjectManager();
 		
-		unsigned int add(Object *object);
-		unsigned int del(unsigned int val);
+		unsigned int objects_add(Object *object);
+		bool objects_exist(unsigned int val);
+		bool objects_delete(unsigned int val);
+		void objects_clear();
+
+		unsigned int pause_objects_add(Object *object);
+		bool pause_objects_exist(unsigned int val);		
+		bool pause_objects_delete(unsigned int val);
+		void pause_objects_clear();
 		
 		void step();
 		void events(SDL_Event *event);

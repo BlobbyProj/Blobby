@@ -17,6 +17,7 @@ class Object {
 		bool visible;
 		
 	public:
+		Object() : loaded(0), visible(1) {};
 		virtual ~Object() {};
 	
 		double get_x() { return x; }

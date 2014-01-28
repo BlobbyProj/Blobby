@@ -168,18 +168,20 @@ bool ScreenManager::surface_delete( unsigned int key )
 
 bool ScreenManager::surface_apply( int x, int y, unsigned int key, unsigned int frame)
 {
-	//Temporary rectangle to hold the offsets
-    SDL_Rect offset;
-
-    //Get the offsets
-    offset.x = x;
-    offset.y = y;
-
-    //Blit the surface
 	if (surface_exist(key))
+	{
+		//Temporary rectangle to hold the offsets
+		SDL_Rect offset;
+
+		//Get the offsets
+		offset.x = x;
+		offset.y = y;
+
+		//Blit the surface
+
 		return SDL_BlitSurface( (*(*images)[key])[frame], NULL, screen, &offset );
-	else
-		return -1;
+	}
+	return -1;
 }
 
 bool ScreenManager::surface_exist( unsigned int key )
