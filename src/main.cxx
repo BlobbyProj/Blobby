@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 #include "globals.h"
 #include "screenmanager.h"
 #include "objectmanager.h"
@@ -8,20 +9,28 @@ int main( int argc, char* args[] )
 {
 	int i;
 	
+	clock_t time;
+	time = clock();
+	double time_since_last_frame = 0;
+	int steps_since_last_frame = 0;
+	
 	SDL_Event event;
-	
-	//object_manager->objects_add(new PlayerCharacter(10,10,"images/block.bmp"));
-	
-	
-
-	//object_manager->load_surfaces();
 	
 	
     //While the user hasn't quit
     while( global_gamestate != -1 )
     {
-	
-		object_manager->draw();
+		global_timestep = ((double)(clock()-time))/CLOCKS_PER_SEC; //Time is in seconds
+		time = clock();
+		
+		steps_since_last_frame++;
+		time_since_last_frame += global_timestep;
+		if (time_since_last_frame > 1.0/global_fps) //If it is time to redraw
+		{	
+			time_since_last_frame = 0;
+			steps_since_last_frame = 0;
+			object_manager->draw();
+		}
 		
         //While there's an event to handle
         while( SDL_PollEvent( &event ) )

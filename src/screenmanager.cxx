@@ -24,7 +24,7 @@ ScreenManager::ScreenManager(int Width, int Height, int BPP)
     }
 	
     //Set the window caption
-    SDL_WM_SetCaption( "Caption", NULL );
+    SDL_WM_SetCaption( "Blobby", NULL );
 }
 
 ScreenManager::~ScreenManager()
@@ -211,12 +211,17 @@ int ScreenManager::surface_height( unsigned int key, unsigned int frame )
 void ScreenManager::surface_pare()
 {
 	std::map<unsigned int,Surface*>::iterator it;
-	for (it = images->begin(); it != images->end(); ++it)
+	it = images->begin();
+	std::map<unsigned int,Surface*>::iterator it_next;
+	while(it != images->end())
 	{
+		it_next = it;
+		it_next++;
 		if (it->second->referenced() == 0)
 		{
 			surface_delete(it->first);
 		}
+		it = it_next;
 	}
 }
 

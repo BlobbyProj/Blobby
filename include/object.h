@@ -13,11 +13,14 @@ class Object {
 		std::string *filenames;
 		unsigned int num_keys;
 		unsigned int *keys;
+		int width;
+		int height;
 		bool loaded;
 		bool visible;
+		bool solid;
 		
 	public:
-		Object() : loaded(0), visible(1) {};
+		Object() : width(0), height(0), loaded(0), visible(1), solid(0) {};
 		virtual ~Object() {};
 	
 		double get_x() { return x; }

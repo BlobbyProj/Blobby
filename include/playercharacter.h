@@ -7,9 +7,12 @@
 
 class PlayerCharacter : public Object {
 	private:
+		int previous_x;
+		int previous_y;
 		double vel;
 		double xvel;
 		double yvel;
+		
 	public:
 		PlayerCharacter(double X, double Y, std::string filename);
 		~PlayerCharacter();

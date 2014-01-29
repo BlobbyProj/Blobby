@@ -74,9 +74,6 @@ Button::Button(double X, double Y, void (*otherFunction)(bool,std::string*))
 	num_keys = 1;
 	keys = new unsigned int[num_keys];
 	
-	width = 0;
-	height = 0;
-	
 	pressed = 0;
 }
 
@@ -123,7 +120,7 @@ void Button::draw()
 	{
 		if (screen_manager->surface_exist(keys[0]))
 		{
-			screen_manager->surface_apply( static_cast<int>(x), static_cast<int>(y), keys[0], pressed );
+			screen_manager->surface_apply( (int)x, (int)y, keys[0], pressed );
 		}
 		else
 		{
@@ -143,8 +140,8 @@ void Button::load_surfaces()
 			screen_manager->surface_reference(keys[i]);
 		}
 	
-		width = screen_manager->surface_width(keys[0],1);
-		height = screen_manager->surface_height(keys[0],1);
+		width = screen_manager->surface_width(keys[0],0);
+		height = screen_manager->surface_height(keys[0],0);
 		
 		loaded = 1;
 	}

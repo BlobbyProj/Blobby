@@ -14,8 +14,6 @@ void ButtonMainMenu(bool init,std::string *filenames);
 class Button : public Object {
 	private:
 		bool pressed;
-		int width;
-		int height;
 		void (*function)(bool,std::string*);
 		
 	public:

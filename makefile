@@ -3,8 +3,8 @@ SDIR = src
 ODIR = obj
 	
 CC = g++
-CFLAGS = -I$(IDIR)  -std=c++0x
-LFLAGS = -static-libgcc -static-libstdc++
+CFLAGS = -I$(IDIR)  -std=c++0x -g
+LFLAGS = -static-libgcc -static-libstdc++ -g
 LIBS = -lmingw32 -lSDLmain -lSDL
 
 _OBJ = main.o globals.o levelmanager.o screenmanager.o surface.o objectmanager.o playercharacter.o button.o sprite.o
@@ -15,7 +15,7 @@ _DEP = sed -n '/include "/p' test.txt | sed 's/.*"\(.*\)".*/\1/'
 main: $(OBJ)
 	$(CC) -o $@ $^ $(LIBS) $(LFLAGS)
 
-$(ODIR)/main.o: $(SDIR)/main.cxx $(IDIR)/globals.h $(IDIR)/levelmanager.h $(IDIR)/screenmanager.h $(IDIR)/objectmanager.h $(IDIR)/playercharacter.h
+$(ODIR)/main.o: $(SDIR)/main.cxx $(IDIR)/globals.h $(IDIR)/levelmanager.h $(IDIR)/screenmanager.h $(IDIR)/objectmanager.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 $(ODIR)/globals.o: $(SDIR)/globals.cxx $(IDIR)/globals.h

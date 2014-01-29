@@ -20,6 +20,10 @@ extern bool global_paused;
 extern char global_background[3];
 extern unsigned int global_background_key;
 
+extern double global_gravity;
+extern double global_timestep;
+const int global_fps = 60;
+
 #ifdef DEBUG
 #include <iostream>
 #define FLAG std::cerr<<__LINE__<<": Flagged"<<std::endl;

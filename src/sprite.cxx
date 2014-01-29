@@ -30,7 +30,7 @@ void Sprite::draw()
 	{
 		if (screen_manager->surface_exist(keys[0]))
 		{
-			screen_manager->surface_apply( static_cast<int>(x), static_cast<int>(y), keys[0], 0);
+			screen_manager->surface_apply( (int)x, (int)y, keys[0], 0);
 		}
 		else
 		{
@@ -49,6 +49,10 @@ void Sprite::load_surfaces()
 			keys[i] = screen_manager->surface_load(filenames,1);
 			screen_manager->surface_reference(keys[i]);
 		}
+		
+		width = screen_manager->surface_width(keys[0],0);
+		height = screen_manager->surface_height(keys[0],0);
+		
 		loaded = 1;
 	}
 }

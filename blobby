@@ -4,6 +4,8 @@
             <Folder name="buttons">
                 <File name="images\buttons\MainMenuPressed.bmp" />
                 <File name="images\buttons\MainMenuUnpressed.bmp" />
+                <File name="images\buttons\PausePressed.bmp" />
+                <File name="images\buttons\PauseUnpressed.bmp" />
                 <File name="images\buttons\PlayPressed.bmp" />
                 <File name="images\buttons\PlayUnpressed.bmp" />
                 <File name="images\buttons\QuitPressed.bmp" />
@@ -24,7 +26,8 @@
                 <File name="images\old\ExitButtonUnpressed.bmp" />
                 <File name="images\old\PlayButtonPressed.pdn" />
             </Folder>
-            <File name="images\block.bmp" />
+            <File name="images\Block.bmp" />
+            <File name="images\Ground.bmp" />
             <File name="images\Menu.bmp" />
             <File name="images\MenuTitle.bmp" />
             <File name="images\PauseTitle.bmp" />
@@ -41,16 +44,15 @@
             <File name="include\surface.h" />
         </Folder>
         <Folder name="obj">
-            <File name="obj\bug.o" />
+            <File name="obj\block.o" />
             <File name="obj\button.o" />
             <File name="obj\globals.o" />
-            <File name="obj\image.o" />
             <File name="obj\levelmanager.o" />
             <File name="obj\main.o" />
             <File name="obj\objectmanager.o" />
             <File name="obj\playercharacter.o" />
-            <File name="obj\screen.o" />
             <File name="obj\screenmanager.o" />
+            <File name="obj\sprite.o" />
             <File name="obj\surface.o" />
         </Folder>
         <Folder name="src">
@@ -69,5 +71,6 @@
         <File name="makefile" />
         <File name="README.md" />
         <File name="SDL.dll" />
+        <File name="stderr.txt" />
     </Project>
 </NotepadPlus>
