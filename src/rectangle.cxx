@@ -7,3 +7,9 @@ Rectangle::Rectangle()
     width = 0;
     height = 0;
 }
+
+char Rectangle::get_collision(Rectangle bound)
+{
+	char rtn;
+	return rtn;
+}
