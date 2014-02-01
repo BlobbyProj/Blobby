@@ -5,12 +5,10 @@
 #include "globals.h"
 #include "screenmanager.h"
 #include "point.h"
-#include "rectangle.h"
 
 class Object {
 	protected:
 		Point position;
-		Rectangle bound;
 		unsigned int oid;
 		std::string *filenames;
 		unsigned int num_keys;
@@ -27,7 +25,6 @@ class Object {
 	
 		double get_x() { return position.x; }
 		double get_y() { return position.y; }
-		Rectangle get_bound() { return bound; }
 		std::string *get_filenames() { return filenames; }
 		unsigned int get_num_keys() { return (num_keys*loaded); }
 		unsigned int *get_keys() { return keys; }	

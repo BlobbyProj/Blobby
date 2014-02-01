@@ -72,8 +72,6 @@ void PlayerCharacter::step()
 			yvel = 0;
 		position.y = 460-height;
 	}
-
-	bound.set_position(position);
 }
 
 void PlayerCharacter::draw()
@@ -113,9 +111,6 @@ void PlayerCharacter::load_surfaces()
 		
 		width = screen_manager->surface_width(keys[0],0);
 		height = screen_manager->surface_height(keys[0],0);
-
-		bound.set_width(width);
-		bound.set_height(height);
 		
 		loaded = 1;
 	}
