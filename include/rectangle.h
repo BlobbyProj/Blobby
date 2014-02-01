@@ -3,10 +3,13 @@
 
 #include "point.h"
 
-struct Rectangle {
+class Rectangle {
+private:
     Point position;
     double width;
     double height;
+public:
+    Rectangle(double x, double y, double width, double height);
 };
 
 #endif
