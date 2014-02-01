@@ -9,7 +9,7 @@ private:
     double width;
     double height;
 public:
-    Rectangle(double x, double y, double width, double height);
+    Rectangle(Point position, double width, double height);
 };
 
 #endif

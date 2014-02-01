@@ -1,10 +1,7 @@
 #include "rectangle.h"
 
-Rectangle::Rectangle(double X, double Y, double W, double H){
-    Point p;
-    p.x = X;
-    p.y = Y;
-    position = p;
+Rectangle::Rectangle(Point P, double W, double H){
+    position = P;
     width = W;
     height = H;
 }
