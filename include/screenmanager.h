@@ -17,6 +17,9 @@ class ScreenManager {
 		int height;
 		int bpp;
 		
+		SDL_Surface *surface_load( std::string filename );
+		SDL_Surface *surface_load( std::string filename, int R, int G, int B);
+		
 	public:
 		ScreenManager(int Width, int Height, int BPP);
 		~ScreenManager();
@@ -30,10 +33,9 @@ class ScreenManager {
 		
 		unsigned int surface_load( std::string *filenames, unsigned int num_files );
 		unsigned int surface_load( std::string *filenames, unsigned int num_files, int R, int G, int B);
-		SDL_Surface *surface_load( std::string filename );
-		SDL_Surface *surface_load( std::string filename, int R, int G, int B);
 		bool surface_delete( unsigned int key );
 		bool surface_apply( int x, int y, unsigned int key, unsigned int frame);
+		bool surface_apply( int x, int y, unsigned int key, unsigned int frame, char alpha);
 		bool surface_exist( unsigned int key );
 		
 		int surface_width( unsigned int key, unsigned int frame );

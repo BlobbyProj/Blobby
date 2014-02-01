@@ -7,7 +7,7 @@ CFLAGS = -I$(IDIR)  -std=c++0x -g
 LFLAGS = -static-libgcc -static-libstdc++ -g
 LIBS = -lmingw32 -lSDLmain -lSDL
 
-_OBJ = main.o globals.o levelmanager.o screenmanager.o surface.o objectmanager.o playercharacter.o button.o sprite.o
+_OBJ = main.o globals.o levelmanager.o screenmanager.o surface.o objectmanager.o playercharacter.o button.o image.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 _DEP = sed -n '/include "/p' test.txt | sed 's/.*"\(.*\)".*/\1/'
@@ -21,7 +21,7 @@ $(ODIR)/main.o: $(SDIR)/main.cxx $(IDIR)/globals.h $(IDIR)/levelmanager.h $(IDIR
 $(ODIR)/globals.o: $(SDIR)/globals.cxx $(IDIR)/globals.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(ODIR)/levelmanager.o: $(SDIR)/levelmanager.cxx $(IDIR)/globals.h $(IDIR)/levelmanager.h $(IDIR)/button.h $(IDIR)/sprite.h
+$(ODIR)/levelmanager.o: $(SDIR)/levelmanager.cxx $(IDIR)/globals.h $(IDIR)/levelmanager.h $(IDIR)/button.h $(IDIR)/image.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 $(ODIR)/screenmanager.o: $(SDIR)/screenmanager.cxx $(IDIR)/globals.h $(IDIR)/surface.h $(IDIR)/screenmanager.h
@@ -39,7 +39,7 @@ $(ODIR)/playercharacter.o: $(SDIR)/playercharacter.cxx $(IDIR)/globals.h $(IDIR)
 $(ODIR)/button.o: $(SDIR)/button.cxx $(IDIR)/globals.h $(IDIR)/screenmanager.h $(IDIR)/object.h $(IDIR)/button.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
-$(ODIR)/sprite.o: $(SDIR)/sprite.cxx $(IDIR)/globals.h $(IDIR)/screenmanager.h $(IDIR)/object.h $(IDIR)/sprite.h
+$(ODIR)/image.o: $(SDIR)/image.cxx $(IDIR)/globals.h $(IDIR)/screenmanager.h $(IDIR)/object.h $(IDIR)/image.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 .PHONY: clean

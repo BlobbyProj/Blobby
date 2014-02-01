@@ -63,8 +63,8 @@ void ButtonMainMenu(bool init, std::string *filenames)
 
 Button::Button(double X, double Y, void (*otherFunction)(bool,std::string*))
 {	
-	x = X;
-	y = Y;
+	position.x = X;
+	position.y = Y;
 	
 	function = otherFunction;
 	
@@ -95,7 +95,7 @@ void Button::events(SDL_Event *event)
 	{
 		if ( pressed == 0 && event->button.button == SDL_BUTTON_LEFT )
 		{
-			if ( event->button.x >= x && event->button.x <= x+width && event->button.y >= y && event->button.y <= y+height)
+			if ( event->button.x >= position.x && event->button.x <= position.x+width && event->button.y >= position.y && event->button.y <= position.y+height)
 			{
 				pressed = 1;
 			}
@@ -106,7 +106,7 @@ void Button::events(SDL_Event *event)
         if( pressed == 1 && event->button.button == SDL_BUTTON_LEFT )
         {
 			pressed = 0;
-			if ( event->button.x >= x && event->button.x <= x+width && event->button.y >= y && event->button.y <= y+height)
+			if ( event->button.x >= position.x && event->button.x <= position.x+width && event->button.y >= position.y && event->button.y <= position.y+height)
 			{
 				(*function)(0,0);
 			}
@@ -120,11 +120,11 @@ void Button::draw()
 	{
 		if (screen_manager->surface_exist(keys[0]))
 		{
-			screen_manager->surface_apply( (int)x, (int)y, keys[0], pressed );
+			screen_manager->surface_apply( (int)position.x, (int)position.y, keys[0], pressed );
 		}
 		else
 		{
-ERROR("Image " << keys[pressed] << " failed to load")
+			ERROR("Image " << keys[pressed] << " failed to load")
 		}
 	}
 }

@@ -2,8 +2,8 @@
 
 PlayerCharacter::PlayerCharacter(double X, double Y, std::string filename)
 {	
-	x = X;
-	y = Y;
+	position.x = X;
+	position.y = Y;
 	previous_x = (int)X;
 	previous_y = (int)Y;
 	
@@ -36,9 +36,8 @@ void PlayerCharacter::events(SDL_Event *event)
 		switch( event->key.keysym.sym )
 		{
 		    case SDLK_UP: 
-				if (y >= 450-height)
+				if (position.y >= 450-height)
 				{
-					FLAG
 					yvel = -vel*2; 
 				}
 				break;
@@ -59,10 +58,10 @@ void PlayerCharacter::events(SDL_Event *event)
 
 void PlayerCharacter::step()
 {
-	x = x + xvel*global_timestep;
-	y = y + yvel*global_timestep;
+	position.x = position.x + xvel*global_timestep;
+	position.y = position.y + yvel*global_timestep;
 	
-	if (y < 460-height)
+	if (position.y < 460-height)
 	{
 		yvel += global_gravity*global_timestep;
 	}
@@ -70,13 +69,7 @@ void PlayerCharacter::step()
 	{
 		if (yvel > 0)
 			yvel = 0;
-		y = 460-height;
-	}
-	
-	if (previous_x != (int)x || previous_y != (int)y)
-	{
-		previous_x = (int)x;
-		previous_y = (int)y;
+		position.y = 460-height;
 	}
 }
 
@@ -85,14 +78,17 @@ void PlayerCharacter::draw()
 	if (visible == 1 && loaded == 1)
 	{
 		if (screen_manager->surface_exist(keys[0]))
-		{
-			screen_manager->surface_apply( (int)x, (int)y, keys[0], 0 );
+		{	
+			int averaged_x = (previous_x+(int)position.x)/2;
+			int averaged_y = (previous_y+(int)position.y)/2;
 			
-			if (previous_x != (int)x || previous_y != (int)y)
-				screen_manager->surface_apply( previous_x, previous_y, keys[0], 0 );
+			if (averaged_x != (int)position.x || averaged_y != (int)position.y)
+				screen_manager->surface_apply( averaged_x, averaged_y, keys[0], 0, 50 );
 				
-			previous_x = (int)x;
-			previous_y = (int)y;
+			screen_manager->surface_apply( (int)position.x, (int)position.y, keys[0], 0 );
+				
+			previous_x = (int)position.x;
+			previous_y = (int)position.y;
 		}
 		else
 		{

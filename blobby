@@ -71,6 +71,5 @@
         <File name="makefile" />
         <File name="README.md" />
         <File name="SDL.dll" />
-        <File name="stderr.txt" />
     </Project>
 </NotepadPlus>

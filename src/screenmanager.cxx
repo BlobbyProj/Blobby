@@ -178,8 +178,32 @@ bool ScreenManager::surface_apply( int x, int y, unsigned int key, unsigned int 
 		offset.y = y;
 
 		//Blit the surface
-
+		
 		return SDL_BlitSurface( (*(*images)[key])[frame], NULL, screen, &offset );
+	}
+	return -1;
+}
+
+bool ScreenManager::surface_apply( int x, int y, unsigned int key, unsigned int frame, char alpha)
+{
+	if (surface_exist(key))
+	{
+		//Temporary rectangle to hold the offsets
+		SDL_Rect offset;
+
+		//Get the offsets
+		offset.x = x;
+		offset.y = y;
+
+		//Blit the surface
+		
+		SDL_Surface *srfc = (*(*images)[key])[frame];
+		char old_alpha = (char)srfc->format->alpha;
+		SDL_SetAlpha( srfc, SDL_SRCALPHA, alpha );
+		int return_value = SDL_BlitSurface( (*(*images)[key])[frame], NULL, screen, &offset );
+		SDL_SetAlpha( srfc, SDL_SRCALPHA, old_alpha );
+		
+		return return_value;
 	}
 	return -1;
 }

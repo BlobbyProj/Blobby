@@ -4,11 +4,11 @@
 #include <string>
 #include "globals.h"
 #include "screenmanager.h"
+#include "point.h"
 
 class Object {
 	protected:
-		double x;
-		double y;
+		Point position;
 		unsigned int oid;
 		std::string *filenames;
 		unsigned int num_keys;
@@ -23,8 +23,8 @@ class Object {
 		Object() : width(0), height(0), loaded(0), visible(1), solid(0) {};
 		virtual ~Object() {};
 	
-		double get_x() { return x; }
-		double get_y() { return y; }
+		double get_x() { return position.x; }
+		double get_y() { return position.y; }
 		std::string *get_filenames() { return filenames; }
 		unsigned int get_num_keys() { return (num_keys*loaded); }
 		unsigned int *get_keys() { return keys; }	

@@ -1,9 +1,9 @@
-#include "sprite.h"
+#include "Image.h"
 
-Sprite::Sprite(double X, double Y, std::string filename)
+Image::Image(double X, double Y, std::string filename)
 {	
-	x = X;
-	y = Y;
+	position.x = X;
+	position.y = Y;
 	
 	filenames = new std::string[1];
 	filenames[0] = filename;
@@ -12,7 +12,7 @@ Sprite::Sprite(double X, double Y, std::string filename)
 	keys = new unsigned int[num_keys];
 }
 
-Sprite::~Sprite()
+Image::~Image()
 {
 	int i;
 	for (i = 0; i < num_keys; i++)
@@ -24,13 +24,13 @@ Sprite::~Sprite()
 	delete keys;
 }
 
-void Sprite::draw()
+void Image::draw()
 {
 	if (visible == 1 && loaded == 1)
 	{
 		if (screen_manager->surface_exist(keys[0]))
 		{
-			screen_manager->surface_apply( (int)x, (int)y, keys[0], 0);
+			screen_manager->surface_apply( (int)position.x, (int)position.y, keys[0], 0);
 		}
 		else
 		{
@@ -39,7 +39,7 @@ ERROR("Image " << keys[0] << " failed to load")
 	}
 }
 
-void Sprite::load_surfaces()
+void Image::load_surfaces()
 {
 	if (loaded == 0)
 	{
