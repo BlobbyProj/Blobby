@@ -5,11 +5,11 @@
 
 class Rectangle {
 private:
-    Point position;
+    Point *position;
     double width;
     double height;
 public:
-    Rectangle(Point position, double width, double height);
+    Rectangle(Point *position, double width, double height);
 };
 
 #endif

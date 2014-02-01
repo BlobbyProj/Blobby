@@ -5,10 +5,12 @@
 #include "globals.h"
 #include "screenmanager.h"
 #include "point.h"
+#include "rectangle.h"
 
 class Object {
 	protected:
 		Point position;
+        Rectangle border;
 		unsigned int oid;
 		std::string *filenames;
 		unsigned int num_keys;
