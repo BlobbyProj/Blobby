@@ -1,4 +1,5 @@
 #include "screenmanager.h"
+#include "rectangle.h"
 
 ScreenManager::ScreenManager(int Width, int Height, int BPP)
 {

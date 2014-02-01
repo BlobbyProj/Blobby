@@ -1,7 +1,9 @@
 #include "rectangle.h"
 
-Rectangle::Rectangle(Point *P, double W, double H){
-    position = P;
-    width = W;
-    height = H;
+Rectangle::Rectangle()
+{
+	position.x = 0;
+	position.y = 0;
+    width = 0;
+    height = 0;
 }
