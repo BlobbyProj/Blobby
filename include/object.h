@@ -10,7 +10,7 @@
 class Object {
 	protected:
 		Point position;
-        Rectangle border;
+        Rectangle bound;
 		unsigned int oid;
 		std::string *filenames;
 		unsigned int num_keys;
