@@ -1,0 +1,75 @@
+<NotepadPlus>
+    <Project name="Blobby">
+        <Folder name="images">
+            <Folder name="buttons">
+                <File name="images\buttons\MainMenuPressed.bmp" />
+                <File name="images\buttons\MainMenuUnpressed.bmp" />
+                <File name="images\buttons\PausePressed.bmp" />
+                <File name="images\buttons\PauseUnpressed.bmp" />
+                <File name="images\buttons\PlayPressed.bmp" />
+                <File name="images\buttons\PlayUnpressed.bmp" />
+                <File name="images\buttons\QuitPressed.bmp" />
+                <File name="images\buttons\QuitUnpressed.bmp" />
+                <File name="images\buttons\ResumePressed.bmp" />
+                <File name="images\buttons\ResumeUnpressed.bmp" />
+            </Folder>
+            <Folder name="old">
+                <File name="images\old\BlankButton.bmp" />
+                <File name="images\old\BlankButtonPressed.bmp" />
+                <File name="images\old\BlankTitle.bmp" />
+                <File name="images\old\ButtonBluePressed.bmp" />
+                <File name="images\old\ButtonBlueUnpressed.bmp" />
+                <File name="images\old\ButtonGreenPressed.bmp" />
+                <File name="images\old\ButtonGreenUnpressed.bmp" />
+                <File name="images\old\ButtonRedPressed.bmp" />
+                <File name="images\old\ButtonRedUnpressed.bmp" />
+                <File name="images\old\ExitButtonUnpressed.bmp" />
+                <File name="images\old\PlayButtonPressed.pdn" />
+            </Folder>
+            <File name="images\Block.bmp" />
+            <File name="images\Ground.bmp" />
+            <File name="images\Menu.bmp" />
+            <File name="images\MenuTitle.bmp" />
+            <File name="images\PauseTitle.bmp" />
+        </Folder>
+        <Folder name="include">
+            <File name="include\button.h" />
+            <File name="include\globals.h" />
+            <File name="include\levelmanager.h" />
+            <File name="include\object.h" />
+            <File name="include\objectmanager.h" />
+            <File name="include\playercharacter.h" />
+            <File name="include\screenmanager.h" />
+            <File name="include\sprite.h" />
+            <File name="include\surface.h" />
+        </Folder>
+        <Folder name="obj">
+            <File name="obj\block.o" />
+            <File name="obj\button.o" />
+            <File name="obj\globals.o" />
+            <File name="obj\levelmanager.o" />
+            <File name="obj\main.o" />
+            <File name="obj\objectmanager.o" />
+            <File name="obj\playercharacter.o" />
+            <File name="obj\screenmanager.o" />
+            <File name="obj\sprite.o" />
+            <File name="obj\surface.o" />
+        </Folder>
+        <Folder name="src">
+            <File name="src\button.cxx" />
+            <File name="src\globals.cxx" />
+            <File name="src\levelmanager.cxx" />
+            <File name="src\main.cxx" />
+            <File name="src\objectmanager.cxx" />
+            <File name="src\playercharacter.cxx" />
+            <File name="src\screenmanager.cxx" />
+            <File name="src\sprite.cxx" />
+            <File name="src\surface.cxx" />
+        </Folder>
+        <File name="blobby" />
+        <File name="main.exe" />
+        <File name="makefile" />
+        <File name="README.md" />
+        <File name="SDL.dll" />
+    </Project>
+</NotepadPlus>
