@@ -15,6 +15,7 @@ void LevelManager::step()
 				object_manager->pause_objects_clear();
 				break;
 			case 1:
+				//~ object_manager->pause_objects_add(new Image(20,20,"media/bg2.png"));
 				object_manager->pause_objects_add(new Image(20,20,"images/Menu.bmp"));
 				object_manager->pause_objects_add(new Image(120,50,"images/PauseTitle.bmp"));
 				object_manager->pause_objects_add(new Button(120,180,ButtonResume));
@@ -30,10 +31,12 @@ void LevelManager::step()
 		switch(global_gamestate)
 		{
 			case 0: //Main Menu
-				object_manager->objects_add(new Image(20,20,"images/Menu.bmp"));
+				//~ object_manager->objects_add(new Image(20,20,"images/Menu.bmp"));
+				//~ object_manager->objects_add(new Image(140,50,"media/blobbyAttempt.png"));
 				object_manager->objects_add(new Image(120,50,"images/MenuTitle.bmp"));
-				object_manager->objects_add(new Button(120,180,ButtonPlay));
-				object_manager->objects_add(new Button(120,320,ButtonQuit));
+				object_manager->objects_add(new Button(120,190,ButtonPlay));
+				object_manager->objects_add(new Button(170,280,ButtonInstructions));
+				object_manager->objects_add(new Button(215,350,ButtonQuit));
 				break;
 			case 1: //Level 1
 				object_manager->objects_add(new Image(0,460,"images/Ground.bmp"));

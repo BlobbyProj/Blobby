@@ -6,6 +6,7 @@
 #include "object.h"
 
 void ButtonPlay(bool init,std::string *filenames);
+void ButtonInstructions(bool init,std::string *filenames);
 void ButtonQuit(bool init,std::string *filenames);
 void ButtonPause(bool init,std::string *filenames);
 void ButtonResume(bool init,std::string *filenames);

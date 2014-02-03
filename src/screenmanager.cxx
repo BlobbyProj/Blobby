@@ -1,5 +1,6 @@
 #include "screenmanager.h"
 #include "rectangle.h"
+#include "SDL/SDL_image.h"
 
 ScreenManager::ScreenManager(int Width, int Height, int BPP)
 {
@@ -110,7 +111,8 @@ SDL_Surface *ScreenManager::surface_load( std::string filename )
     SDL_Surface* optimizedImage = NULL;
 	
 	//Load the image
-    loadedImage = SDL_LoadBMP( filename.c_str() );
+    //~ loadedImage = SDL_LoadBMP( filename.c_str() );
+    loadedImage = IMG_Load( filename.c_str() );
 	
 	//If nothing went wrong in loading the image
     if( loadedImage != NULL )
@@ -134,7 +136,8 @@ SDL_Surface *ScreenManager::surface_load( std::string filename, int R, int G, in
     SDL_Surface* optimizedImage = NULL;
 	
 	//Load the image
-    loadedImage = SDL_LoadBMP( filename.c_str() );
+    //~ loadedImage = SDL_LoadBMP( filename.c_str() );
+    loadedImage = IMG_Load( filename.c_str() );
 	
 	//If nothing went wrong in loading the image
     if( loadedImage != NULL )

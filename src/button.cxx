@@ -4,20 +4,37 @@ void ButtonPlay(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "images/buttons/PlayUnpressed.bmp";
-		filenames[1] = "images/buttons/PlayPressed.bmp";
+		//~ filenames[0] = "images/buttons/PlayUnpressed.bmp";
+		//~ filenames[1] = "images/buttons/PlayPressed.bmp";
+		filenames[0] = "media/Buttons/playBtn.png";
+		filenames[1] = "media/Buttons/playClick.png";
 		return;
 	}
 
 	global_gamestate = 1;
 }
 
+void ButtonInstructions(bool init, std::string *filenames)
+{
+	if (init == 1)
+	{
+		filenames[0] = "media/Buttons/instructionsBtn.png";
+		filenames[1] = "media/Buttons/instructionsClick.png";
+		return;
+	}
+
+	global_gamestate = 0;
+	global_paused = 0;
+}
+
 void ButtonQuit(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "images/buttons/QuitUnpressed.bmp";
-		filenames[1] = "images/buttons/QuitPressed.bmp";
+		//~ filenames[0] = "images/buttons/QuitUnpressed.bmp";
+		//~ filenames[1] = "images/buttons/QuitPressed.bmp";
+		filenames[0] = "media/Buttons/quitBtn.png";
+		filenames[1] = "media/Buttons/quitClick.png";
 		return;
 	}
 	
