@@ -58,6 +58,7 @@ void PlayerCharacter::events(SDL_Event *event)
 
 void PlayerCharacter::step()
 {
+
 	position.x = position.x + xvel*global_timestep;
 	position.y = position.y + yvel*global_timestep;
 	
