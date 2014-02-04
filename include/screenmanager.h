@@ -33,8 +33,8 @@ class ScreenManager {
 		unsigned int texture_load( std::string *filenames, unsigned int num_files );
 		unsigned int texture_load( std::string *filenames, unsigned int num_files, int R, int G, int B);
 		bool texture_delete( unsigned int key );
-		bool texture_apply( int x, int y, int w, int h, unsigned int key, unsigned int frame);
-		bool texture_apply( int x, int y, int w, int h, unsigned int key, unsigned int frame, char alpha);
+		bool texture_apply( int x, int y, int width, int height, unsigned int key, unsigned int frame);
+		bool texture_apply( int x, int y, int width, int height, unsigned int key, unsigned int frame, char alpha);
 		bool texture_exist( unsigned int key );
 		
 		int texture_width( unsigned int key, unsigned int frame );

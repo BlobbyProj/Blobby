@@ -42,7 +42,7 @@ ScreenManager::~ScreenManager()
 		
 bool ScreenManager::clear(int R, int G, int B)
 {
-    //SDL_SetRenderDrawColor(renderer, R, G, B, 255);
+    SDL_SetRenderDrawColor(renderer, R, G, B, 255);
 	return SDL_RenderClear(renderer);
 }
 
