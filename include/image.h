@@ -7,7 +7,7 @@
 
 class Image : public Object {
 	public:
-		Image(double X, double Y, std::string filename);
+		Image(double X, double Y, int width, int height, std::string filename);
 		~Image();
 		
 		void step() {};

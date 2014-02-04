@@ -17,7 +17,7 @@ class Button : public Object {
 		void (*function)(bool,std::string*);
 		
 	public:
-		Button(double X, double Y, void (*otherFunction)(bool,std::string*));
+		Button(double X, double Y, int width, int height, void (*otherFunction)(bool,std::string*));
 		~Button();
 		
 		void step() {};

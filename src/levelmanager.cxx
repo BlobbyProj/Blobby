@@ -15,13 +15,13 @@ void LevelManager::step()
 				object_manager->pause_objects_clear();
 				break;
 			case 1:
-				object_manager->pause_objects_add(new Image(20,20,"images/Menu.bmp"));
-				object_manager->pause_objects_add(new Image(120,50,"images/PauseTitle.bmp"));
-				object_manager->pause_objects_add(new Button(120,180,ButtonResume));
-				object_manager->pause_objects_add(new Button(120,320,ButtonMainMenu));
+				object_manager->pause_objects_add(new Image(20,20, 600, 440, "images/Menu.bmp"));
+				object_manager->pause_objects_add(new Image(120, 50, 400, 100, "images/PauseTitle.bmp"));
+				object_manager->pause_objects_add(new Button(120,180, 400, 100, ButtonResume));
+				object_manager->pause_objects_add(new Button(120,320, 400, 100, ButtonMainMenu));
 				break;
 		}
-		screen_manager->surface_pare();
+		screen_manager->texture_pare();
 		object_manager->load_surfaces();
 	}
 	if (global_gamestate != previous_gamestate)
@@ -30,18 +30,18 @@ void LevelManager::step()
 		switch(global_gamestate)
 		{
 			case 0: //Main Menu
-				object_manager->objects_add(new Image(20,20,"images/Menu.bmp"));
-				object_manager->objects_add(new Image(120,50,"images/MenuTitle.bmp"));
-				object_manager->objects_add(new Button(120,180,ButtonPlay));
-				object_manager->objects_add(new Button(120,320,ButtonQuit));
+				object_manager->objects_add(new Image(20,20,600, 440, "images/Menu.bmp"));
+				object_manager->objects_add(new Image(120,50, 400, 100, "images/MenuTitle.bmp"));
+				object_manager->objects_add(new Button(120,180, 400, 100, ButtonPlay));
+				object_manager->objects_add(new Button(120,320, 400, 100, ButtonQuit));
 				break;
 			case 1: //Level 1
-				object_manager->objects_add(new Image(0,460,"images/Ground.bmp"));
-				object_manager->objects_add(new PlayerCharacter(10,10,"images/Block.bmp"));
-				object_manager->objects_add(new Button(580,30,ButtonPause));
+				object_manager->objects_add(new Image(0,460,640, 20, "images/Ground.bmp"));
+				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, "images/Block.bmp"));
+				object_manager->objects_add(new Button(580,30, 400, 100, ButtonPause));
 				break;
 		}
-		screen_manager->surface_pare();
+		screen_manager->texture_pare();
 		object_manager->load_surfaces();
 	}
 	
