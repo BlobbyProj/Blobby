@@ -3,10 +3,10 @@ SDIR = src
 ODIR = obj
 	
 CC = g++
-CFLAGS = -I$(IDIR)  -std=c++0x -g -I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image.framework/Headers
+CFLAGS = -I$(IDIR)  -std=c++0x -g -I/Library/Frameworks/SDL2.framework/Headers
 LFLAGS = -g
 LIBS =
-FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2 /Library/Frameworks/SDL2_image.framework/Versions/Current/SDL2_image
+FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2
 
 _OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o objectmanager.o rectangle.o playercharacter.o button.o image.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ)) $(FRAMEWORKS)
