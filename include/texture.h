@@ -1,7 +1,7 @@
 #ifndef SURFACE_H
 #define SURFACE_H
 
-#include "SDL.h"
+#include "SDL2/SDL.h"
 #include <string>
 #include <vector>
 #include "globals.h"

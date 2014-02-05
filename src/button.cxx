@@ -4,8 +4,8 @@ void ButtonPlay(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "images/buttons/PlayUnpressed.bmp";
-		filenames[1] = "images/buttons/PlayPressed.bmp";
+		filenames[0] = "media/updated/playBtn.png";
+		filenames[1] = "media/updated/playClick.png";
 		return;
 	}
 
@@ -16,8 +16,9 @@ void ButtonQuit(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "images/buttons/QuitUnpressed.bmp";
-		filenames[1] = "images/buttons/QuitPressed.bmp";
+		filenames[0] = "media/updated/quitBtn.png";
+		filenames[1] = "media/updated/quitClick.png";
+
 		return;
 	}
 	
@@ -40,8 +41,8 @@ void ButtonResume(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "images/buttons/ResumeUnpressed.bmp";
-		filenames[1] = "images/buttons/ResumePressed.bmp";
+		filenames[0] = "media/updated/resumeBtn.png";
+		filenames[1] = "media/updated/resumeClick.png";
 		return;
 	}
 	
@@ -52,14 +53,27 @@ void ButtonMainMenu(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "images/buttons/MainMenuUnpressed.bmp";
-		filenames[1] = "images/buttons/MainMenuPressed.bmp";
+		filenames[0] = "media/updated/mainMenuBtn.png";
+		filenames[1] = "media/updated/mainMenuClick.png";
 		return;
 	}
 	
 	global_paused = 0;
 	global_gamestate = 0;
 }
+
+void ButtonInstructions(bool init, std::string *filenames)
+{
+	if (init == 1)
+	{
+		filenames[0] = "media/updated/iBtn.png";
+		filenames[1] = "media/updated/iClick.png";
+		return;
+	}
+
+	global_gamestate = 0;
+}
+
 
 Button::Button(double X, double Y, int W, int H, void (*otherFunction)(bool,std::string*))
 {	

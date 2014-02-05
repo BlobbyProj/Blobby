@@ -1,7 +1,7 @@
 #ifndef SCREENMANAGER_H
 #define SCREENMANAGER_H
 
-#include "SDL.h"
+#include "SDL2/SDL.h"
 #include <string>
 #include <vector>
 #include <map>

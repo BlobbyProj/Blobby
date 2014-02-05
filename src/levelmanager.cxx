@@ -16,9 +16,9 @@ void LevelManager::step()
 				break;
 			case 1:
 				object_manager->pause_objects_add(new Image(20,20, 600, 440, "images/Menu.bmp"));
-				object_manager->pause_objects_add(new Image(120, 50, 400, 100, "images/PauseTitle.bmp"));
-				object_manager->pause_objects_add(new Button(120,180, 400, 100, ButtonResume));
-				object_manager->pause_objects_add(new Button(120,320, 400, 100, ButtonMainMenu));
+				object_manager->pause_objects_add(new Image(0, 0, 400, 100, "images/PauseMenu.bmp"));
+				object_manager->pause_objects_add(new Button(180,220, 400, 100, ButtonResume));
+				object_manager->pause_objects_add(new Button(180,300, 400, 100, ButtonMainMenu));
 				break;
 		}
 		screen_manager->texture_pare();
@@ -30,14 +30,16 @@ void LevelManager::step()
 		switch(global_gamestate)
 		{
 			case 0: //Main Menu
-				object_manager->objects_add(new Image(20,20,600, 440, "images/Menu.bmp"));
-				object_manager->objects_add(new Image(120,50, 400, 100, "images/MenuTitle.bmp"));
-				object_manager->objects_add(new Button(120,180, 400, 100, ButtonPlay));
-				object_manager->objects_add(new Button(120,320, 400, 100, ButtonQuit));
+				//TODO: only works if inside images folder? why?
+				object_manager->objects_add(new Image(0,0, 400, 100, "images/bg2edit.bmp"));
+				object_manager->objects_add(new Button(180,220, 200, 80, ButtonPlay));
+				object_manager->objects_add(new Button(240,290, 200, 80, ButtonInstructions));
+				object_manager->objects_add(new Button(240,355, 400, 100, ButtonQuit));
 				break;
 			case 1: //Level 1
 				object_manager->objects_add(new Image(0,460,640, 20, "images/Ground.bmp"));
-				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, "images/Block.bmp"));
+				//~ object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, "images/Block.bmp"));
+				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, "media/blobbyAttempt.png"));
 				object_manager->objects_add(new Button(580,30, 400, 100, ButtonPause));
 				break;
 		}

@@ -1,4 +1,4 @@
-#include "Image.h"
+#include "image.h"
 
 Image::Image(double X, double Y, int W, int H, std::string filename)
 {	
@@ -36,7 +36,7 @@ void Image::draw()
 		}
 		else
 		{
-ERROR("Image " << keys[0] << " failed to load")
+		ERROR("Image " << keys[0] << " failed to load")
 		}
 	}
 }

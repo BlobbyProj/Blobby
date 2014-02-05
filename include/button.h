@@ -10,6 +10,7 @@ void ButtonQuit(bool init,std::string *filenames);
 void ButtonPause(bool init,std::string *filenames);
 void ButtonResume(bool init,std::string *filenames);
 void ButtonMainMenu(bool init,std::string *filenames);
+void ButtonInstructions(bool init,std::string *filenames);
 
 class Button : public Object {
 	private:
