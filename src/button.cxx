@@ -4,8 +4,10 @@ void ButtonPlay(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/updated/playBtn.png";
-		filenames[1] = "media/updated/playClick.png";
+		//filenames[0] = "media/updated/playBtn.png";
+		//filenames[1] = "media/updated/playClick.png";
+        filenames[0] = "images/buttons/PlayUnpressed.bmp";
+        filenames[1] = "images/buttons/PlayPressed.bmp";
 		return;
 	}
 
@@ -16,8 +18,10 @@ void ButtonQuit(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/updated/quitBtn.png";
-		filenames[1] = "media/updated/quitClick.png";
+		//filenames[0] = "media/updated/quitBtn.png";
+		//filenames[1] = "media/updated/quitClick.png";
+        filenames[0] = "images/buttons/QuitUnpressed.bmp";
+        filenames[1] = "images/buttons/QuitPressed.bmp";
 
 		return;
 	}
@@ -41,8 +45,10 @@ void ButtonResume(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/updated/resumeBtn.png";
-		filenames[1] = "media/updated/resumeClick.png";
+		//filenames[0] = "media/updated/resumeBtn.png";
+		//filenames[1] = "media/updated/resumeClick.png";
+        filenames[0] = "images/buttons/ResumeUnpressed.bmp";
+        filenames[1] = "images/buttons/ResumePressed.bmp";
 		return;
 	}
 	
@@ -53,8 +59,10 @@ void ButtonMainMenu(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/updated/mainMenuBtn.png";
-		filenames[1] = "media/updated/mainMenuClick.png";
+		//filenames[0] = "media/updated/mainMenuBtn.png";
+		//filenames[1] = "media/updated/mainMenuClick.png";
+        filenames[0] = "images/buttons/MainMenuUnpressed.bmp";
+        filenames[1] = "images/buttons/MainMenuPressed.bmp";
 		return;
 	}
 	
@@ -66,8 +74,10 @@ void ButtonInstructions(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/updated/iBtn.png";
-		filenames[1] = "media/updated/iClick.png";
+		//filenames[0] = "media/updated/iBtn.png";
+		//filenames[1] = "media/updated/iClick.png";
+        filenames[0] = "images/buttons/MainMenuUnpressed.bmp";
+        filenames[1] = "images/buttons/MainMenuPressed.bmp";
 		return;
 	}
 
