@@ -1,10 +1,6 @@
 #include "screenmanager.h"
 #include "rectangle.h"
-<<<<<<< HEAD
-#include "SDL/SDL_image.h"
-=======
 #include "SDL2/SDL_image.h"
->>>>>>> 9fb90ad67163df1b04f318cfaf38d1c7db8a2374
 
 ScreenManager::ScreenManager(int Width, int Height)
 {
@@ -115,10 +111,6 @@ SDL_Texture *ScreenManager::texture_load( std::string filename )
     SDL_Texture* loadedImage = NULL;
     
 	//Load the image
-<<<<<<< HEAD
-    //~ loadedImage = SDL_LoadBMP( filename.c_str() );
-    loadedImage = IMG_Load( filename.c_str() );
-=======
     //~ loadedSurface = SDL_LoadBMP( filename.c_str() );
     loadedSurface = IMG_Load( filename.c_str() );
 
@@ -127,7 +119,6 @@ SDL_Texture *ScreenManager::texture_load( std::string filename )
     if (loadedSurface == NULL) {
         FLAG;
     }
->>>>>>> 9fb90ad67163df1b04f318cfaf38d1c7db8a2374
 	
     loadedImage = SDL_CreateTextureFromSurface(renderer, loadedSurface);
     
@@ -153,13 +144,8 @@ SDL_Texture *ScreenManager::texture_load( std::string filename, int R, int G, in
     SDL_Texture* loadedImage = NULL;
 	
 	//Load the image
-<<<<<<< HEAD
-    //~ loadedImage = SDL_LoadBMP( filename.c_str() );
-    loadedImage = IMG_Load( filename.c_str() );
-=======
     //~ loadedSurface = SDL_LoadBMP( filename.c_str() );
     loadedSurface = IMG_Load( filename.c_str() );
->>>>>>> 9fb90ad67163df1b04f318cfaf38d1c7db8a2374
 	
     // Check if surface loaded properly
     if (loadedSurface == NULL) {
