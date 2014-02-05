@@ -3,13 +3,12 @@ SDIR = src
 ODIR = obj
 	
 CC = g++
-CFLAGS = -I$(IDIR)  -std=c++0x -g -I/Library/Frameworks/SDL2.framework/Headers
-LFLAGS = -g
-LIBS =
+CFLAGS = -I$(IDIR)  -std=c++0x -g
+LFLAGS = -static-libgcc -static-libstdc++ -g
+LIBS = -lSDL2 -lSDL2_image
 
 _OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o objectmanager.o rectangle.o playercharacter.o button.o image.o
-OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ)) /Library/Frameworks/SDL2.framework/Versions/Current/SDL2
-
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ)) 
 _DEP = sed -n '/include "/p' test.txt | sed 's/.*"\(.*\)".*/\1/'
 
 main: $(OBJ)
