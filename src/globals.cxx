@@ -4,7 +4,7 @@
 #include "levelmanager.h"
 
 //Initialize screen manager
-ScreenManager *screen_manager = new ScreenManager(640,480,32);
+ScreenManager *screen_manager = new ScreenManager(640,480);
 
 //Initialize object manager
 ObjectManager *object_manager = new ObjectManager;

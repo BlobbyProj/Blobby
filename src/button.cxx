@@ -4,10 +4,15 @@ void ButtonPlay(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
+<<<<<<< HEAD
 		//~ filenames[0] = "images/buttons/PlayUnpressed.bmp";
 		//~ filenames[1] = "images/buttons/PlayPressed.bmp";
 		filenames[0] = "media/Buttons/playBtn.png";
 		filenames[1] = "media/Buttons/playClick.png";
+=======
+		filenames[0] = "media/updated/playBtn.png";
+		filenames[1] = "media/updated/playClick.png";
+>>>>>>> 9fb90ad67163df1b04f318cfaf38d1c7db8a2374
 		return;
 	}
 
@@ -31,10 +36,16 @@ void ButtonQuit(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
+<<<<<<< HEAD
 		//~ filenames[0] = "images/buttons/QuitUnpressed.bmp";
 		//~ filenames[1] = "images/buttons/QuitPressed.bmp";
 		filenames[0] = "media/Buttons/quitBtn.png";
 		filenames[1] = "media/Buttons/quitClick.png";
+=======
+		filenames[0] = "media/updated/quitBtn.png";
+		filenames[1] = "media/updated/quitClick.png";
+
+>>>>>>> 9fb90ad67163df1b04f318cfaf38d1c7db8a2374
 		return;
 	}
 	
@@ -57,8 +68,8 @@ void ButtonResume(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "images/buttons/ResumeUnpressed.bmp";
-		filenames[1] = "images/buttons/ResumePressed.bmp";
+		filenames[0] = "media/updated/resumeBtn.png";
+		filenames[1] = "media/updated/resumeClick.png";
 		return;
 	}
 	
@@ -69,8 +80,8 @@ void ButtonMainMenu(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "images/buttons/MainMenuUnpressed.bmp";
-		filenames[1] = "images/buttons/MainMenuPressed.bmp";
+		filenames[0] = "media/updated/mainMenuBtn.png";
+		filenames[1] = "media/updated/mainMenuClick.png";
 		return;
 	}
 	
@@ -78,10 +89,25 @@ void ButtonMainMenu(bool init, std::string *filenames)
 	global_gamestate = 0;
 }
 
-Button::Button(double X, double Y, void (*otherFunction)(bool,std::string*))
+void ButtonInstructions(bool init, std::string *filenames)
+{
+	if (init == 1)
+	{
+		filenames[0] = "media/updated/iBtn.png";
+		filenames[1] = "media/updated/iClick.png";
+		return;
+	}
+
+	global_gamestate = 0;
+}
+
+
+Button::Button(double X, double Y, int W, int H, void (*otherFunction)(bool,std::string*))
 {	
 	position.x = X;
 	position.y = Y;
+    width = W;
+    height = H;
 	
 	function = otherFunction;
 	
@@ -99,7 +125,7 @@ Button::~Button()
 	int i;
 	for (i = 0; i < num_keys; i++)
 	{
-		screen_manager->surface_dereference(keys[i]);
+		screen_manager->texture_dereference(keys[i]);
 	}
 
 	delete[] filenames;
@@ -135,9 +161,9 @@ void Button::draw()
 {
 	if (visible == 1 && loaded == 1)
 	{
-		if (screen_manager->surface_exist(keys[0]))
+		if (screen_manager->texture_exist(keys[0]))
 		{
-			screen_manager->surface_apply( (int)position.x, (int)position.y, keys[0], pressed );
+			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], pressed );
 		}
 		else
 		{
@@ -153,12 +179,12 @@ void Button::load_surfaces()
 		int i;
 		for (i = 0; i < num_keys; i++)
 		{	
-			keys[i] = screen_manager->surface_load(filenames,2,255,255,255);
-			screen_manager->surface_reference(keys[i]);
+			keys[i] = screen_manager->texture_load(filenames,2,255,255,255);
+			screen_manager->texture_reference(keys[i]);
 		}
 	
-		width = screen_manager->surface_width(keys[0],0);
-		height = screen_manager->surface_height(keys[0],0);
+		width = screen_manager->texture_width(keys[0],0);
+		height = screen_manager->texture_height(keys[0],0);
 		
 		loaded = 1;
 	}

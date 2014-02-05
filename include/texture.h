@@ -1,22 +1,22 @@
 #ifndef SURFACE_H
 #define SURFACE_H
 
-#include "SDL/SDL.h"
+#include "SDL2/SDL.h"
 #include <string>
 #include <vector>
 #include "globals.h"
 
-class Surface {
+class Texture {
 	private:
-		std::vector<SDL_Surface*>* frames;
+		std::vector<SDL_Texture*>* frames;
 		std::vector<std::string>* filenames;
 		unsigned int num_references;
 		
 	public:
-		Surface();
-		~Surface();
+		Texture();
+		~Texture();
 		
-		void add(SDL_Surface *surface) { frames->push_back(surface); }
+		void add(SDL_Texture *texture) { frames->push_back(texture); }
 		void add(std::string filename) { filenames->push_back(filename); }
 		unsigned int size() { return frames->size(); }
 		
@@ -26,8 +26,8 @@ class Surface {
 		void operator++(int) { num_references++; };
 		void operator--(int) { num_references--; }
 		
-		SDL_Surface *operator[](unsigned int val) { return (*frames)[val]; }
-		const SDL_Surface *operator[](unsigned int val) const { return (*frames)[val]; }
+		SDL_Texture *operator[](unsigned int val) { return (*frames)[val]; }
+		const SDL_Texture *operator[](unsigned int val) const { return (*frames)[val]; }
 };
 
 #endif

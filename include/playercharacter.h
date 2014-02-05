@@ -14,7 +14,7 @@ class PlayerCharacter : public Object {
 		double yvel;
 		
 	public:
-		PlayerCharacter(double X, double Y, std::string filename);
+		PlayerCharacter(double X, double Y, int width, int height, std::string filename);
 		~PlayerCharacter();
 		
 		void step();
