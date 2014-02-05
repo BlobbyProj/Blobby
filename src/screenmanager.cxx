@@ -1,6 +1,6 @@
 #include "screenmanager.h"
 #include "rectangle.h"
-#include "SDL2/SDL_image.h"
+#include "SDL_image.h"
 
 ScreenManager::ScreenManager(int Width, int Height)
 {
