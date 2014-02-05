@@ -4,10 +4,8 @@ void ButtonPlay(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		//filenames[0] = "media/updated/playBtn.png";
-		//filenames[1] = "media/updated/playClick.png";
-        filenames[0] = "images/buttons/PlayUnpressed.bmp";
-        filenames[1] = "images/buttons/PlayPressed.bmp";
+		filenames[0] = "media/playBtn.bmp";
+		filenames[1] = "media/playClick.bmp";
 		return;
 	}
 
@@ -18,10 +16,8 @@ void ButtonQuit(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		//filenames[0] = "media/updated/quitBtn.png";
-		//filenames[1] = "media/updated/quitClick.png";
-        filenames[0] = "images/buttons/QuitUnpressed.bmp";
-        filenames[1] = "images/buttons/QuitPressed.bmp";
+		filenames[0] = "media/quitBtn.bmp";
+		filenames[1] = "media/quitClick.bmp";
 
 		return;
 	}
@@ -45,10 +41,8 @@ void ButtonResume(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		//filenames[0] = "media/updated/resumeBtn.png";
-		//filenames[1] = "media/updated/resumeClick.png";
-        filenames[0] = "images/buttons/ResumeUnpressed.bmp";
-        filenames[1] = "images/buttons/ResumePressed.bmp";
+		filenames[0] = "media/resumeBtn.bmp";
+		filenames[1] = "media/resumeClick.bmp";
 		return;
 	}
 	
@@ -59,10 +53,8 @@ void ButtonMainMenu(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		//filenames[0] = "media/updated/mainMenuBtn.png";
-		//filenames[1] = "media/updated/mainMenuClick.png";
-        filenames[0] = "images/buttons/MainMenuUnpressed.bmp";
-        filenames[1] = "images/buttons/MainMenuPressed.bmp";
+		filenames[0] = "media/mainMenuBtn.bmp";
+		filenames[1] = "media/mainMenuClick.bmp";
 		return;
 	}
 	
@@ -74,10 +66,8 @@ void ButtonInstructions(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		//filenames[0] = "media/updated/iBtn.png";
-		//filenames[1] = "media/updated/iClick.png";
-        filenames[0] = "images/buttons/MainMenuUnpressed.bmp";
-        filenames[1] = "images/buttons/MainMenuPressed.bmp";
+		filenames[0] = "media/instructionsBtn.bmp";
+		filenames[1] = "media/instructionsClick.bmp";
 		return;
 	}
 
@@ -161,7 +151,7 @@ void Button::load_surfaces()
 	{
 		int i;
 		for (i = 0; i < num_keys; i++)
-		{	
+		{
 			keys[i] = screen_manager->texture_load(filenames,2,255,255,255);
 			screen_manager->texture_reference(keys[i]);
 		}

@@ -111,8 +111,6 @@ SDL_Texture *ScreenManager::texture_load( std::string filename )
     
 	//Load the image
     loadedSurface = SDL_LoadBMP( filename.c_str() );
-    //loadedSurface = IMG_Load( filename.c_str() );
-
     
     // Check if surface loaded properly
     if (loadedSurface == NULL) {
@@ -141,13 +139,13 @@ SDL_Texture *ScreenManager::texture_load( std::string filename, int R, int G, in
     
     //The texture that will hold the image
     SDL_Texture* loadedImage = NULL;
-	
+    
 	//Load the image
     loadedSurface = SDL_LoadBMP( filename.c_str() );
-    //loadedSurface = IMG_Load( filename.c_str() );
 	
     // Check if surface loaded properly
     if (loadedSurface == NULL) {
+        std::cout << SDL_GetError() << std::endl;
         FLAG;
     }
     
