@@ -1,49 +1,48 @@
 #ifndef SCREENMANAGER_H
 #define SCREENMANAGER_H
 
-#include "SDL/SDL.h"
+#include "SDL2/SDL.h"
 #include <string>
 #include <vector>
 #include <map>
 #include <functional>
 #include "globals.h"
-#include "surface.h"
+#include "texture.h"
 
 class ScreenManager {
 	private:
-		SDL_Surface *screen;
-		std::map<unsigned int,Surface*> *images;
+		SDL_Window *screen;
+        SDL_Renderer *renderer;
+		std::map<unsigned int,Texture*> *images;
 		int width;
 		int height;
-		int bpp;
 		
-		SDL_Surface *surface_load( std::string filename );
-		SDL_Surface *surface_load( std::string filename, int R, int G, int B);
+		SDL_Texture *texture_load( std::string filename );
+		SDL_Texture *texture_load( std::string filename, int R, int G, int B);
 		
 	public:
-		ScreenManager(int Width, int Height, int BPP);
+		ScreenManager(int Width, int Height);
 		~ScreenManager();
 		
 		int get_width() { return width; }
 		int get_height() { return height; }
-		int get_bpp() { return bpp; }
-		
+    
 		bool clear(int R, int G, int B);
-		bool flip();
+        void show();
 		
-		unsigned int surface_load( std::string *filenames, unsigned int num_files );
-		unsigned int surface_load( std::string *filenames, unsigned int num_files, int R, int G, int B);
-		bool surface_delete( unsigned int key );
-		bool surface_apply( int x, int y, unsigned int key, unsigned int frame);
-		bool surface_apply( int x, int y, unsigned int key, unsigned int frame, char alpha);
-		bool surface_exist( unsigned int key );
+		unsigned int texture_load( std::string *filenames, unsigned int num_files );
+		unsigned int texture_load( std::string *filenames, unsigned int num_files, int R, int G, int B);
+		bool texture_delete( unsigned int key );
+		bool texture_apply( int x, int y, int width, int height, unsigned int key, unsigned int frame);
+		bool texture_apply( int x, int y, int width, int height, unsigned int key, unsigned int frame, char alpha);
+		bool texture_exist( unsigned int key );
 		
-		int surface_width( unsigned int key, unsigned int frame );
-		int surface_height( unsigned int key, unsigned int frame );
+		int texture_width( unsigned int key, unsigned int frame );
+		int texture_height( unsigned int key, unsigned int frame );
 		
-		void surface_reference( unsigned int key ) { (*(*images)[key])++; }
-		void surface_dereference( unsigned int key ) { (*(*images)[key])--; }
-		void surface_pare();
+		void texture_reference( unsigned int key ) { (*(*images)[key])++; }
+		void texture_dereference( unsigned int key ) { (*(*images)[key])--; }
+		void texture_pare();
 		
 		void print();
 };

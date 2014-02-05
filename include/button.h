@@ -10,6 +10,7 @@ void ButtonQuit(bool init,std::string *filenames);
 void ButtonPause(bool init,std::string *filenames);
 void ButtonResume(bool init,std::string *filenames);
 void ButtonMainMenu(bool init,std::string *filenames);
+void ButtonInstructions(bool init,std::string *filenames);
 
 class Button : public Object {
 	private:
@@ -17,7 +18,7 @@ class Button : public Object {
 		void (*function)(bool,std::string*);
 		
 	public:
-		Button(double X, double Y, void (*otherFunction)(bool,std::string*));
+		Button(double X, double Y, int width, int height, void (*otherFunction)(bool,std::string*));
 		~Button();
 		
 		void step() {};
