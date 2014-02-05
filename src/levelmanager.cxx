@@ -30,8 +30,7 @@ void LevelManager::step()
 		switch(global_gamestate)
 		{
 			case 0: //Main Menu
-				//TODO: only works if inside images folder? why?
-				object_manager->objects_add(new Image(0,0, 400, 100, "images/bg2edit.bmp"));
+				object_manager->objects_add(new Image(0,0, 400, 100, "media/bg2edit.png"));
 				object_manager->objects_add(new Button(180,220, 200, 80, ButtonPlay));
 				object_manager->objects_add(new Button(240,290, 200, 80, ButtonInstructions));
 				object_manager->objects_add(new Button(240,355, 400, 100, ButtonQuit));
