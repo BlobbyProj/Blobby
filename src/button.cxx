@@ -4,8 +4,8 @@ void ButtonPlay(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/playBtn.bmp";
-		filenames[1] = "media/playClick.bmp";
+		filenames[0] = "media/buttons/playBtn.bmp";
+		filenames[1] = "media/buttons/playClick.bmp";
 		return;
 	}
 
@@ -16,8 +16,8 @@ void ButtonQuit(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/quitBtn.bmp";
-		filenames[1] = "media/quitClick.bmp";
+		filenames[0] = "media/buttons/quitBtn.bmp";
+		filenames[1] = "media/buttons/quitClick.bmp";
 
 		return;
 	}
@@ -41,8 +41,8 @@ void ButtonResume(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/resumeBtn.bmp";
-		filenames[1] = "media/resumeClick.bmp";
+		filenames[0] = "media/buttons/resumeBtn.bmp";
+		filenames[1] = "media/buttons/resumeClick.bmp";
 		return;
 	}
 	
@@ -53,8 +53,8 @@ void ButtonMainMenu(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/mainMenuBtn.bmp";
-		filenames[1] = "media/mainMenuClick.bmp";
+		filenames[0] = "media/buttons/mainMenuBtn.bmp";
+		filenames[1] = "media/buttons/mainMenuClick.bmp";
 		return;
 	}
 	
@@ -66,8 +66,8 @@ void ButtonInstructions(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/instructionsBtn.bmp";
-		filenames[1] = "media/instructionsClick.bmp";
+		filenames[0] = "media/buttons/instructionsBtn.bmp";
+		filenames[1] = "media/buttons/instructionsClick.bmp";
 		return;
 	}
 
