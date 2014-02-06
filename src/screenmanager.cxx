@@ -114,6 +114,7 @@ SDL_Texture *ScreenManager::texture_load( std::string filename )
     
     // Check if surface loaded properly
     if (loadedSurface == NULL) {
+        std::cout << SDL_GetError() << std::endl;
         FLAG;
     }
 	
@@ -161,6 +162,7 @@ SDL_Texture *ScreenManager::texture_load( std::string filename, int R, int G, in
     //Check if something went wrong in loading the image
     if( loadedImage == NULL )
     {
+        std::cout << SDL_GetError() << std::endl;
         FLAG;
     }
     
