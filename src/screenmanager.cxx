@@ -219,7 +219,7 @@ bool ScreenManager::texture_apply( int x, int y, int w, int h, unsigned int key,
 		SDL_Texture *tex = (*(*images)[key])[frame];
         Uint32 old_alpha;
         SDL_QueryTexture(tex, &old_alpha, NULL, NULL, NULL);
-        old_alpha = (char) old_alpha;;
+        old_alpha = (char) old_alpha;
 		SDL_SetTextureAlphaMod(tex, alpha);
         
 		int return_value = SDL_RenderCopy( renderer, (*(*images)[key])[frame], NULL, &offset );
