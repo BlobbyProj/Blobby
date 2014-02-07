@@ -95,9 +95,10 @@ void PlayerCharacter::draw()
 			int averaged_y = (previous_y+(int)position.y)/2;
 			
 			if (averaged_x != (int)position.x || averaged_y != (int)position.y)
+                // this affects blur
 				screen_manager->texture_apply( averaged_x, averaged_y, width, height, keys[0], 0, 50 );
 				
-			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], 0 );
+			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], 0, 255 );
 				
 			previous_x = (int)position.x;
 			previous_y = (int)position.y;
@@ -116,7 +117,7 @@ void PlayerCharacter::load_surfaces()
 		int i;
 		for (i = 0; i < num_keys; i++)
 		{
-			keys[i] = screen_manager->texture_load(filenames,1);
+			keys[i] = screen_manager->texture_load(filenames,1,0,255,0);
 			screen_manager->texture_reference(keys[i]);
 		}
 		

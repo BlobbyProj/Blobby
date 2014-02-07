@@ -5,6 +5,7 @@
 #include "globals.h"
 #include "screenmanager.h"
 #include "point.h"
+#include "rectangle.h"
 
 class Object {
 	protected:
@@ -29,6 +30,7 @@ class Object {
 		unsigned int get_num_keys() { return (num_keys*loaded); }
 		unsigned int *get_keys() { return keys; }	
 		bool get_visible() { return visible; }
+        Rectangle get_rectangle();
 		
 		void set_oid(unsigned int val) { oid = val; }
 		
@@ -36,6 +38,7 @@ class Object {
 		virtual void events(SDL_Event *event)=0;
 		virtual void draw()=0;
 		virtual void load_surfaces()=0;
+    
 };
 
 #endif

@@ -21,6 +21,8 @@ class PlayerCharacter : public Object {
 		void events(SDL_Event *event);
 		void draw();
 		void load_surfaces();
+    
+        Rectangle get_rectangle();
 };
 
 #endif

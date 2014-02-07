@@ -45,6 +45,9 @@ $(ODIR)/button.o: $(SDIR)/button.cxx $(IDIR)/globals.h $(IDIR)/screenmanager.h $
 	
 $(ODIR)/image.o: $(SDIR)/image.cxx $(IDIR)/globals.h $(IDIR)/screenmanager.h $(IDIR)/rectangle.h $(IDIR)/object.h $(IDIR)/image.h
 	$(CC) -c -o $@ $< $(CFLAGS)
+    
+$(ODIR)/enemy.o: $(SDIR)/enemy.cxx $(IDIR)/globals.h $(IDIR)/screenmanager.h $(IDIR)/rectangle.h $(IDIR)/object.h $(IDIR)/image.h
+	$(CC) -c -o $@ $< $(CFLAGS)
 	
 .PHONY: clean
 

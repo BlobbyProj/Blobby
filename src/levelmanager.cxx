@@ -37,9 +37,13 @@ void LevelManager::step()
 				break;
 			case 1: //Level 1
 				object_manager->objects_add(new Image(0,460,640, 20, "images/Ground.bmp"));
-				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, "media/blobbys/blobby.bmp"));
+				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, "media/blobbys/blobbyGreen.bmp"));
 				object_manager->objects_add(new Button(580,30, 400, 100, ButtonPause));
 				break;
+			case 2: //Instructions
+				object_manager->objects_add(new Image(0,0,640, 480, "media/instructionsMenu.bmp"));
+				object_manager->objects_add(new Button(100,355, 400, 100, ButtonGoBack));
+
 		}
 		screen_manager->texture_pare();
 		object_manager->load_surfaces();

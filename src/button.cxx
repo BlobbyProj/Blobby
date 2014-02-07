@@ -61,6 +61,17 @@ void ButtonMainMenu(bool init, std::string *filenames)
 	global_paused = 0;
 	global_gamestate = 0;
 }
+void ButtonGoBack(bool init, std::string *filenames)
+{
+	if (init == 1)
+	{
+		filenames[0] = "media/buttons/backBtn.bmp";
+		filenames[1] = "media/buttons/backClick.bmp";
+		return;
+	}
+	
+	global_gamestate = 0;
+}
 
 void ButtonInstructions(bool init, std::string *filenames)
 {
@@ -71,7 +82,7 @@ void ButtonInstructions(bool init, std::string *filenames)
 		return;
 	}
 
-	global_gamestate = 0;
+	global_gamestate = 2;
 }
 
 
