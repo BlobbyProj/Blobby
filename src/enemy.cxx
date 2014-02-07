@@ -1,7 +1,7 @@
-#include "image.h"
+#include "enemy.h"
 
-Image::Image(double X, double Y, int W, int H, std::string filename)
-{	
+Enemy::Enemy(double X, double Y, int W, int H, std::string filename)
+{
 	position.x = X;
 	position.y = Y;
     width = W;
@@ -14,19 +14,19 @@ Image::Image(double X, double Y, int W, int H, std::string filename)
 	keys = new unsigned int[num_keys];
 }
 
-Image::~Image()
+Enemy::~Enemy()
 {
 	int i;
 	for (i = 0; i < num_keys; i++)
 	{
 		screen_manager->texture_dereference(keys[i]);
 	}
-
+    
 	delete[] filenames;
 	delete keys;
 }
 
-void Image::draw()
+void Enemy::draw()
 {
 	if (visible == 1 && loaded == 1)
 	{
@@ -36,12 +36,12 @@ void Image::draw()
 		}
 		else
 		{
-		ERROR("Image " << keys[0] << " failed to load")
+            ERROR("Image " << keys[0] << " failed to load")
 		}
 	}
 }
 
-void Image::load_surfaces()
+void Enemy::load_surfaces()
 {
 	if (loaded == 0)
 	{
@@ -57,4 +57,19 @@ void Image::load_surfaces()
 		
 		loaded = 1;
 	}
+}
+
+void Enemy::step()
+{
+        while (visible == 1 && loaded == 1)
+        {
+            position.x += 20;
+            position.x -= 20;
+        }
+            
+}
+
+void Enemy::attack()
+{
+    //implement attack after collisions?
 }

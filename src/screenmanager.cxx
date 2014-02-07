@@ -1,6 +1,14 @@
 #include "screenmanager.h"
 #include "rectangle.h"
 
+#include <ciso646>
+#if defined( _LIBCPP_VERSION )
+using std::hash;
+#else
+#include <tr1/unordered_map>
+using std::tr1::hash;
+#endif
+
 ScreenManager::ScreenManager(int Width, int Height)
 {
 	images = new std::map<unsigned int,Texture*>;
@@ -27,7 +35,6 @@ ScreenManager::ScreenManager(int Width, int Height)
 
 ScreenManager::~ScreenManager()
 {
-	int i;
 	std::map<unsigned int,Texture*>::iterator it;
 	for (it = images->begin(); it != images->end(); ++it)
 	{
@@ -54,8 +61,8 @@ void ScreenManager::show() {
 unsigned int ScreenManager::texture_load( std::string *filenames, unsigned int num_files )
 {
 	//Hash filename for use as key
-	std::hash<std::string> str_hash;
-	unsigned int key = str_hash(filenames[0]);
+	std::tr1::hash<std::string> str_hash;
+	unsigned int key = (int)str_hash(filenames[0]);
 	
 	//Check if image already loaded
 	if (texture_exist(key))
@@ -79,8 +86,8 @@ unsigned int ScreenManager::texture_load( std::string *filenames, unsigned int n
 unsigned int ScreenManager::texture_load( std::string *filenames, unsigned int num_files, int R, int G, int B)
 {
 	//Hash filename for use as key
-	std::hash<std::string> str_hash;
-	unsigned int key = str_hash(filenames[0]);
+	std::tr1::hash<std::string> str_hash;
+	unsigned int key = (int)str_hash(filenames[0]);
 	
 	//Check if image already loaded
 	if (texture_exist(key))
@@ -111,11 +118,10 @@ SDL_Texture *ScreenManager::texture_load( std::string filename )
     
 	//Load the image
     loadedSurface = SDL_LoadBMP( filename.c_str() );
-    //loadedSurface = IMG_Load( filename.c_str() );
-
     
     // Check if surface loaded properly
     if (loadedSurface == NULL) {
+        std::cout << SDL_GetError() << std::endl;
         FLAG;
     }
 	
@@ -141,13 +147,13 @@ SDL_Texture *ScreenManager::texture_load( std::string filename, int R, int G, in
     
     //The texture that will hold the image
     SDL_Texture* loadedImage = NULL;
-	
+    
 	//Load the image
     loadedSurface = SDL_LoadBMP( filename.c_str() );
-    //loadedSurface = IMG_Load( filename.c_str() );
 	
     // Check if surface loaded properly
     if (loadedSurface == NULL) {
+        std::cout << SDL_GetError() << std::endl;
         FLAG;
     }
     
@@ -163,6 +169,7 @@ SDL_Texture *ScreenManager::texture_load( std::string filename, int R, int G, in
     //Check if something went wrong in loading the image
     if( loadedImage == NULL )
     {
+        std::cout << SDL_GetError() << std::endl;
         FLAG;
     }
     
@@ -176,7 +183,6 @@ bool ScreenManager::texture_delete( unsigned int key )
 {
 	if (texture_exist(key))
 	{
-		int i;
 		delete (*images)[key];
 		images->erase(key);
 		return 0;

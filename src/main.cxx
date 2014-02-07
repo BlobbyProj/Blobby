@@ -7,8 +7,6 @@
 
 int main( int argc, char* args[] )
 {
-	int i;
-	
 	clock_t time;
 	time = clock();
 	double time_since_last_frame = 0;

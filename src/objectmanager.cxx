@@ -11,7 +11,7 @@ ObjectManager::~ObjectManager()
 
 unsigned int ObjectManager::objects_add(Object *object)
 {	
-	unsigned int oid = objects.size();
+	unsigned int oid = (int)objects.size();
 	object->set_oid(oid);
 	objects.push_back(object);
 	return oid;
@@ -39,7 +39,6 @@ bool ObjectManager::objects_delete(unsigned int val)
 
 void ObjectManager::objects_clear()
 {
-	int i;
 	while (objects.size() != 0)
 	{
 		delete objects[0];
@@ -49,7 +48,7 @@ void ObjectManager::objects_clear()
 
 unsigned int ObjectManager::pause_objects_add(Object *object)
 {	
-	unsigned int oid = pause_objects.size();
+	unsigned int oid = (int)pause_objects.size();
 	object->set_oid(oid);
 	pause_objects.push_back(object);
 	return oid;
@@ -77,7 +76,6 @@ bool ObjectManager::pause_objects_delete(unsigned int val)
 
 void ObjectManager::pause_objects_clear()
 {
-	int i;
 	while (pause_objects.size() != 0)
 	{
 		delete pause_objects[0];

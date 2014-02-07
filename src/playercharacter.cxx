@@ -38,30 +38,38 @@ void PlayerCharacter::events(SDL_Event *event)
 		//Set the proper message surface
 		switch( event->key.keysym.sym )
 		{
-		    case SDLK_UP: 
-				if (position.y >= 450-height)
-				{
-					yvel = -vel*2; 
-				}
-				break;
-			case SDLK_LEFT: xvel -= vel; break;
-			case SDLK_RIGHT: xvel += vel; break;
+		    case SDLK_UP:
+                if (position.y >= 450-height)
+                {
+                    yvel = -vel*2;
+                }
+                break;
+			case SDLK_LEFT:
+                // ensure it doesn't get going to fast (300 is max speed)
+                if (xvel > -300 )
+                    xvel -= vel;
+                break;
+			case SDLK_RIGHT:
+                if (xvel < 300)
+                    xvel += vel;
+                break;
 		}
 	}
-	else if( event->type == SDL_KEYUP )
-    {
-        //Adjust the velocity
+    else if (event->type == SDL_KEYUP) {
         switch( event->key.keysym.sym )
         {
-            case SDLK_LEFT: xvel += vel; break;
-            case SDLK_RIGHT: xvel -= vel; break;  
-        }        
-	}
+            case SDLK_LEFT:
+                xvel += vel;
+                break;
+            case SDLK_RIGHT:
+                xvel -= vel;
+                break;
+        }
+    }
 }
 
 void PlayerCharacter::step()
 {
-
 	position.x = position.x + xvel*global_timestep;
 	position.y = position.y + yvel*global_timestep;
 	
