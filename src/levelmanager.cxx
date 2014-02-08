@@ -15,7 +15,7 @@ void LevelManager::step()
 				object_manager->pause_objects_clear();
 				break;
 			case 1:
-				object_manager->pause_objects_add(new Image(20,20, 600, 440, "images/Menu.bmp"));
+				object_manager->pause_objects_add(new Image(20,20, 600, 440, "media/Menu.bmp"));
 				object_manager->pause_objects_add(new Image(0, 0, 400, 100, "media/PauseMenu.bmp"));
 				object_manager->pause_objects_add(new Button(180,220, 400, 100, ButtonResume));
 				object_manager->pause_objects_add(new Button(180,300, 400, 100, ButtonMainMenu));
@@ -36,8 +36,8 @@ void LevelManager::step()
 				object_manager->objects_add(new Button(240,355, 400, 100, ButtonQuit));
 				break;
 			case 1: //Level 1
-				object_manager->objects_add(new Image(0,460,640, 20, "images/Ground.bmp"));
-				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, "media/blobbys/blobbyGreen.bmp"));
+				object_manager->objects_add(new Image(0,460,640, 20, "media/Ground.bmp"));
+				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, "media/blobbys/blobby.bmp"));
 				object_manager->objects_add(new Button(580,30, 400, 100, ButtonPause));
 				break;
 			case 2: //Instructions
