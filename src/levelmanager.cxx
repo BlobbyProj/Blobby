@@ -4,6 +4,7 @@
 #include "playercharacter.h"
 #include "button.h"
 #include "image.h"
+#include "enemy.h"
 
 void LevelManager::step()
 {
