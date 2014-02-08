@@ -11,7 +11,7 @@ public:
     ~Enemy();
     
     void step();
-    void events(SDL_Event *event);
+    void events(SDL_Event *event){};
     void draw();
     void load_surfaces();
     void attack();

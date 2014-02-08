@@ -8,7 +8,7 @@ LFLAGS = -g
 LIBS =
 FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2
 
-_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o objectmanager.o rectangle.o playercharacter.o button.o image.o 
+_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o objectmanager.o rectangle.o playercharacter.o button.o image.o enemy.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ)) $(FRAMEWORKS)
 
 _DEP = sed -n '/include "/p' test.txt | sed 's/.*"\(.*\)".*/\1/'
@@ -46,7 +46,7 @@ $(ODIR)/button.o: $(SDIR)/button.cxx $(IDIR)/globals.h $(IDIR)/screenmanager.h $
 $(ODIR)/image.o: $(SDIR)/image.cxx $(IDIR)/globals.h $(IDIR)/screenmanager.h $(IDIR)/rectangle.h $(IDIR)/object.h $(IDIR)/image.h
 	$(CC) -c -o $@ $< $(CFLAGS)
     
-$(ODIR)/enemy.o: $(SDIR)/enemy.cxx $(IDIR)/globals.h $(IDIR)/screenmanager.h $(IDIR)/rectangle.h $(IDIR)/object.h $(IDIR)/image.h
+$(ODIR)/enemy.o: $(SDIR)/enemy.cxx $(IDIR)/globals.h $(IDIR)/screenmanager.h $(IDIR)/rectangle.h $(IDIR)/object.h $(IDIR)/enemy.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 .PHONY: clean

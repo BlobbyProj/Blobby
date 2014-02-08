@@ -48,7 +48,8 @@ void Enemy::load_surfaces()
 		int i;
 		for (i = 0; i < num_keys; i++)
 		{
-			keys[i] = screen_manager->texture_load(filenames,1);
+            // Makes the blue background transparent
+			keys[i] = screen_manager->texture_load(filenames,1,170,204,255);
 			screen_manager->texture_reference(keys[i]);
 		}
 		
