@@ -11,7 +11,7 @@ OS =
 _OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o objectmanager.o rectangle.o playercharacter.o button.o image.o enemy.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-ifeq ($(OS),MAC)
+ifeq ($(OS),OSX)
 #MAC
 CFLAGS = -I$(IDIR) -std=c++0x -g -I/Library/Frameworks/SDL2.framework/Headers
 LFLAGS = -g
@@ -63,15 +63,13 @@ $(ODIR)/image.o: $(SDIR)/image.cxx $(IDIR)/globals.h $(IDIR)/screenmanager.h $(I
 $(ODIR)/enemy.o: $(SDIR)/enemy.cxx $(IDIR)/globals.h $(IDIR)/screenmanager.h $(IDIR)/rectangle.h $(IDIR)/object.h $(IDIR)/enemy.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
-.PHONY: clean windows mac
-
+.PHONY: clean
+	
 clean:
-ifeq ($(OS),MAC)
+ifeq ($(OS),OSX)
+#MAC
 	rm -f $(ODIR)/*.o
 else
+#WINDOWS
 	del $(ODIR)\*.o
 endif
-
-windows: OS = WINDOWS
-
-mac: OS = MAC
