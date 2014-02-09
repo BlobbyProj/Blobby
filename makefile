@@ -1,6 +1,7 @@
 IDIR = include
 SDIR = src
 ODIR = obj
+BDIR = bin
 	
 CC = g++
 #CFLAGS = -I$(IDIR) -std=c++0x -g -I/Library/Frameworks/SDL2.framework/Headers
@@ -12,12 +13,13 @@ _OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o objectmanager.o
 #OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ)) $(FRAMEWORKS)
 
 CFLAGS = -I$(IDIR) -std=c++0x -g
-LFLAGS = -lmingw32 -lSDL2main -lSDL2
+LFLAGS = -static-libgcc -static-libstdc++ -g
+LIBS = -lmingw32 -lSDL2main -lSDL2
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 _DEP = sed -n '/include "/p' test.txt | sed 's/.*"\(.*\)".*/\1/'
 
-main: $(OBJ)
+$(BDIR)/main: $(OBJ)
 	$(CC) -o $@ $^ $(LIBS) $(LFLAGS)
 
 $(ODIR)/main.o: $(SDIR)/main.cxx $(IDIR)/globals.h $(IDIR)/levelmanager.h $(IDIR)/screenmanager.h $(IDIR)/objectmanager.h
