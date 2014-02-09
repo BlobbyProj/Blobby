@@ -1,12 +1,15 @@
 #include "playercharacter.h"
 
-PlayerCharacter::PlayerCharacter(double X, double Y, std::string filename)
+PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string filename)
 {	
 	position.x = X;
 	position.y = Y;
 	previous_x = (int)X;
 	previous_y = (int)Y;
 	
+    width = W;
+    height = H;
+    
 	filenames = new std::string;
 	filenames[0] = filename;
 	
@@ -21,7 +24,7 @@ PlayerCharacter::~PlayerCharacter()
 	int i;
 	for (i = 0; i < num_keys; i++)
 	{
-		screen_manager->surface_dereference(keys[i]);
+		screen_manager->texture_dereference(keys[i]);
 	}
 
 	delete filenames;
@@ -35,25 +38,34 @@ void PlayerCharacter::events(SDL_Event *event)
 		//Set the proper message surface
 		switch( event->key.keysym.sym )
 		{
-		    case SDLK_UP: 
-				if (position.y >= 450-height)
-				{
-					yvel = -vel*2; 
-				}
-				break;
-			case SDLK_LEFT: xvel -= vel; break;
-			case SDLK_RIGHT: xvel += vel; break;
+		    case SDLK_UP:
+            if (position.y >= 450-height)
+            {
+                yvel = -vel*2;
+            }
+            break;
+			case SDLK_LEFT:
+                // ensure it doesn't get going to fast (300 is max speed)
+                if (xvel > -300 )
+                    xvel -= vel;
+                break;
+			case SDLK_RIGHT:
+                if (xvel < 300)
+                    xvel += vel;
+                break;
 		}
 	}
-	else if( event->type == SDL_KEYUP )
-    {
-        //Adjust the velocity
+    else if (event->type == SDL_KEYUP) {
         switch( event->key.keysym.sym )
         {
-            case SDLK_LEFT: xvel += vel; break;
-            case SDLK_RIGHT: xvel -= vel; break;  
-        }        
-	}
+            case SDLK_LEFT:
+                xvel += vel;
+                break;
+            case SDLK_RIGHT:
+                xvel -= vel;
+                break;
+        }
+    }
 }
 
 void PlayerCharacter::step()
@@ -77,15 +89,16 @@ void PlayerCharacter::draw()
 {
 	if (visible == 1 && loaded == 1)
 	{
-		if (screen_manager->surface_exist(keys[0]))
+		if (screen_manager->texture_exist(keys[0]))
 		{	
 			int averaged_x = (previous_x+(int)position.x)/2;
 			int averaged_y = (previous_y+(int)position.y)/2;
 			
 			if (averaged_x != (int)position.x || averaged_y != (int)position.y)
-				screen_manager->surface_apply( averaged_x, averaged_y, keys[0], 0, 50 );
+                // this affects blur
+				screen_manager->texture_apply( averaged_x, averaged_y, width, height, keys[0], 0, 50 );
 				
-			screen_manager->surface_apply( (int)position.x, (int)position.y, keys[0], 0 );
+			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], 0, 255 );
 				
 			previous_x = (int)position.x;
 			previous_y = (int)position.y;
@@ -104,12 +117,12 @@ void PlayerCharacter::load_surfaces()
 		int i;
 		for (i = 0; i < num_keys; i++)
 		{
-			keys[i] = screen_manager->surface_load(filenames,1);
-			screen_manager->surface_reference(keys[i]);
+			keys[i] = screen_manager->texture_load(filenames,1,170,204,255);
+			screen_manager->texture_reference(keys[i]);
 		}
 		
-		width = screen_manager->surface_width(keys[0],0);
-		height = screen_manager->surface_height(keys[0],0);
+		width = screen_manager->texture_width(keys[0],0);
+		height = screen_manager->texture_height(keys[0],0);
 		
 		loaded = 1;
 	}

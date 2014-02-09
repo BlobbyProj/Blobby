@@ -119,7 +119,7 @@ void ObjectManager::draw()
 {
 	int i;
 	screen_manager->clear(global_background[0],global_background[1],global_background[2]);
-	screen_manager->surface_apply(0,0,global_background_key,0);
+	screen_manager->texture_apply(0,0, 640, 480, global_background_key,0);
 	if (global_paused == 0)
 	{
 		for( i = 0; i < objects.size(); i++)
@@ -130,7 +130,7 @@ void ObjectManager::draw()
 		for( i = 0; i < pause_objects.size(); i++)
 			pause_objects[i]->draw();
 	}
-	screen_manager->flip();
+	screen_manager->show();
 }
 
 void ObjectManager::load_surfaces()
