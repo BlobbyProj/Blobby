@@ -16,6 +16,8 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
 	num_keys = 1;
 	keys = new unsigned int[num_keys];
 	
+    xvel = 0;
+	yvel = 0;
 	vel = 300;
 }
 
