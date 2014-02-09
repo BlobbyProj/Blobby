@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <ctime>
 #include "globals.h"
 #include "screenmanager.h"
@@ -7,6 +8,11 @@
 
 int main( int argc, char* args[] )
 {
+	std::ofstream cout;
+	cout.open("CON");
+	cout << "YO" << std::endl;
+	cout.close();
+
 	int i;
 	
 	clock_t time;
