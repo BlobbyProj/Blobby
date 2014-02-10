@@ -62,10 +62,10 @@ void Enemy::load_surfaces()
 
 void Enemy::step()
 {
-        while (visible == 1 && loaded == 1)
+    
+        if (visible == 1 && loaded == 1)
         {
-            position.x += 20;
-            position.x -= 20;
+            // need to implement what enemy does each step
         }
             
 }

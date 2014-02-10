@@ -39,6 +39,7 @@ void LevelManager::step()
 			case 1: //Level 1
                 object_manager->objects_add(new Image(0,0, 600, 440, "media/backgrounds/island1.bmp"));
 				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, "media/blobbys/blobby.bmp"));
+                //object_manager->objects_add(new Enemy(50, 70, 97, 110, "media/enemies/goon.bmp"));
 				object_manager->objects_add(new Button(580,30, 400, 100, ButtonPause));
 				break;
 			case 2: //Instructions
