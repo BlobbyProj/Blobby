@@ -28,7 +28,7 @@ Enemy::~Enemy()
 
 void Enemy::draw()
 {
-	if (visible == 1 && loaded == 1)
+    if (visible == 1 && loaded == 1)
 	{
 		if (screen_manager->texture_exist(keys[0]))
 		{
@@ -49,7 +49,7 @@ void Enemy::load_surfaces()
 		for (i = 0; i < num_keys; i++)
 		{
             // Makes the blue background transparent
-			keys[i] = screen_manager->texture_load(filenames,1,170,204,255);
+			keys[i] = screen_manager->texture_load(filenames,1,0, 255, 0);
 			screen_manager->texture_reference(keys[i]);
 		}
 		
@@ -62,12 +62,7 @@ void Enemy::load_surfaces()
 
 void Enemy::step()
 {
-    
-        if (visible == 1 && loaded == 1)
-        {
-            // need to implement what enemy does each step
-        }
-            
+    // need to implement what enemy does each step
 }
 
 void Enemy::attack()
