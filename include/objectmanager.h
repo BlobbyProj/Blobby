@@ -29,6 +29,8 @@ class ObjectManager {
 		void events(SDL_Event *event);
 		void draw();
 		void load_surfaces();
+
+		bool get_collision(unsigned int OID);
 };
 
 #endif

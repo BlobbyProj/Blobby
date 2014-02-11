@@ -30,6 +30,7 @@ class Object {
 		unsigned int get_num_keys() { return (num_keys*loaded); }
 		unsigned int *get_keys() { return keys; }	
 		bool get_visible() { return visible; }
+		bool get_solid() { return solid; }
         Rectangle get_rectangle();
 		
 		void set_oid(unsigned int val) { oid = val; }

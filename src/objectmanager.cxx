@@ -147,3 +147,8 @@ void ObjectManager::load_surfaces()
 			pause_objects[i]->load_surfaces();
 	}
 }
+
+bool get_collision(unsigned int OID)
+{
+	return false;
+}
