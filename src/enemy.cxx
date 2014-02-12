@@ -1,17 +1,24 @@
 #include "enemy.h"
 
 Enemy::Enemy(double X, double Y, int W, int H, std::string filename)
-{
+{	
 	position.x = X;
 	position.y = Y;
+	previous_x = (int)X;
+	previous_y = (int)Y;
+	
     width = W;
     height = H;
-	
-	filenames = new std::string[1];
+    
+	filenames = new std::string;
 	filenames[0] = filename;
 	
 	num_keys = 1;
 	keys = new unsigned int[num_keys];
+	
+	xvel = 0;
+	yvel = 0;
+	vel = 0;
 }
 
 Enemy::~Enemy()
@@ -21,9 +28,44 @@ Enemy::~Enemy()
 	{
 		screen_manager->texture_dereference(keys[i]);
 	}
-    
-	delete[] filenames;
-	delete keys;
+
+	delete filenames;
+	delete[] keys;
+}
+
+void Enemy::events(SDL_Event *event)
+{
+	//events code?
+}
+
+
+
+void Enemy::step()
+{
+	//~ if(position.x > 300 || position.x < 40){
+	if(position.x >= 500){
+		xvel = -80;
+	}else if(position.x <= 300){
+		xvel = 80;
+	}
+	
+	position.x +=  xvel*global_timestep;
+	//~ position.x = position.x + vel*global_timestep;
+	//~ position.y = position.y + vel*global_timestep;
+	
+	//~ position.x = position.x + xvel*global_timestep;
+	//~ position.y = position.y + yvel*global_timestep;
+	
+	//~ if (position.y < 460-height)
+	//~ {
+		//~ yvel += global_gravity*global_timestep;
+	//~ }
+	//~ else
+	//~ {
+		//~ if (yvel > 0)
+			//~ yvel = 0;
+		//~ position.y = 460-height;
+	//~ }
 }
 
 void Enemy::draw()
@@ -31,12 +73,22 @@ void Enemy::draw()
 	if (visible == 1 && loaded == 1)
 	{
 		if (screen_manager->texture_exist(keys[0]))
-		{
-			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], 0);
+		{	
+			int averaged_x = (previous_x+(int)position.x)/2;
+			int averaged_y = (previous_y+(int)position.y)/2;
+			
+			if (averaged_x != (int)position.x || averaged_y != (int)position.y)
+                // this affects blur
+				screen_manager->texture_apply( averaged_x, averaged_y, width, height, keys[0], 0, 50 );
+				
+			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], 0, 255 );
+				
+			previous_x = (int)position.x;
+			previous_y = (int)position.y;
 		}
 		else
 		{
-            ERROR("Image " << keys[0] << " failed to load")
+ERROR("Image " << keys[0] << " failed to load")
 		}
 	}
 }
@@ -48,8 +100,7 @@ void Enemy::load_surfaces()
 		int i;
 		for (i = 0; i < num_keys; i++)
 		{
-            // Makes the blue background transparent
-			keys[i] = screen_manager->texture_load(filenames,1,170,204,255);
+			keys[i] = screen_manager->texture_load(filenames,1,0,255,0);
 			screen_manager->texture_reference(keys[i]);
 		}
 		
@@ -58,19 +109,4 @@ void Enemy::load_surfaces()
 		
 		loaded = 1;
 	}
-}
-
-void Enemy::step()
-{
-        while (visible == 1 && loaded == 1)
-        {
-            position.x += 20;
-            position.x -= 20;
-        }
-            
-}
-
-void Enemy::attack()
-{
-    //implement attack after collisions?
 }
