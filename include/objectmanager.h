@@ -1,7 +1,8 @@
 #ifndef OBJECTMANAGER_H
 #define OBJECTMANAGER_H
 
-#include <vector>
+//#include <vector>
+#include <map>
 #include "globals.h"
 #include "screenmanager.h"
 #include "object.h"
@@ -9,20 +10,21 @@
 
 class ObjectManager {
 	private:
-		std::vector<Object*> objects;
-		std::vector<Object*> pause_objects;
+        std::map<unsigned int,Object*> objects;
+        std::map<unsigned int,Object*> pause_objects;
+        std::map<unsigned int,Object*>::iterator i;
 		
 	public:
 		~ObjectManager();
 		
 		unsigned int objects_add(Object *object);
-		bool objects_exist(unsigned int val);
-		bool objects_delete(unsigned int val);
+		bool objects_exist(unsigned int OID);
+		bool objects_delete(unsigned int OID);
 		void objects_clear();
 
 		unsigned int pause_objects_add(Object *object);
-		bool pause_objects_exist(unsigned int val);		
-		bool pause_objects_delete(unsigned int val);
+		bool pause_objects_exist(unsigned int OID);
+		bool pause_objects_delete(unsigned int OID);
 		void pause_objects_clear();
 		
 		void step();

@@ -1,37 +1,40 @@
 #include "objectmanager.h"
 
 ObjectManager::~ObjectManager()
-{
-	int i;
-	for (i = 0; i < objects.size(); i++)
-		delete objects[i];
-	for (i = 0; i < pause_objects.size(); i++)
-		delete pause_objects[i];
+{    
+    for( i= objects.begin(); i!=objects.end(); i++){
+        delete i->second;
+    }
+    objects.clear();
+    for( i= pause_objects.begin(); i!=pause_objects.end(); i++){
+        delete i->second;
+    }
+    pause_objects.clear();
 }
 
 unsigned int ObjectManager::objects_add(Object *object)
 {	
 	unsigned int oid = objects.size();
 	object->set_oid(oid);
-	objects.push_back(object);
+    objects.insert(std::pair<unsigned int,Object*>(oid,object));
 	return oid;
 }
 
-bool ObjectManager::objects_exist(unsigned int val)
+bool ObjectManager::objects_exist(unsigned int OID)
 {
-	if (val < objects.size())
-	{
+	if (objects.find(OID) != objects.end())
+    {
 		return 1;
 	}
 	return 0;
 }
 
-bool ObjectManager::objects_delete(unsigned int val)
+bool ObjectManager::objects_delete(unsigned int OID)
 {
-	if (objects_exist(val))
+	if (objects_exist(OID))
 	{
-		delete objects[val];
-		objects.erase(objects.begin()+val);
+        delete objects[OID];
+        objects.erase(OID);
 		return 0;
 	}
 	return -1;
@@ -39,37 +42,35 @@ bool ObjectManager::objects_delete(unsigned int val)
 
 void ObjectManager::objects_clear()
 {
-	int i;
-	while (objects.size() != 0)
-	{
-		delete objects[0];
-		objects.erase(objects.begin());
-	}
+    for(i= objects.begin(); i!=objects.end(); i++){
+        delete i->second;
+    }
+    objects.clear();
 }
 
 unsigned int ObjectManager::pause_objects_add(Object *object)
 {	
 	unsigned int oid = pause_objects.size();
 	object->set_oid(oid);
-	pause_objects.push_back(object);
+    pause_objects.insert(std::pair<unsigned int,Object*>(oid,object));
 	return oid;
 }
 
-bool ObjectManager::pause_objects_exist(unsigned int val)
+bool ObjectManager::pause_objects_exist(unsigned int OID)
 {
-	if (val < pause_objects.size())
-	{
+	if (pause_objects.find(OID) != pause_objects.end())
+    {
 		return 1;
 	}
 	return 0;
 }
 
-bool ObjectManager::pause_objects_delete(unsigned int val)
+bool ObjectManager::pause_objects_delete(unsigned int OID)
 {
-	if (pause_objects_exist(val))
+	if (pause_objects_exist(OID))
 	{
-		delete pause_objects[val];
-		pause_objects.erase(pause_objects.begin()+val);
+		delete pause_objects[OID];
+        pause_objects.erase(OID);
 		return 0;
 	}
 	return -1;
@@ -77,12 +78,10 @@ bool ObjectManager::pause_objects_delete(unsigned int val)
 
 void ObjectManager::pause_objects_clear()
 {
-	int i;
-	while (pause_objects.size() != 0)
-	{
-		delete pause_objects[0];
-		pause_objects.erase(pause_objects.begin());
-	}
+    for(i= pause_objects.begin(); i!=pause_objects.end(); i++){
+        delete i->second;
+    }
+    pause_objects.clear();
 }
 
 void ObjectManager::step()
