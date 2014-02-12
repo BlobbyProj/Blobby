@@ -16,6 +16,8 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
 	num_keys = 1;
 	keys = new unsigned int[num_keys];
 	
+	xvel = 0;
+	yvel = 0;
 	vel = 300;
 }
 
@@ -46,22 +48,30 @@ void PlayerCharacter::events(SDL_Event *event)
             break;
 			case SDLK_LEFT:
                 // ensure it doesn't get going to fast (300 is max speed)
-                if (xvel > -300 ) {
+                if (xvel > -300 )
                     xvel -= vel;
-                }
                 break;
 			case SDLK_RIGHT:
-                if (xvel < 300) {
+                if (xvel < 300)
                     xvel += vel;
-                }
                 break;
 		}
 	}
+    else if (event->type == SDL_KEYUP) {
+        switch( event->key.keysym.sym )
+        {
+            case SDLK_LEFT:
+                xvel += vel;
+                break;
+            case SDLK_RIGHT:
+                xvel -= vel;
+                break;
+        }
+    }
 }
 
 void PlayerCharacter::step()
 {
-
 	position.x = position.x + xvel*global_timestep;
 	position.y = position.y + yvel*global_timestep;
 	
@@ -87,8 +97,7 @@ void PlayerCharacter::draw()
 			int averaged_y = (previous_y+(int)position.y)/2;
 			
 			if (averaged_x != (int)position.x || averaged_y != (int)position.y)
-				//set alpha value to affect transparency of blobby image
-				//~ screen_manager->texture_apply( averaged_x, averaged_y, width, height, keys[0], 0, 255 );
+                // this affects blur
 				screen_manager->texture_apply( averaged_x, averaged_y, width, height, keys[0], 0, 50 );
 				
 			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], 0, 255 );
@@ -98,7 +107,7 @@ void PlayerCharacter::draw()
 		}
 		else
 		{
-		ERROR("Image " << keys[0] << " failed to load")
+ERROR("Image " << keys[0] << " failed to load")
 		}
 	}
 }
@@ -110,8 +119,7 @@ void PlayerCharacter::load_surfaces()
 		int i;
 		for (i = 0; i < num_keys; i++)
 		{
-			//~ keys[i] = screen_manager->texture_load(filenames,1);
-			keys[i] = screen_manager->texture_load(filenames,1, 0,255,0);
+			keys[i] = screen_manager->texture_load(filenames,1,0,255,0);
 			screen_manager->texture_reference(keys[i]);
 		}
 		

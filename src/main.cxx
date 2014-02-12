@@ -1,12 +1,36 @@
 #include <iostream>
+#include <fstream>
 #include <ctime>
 #include "globals.h"
 #include "screenmanager.h"
 #include "objectmanager.h"
 #include "levelmanager.h"
+#include "console.h"
 
 int main( int argc, char* args[] )
 {
+	//Initialize all SDL subsystems
+	if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
+	{
+	    FLAG
+	}
+
+	//Create console
+	console = new Console(CONSOLE_WIDTH,CONSOLE_HEIGHT);
+
+	//Create screen manager
+	screen_manager = new ScreenManager(WIDTH,HEIGHT);
+
+	//Create object manager
+	object_manager = new ObjectManager;
+
+	//Create level manager
+	level_manager = new LevelManager;
+
+	//std::ofstream cout;
+	//cout.open("CON");
+	//cout.close();
+
 	int i;
 	
 	clock_t time;
@@ -29,31 +53,50 @@ int main( int argc, char* args[] )
 		{	
 			time_since_last_frame = 0;
 			steps_since_last_frame = 0;
-			object_manager->draw();
+			if (global_focus == 2)
+				object_manager->draw();
 		}
 		
         //While there's an event to handle
         while( SDL_PollEvent( &event ) )
         {
-			object_manager->events(&event);
-            //If the user has Xed out the window
-            if( event.type == SDL_QUIT )
+        	//If the user has Xed out the window
+        	if( event.type == SDL_WINDOWEVENT )
             {
-                //Quit the program
-                global_gamestate = -1;
+            	switch(event.window.event)
+            	{
+            	case SDL_WINDOWEVENT_FOCUS_LOST:
+            		global_focus = 0;
+            		break;
+            	case SDL_WINDOWEVENT_FOCUS_GAINED:
+            		global_focus = event.window.windowID;
+            		break;
+            	case SDL_WINDOWEVENT_CLOSE:
+                	//Quit the program
+                	global_gamestate = -1;
+                	break;
+            	}
             }
+            if (global_focus == 2)
+            {
+				object_manager->events(&event);
+			}
+
         }
-		
-		object_manager->step();
-		level_manager->step();
+		if (global_focus == 2)
+		{
+			object_manager->step();
+			level_manager->step();
+		}
 		
     }
 	
-	
     //Free the surface and quit SDL
+    delete console;
 	delete object_manager;
 	delete level_manager;
 	delete screen_manager;
+	SDL_Quit();
 
     return 0;
 }

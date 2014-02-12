@@ -7,12 +7,6 @@ ScreenManager::ScreenManager(int Width, int Height)
 
 	width = Width;
 	height = Height;
-
-    //Initialize all SDL subsystems
-    if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
-    {
-        FLAG
-    }
 	
     //Set up the screen and renderer
     screen = SDL_CreateWindow("Blobby", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Width, Height, 0);
@@ -37,7 +31,6 @@ ScreenManager::~ScreenManager()
 	
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(screen);
-	SDL_Quit();
 }
 		
 bool ScreenManager::clear(int R, int G, int B)
@@ -114,6 +107,7 @@ SDL_Texture *ScreenManager::texture_load( std::string filename )
     
     // Check if surface loaded properly
     if (loadedSurface == NULL) {
+        std::cout << SDL_GetError() << std::endl;
         FLAG;
     }
 	
@@ -161,6 +155,7 @@ SDL_Texture *ScreenManager::texture_load( std::string filename, int R, int G, in
     //Check if something went wrong in loading the image
     if( loadedImage == NULL )
     {
+        std::cout << SDL_GetError() << std::endl;
         FLAG;
     }
     
@@ -219,7 +214,7 @@ bool ScreenManager::texture_apply( int x, int y, int w, int h, unsigned int key,
 		SDL_Texture *tex = (*(*images)[key])[frame];
         Uint32 old_alpha;
         SDL_QueryTexture(tex, &old_alpha, NULL, NULL, NULL);
-        old_alpha = (char) old_alpha;
+        old_alpha = (char) old_alpha;;
 		SDL_SetTextureAlphaMod(tex, alpha);
         
 		int return_value = SDL_RenderCopy( renderer, (*(*images)[key])[frame], NULL, &offset );
