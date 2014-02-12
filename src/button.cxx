@@ -9,7 +9,7 @@ void ButtonPlay(bool init, std::string *filenames)
 		return;
 	}
 
-	global_gamestate = 1;
+	global_gamestate = 2;
 }
 
 void ButtonQuit(bool init, std::string *filenames)
@@ -82,7 +82,7 @@ void ButtonInstructions(bool init, std::string *filenames)
 		return;
 	}
 
-	global_gamestate = 2;
+	global_gamestate = 1;
 }
 
 
