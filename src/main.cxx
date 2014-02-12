@@ -92,7 +92,7 @@ int main( int argc, char* args[] )
     }
 	
     //Free the surface and quit SDL
-    //~ delete console;
+    delete console;
 	delete object_manager;
 	delete level_manager;
 	delete screen_manager;
