@@ -16,7 +16,7 @@ int main( int argc, char* args[] )
 	}
 
 	//Create console
-	//~ console = new Console(CONSOLE_WIDTH,CONSOLE_HEIGHT);
+	console = new Console(CONSOLE_WIDTH,CONSOLE_HEIGHT);
 
 	//Create screen manager
 	screen_manager = new ScreenManager(WIDTH,HEIGHT);
