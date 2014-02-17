@@ -2,36 +2,31 @@
 
 ObjectManager::~ObjectManager()
 {
-	int i;
-	for (i = 0; i < objects.size(); i++)
-		delete objects[i];
-	for (i = 0; i < pause_objects.size(); i++)
-		delete pause_objects[i];
+	objects_clear();
+	pause_objects_clear();
 }
 
 unsigned int ObjectManager::objects_add(Object *object)
-{	
-	unsigned int oid = objects.size();
-	object->set_oid(oid);
-	objects.push_back(object);
-	return oid;
+{
+	object->set_oid(count);
+	objects.insert(std::pair<unsigned int,Object*>(count,object));
+	count++;
 }
 
-bool ObjectManager::objects_exist(unsigned int val)
+bool ObjectManager::objects_exist(unsigned int key)
 {
-	if (val < objects.size())
-	{
+	if (objects.find(key) != objects.end())
 		return 1;
-	}
-	return 0;
+	else
+		return 0;
 }
 
-bool ObjectManager::objects_delete(unsigned int val)
+bool ObjectManager::objects_delete(unsigned int key)
 {
-	if (objects_exist(val))
+	if (objects_exist(key))
 	{
-		delete objects[val];
-		objects.erase(objects.begin()+val);
+		delete objects[key];
+		objects.erase(key);
 		return 0;
 	}
 	return -1;
@@ -39,37 +34,36 @@ bool ObjectManager::objects_delete(unsigned int val)
 
 void ObjectManager::objects_clear()
 {
-	int i;
-	while (objects.size() != 0)
+	std::map<unsigned int,Object*>::iterator it;
+	for (it = objects.begin(); it != objects.end(); ++it)
 	{
-		delete objects[0];
-		objects.erase(objects.begin());
+		delete it->second;
 	}
+	objects.clear();
+	count = 0;
 }
 
 unsigned int ObjectManager::pause_objects_add(Object *object)
 {	
-	unsigned int oid = pause_objects.size();
-	object->set_oid(oid);
-	pause_objects.push_back(object);
-	return oid;
+	object->set_oid(pause_count);
+	pause_objects.insert(std::pair<unsigned int,Object*>(pause_count,object));
+	pause_count++;
 }
 
-bool ObjectManager::pause_objects_exist(unsigned int val)
+bool ObjectManager::pause_objects_exist(unsigned int key)
 {
-	if (val < pause_objects.size())
-	{
+	if (pause_objects.find(key) != pause_objects.end())
 		return 1;
-	}
-	return 0;
+	else
+		return 0;
 }
 
-bool ObjectManager::pause_objects_delete(unsigned int val)
+bool ObjectManager::pause_objects_delete(unsigned int key)
 {
-	if (pause_objects_exist(val))
+	if (pause_objects_exist(key))
 	{
-		delete pause_objects[val];
-		pause_objects.erase(pause_objects.begin()+val);
+		delete pause_objects[key];
+		pause_objects.erase(key);
 		return 0;
 	}
 	return -1;
@@ -77,74 +71,79 @@ bool ObjectManager::pause_objects_delete(unsigned int val)
 
 void ObjectManager::pause_objects_clear()
 {
-	int i;
-	while (pause_objects.size() != 0)
+	std::map<unsigned int,Object*>::iterator it;
+	for (it = pause_objects.begin(); it != pause_objects.end(); ++it)
 	{
-		delete pause_objects[0];
-		pause_objects.erase(pause_objects.begin());
+		delete it->second;
 	}
+	pause_objects.clear();
+	pause_count = 0;
 }
 
 void ObjectManager::step()
 {
-	int i;
 	if (global_paused == 0)
 	{
-		for (i = 0; i < objects.size(); i++)
-			objects[i]->step();
+		std::map<unsigned int,Object*>::iterator it;
+		for (it = objects.begin(); it != objects.end(); ++it)
+			it->second->step();
 	}
 	else
 	{
-		for (i = 0; i < pause_objects.size(); i++)
-			pause_objects[i]->step();
+		std::map<unsigned int,Object*>::iterator it;
+		for (it = pause_objects.begin(); it != pause_objects.end(); ++it)
+			it->second->step();
 	}
 }
 
 void ObjectManager::events(SDL_Event *event)
 {
-	int i;
 	if (global_paused == 0)
 	{
-		for (i = 0; i < objects.size(); i++)
-			objects[i]->events(event);
+		std::map<unsigned int,Object*>::iterator it;
+		for (it = objects.begin(); it != objects.end(); ++it)
+			it->second->events(event);
 	}
 	else
 	{
-		for (i = 0; i < pause_objects.size(); i++)
-			pause_objects[i]->events(event);
+		std::map<unsigned int,Object*>::iterator it;
+		for (it = pause_objects.begin(); it != pause_objects.end(); ++it)
+			it->second->events(event);
 	}
 }
 
 void ObjectManager::draw()
 {
-	int i;
 	screen_manager->clear(global_background[0],global_background[1],global_background[2]);
 	screen_manager->texture_apply(0,0, 640, 480, global_background_key,0);
 	if (global_paused == 0)
 	{
-		for( i = 0; i < objects.size(); i++)
-			objects[i]->draw();
+		std::map<unsigned int,Object*>::iterator it;
+		for (it = objects.begin(); it != objects.end(); ++it)
+			it->second->draw();
 	}
 	else
 	{
-		for( i = 0; i < pause_objects.size(); i++)
-			pause_objects[i]->draw();
+		std::map<unsigned int,Object*>::iterator it;
+		for (it = pause_objects.begin(); it != pause_objects.end(); ++it)
+			it->second->draw();
 	}
 	screen_manager->show();
 }
 
 void ObjectManager::load_surfaces()
 {
-	int i;
 	if (global_paused == 0)
 	{
-		for ( i = 0; i < objects.size(); i++)
-			objects[i]->load_surfaces();
+		std::map<unsigned int,Object*>::iterator it;
+		for (it = objects.begin(); it != objects.end(); ++it)
+			it->second->load_surfaces();
 	}
 	else
 	{
-		for ( i = 0; i < pause_objects.size(); i++)
-			pause_objects[i]->load_surfaces();
+		std::map<unsigned int,Object*>::iterator it;
+		for (it = pause_objects.begin(); it != pause_objects.end(); ++it)
+			it->second->load_surfaces();
 	}
 }
 

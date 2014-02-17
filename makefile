@@ -14,25 +14,27 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 vpath %.h $(IDIR)
 vpath %.cxx $(SDIR)
 
-#Check: if Windows or Linux, set _libs
-ifeq ($(OS),Windows_NT)
-	_libs = -lmingw32 -lSDL2main -lSDL2 -mwindows
-else
-	_libs = -lSDL2
-endif
-
+#OSX
 ifeq ($(OS),OSX)
-#MAC
 CFLAGS = -I$(IDIR) -std=c++0x -g -I/Library/Frameworks/SDL2.framework/Headers
 LFLAGS = -g
 LIBS =
 FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2
-else
+endif
 
-#WINDOWS/Linux
+#WINDOWS
+ifeq ($(OS),WINDOWS)
 CFLAGS = -I$(IDIR) -std=c++0x -g
 LFLAGS = -static-libgcc -static-libstdc++ -g
-LIBS = $(_libs)
+LIBS = -lmingw32 -lSDL2main -lSDL2 -mwindows
+FRAMEWORKS = 
+endif
+
+#LINUX
+ifeq ($(OS),LINUX)
+CFLAGS = -I$(IDIR) -std=c++0x -g
+LFLAGS = -static-libgcc -static-libstdc++ -g
+LIBS = -lSDL2
 FRAMEWORKS = 
 endif
 
