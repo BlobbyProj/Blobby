@@ -16,7 +16,7 @@ int main( int argc, char* args[] )
 	}
 
 	//Create console
-	console = new Console(CONSOLE_WIDTH,CONSOLE_HEIGHT);
+	//~ console = new Console(CONSOLE_WIDTH,CONSOLE_HEIGHT);
 
 	//Create screen manager
 	screen_manager = new ScreenManager(WIDTH,HEIGHT);
@@ -53,7 +53,7 @@ int main( int argc, char* args[] )
 		{	
 			time_since_last_frame = 0;
 			steps_since_last_frame = 0;
-			if (global_focus == 2)
+			if (global_focus == 1)
 				object_manager->draw();
 		}
 		
@@ -77,13 +77,13 @@ int main( int argc, char* args[] )
                 	break;
             	}
             }
-            if (global_focus == 2)
+            if (global_focus == 1)
             {
 				object_manager->events(&event);
 			}
 
         }
-		if (global_focus == 2)
+		if (global_focus == 1)
 		{
 			object_manager->step();
 			level_manager->step();
@@ -92,7 +92,7 @@ int main( int argc, char* args[] )
     }
 	
     //Free the surface and quit SDL
-    delete console;
+    //~ delete console;
 	delete object_manager;
 	delete level_manager;
 	delete screen_manager;
