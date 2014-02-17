@@ -8,7 +8,7 @@ BDIR = bin
 CC = g++
 OS = 
 
-_OBJ = main.o globals.o console.o levelmanager.o screenmanager.o texture.o objectmanager.o rectangle.o playercharacter.o button.o image.o enemy.o
+_OBJ = main.o globals.o console.o levelmanager.o screenmanager.o texture.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 vpath %.h $(IDIR)
@@ -64,10 +64,13 @@ $(ODIR)/texture.o: texture.cxx globals.h texture.h
 $(ODIR)/objectmanager.o: objectmanager.cxx globals.h screenmanager.h objectmanager.h rectangle.h object.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
+$(ODIR)/object.o: object.cxx globals.h screenmanager.h point.h rectangle.h object.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+
 $(ODIR)/rectangle.o: rectangle.cxx globals.h point.h rectangle.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
-$(ODIR)/playercharacter.o: playercharacter.cxx globals.h screenmanager.h rectangle.h object.h playercharacter.h
+$(ODIR)/playercharacter.o: playercharacter.cxx globals.h screenmanager.h rectangle.h object.h playercharacter.h objectmanager.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 $(ODIR)/button.o: button.cxx globals.h screenmanager.h rectangle.h object.h button.h

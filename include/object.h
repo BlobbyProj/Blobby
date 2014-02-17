@@ -26,9 +26,10 @@ class Object {
 	
 		double get_x() { return position.x; }
 		double get_y() { return position.y; }
+		unsigned int get_oid() { return oid; }
 		std::string *get_filenames() { return filenames; }
 		unsigned int get_num_keys() { return (num_keys*loaded); }
-		unsigned int *get_keys() { return keys; }	
+		unsigned int *get_keys() { return keys; }
 		bool get_visible() { return visible; }
 		bool get_solid() { return solid; }
         Rectangle get_rectangle();

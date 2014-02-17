@@ -147,7 +147,22 @@ void ObjectManager::load_surfaces()
 	}
 }
 
-bool get_collision(unsigned int OID)
+std::vector<unsigned int>* ObjectManager::get_collisions(unsigned int OID)
 {
-	return false;
+	std::vector<unsigned int>* collisions = new std::vector<unsigned int>;
+
+	Rectangle bound = objects[OID]->get_rectangle();
+
+	std::map<unsigned int,Object*>::iterator it;
+	for (it = objects.begin(); it != objects.end(); ++it)
+	{
+		if (it->second->get_oid() != OID && it->second->get_solid() == 1)
+		{
+			if (bound.get_collision(it->second->get_rectangle()) == 1)
+			{
+				collisions->push_back(it->first);
+			}
+		}
+	}
+	return collisions;
 }

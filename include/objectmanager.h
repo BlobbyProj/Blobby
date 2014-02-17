@@ -2,6 +2,7 @@
 #define OBJECTMANAGER_H
 
 #include <vector>
+#include <map>
 #include "globals.h"
 #include "screenmanager.h"
 #include "object.h"
@@ -36,7 +37,7 @@ class ObjectManager {
 		void draw();
 		void load_surfaces();
 
-		bool get_collision(unsigned int OID);
+		std::vector<unsigned int>* get_collisions(unsigned int OID);
 };
 
 #endif
