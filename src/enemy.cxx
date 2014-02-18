@@ -19,6 +19,8 @@ Enemy::Enemy(double X, double Y, int W, int H, std::string filename)
 	xvel = 0;
 	yvel = 0;
 	vel = 0;
+
+	solid = 1;
 }
 
 Enemy::~Enemy()

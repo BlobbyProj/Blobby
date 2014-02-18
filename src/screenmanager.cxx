@@ -21,7 +21,6 @@ ScreenManager::ScreenManager(int Width, int Height)
 
 ScreenManager::~ScreenManager()
 {
-	int i;
 	std::map<unsigned int,Texture*>::iterator it;
 	for (it = images->begin(); it != images->end(); ++it)
 	{

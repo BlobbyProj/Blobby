@@ -8,31 +8,33 @@ BDIR = bin
 CC = g++
 OS = 
 
-_OBJ = main.o globals.o console.o levelmanager.o screenmanager.o texture.o objectmanager.o rectangle.o playercharacter.o button.o image.o enemy.o
+_OBJ = main.o globals.o console.o levelmanager.o screenmanager.o texture.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 vpath %.h $(IDIR)
 vpath %.cxx $(SDIR)
 
-#Check: if Windows or Linux, set _libs
-ifeq ($(OS),Windows_NT)
-	_libs = -lmingw32 -lSDL2main -lSDL2 -mwindows
-else
-	_libs = -lSDL2
-endif
-
+#OSX
 ifeq ($(OS),OSX)
-#MAC
 CFLAGS = -I$(IDIR) -std=c++0x -g -I/Library/Frameworks/SDL2.framework/Headers
 LFLAGS = -g
 LIBS =
 FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2
-else
+endif
 
-#WINDOWS/Linux
+#WINDOWS
+ifeq ($(OS),WINDOWS)
 CFLAGS = -I$(IDIR) -std=c++0x -g
 LFLAGS = -static-libgcc -static-libstdc++ -g
-LIBS = $(_libs)
+LIBS = -lmingw32 -lSDL2main -lSDL2 -mwindows
+FRAMEWORKS = 
+endif
+
+#LINUX
+ifeq ($(OS),LINUX)
+CFLAGS = -I$(IDIR) -std=c++0x -g
+LFLAGS = -static-libgcc -static-libstdc++ -g
+LIBS = -lSDL2
 FRAMEWORKS = 
 endif
 
@@ -62,10 +64,13 @@ $(ODIR)/texture.o: texture.cxx globals.h texture.h
 $(ODIR)/objectmanager.o: objectmanager.cxx globals.h screenmanager.h objectmanager.h rectangle.h object.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
+$(ODIR)/object.o: object.cxx globals.h screenmanager.h point.h rectangle.h object.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+
 $(ODIR)/rectangle.o: rectangle.cxx globals.h point.h rectangle.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
-$(ODIR)/playercharacter.o: playercharacter.cxx globals.h screenmanager.h rectangle.h object.h playercharacter.h
+$(ODIR)/playercharacter.o: playercharacter.cxx globals.h screenmanager.h rectangle.h object.h playercharacter.h objectmanager.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 $(ODIR)/button.o: button.cxx globals.h screenmanager.h rectangle.h object.h button.h

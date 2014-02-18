@@ -19,6 +19,8 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
 	xvel = 0;
 	yvel = 0;
 	vel = 300;
+
+	solid = 1;
 }
 
 PlayerCharacter::~PlayerCharacter()
@@ -72,6 +74,8 @@ void PlayerCharacter::events(SDL_Event *event)
 
 void PlayerCharacter::step()
 {
+	int i;
+
 	position.x = position.x + xvel*global_timestep;
 	position.y = position.y + yvel*global_timestep;
 	
@@ -85,6 +89,10 @@ void PlayerCharacter::step()
 			yvel = 0;
 		position.y = 460-height;
 	}
+	std::vector<unsigned int>* collisions = object_manager->get_collisions(oid);
+	for (i = 0; i < collisions->size(); i++)
+		object_manager->objects_delete((*collisions)[i]);
+	delete collisions;
 }
 
 void PlayerCharacter::draw()
