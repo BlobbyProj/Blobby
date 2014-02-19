@@ -5,6 +5,7 @@
 #include "button.h"
 #include "image.h"
 #include "enemy.h"
+#include "block.h"
 
 void LevelManager::step()
 {
@@ -45,6 +46,7 @@ void LevelManager::step()
 				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, "media/blobbys/blobby.bmp"));
 				object_manager->objects_add(new Enemy(200,360, 32, 32, "media/enemies/torto.bmp"));
 				object_manager->objects_add(new Button(580,30, 400, 100, ButtonPause));
+                //object_manager->objects_add(new Block(500, 350, 100, 100, "media/block1.bmp"));
 				break;
 
 		}

@@ -8,7 +8,7 @@ BDIR = bin
 CC = g++
 OS = 
 
-_OBJ = main.o globals.o console.o levelmanager.o screenmanager.o texture.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o
+_OBJ = main.o globals.o console.o levelmanager.o screenmanager.o texture.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 vpath %.h $(IDIR)
@@ -80,6 +80,9 @@ $(ODIR)/image.o: image.cxx globals.h screenmanager.h rectangle.h object.h image.
 	$(CC) -c -o $@ $< $(CFLAGS)
     
 $(ODIR)/enemy.o: enemy.cxx globals.h screenmanager.h rectangle.h object.h enemy.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+    
+$(ODIR)/block.o: block.cxx globals.h screenmanager.h rectangle.h object.h block.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 .PHONY: clean
