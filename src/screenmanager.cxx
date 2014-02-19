@@ -1,6 +1,14 @@
 #include "screenmanager.h"
 #include "rectangle.h"
 
+#include <ciso646>
+#if defined( _LIBCPP_VERSION )
+using std::hash;
+#else
+#include <tr1/unordered_map>
+using std::tr1::hash;
+#endif
+
 ScreenManager::ScreenManager(int Width, int Height)
 {
 	images = new std::map<unsigned int,Texture*>;
@@ -46,7 +54,7 @@ void ScreenManager::show() {
 unsigned int ScreenManager::texture_load( std::string *filenames, unsigned int num_files )
 {
 	//Hash filename for use as key
-	std::hash<std::string> str_hash;
+	hash<std::string> str_hash;
 	unsigned int key = str_hash(filenames[0]);
 	
 	//Check if image already loaded
@@ -71,7 +79,7 @@ unsigned int ScreenManager::texture_load( std::string *filenames, unsigned int n
 unsigned int ScreenManager::texture_load( std::string *filenames, unsigned int num_files, int R, int G, int B)
 {
 	//Hash filename for use as key
-	std::hash<std::string> str_hash;
+	hash<std::string> str_hash;
 	unsigned int key = str_hash(filenames[0]);
 	
 	//Check if image already loaded
