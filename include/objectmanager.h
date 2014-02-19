@@ -10,8 +10,6 @@
 
 class ObjectManager {
 	private:
-		//std::vector<Object*> objects;
-		//std::vector<Object*> pause_objects;
 		unsigned int count;
 		unsigned int pause_count;
 

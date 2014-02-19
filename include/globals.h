@@ -1,7 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-//g++ main.cxx screen.cxx objectmanager.cxx bug.cxx -o main -lmingw32 -lSDLmain -lSDL -static-libgcc -static-libstdc++
 #define DEBUG
 
 #define WIDTH 640
