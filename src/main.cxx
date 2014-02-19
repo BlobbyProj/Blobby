@@ -56,7 +56,7 @@ int main( int argc, char* args[] )
 		{	
 			time_since_last_frame = 0;
 			steps_since_last_frame = 0;
-			if (global_focus == 1)
+			if (global_focus != 0)
 				object_manager->draw();
 		}
 		
@@ -80,13 +80,13 @@ int main( int argc, char* args[] )
                 	break;
             	}
             }
-            if (global_focus == 1)
+            if (global_focus != 0)
             {
 				object_manager->events(&event);
 			}
 
         }
-		if (global_focus == 1)
+		if (global_focus != 0)
 		{
 			object_manager->step();
 			level_manager->step();

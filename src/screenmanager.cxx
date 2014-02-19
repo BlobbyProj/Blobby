@@ -46,7 +46,8 @@ bool ScreenManager::clear(int R, int G, int B)
 	return SDL_RenderClear(renderer);
 }
 
-void ScreenManager::show() {
+void ScreenManager::show()
+{
     SDL_RenderPresent(renderer);
     return;
 }
@@ -113,7 +114,8 @@ SDL_Texture *ScreenManager::texture_load( std::string filename )
     loadedSurface = SDL_LoadBMP( filename.c_str() );
     
     // Check if surface loaded properly
-    if (loadedSurface == NULL) {
+    if (loadedSurface == NULL)
+    {
         std::cout << SDL_GetError() << std::endl;
         FLAG;
     }
@@ -241,7 +243,8 @@ bool ScreenManager::texture_exist( unsigned int key )
 
 int ScreenManager::texture_width( unsigned int key, unsigned int frame )
 {
-	if (texture_exist(key)){
+	if (texture_exist(key))
+	{
         int w;
 		SDL_QueryTexture((*(*images)[key])[frame], NULL, NULL, &w, NULL);
         return w;
@@ -252,7 +255,8 @@ int ScreenManager::texture_width( unsigned int key, unsigned int frame )
 
 int ScreenManager::texture_height( unsigned int key, unsigned int frame )
 {
-	if (texture_exist(key)){
+	if (texture_exist(key))
+	{
         int h;
 		SDL_QueryTexture((*(*images)[key])[frame], NULL, NULL, NULL, &h);
         return h;
