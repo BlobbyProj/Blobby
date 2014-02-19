@@ -44,30 +44,21 @@ void Enemy::events(SDL_Event *event)
 
 void Enemy::step()
 {
-	//~ if(position.x > 300 || position.x < 40){
-	if(position.x >= 500){
+    // set veloctiy based on position
+    if(position.x >= 500){
 		xvel = -80;
 	}else if(position.x <= 300){
 		xvel = 80;
 	}
 	
-	position.x +=  xvel*global_timestep;
-	//~ position.x = position.x + vel*global_timestep;
-	//~ position.y = position.y + vel*global_timestep;
-	
-	//~ position.x = position.x + xvel*global_timestep;
-	//~ position.y = position.y + yvel*global_timestep;
-	
-	//~ if (position.y < 460-height)
-	//~ {
-		//~ yvel += global_gravity*global_timestep;
-	//~ }
-	//~ else
-	//~ {
-		//~ if (yvel > 0)
-			//~ yvel = 0;
-		//~ position.y = 460-height;
-	//~ }
+    // if enemy collided with something, reverse velocity
+    std::vector<unsigned int>* collisions = object_manager->get_collisions(oid);
+    if (!collisions->empty()){
+        xvel = xvel * (-1);
+    }
+    delete collisions;
+    
+    position.x +=  xvel*global_timestep;
 }
 
 void Enemy::draw()

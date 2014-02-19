@@ -3,6 +3,7 @@
 
 #include "globals.h"
 #include "screenmanager.h"
+#include "objectmanager.h"
 #include "object.h"
 
 class Enemy : public Object {
