@@ -15,12 +15,6 @@ ScreenManager::ScreenManager(int Width, int Height)
 
 	width = Width;
 	height = Height;
-
-    //Initialize all SDL subsystems
-    if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
-    {
-        FLAG
-    }
 	
     //Set up the screen and renderer
     screen = SDL_CreateWindow("Blobby", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Width, Height, 0);
@@ -44,7 +38,6 @@ ScreenManager::~ScreenManager()
 	
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(screen);
-	SDL_Quit();
 }
 		
 bool ScreenManager::clear(int R, int G, int B)

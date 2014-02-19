@@ -15,12 +15,14 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
 	
 	num_keys = 1;
 	keys = new unsigned int[num_keys];
-    
+	
+<<<<<<< HEAD
+    xvel = 0;
+=======
 	xvel = 0;
+>>>>>>> 5f356105c1e1ef9f031ae9b5c8f5f08a6f669a65
 	yvel = 0;
 	vel = 300;
-
-	solid = 1;
 }
 
 PlayerCharacter::~PlayerCharacter()
@@ -43,19 +45,11 @@ void PlayerCharacter::events(SDL_Event *event)
 		switch( event->key.keysym.sym )
 		{
 		    case SDLK_UP:
-<<<<<<< HEAD
-                if (position.y >= 450-height)
-                {
-                    yvel = -vel*2;
-                }
-                break;
-=======
             if (position.y >= 450-height)
             {
                 yvel = -vel*2;
             }
             break;
->>>>>>> 666cf241a082cc9e5df60c32025d8cb959ff2a4b
 			case SDLK_LEFT:
                 // ensure it doesn't get going to fast (300 is max speed)
                 if (xvel > -300 )
@@ -82,11 +76,6 @@ void PlayerCharacter::events(SDL_Event *event)
 
 void PlayerCharacter::step()
 {
-<<<<<<< HEAD
-=======
-	int i;
-
->>>>>>> 666cf241a082cc9e5df60c32025d8cb959ff2a4b
 	position.x = position.x + xvel*global_timestep;
 	position.y = position.y + yvel*global_timestep;
 	
@@ -100,10 +89,6 @@ void PlayerCharacter::step()
 			yvel = 0;
 		position.y = 460-height;
 	}
-	std::vector<unsigned int>* collisions = object_manager->get_collisions(oid);
-	for (i = 0; i < collisions->size(); i++)
-		object_manager->objects_delete((*collisions)[i]);
-	delete collisions;
 }
 
 void PlayerCharacter::draw()

@@ -11,12 +11,13 @@ private:
     double height;
 public:
     Rectangle();
+    Rectangle(Point position, double width, double height);
 
     void set_position(Point Position) { position = Position; }
     void set_width(double Width) { width = Width; }
     void set_height(double Height) { height = Height; }
 
-    char get_collision(Rectangle bound);
+    bool get_collision(Rectangle bound);
 };
 
 #endif
