@@ -3,19 +3,30 @@ Blobby
 
 Group Project; a game.
 
+========================
+To Run on Linux OS
 
---To Run on Linux OS
 1. Make sure you have SDL2 Library Installed (if not, see 'downloading SDL2 for Linux below').
+
 2. Go into the main blobby directory that contains the makefile
+
 3. Type "make OS=LINUX" (this should successfully compile the Blobby game)
+
 4. Upon completion, the executable file will be inside of the bin directory
+
 5. Open the bin directory, and run the file named "Blobby". 
+
 	(This can be done by typing "./Blobby" into the terminal).
 
---To Run on Mac OS
+
+========================
+
+To Run on Mac OS
 
 
---To Run on Windows OS
+========================
+
+To Run on Windows OS
 
 
 
