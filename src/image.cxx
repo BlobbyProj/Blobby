@@ -2,6 +2,8 @@
 
 Image::Image(double X, double Y, int W, int H, std::string filename)
 {	
+	type = 3;
+
 	position.x = X;
 	position.y = Y;
     width = W;
@@ -32,7 +34,7 @@ void Image::draw()
 	{
 		if (screen_manager->texture_exist(keys[0]))
 		{
-			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], 0);
+			screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], 0);
 		}
 		else
 		{

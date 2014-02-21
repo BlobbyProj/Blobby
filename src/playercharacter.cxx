@@ -1,7 +1,9 @@
 #include "playercharacter.h"
 
-PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string filename)
+PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string *fnames)
 {	
+	type = 1;
+	
 	position.x = X;
 	position.y = Y;
 	previous_x = (int)X;
@@ -10,8 +12,7 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
     width = W;
     height = H;
     
-	filenames = new std::string;
-	filenames[0] = filename;
+    filenames = fnames;
 	
 	num_keys = 1;
 	keys = new unsigned int[num_keys];
@@ -19,6 +20,7 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
 	xvel = 0;
 	yvel = 0;
 	vel = 300;
+	dir = 1;
 
 	solid = 1;
 }
@@ -31,7 +33,7 @@ PlayerCharacter::~PlayerCharacter()
 		screen_manager->texture_dereference(keys[i]);
 	}
 
-	delete filenames;
+	delete[] filenames;
 	delete[] keys;
 }
 
@@ -43,17 +45,17 @@ void PlayerCharacter::events(SDL_Event *event)
 		switch( event->key.keysym.sym )
 		{
 		    case SDLK_UP:
-            if (position.y >= 450-height)
-            {
-                yvel = -vel*2;
-            }
-            break;
+            	if (yvel == 0)
+                	yvel = -vel*2;
+            	break;
 			case SDLK_LEFT:
+			    dir = 0;
                 // ensure it doesn't get going to fast (300 is max speed)
                 if (xvel > -300 )
                     xvel -= vel;
                 break;
 			case SDLK_RIGHT:
+				dir = 1;
                 if (xvel < 300)
                     xvel += vel;
                 break;
@@ -76,23 +78,58 @@ void PlayerCharacter::step()
 {
 	int i;
 
-	position.x = position.x + xvel*global_timestep;
-	position.y = position.y + yvel*global_timestep;
-	
+	bool blocked[4] = {0,0,0,0};
+	std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
+	for (i = 0; i < collisions->size(); i++)
+	{
+		unsigned int key = (*collisions)[i].oid;
+		switch(object_manager->objects_type(key))
+		{
+			case 4: //Enemy
+				object_manager->objects_delete(key);
+				break;
+			case 5: //Block
+				blocked[(*collisions)[i].type] = 1;
+				break;
+		}
+	}
+	delete collisions;
+
+	//Apply gravity
 	if (position.y < 460-height)
 	{
 		yvel += global_gravity*global_timestep;
 	}
-	else
+/*	else
 	{
 		if (yvel > 0)
 			yvel = 0;
 		position.y = 460-height;
+	}*/
+
+	//Apply movement
+	if ((xvel*global_timestep > 0 && blocked[2] == 0) || (xvel*global_timestep < 0 && blocked[0] == 0))
+		position.x = position.x + xvel*global_timestep;
+
+	if ((yvel*global_timestep > 0 && blocked[3] == 0) || (yvel*global_timestep < 0 && blocked[1] == 0))
+		position.y = position.y + yvel*global_timestep;
+	if ((yvel*global_timestep > 0 && blocked[3] == 1) || (yvel*global_timestep < 0 && blocked[1] == 1))
+		yvel = 0;
+
+	//Contain blobby
+	if (position.x < 0)
+		position.x = 0;
+	if (position.x > level_manager->get_level_width()-width)
+		position.x = level_manager->get_level_width()-width;
+	if (position.y > level_manager->get_level_height()-20-height)
+	{
+		position.y = level_manager->get_level_height()-20-height;
+		yvel = 0;
 	}
-	std::vector<unsigned int>* collisions = object_manager->get_collisions(oid);
-	for (i = 0; i < collisions->size(); i++)
-		object_manager->objects_delete((*collisions)[i]);
-	delete collisions;
+
+	
+	//Move screen
+	level_manager->set_level_x( position.x );
 }
 
 void PlayerCharacter::draw()
@@ -106,16 +143,16 @@ void PlayerCharacter::draw()
 			
 			if (averaged_x != (int)position.x || averaged_y != (int)position.y)
                 // this affects blur
-				screen_manager->texture_apply( averaged_x, averaged_y, width, height, keys[0], 0, 50 );
+				screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[0], dir, 50 );
 				
-			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], 0, 255 );
+			screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], dir, 255 );
 				
 			previous_x = (int)position.x;
 			previous_y = (int)position.y;
 		}
 		else
 		{
-ERROR("Image " << keys[0] << " failed to load")
+ERROR("Image " << keys[dir] << " failed to load")
 		}
 	}
 }
@@ -127,7 +164,7 @@ void PlayerCharacter::load_surfaces()
 		int i;
 		for (i = 0; i < num_keys; i++)
 		{
-			keys[i] = screen_manager->texture_load(filenames,1,0,255,0);
+			keys[i] = screen_manager->texture_load(filenames,2,0,255,0);
 			screen_manager->texture_reference(keys[i]);
 		}
 		
