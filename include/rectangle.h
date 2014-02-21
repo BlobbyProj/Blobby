@@ -17,7 +17,7 @@ public:
     void set_width(double Width) { width = Width; }
     void set_height(double Height) { height = Height; }
 
-    bool get_collision(Rectangle bound);
+    unsigned int get_collision(Rectangle bound);
 };
 
 #endif

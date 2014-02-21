@@ -2,6 +2,8 @@
 
 Enemy::Enemy(double X, double Y, int W, int H, std::string filename)
 {	
+	type = 4;
+
 	position.x = X;
 	position.y = Y;
 	previous_x = (int)X;
@@ -52,8 +54,9 @@ void Enemy::step()
 	}
 	
     // if enemy collided with something, reverse velocity
-    std::vector<unsigned int>* collisions = object_manager->get_collisions(oid);
-    if (!collisions->empty()){
+    std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
+    if (!collisions->empty())
+    {
         xvel = xvel * (-1);
     }
     delete collisions;
@@ -72,9 +75,9 @@ void Enemy::draw()
 			
 			if (averaged_x != (int)position.x || averaged_y != (int)position.y)
                 // this affects blur
-				screen_manager->texture_apply( averaged_x, averaged_y, width, height, keys[0], 0, 50 );
+				screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[0], 0, 50 );
 				
-			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], 0, 255 );
+			screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], 0, 255 );
 				
 			previous_x = (int)position.x;
 			previous_y = (int)position.y;

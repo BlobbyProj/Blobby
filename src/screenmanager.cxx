@@ -1,4 +1,5 @@
 #include "screenmanager.h"
+#include "levelmanager.h"
 #include "rectangle.h"
 
 #include <ciso646>
@@ -184,7 +185,7 @@ bool ScreenManager::texture_delete( unsigned int key )
 	return -1;
 }
 
-bool ScreenManager::texture_apply( int x, int y, int w, int h, unsigned int key, unsigned int frame)
+bool ScreenManager::texture_apply( int x, int y, bool fixed, int w, int h, unsigned int key, unsigned int frame)
 {
 	if (texture_exist(key))
 	{
@@ -192,8 +193,8 @@ bool ScreenManager::texture_apply( int x, int y, int w, int h, unsigned int key,
 		SDL_Rect offset;
 
 		//Get the offsets
-		offset.x = x;
-		offset.y = y;
+		offset.x = x-(level_manager->get_level_x()*(1-fixed));
+		offset.y = y-(level_manager->get_level_y()*(1-fixed));
         offset.w = w;
         offset.h = h;
         
@@ -203,7 +204,7 @@ bool ScreenManager::texture_apply( int x, int y, int w, int h, unsigned int key,
 	return -1;
 }
 
-bool ScreenManager::texture_apply( int x, int y, int w, int h, unsigned int key, unsigned int frame, char alpha)
+bool ScreenManager::texture_apply( int x, int y, bool fixed, int w, int h, unsigned int key, unsigned int frame, char alpha)
 {
 	if (texture_exist(key))
 	{
@@ -211,8 +212,8 @@ bool ScreenManager::texture_apply( int x, int y, int w, int h, unsigned int key,
 		SDL_Rect offset;
 
 		//Get the offsets
-		offset.x = x;
-		offset.y = y;
+		offset.x = x-level_manager->get_level_x();
+		offset.y = y-level_manager->get_level_y();
         offset.w = w;
         offset.h = h;
 
