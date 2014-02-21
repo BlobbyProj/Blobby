@@ -29,8 +29,13 @@ class Object {
 		Object() : type(0), width(0), height(0), loaded(0), visible(1), solid(0), fixed(0) {};
 		virtual ~Object() {};
 	
+		// returns x coordinate of position of Object's upper-left corner
 		double get_x() { return position.x; }
+		
+		// returns y coordinate of position of Object's upper-left corner
 		double get_y() { return position.y; }
+
+		// returns OID of Object
 		unsigned int get_oid() { return oid; }
 		unsigned int get_type() { return type; }
 		std::string *get_filenames() { return filenames; }
@@ -40,6 +45,7 @@ class Object {
 		bool get_solid() { return solid; }
         Rectangle get_rectangle();
 		
+		// sets OID of Object
 		void set_oid(unsigned int val) { oid = val; }
 		
 		virtual void step()=0;
