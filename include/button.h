@@ -5,9 +5,9 @@
 #include "screenmanager.h"
 #include "object.h"
 
-// param init        (????)
-// param *filenames  holds strings specifying names of Button image files
-// pre-conditions    Button is avaiable on screen for user
+// param init        represents whether or not the method has been run before
+// param *filenames  holds strings specifying names of the Button image files
+// pre-conditions    Button is available on screen for user
 
 // controls Button to begin playing game; fetches image files if not initially available
 // post-conditions  standard game play begins, global_gamestate does not equal 0
@@ -48,7 +48,7 @@ class Button : public Object {
         // param Y         y coordinate for location of upper-left corner of Button
         // param width     width of Button in pixels
         // param height    height of Button in pixels
-        // param (*otherFunction)(bool,std::string*) (????)
+        // param (*otherFunction)(bool,std::string*) pointer to the function which contains Button information
         // pre-conditions  Button does not yet exist
         // post-conditions Button exists
 		Button(double X, double Y, int width, int height, void (*otherFunction)(bool,std::string*));

@@ -8,6 +8,8 @@
 #define CONSOLE_WIDTH 200
 #define CONSOLE_HEIGHT 400
 
+//global variables used throughout the rest of the files
+
 class ScreenManager;
 extern ScreenManager *screen_manager;
 
