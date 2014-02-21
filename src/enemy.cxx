@@ -37,13 +37,6 @@ Enemy::~Enemy()
 	delete[] keys;
 }
 
-void Enemy::events(SDL_Event *event)
-{
-	//events code?
-}
-
-
-
 void Enemy::step()
 {
     // if enemy collided with something, reverse velocity

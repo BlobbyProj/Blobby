@@ -37,8 +37,8 @@ class Enemy : public Object {
 		void step();
     
         // called every time there is an event; inherited from Object
-        // ????
-		void events(SDL_Event *event);
+        // Enemies are not effected by events so this function does nothing
+        void events(SDL_Event *event){};
     
         // calls screenmanager->texture_apply to add object to texture at specified (x,y) position and with specified width, height; blurs movement
         // pre-conditions  object is visible and loaded
