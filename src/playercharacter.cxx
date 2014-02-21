@@ -33,7 +33,7 @@ PlayerCharacter::~PlayerCharacter()
 		screen_manager->texture_dereference(keys[i]);
 	}
 
-	delete filenames;
+	delete[] filenames;
 	delete[] keys;
 }
 
@@ -45,8 +45,8 @@ void PlayerCharacter::events(SDL_Event *event)
 		switch( event->key.keysym.sym )
 		{
 		    case SDLK_UP:
-            if (yvel == 0)
-                yvel = -vel*2;
+            	if (yvel == 0)
+                	yvel = -vel*2;
             	break;
 			case SDLK_LEFT:
 			    dir = 0;
