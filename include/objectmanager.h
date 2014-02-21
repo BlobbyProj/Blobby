@@ -86,9 +86,21 @@ class ObjectManager {
 		// post-conditions - the pause_objects map is empty
 		void pause_objects_clear();
 		
+        // called every iteration of the game loop
+        // Calls step() on each object or paused object, depending on if game is paused
 		void step();
+    
+        // called every time there is an event
+        // Calls events() on each object or paused object, depending on if game is paused
 		void events(SDL_Event *event);
+    
+        // calls screenmanager->texture_apply to add background image to texture
+        // Calls draw() on each object or paused object, depending on if game is paused
+        // post-conditions all objects appear on texture
 		void draw();
+    
+        // Calls load_surfaces() on each object or paused object, depending on if game is paused
+        // post-conditions all objects have their images loaded
 		void load_surfaces();
 
 		struct Collision {
@@ -96,15 +108,12 @@ class ObjectManager {
 			unsigned int type;
 		};
 
-		std::vector<Collision>* get_collisions(unsigned int OID);
-=======
 		
 		// method to check for collisions between objects
 		// param OID - the object id that you want to check
-		// return std::vector<unsigned int>* - returns a struct that contains the Object id and the direction of collision
+		// return std::vector<Collisions>* - returns a struct that contains the Object id and the direction of collision
 		// post-conditions - know which objects have collided with the object who's id is OID
-		std::vector<unsigned int>* get_collisions(unsigned int OID);
->>>>>>> 0b2f447facbd9266941b8adfcfc3375f0007bbcf
+		std::vector<Collision>* get_collisions(unsigned int OID);
 };
 
 #endif

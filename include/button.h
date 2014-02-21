@@ -59,9 +59,23 @@ class Button : public Object {
 		// post-conditions Button no longer exists
 		~Button();
 		
+        // called every iteration of the game loop; inherited from Object
+        // Button does nothing because it does not change with each iteration
 		void step() {};
+    
+        // called every time there is an event; inherited from Object
+        // determines whether the button was pressed
+        // post-conditions  button image is correct based on if pressed
 		void events(SDL_Event *event);
+    
+        // calls screenmanager->texture_apply to add object to texture at specified (x,y) position and with specified width, height
+        // pre-conditions  object is visible and loaded
+        // post-conditions object appears on texture
 		void draw();
+    
+        // instructs screenmanager to load the images for the Button
+        // pre-conditions  Button's image filenames are valid
+        // post-conditions Button's image is ready to be shown
 		void load_surfaces();
 };
 

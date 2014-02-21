@@ -48,9 +48,16 @@ class Object {
 		// sets OID of Object
 		void set_oid(unsigned int val) { oid = val; }
 		
+        // called every iteration of the game loop; each subclass implements
 		virtual void step()=0;
+    
+        // called every time there is an event; each subclass implements
 		virtual void events(SDL_Event *event)=0;
+    
+        // Object will be drawn to screen; each subclass implements
 		virtual void draw()=0;
+    
+        // called to load the images for the Object; each subclass implements
 		virtual void load_surfaces()=0;
     
 };
