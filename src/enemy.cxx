@@ -18,7 +18,7 @@ Enemy::Enemy(double X, double Y, int W, int H, std::string filename)
 	num_keys = 1;
 	keys = new unsigned int[num_keys];
 	
-	xvel = 0;
+	xvel = 80;
 	yvel = 0;
 	vel = 0;
 
@@ -47,11 +47,11 @@ void Enemy::events(SDL_Event *event)
 void Enemy::step()
 {
     // set veloctiy based on position
-    if(position.x >= 500){
+    /*if(position.x >= 500){
 		xvel = -80;
 	}else if(position.x <= 300){
 		xvel = 80;
-	}
+	}*/
 	
     // if enemy collided with something, reverse velocity
     std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
