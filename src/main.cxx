@@ -5,7 +5,6 @@
 #include "screenmanager.h"
 #include "objectmanager.h"
 #include "levelmanager.h"
-#include "console.h"
 
 int main( int argc, char* args[] )
 {
@@ -15,8 +14,7 @@ int main( int argc, char* args[] )
 	    FLAG
 	}
 
-	//Create console
-	//~ console = new Console(CONSOLE_WIDTH,CONSOLE_HEIGHT);
+
 
 	//Create screen manager
 	screen_manager = new ScreenManager(WIDTH,HEIGHT);
@@ -92,7 +90,6 @@ int main( int argc, char* args[] )
     }
 	
     //Free the surface and quit SDL
-    //~ delete console;
 	delete object_manager;
 	delete level_manager;
 	delete screen_manager;
