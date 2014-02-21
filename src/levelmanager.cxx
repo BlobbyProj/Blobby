@@ -72,12 +72,15 @@ void LevelManager::step()
 				level_y = 0;
 				break;
 			case 2: //Level 1
-                object_manager->objects_add(new Image(0,0, 600, 440, "media/backgrounds/island1.bmp"));
-				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, "media/blobbys/blobby.bmp"));
+				std::string *blobby = new std::string[2];
+				blobby[0] = "media/blobbys/blobbyleft.bmp";
+				blobby[1] = "media/blobbys/blobbyright.bmp";
+                object_manager->objects_add(new Image(0,0, 3000, 440, "media/backgrounds/bg1long.bmp"));
+				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, blobby));
 				object_manager->objects_add(new Enemy(200,335, 32, 32, "media/enemies/torto.bmp"));
 				object_manager->objects_add(new Button(580,30, 400, 100, ButtonPause));
                 object_manager->objects_add(new Block(500, 360, 100, 100, "media/block1.bmp"));
-                level_width = 1000;
+                level_width = 2400;
 				level_height = HEIGHT;
 				level_x = 0;
 				level_y = 0;
