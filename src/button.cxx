@@ -88,6 +88,8 @@ void ButtonInstructions(bool init, std::string *filenames)
 
 Button::Button(double X, double Y, int W, int H, void (*otherFunction)(bool,std::string*))
 {	
+	type = 2;
+	
 	position.x = X;
 	position.y = Y;
     width = W;
@@ -102,6 +104,7 @@ Button::Button(double X, double Y, int W, int H, void (*otherFunction)(bool,std:
 	keys = new unsigned int[num_keys];
 	
 	pressed = 0;
+	fixed = 1;
 }
 
 Button::~Button()
@@ -147,7 +150,7 @@ void Button::draw()
 	{
 		if (screen_manager->texture_exist(keys[0]))
 		{
-			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], pressed );
+			screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], pressed );
 		}
 		else
 		{

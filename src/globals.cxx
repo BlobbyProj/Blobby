@@ -2,7 +2,6 @@
 #include "screenmanager.h"
 #include "objectmanager.h"
 #include "levelmanager.h"
-#include "console.h"
 
 //Initialize screen manager
 ScreenManager *screen_manager = 0;

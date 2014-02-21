@@ -8,7 +8,7 @@ BDIR = bin
 CC = g++
 OS = 
 
-_OBJ = main.o globals.o console.o levelmanager.o screenmanager.o texture.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o
+_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 vpath %.h $(IDIR)
@@ -43,13 +43,10 @@ _DEP = sed -n '/include "/p' test.txt | sed 's/.*"\(.*\)".*/\1/'
 $(BDIR)/$(NAME): $(OBJ) $(FRAMEWORKS)
 	$(CC) -o $@ $^ $(LIBS) $(LFLAGS)
 
-$(ODIR)/main.o: main.cxx globals.h levelmanager.h screenmanager.h objectmanager.h console.h
+$(ODIR)/main.o: main.cxx globals.h levelmanager.h screenmanager.h objectmanager.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 $(ODIR)/globals.o: globals.cxx globals.h
-	$(CC) -c -o $@ $< $(CFLAGS)
-
-$(ODIR)/console.o: console.cxx globals.h console.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/levelmanager.o: levelmanager.cxx globals.h levelmanager.h button.h image.h

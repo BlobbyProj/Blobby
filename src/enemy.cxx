@@ -2,6 +2,8 @@
 
 Enemy::Enemy(double X, double Y, int W, int H, std::string filename)
 {	
+	type = 4;
+
 	position.x = X;
 	position.y = Y;
 	previous_x = (int)X;
@@ -16,7 +18,7 @@ Enemy::Enemy(double X, double Y, int W, int H, std::string filename)
 	num_keys = 1;
 	keys = new unsigned int[num_keys];
 	
-	xvel = 0;
+	xvel = 80;
 	yvel = 0;
 	vel = 0;
 
@@ -44,16 +46,10 @@ void Enemy::events(SDL_Event *event)
 
 void Enemy::step()
 {
-    // set veloctiy based on position
-    if(position.x >= 500){
-		xvel = -80;
-	}else if(position.x <= 300){
-		xvel = 80;
-	}
-	
     // if enemy collided with something, reverse velocity
-    std::vector<unsigned int>* collisions = object_manager->get_collisions(oid);
-    if (!collisions->empty()){
+    std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
+    if (!collisions->empty())
+    {
         xvel = xvel * (-1);
     }
     delete collisions;
@@ -72,9 +68,9 @@ void Enemy::draw()
 			
 			if (averaged_x != (int)position.x || averaged_y != (int)position.y)
                 // this affects blur
-				screen_manager->texture_apply( averaged_x, averaged_y, width, height, keys[0], 0, 50 );
+				screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[0], 0, 50 );
 				
-			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], 0, 255 );
+			screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], 0, 255 );
 				
 			previous_x = (int)position.x;
 			previous_y = (int)position.y;
