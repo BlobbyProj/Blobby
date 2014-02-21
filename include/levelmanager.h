@@ -22,6 +22,9 @@ class LevelManager {
 		void set_level_x( double x );
 		void set_level_y( double y );
 
+        // called every time there is an event
+        // Checks level status and shows correct objects for the current level
+        // post-conditions  correct level or menu is shown
 		void step();
 };
 
