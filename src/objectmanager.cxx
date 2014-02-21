@@ -11,6 +11,7 @@ unsigned int ObjectManager::objects_add(Object *object)
 	object->set_oid(count);
 	objects.insert(std::pair<unsigned int,Object*>(count,object));
 	count++;
+	return count-1;
 }
 
 unsigned int ObjectManager::objects_type(unsigned int key)
@@ -27,6 +28,15 @@ bool ObjectManager::objects_exist(unsigned int key)
 		return 1;
 	else
 		return 0;
+}
+
+Object *ObjectManager::objects_get(unsigned int key)
+{
+	if (objects_exist(key))
+	{
+		return objects[key];
+	}
+	return 0;
 }
 
 bool ObjectManager::objects_delete(unsigned int key)
@@ -56,6 +66,7 @@ unsigned int ObjectManager::pause_objects_add(Object *object)
 	object->set_oid(pause_count);
 	pause_objects.insert(std::pair<unsigned int,Object*>(pause_count,object));
 	pause_count++;
+	return pause_count-1;
 }
 
 unsigned int ObjectManager::pause_objects_type(unsigned int key)
@@ -72,6 +83,15 @@ bool ObjectManager::pause_objects_exist(unsigned int key)
 		return 1;
 	else
 		return 0;
+}
+
+Object *ObjectManager::pause_objects_get(unsigned int key)
+{
+	if (pause_objects_exist(key))
+	{
+		return pause_objects[key];
+	}
+	return 0;
 }
 
 bool ObjectManager::pause_objects_delete(unsigned int key)
@@ -100,15 +120,33 @@ void ObjectManager::step()
 {
 	if (global_paused == 0)
 	{
+		std::vector<unsigned int> trashed;
 		std::map<unsigned int,Object*>::iterator it;
 		for (it = objects.begin(); it != objects.end(); ++it)
-			it->second->step();
+		{
+			if (it->second->get_trashed())
+				trashed.push_back(it->first);
+			else
+				it->second->step();
+		}
+		int i;
+		for (i = 0; i < trashed.size(); i++)
+			objects_delete(trashed[i]);
 	}
 	else
 	{
+		std::vector<unsigned int> trashed;
 		std::map<unsigned int,Object*>::iterator it;
 		for (it = pause_objects.begin(); it != pause_objects.end(); ++it)
-			it->second->step();
+		{
+			if (it->second->get_trashed())
+				trashed.push_back(it->first);
+			else
+				it->second->step();
+		}
+		int i;
+		for (i = 0; i < trashed.size(); i++)
+			pause_objects_delete(trashed[i]);
 	}
 }
 

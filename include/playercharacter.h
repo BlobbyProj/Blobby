@@ -14,6 +14,9 @@ class PlayerCharacter : public Object {
 		double xvel;
 		double yvel;
 		bool dir;
+		bool blocked[4];
+		bool pressed[3]; //0 = left, 1 = up, 2 = right
+		char lives;
 
 	public:
 		PlayerCharacter(double X, double Y, int width, int height, std::string *fnames);

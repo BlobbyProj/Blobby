@@ -75,13 +75,14 @@ unsigned int Rectangle::get_collision(Rectangle bound)
             else
                 return 3;
         }
-        else //Collision is from left/right (or diagonal)
+        else if (overlapX < overlapY) //Collision is from left/right
         {
             if (left)
                 return 0;
             else
                 return 2;
         }
+        //if diagonal does nothing...
     }
     return 4; //If no collision
 }

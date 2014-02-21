@@ -212,8 +212,8 @@ bool ScreenManager::texture_apply( int x, int y, bool fixed, int w, int h, unsig
 		SDL_Rect offset;
 
 		//Get the offsets
-		offset.x = x-level_manager->get_level_x();
-		offset.y = y-level_manager->get_level_y();
+		offset.x = x-(level_manager->get_level_x()*(1-fixed));
+		offset.y = y-(level_manager->get_level_y()*(1-fixed));
         offset.w = w;
         offset.h = h;
 

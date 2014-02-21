@@ -19,6 +19,7 @@ class Object {
 		int width;
 		int height;
 		bool loaded;
+		bool trashed;
 
 		//Characteristics
 		bool visible;
@@ -26,7 +27,7 @@ class Object {
 		bool fixed;
 		
 	public:
-		Object() : type(0), width(0), height(0), loaded(0), visible(1), solid(0), fixed(0) {};
+		Object() : type(0), width(0), height(0), loaded(0), trashed(0), visible(1), solid(0), fixed(0) {};
 		virtual ~Object() {};
 	
 		double get_x() { return position.x; }
@@ -36,11 +37,13 @@ class Object {
 		std::string *get_filenames() { return filenames; }
 		unsigned int get_num_keys() { return (num_keys*loaded); }
 		unsigned int *get_keys() { return keys; }
+		bool get_trashed() { return trashed; }
 		bool get_visible() { return visible; }
 		bool get_solid() { return solid; }
         Rectangle get_rectangle();
 		
 		void set_oid(unsigned int val) { oid = val; }
+		void set_solid( bool val ) { solid = val; }
 		
 		virtual void step()=0;
 		virtual void events(SDL_Event *event)=0;
@@ -57,6 +60,7 @@ class Object {
 	3 = Image
 	4 = Enemy
 	5 = Block
+	6 = Flag
 
 */
 

@@ -25,12 +25,14 @@ class ObjectManager {
 		unsigned int objects_add(Object *object);
 		unsigned int objects_type(unsigned int key);
 		bool objects_exist(unsigned int key);
+		Object *objects_get(unsigned int key);
 		bool objects_delete(unsigned int key);
 		void objects_clear();
 
 		unsigned int pause_objects_add(Object *object);
 		unsigned int pause_objects_type(unsigned int key);
 		bool pause_objects_exist(unsigned int key);
+		Object *pause_objects_get(unsigned int key);
 		bool pause_objects_delete(unsigned int key);
 		void pause_objects_clear();
 		
