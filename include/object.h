@@ -27,7 +27,14 @@ class Object {
 		bool fixed;
 		
 	public:
+        // constructor for Object; sets all variables to default values
+        // pre-conditions  Object does not yet exist
+        // post-conditions Object exists
 		Object() : type(0), width(0), height(0), loaded(0), trashed(0), visible(1), solid(0), fixed(0) {};
+    
+        // destructor for Object - deletes instance of object, must be defined by subclass
+        // pre-conditions  Object exists
+        // post-conditions Object no longer exists
 		virtual ~Object() {};
 	
         // returns x coordinate of position of Object's upper-left corner
@@ -38,17 +45,35 @@ class Object {
     
         // returns OID of Object
 		unsigned int get_oid() { return oid; }
+    
+        // returns type of object as int (defined below)
 		unsigned int get_type() { return type; }
+    
+        // returns the filenames of the images
 		std::string *get_filenames() { return filenames; }
+    
+        // returns the num_keys of the Object
 		unsigned int get_num_keys() { return (num_keys*loaded); }
+    
+        // returns the keys of the Object
 		unsigned int *get_keys() { return keys; }
+    
+        // returns value of trashed
 		bool get_trashed() { return trashed; }
+    
+        // returns visible or not
 		bool get_visible() { return visible; }
+    
+        // returns solid
 		bool get_solid() { return solid; }
+    
+        // returns the bordering rectangle of an object
         Rectangle get_rectangle();
 		
         // sets OID of Object
 		void set_oid(unsigned int val) { oid = val; }
+    
+        // sets value of solid
 		void set_solid( bool val ) { solid = val; }
 		
         // called every iteration of the game loop; each subclass implements
