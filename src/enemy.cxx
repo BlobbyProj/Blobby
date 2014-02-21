@@ -46,13 +46,6 @@ void Enemy::events(SDL_Event *event)
 
 void Enemy::step()
 {
-    // set veloctiy based on position
-    /*if(position.x >= 500){
-		xvel = -80;
-	}else if(position.x <= 300){
-		xvel = 80;
-	}*/
-	
     // if enemy collided with something, reverse velocity
     std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
     if (!collisions->empty())
