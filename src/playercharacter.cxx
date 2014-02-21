@@ -194,11 +194,12 @@ void PlayerCharacter::draw()
 			{	
 				screen_manager->texture_apply( 0, 0, 1, WIDTH, HEIGHT, keys[2], 0, 255 );
 			}
+            else
+            {
+                ERROR("Image " << keys[2] << " failed to load")
+            }
 		}
-		else
-		{
-			ERROR("Image " << keys[2] << " failed to load")
-		}
+		
 
 		//Draw Blobby
 		if (screen_manager->texture_exist(keys[0]))
