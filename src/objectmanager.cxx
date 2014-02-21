@@ -13,6 +13,14 @@ unsigned int ObjectManager::objects_add(Object *object)
 	count++;
 }
 
+unsigned int ObjectManager::objects_type(unsigned int key)
+{
+	if (objects_exist(key))
+		return objects[key]->get_type();
+	else
+		return 0;
+}
+
 bool ObjectManager::objects_exist(unsigned int key)
 {
 	if (objects.find(key) != objects.end())
@@ -48,6 +56,14 @@ unsigned int ObjectManager::pause_objects_add(Object *object)
 	object->set_oid(pause_count);
 	pause_objects.insert(std::pair<unsigned int,Object*>(pause_count,object));
 	pause_count++;
+}
+
+unsigned int ObjectManager::pause_objects_type(unsigned int key)
+{
+	if (pause_objects_exist(key))
+		return pause_objects[key]->get_type();
+	else
+		return 0;
 }
 
 bool ObjectManager::pause_objects_exist(unsigned int key)
@@ -115,7 +131,7 @@ void ObjectManager::events(SDL_Event *event)
 void ObjectManager::draw()
 {
 	screen_manager->clear(global_background[0],global_background[1],global_background[2]);
-	screen_manager->texture_apply(0,0, 640, 480, global_background_key,0);
+	screen_manager->texture_apply(0,0, 1, 640, 480, global_background_key,0);
 	if (global_paused == 0)
 	{
 		std::map<unsigned int,Object*>::iterator it;
@@ -147,9 +163,9 @@ void ObjectManager::load_surfaces()
 	}
 }
 
-std::vector<unsigned int>* ObjectManager::get_collisions(unsigned int OID)
+std::vector<ObjectManager::Collision>* ObjectManager::get_collisions(unsigned int OID)
 {
-	std::vector<unsigned int>* collisions = new std::vector<unsigned int>;
+	std::vector<Collision>* collisions = new std::vector<Collision>;
     
 	Rectangle bound = objects[OID]->get_rectangle();
     
@@ -158,9 +174,12 @@ std::vector<unsigned int>* ObjectManager::get_collisions(unsigned int OID)
 	{
 		if (it->second->get_oid() != OID && it->second->get_solid() == 1)
 		{
-			if (bound.get_collision(it->second->get_rectangle()) == 1)
+			Collision collision;
+			collision.type = bound.get_collision(it->second->get_rectangle());
+			if (collision.type != 4)
 			{
-				collisions->push_back(it->first);
+				collision.oid = it->first;
+				collisions->push_back(collision);
 			}
 		}
 	}

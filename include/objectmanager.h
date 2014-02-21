@@ -23,12 +23,14 @@ class ObjectManager {
 		~ObjectManager();
 		
 		unsigned int objects_add(Object *object);
+		unsigned int objects_type(unsigned int key);
 		bool objects_exist(unsigned int key);
 		bool objects_delete(unsigned int key);
 		void objects_clear();
 
 		unsigned int pause_objects_add(Object *object);
-		bool pause_objects_exist(unsigned int key);		
+		unsigned int pause_objects_type(unsigned int key);
+		bool pause_objects_exist(unsigned int key);
 		bool pause_objects_delete(unsigned int key);
 		void pause_objects_clear();
 		
@@ -37,7 +39,12 @@ class ObjectManager {
 		void draw();
 		void load_surfaces();
 
-		std::vector<unsigned int>* get_collisions(unsigned int OID);
+		struct Collision {
+			unsigned int oid;
+			unsigned int type;
+		};
+
+		std::vector<Collision>* get_collisions(unsigned int OID);
 };
 
 #endif
