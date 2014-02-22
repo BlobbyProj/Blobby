@@ -75,9 +75,9 @@ void LevelManager::step()
 			case 2: //Level 1
 				std::string *blobby = new std::string[4];
 				std::string *flag = new std::string[2];
-				blobby[0] = "media/blobbys/blobbyleftSmaller.bmp";
-				blobby[1] = "media/blobbys/blobbyrightSmaller.bmp";
-				blobby[2] = "media/blobbys/life.bmp";
+				blobby[0] = "media/blobbys/blobbyleftSmaller.png";
+				blobby[1] = "media/blobbys/blobbyrightSmaller.png";
+				blobby[2] = "media/blobbys/life.png";
 				blobby[3] = "media/backgrounds/lose.bmp";
 				flag[0] = "media/flag.bmp";
 				flag[1] = "media/backgrounds/success.bmp";
