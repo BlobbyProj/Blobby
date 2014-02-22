@@ -7,8 +7,7 @@
 
 class Block : public Object {
 public:
-    
-	// constructor for Block - creates new instance of Block object
+    // constructor for Block - creates new instance of Block object
 	// param X         x coordinate for location of upper-left corner of Block
 	// param Y         y coordinate for location of upper-left corner of Block
 	// param width     width of Block in pixels
@@ -35,7 +34,7 @@ public:
     // pre-conditions  object is visible and loaded
     // post-conditions object appears on texture
     void draw();
-
+    
     // instructs screenmanager to load the images for the Block
     // pre-conditions  Block's image filename is valid
     // post-conditions Block's image is ready to be shown

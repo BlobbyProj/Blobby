@@ -6,6 +6,7 @@
 #include "image.h"
 #include "enemy.h"
 #include "block.h"
+#include "flag.h"
 
 void LevelManager::set_level_x( double x )
 {
@@ -72,22 +73,68 @@ void LevelManager::step()
 				level_y = 0;
 				break;
 			case 2: //Level 1
-				std::string *blobby = new std::string[2];
-				blobby[0] = "media/blobbys/blobbyleft.bmp";
-				blobby[1] = "media/blobbys/blobbyright.bmp";
+				std::string *blobby = new std::string[4];
+				std::string *flag = new std::string[2];
+				blobby[0] = "media/blobbys/blobbyleftSmaller.bmp";
+				blobby[1] = "media/blobbys/blobbyrightSmaller.bmp";
+				blobby[2] = "media/blobbys/life.bmp";
+				blobby[3] = "media/backgrounds/lose.bmp";
+				flag[0] = "media/flag.bmp";
+				flag[1] = "media/backgrounds/success.bmp";
                 object_manager->objects_add(new Image(0,0, 3000, 440, "media/backgrounds/bg1long.bmp"));
-				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, blobby));
                 object_manager->objects_add(new Button(580,30, 400, 100, ButtonPause));
-				object_manager->objects_add(new Enemy(300,335, 102, 125, "media/enemies/torto.bmp"));
-                object_manager->objects_add(new Enemy(1500,335, 100, 123, "media/enemies/torto2.bmp"));
-                object_manager->objects_add(new Enemy(900,342, 102, 116, "media/enemies/goon.bmp"));
+				object_manager->objects_add(new Block(200, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(300, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(300, HEIGHT-20-128, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(400, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(400, HEIGHT-20-128, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(500, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(500, HEIGHT-20-128, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(1000, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(1000, HEIGHT-20-128, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(1100, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(1100, 0, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(1100, 64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1100, 128, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1200, 0, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1200, 64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1200, 128, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1200, 192, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1300, 0, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1300, 64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1400, 0, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1400, 64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1500, 0, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1500, 64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1600, 0, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1600, 64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1600, 128, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1600, 192, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1700, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(1700, 0, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(1700, 64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1700, 128, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(1800, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(1800, HEIGHT-20-128, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(1900, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(2000, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(2100, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(2200, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(2300, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(2400, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(2500, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(2600, HEIGHT-20-128, 100, 64, "media/block.bmp"));
+                object_manager->objects_add(new Block(2600, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Block(2700, HEIGHT-20-64, 100, 64, "media/block.bmp"));
+				object_manager->objects_add(new Enemy(300,200, 64, 78, "media/enemies/torto.bmp"));
+				object_manager->objects_add(new Enemy(2200,0, 64, 78, "media/enemies/torto.bmp"));
+				object_manager->objects_add(new Enemy(1900,0, 64, 78, "media/enemies/goon.bmp"));
+                object_manager->objects_add(new Enemy(500,200, 64, 78, "media/enemies/torto2.bmp"));
+                object_manager->objects_add(new Enemy(900,0, 64, 72, "media/enemies/goon.bmp"));
+				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, blobby));
+				object_manager->objects_add(new Flag(2900, HEIGHT-20-128, 64, 128, flag));
 
-                object_manager->objects_add(new Block(200, 360, 100, 100, "media/block1.bmp"));
-                object_manager->objects_add(new Block(500, 360, 100, 100, "media/block1.bmp"));
-                object_manager->objects_add(new Block(800, 360, 100, 100, "media/block1.bmp"));
-                object_manager->objects_add(new Block(1300, 360, 100, 100, "media/block1.bmp"));
-                object_manager->objects_add(new Block(1650, 360, 100, 100, "media/block1.bmp"));
-                object_manager->objects_add(new Block(2000, 360, 100, 100, "media/block1.bmp"));
+
                 level_width = 3000;
 				level_height = HEIGHT;
 				level_x = 0;
