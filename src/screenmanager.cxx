@@ -104,32 +104,16 @@ unsigned int ScreenManager::texture_load( std::string *filenames, unsigned int n
 
 SDL_Texture *ScreenManager::texture_load( std::string filename )
 {
-	//Temporary storage for the image that's loaded
-    SDL_Surface* loadedSurface = NULL;
-	
     //Texture to hold image
     SDL_Texture* loadedImage = NULL;
     
-	//Load the image
-    loadedSurface = SDL_LoadBMP( filename.c_str() );
-    
-    // Check if surface loaded properly
-    if (loadedSurface == NULL) {
-        std::cout << SDL_GetError() << std::endl;
-        FLAG;
-    }
-	
-    loadedImage = SDL_CreateTextureFromSurface(renderer, loadedSurface);
-    
-	//Check if something went wrong in loading the image
+    // Load image (using img framework)
+    loadedImage = IMG_LoadTexture(renderer, filename.c_str());
     if( loadedImage == NULL )
     {
         std::cout << SDL_GetError() << std::endl;
         FLAG;
     }
-	
-    //Free the old surface
-    SDL_FreeSurface( loadedSurface );
     
 	return loadedImage;
 }
@@ -143,8 +127,8 @@ SDL_Texture *ScreenManager::texture_load( std::string filename, int R, int G, in
     SDL_Texture* loadedImage = NULL;
     
 	//Load the image
-    loadedSurface = SDL_LoadBMP( filename.c_str() );
-	
+    loadedSurface = IMG_Load(filename.c_str());
+    
     // Check if surface loaded properly
     if (loadedSurface == NULL) {
         std::cout << SDL_GetError() << std::endl;
@@ -156,7 +140,7 @@ SDL_Texture *ScreenManager::texture_load( std::string filename, int R, int G, in
 	
 	//Set all pixels that color to be transparent
 	SDL_SetColorKey( loadedSurface, SDL_TRUE, colorkey );
-    
+
     // convert the surface into a texture
     loadedImage = SDL_CreateTextureFromSurface(renderer, loadedSurface);
     

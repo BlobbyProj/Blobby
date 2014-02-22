@@ -16,10 +16,10 @@ vpath %.cxx $(SDIR)
 
 #OSX
 ifeq ($(OS),OSX)
-CFLAGS = -I$(IDIR) -std=c++0x -g -I/Library/Frameworks/SDL2.framework/Headers
+CFLAGS = -I$(IDIR) -std=c++0x -g -I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image.framework/Headers
 LFLAGS = -g
 LIBS =
-FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2
+FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2 /Library/Frameworks/SDL2_image.framework/Versions/Current/SDL2_image
 endif
 
 #WINDOWS
