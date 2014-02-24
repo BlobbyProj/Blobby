@@ -93,6 +93,7 @@ int main( int argc, char* args[] )
 	delete object_manager;
 	delete level_manager;
 	delete screen_manager;
+    IMG_Quit();
 	SDL_Quit();
 
     return 0;
