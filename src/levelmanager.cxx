@@ -82,7 +82,7 @@ void LevelManager::step()
 				flag[0] = "media/flag.bmp";
 				flag[1] = "media/backgrounds/success.bmp";
                 object_manager->objects_add(new Image(0,0, 3000, 440, "media/backgrounds/bg1long.bmp"));
-                object_manager->objects_add(new Button(580,30, 400, 100, ButtonPause));
+                
 				object_manager->objects_add(new Block(200, HEIGHT-20-64, 100, 64, "media/block.bmp"));
                 object_manager->objects_add(new Block(300, HEIGHT-20-64, 100, 64, "media/block.bmp"));
                 object_manager->objects_add(new Block(300, HEIGHT-20-128, 100, 64, "media/block.bmp"));
@@ -133,7 +133,7 @@ void LevelManager::step()
                 object_manager->objects_add(new Enemy(900,0, 64, 72, "media/enemies/goon.png"));
 				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, blobby));
 				object_manager->objects_add(new Flag(2900, HEIGHT-20-128, 64, 128, flag));
-
+                object_manager->objects_add(new Button(580,30, 400, 100, ButtonPause));
 
                 level_width = 3000;
 				level_height = HEIGHT;
