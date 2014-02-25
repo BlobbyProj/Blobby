@@ -1,6 +1,7 @@
 #include "levelmanager.h"
 #include "objectmanager.h"
 #include "screenmanager.h"
+#include "musicmanager.h"
 #include "playercharacter.h"
 #include "button.h"
 #include "image.h"
@@ -34,12 +35,15 @@ void LevelManager::step()
 {
 	if (global_paused != previous_paused)
 	{
+        music_manager->pause();
 		switch(global_paused)
 		{
 			case 0:
+                music_manager->resume();
 				object_manager->pause_objects_clear();
 				break;
 			case 1:
+                music_manager->pause();
 				object_manager->pause_objects_add(new Image(20+level_x ,20+level_y, 600, 440, "media/Menu.bmp"));
 				object_manager->pause_objects_add(new Image(0+level_x, 0+level_y, 400, 100, "media/PauseMenu.bmp"));
 				object_manager->pause_objects_add(new Button(180,220, 400, 100, ButtonResume));
@@ -51,6 +55,7 @@ void LevelManager::step()
 	}
 	if (global_gamestate != previous_gamestate)
 	{
+        music_manager->stop();
 		object_manager->objects_clear();
 		switch(global_gamestate)
 		{
@@ -73,6 +78,8 @@ void LevelManager::step()
 				level_y = 0;
 				break;
 			case 2: //Level 1
+                music_manager->add_track("media/music/blobby.wav");
+                music_manager->play("media/music/blobby.wav");
 				std::string *blobby = new std::string[4];
 				std::string *flag = new std::string[2];
 				blobby[0] = "media/blobbys/blobbyleftSmaller.png";

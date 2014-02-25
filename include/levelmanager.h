@@ -9,7 +9,7 @@ class LevelManager {
 		double level_x;
 		double level_y;
 		double level_width;
-		double level_height;
+        double level_height;
 		
 	public:
         // constructor for LevelManager - controls the levels in the game
