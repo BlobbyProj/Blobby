@@ -32,7 +32,7 @@ endif
 
 #LINUX
 ifeq ($(OS),LINUX)
-CFLAGS = -I$(IDIR) -std=c++0x -g
+CFLAGS = -I$(IDIR) -std=c++0x -g -DLINUX
 LFLAGS = -static-libgcc -static-libstdc++ -g
 LIBS = -lSDL2
 FRAMEWORKS = 
