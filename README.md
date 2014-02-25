@@ -41,7 +41,7 @@ To Run on Windows OS
 
 ===============================
 
-Downloading SDL2 for Linux
+**Downloading SDL2 for Linux**
 
 1. To install SDL2 you can either download it from the mercurial repository online or through the source code archive.<br>
 	*Note: I recommend using the source code: Step 3. *
@@ -73,12 +73,13 @@ Downloading SDL2 for Linux
 4. Make sure to update links and cache to the libraries<br>
 	Command: sudo ldconfig<br>
 
-**Note: If you want to remove all the installed SDL libraries<br>
-	Command: sudo apt-get purge libsdl*<br>
-	Command: sudo apt-get autoremove --purge<br> 
+*Note: If you want to remove all the installed SDL libraries* <br>
+	Command: sudo apt-get purge libsdl* <br>
+	Command: sudo apt-get autoremove --purge <br>
+	 
 =============================
 
-Downloading SDL2_image for Linux
+**Downloading SDL2_image for Linux **
 
 1. To install SDL2_image, go to https://www.libsdl.org/projects/SDL_image/ <br>
 2. Download "SDL2_image-2.0.0.tar.gz"<br>
@@ -92,7 +93,7 @@ Downloading SDL2_image for Linux
 	Comand: sudo ldconfig<br>
 	
 ===============================
-Downloading SDL2_mixer for Linux
+** Downloading SDL2_mixer for Linux **
 
 1. To install SDL2_mixer, go to http://www.libsdl.org/projects/SDL_mixer/<br>
 2. Download "SDL2_mixer-2.0.0.tar.gz"<br>
