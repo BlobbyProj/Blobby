@@ -4,7 +4,7 @@ Blobby
 Group Project; a game.
 
 ========================
-To Run on Linux OS
+**To Run on Linux OS**
 
 1. Make sure you have SDL2 Library, SDL2_Image, and SDL2_Mixer Installed (if not, see the downloading information section below).
 
@@ -79,7 +79,7 @@ To Run on Windows OS
 	 
 =============================
 
-**Downloading SDL2_image for Linux **
+**Downloading SDL2_image for Linux**
 
 1. To install SDL2_image, go to https://www.libsdl.org/projects/SDL_image/ <br>
 2. Download "SDL2_image-2.0.0.tar.gz"<br>
@@ -93,7 +93,7 @@ To Run on Windows OS
 	Comand: sudo ldconfig<br>
 	
 ===============================
-** Downloading SDL2_mixer for Linux **
+**Downloading SDL2_mixer for Linux**
 
 1. To install SDL2_mixer, go to http://www.libsdl.org/projects/SDL_mixer/<br>
 2. Download "SDL2_mixer-2.0.0.tar.gz"<br>
