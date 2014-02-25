@@ -11,6 +11,15 @@ unsigned int ObjectManager::objects_add(Object *object)
 	object->set_oid(count);
 	objects.insert(std::pair<unsigned int,Object*>(count,object));
 	count++;
+	return count-1;
+}
+
+unsigned int ObjectManager::objects_type(unsigned int key)
+{
+	if (objects_exist(key))
+		return objects[key]->get_type();
+	else
+		return 0;
 }
 
 bool ObjectManager::objects_exist(unsigned int key)
@@ -19,6 +28,15 @@ bool ObjectManager::objects_exist(unsigned int key)
 		return 1;
 	else
 		return 0;
+}
+
+Object *ObjectManager::objects_get(unsigned int key)
+{
+	if (objects_exist(key))
+	{
+		return objects[key];
+	}
+	return 0;
 }
 
 bool ObjectManager::objects_delete(unsigned int key)
@@ -48,6 +66,15 @@ unsigned int ObjectManager::pause_objects_add(Object *object)
 	object->set_oid(pause_count);
 	pause_objects.insert(std::pair<unsigned int,Object*>(pause_count,object));
 	pause_count++;
+	return pause_count-1;
+}
+
+unsigned int ObjectManager::pause_objects_type(unsigned int key)
+{
+	if (pause_objects_exist(key))
+		return pause_objects[key]->get_type();
+	else
+		return 0;
 }
 
 bool ObjectManager::pause_objects_exist(unsigned int key)
@@ -56,6 +83,15 @@ bool ObjectManager::pause_objects_exist(unsigned int key)
 		return 1;
 	else
 		return 0;
+}
+
+Object *ObjectManager::pause_objects_get(unsigned int key)
+{
+	if (pause_objects_exist(key))
+	{
+		return pause_objects[key];
+	}
+	return 0;
 }
 
 bool ObjectManager::pause_objects_delete(unsigned int key)
@@ -84,15 +120,33 @@ void ObjectManager::step()
 {
 	if (global_paused == 0)
 	{
+		std::vector<unsigned int> trashed;
 		std::map<unsigned int,Object*>::iterator it;
 		for (it = objects.begin(); it != objects.end(); ++it)
-			it->second->step();
+		{
+			if (it->second->get_trashed())
+				trashed.push_back(it->first);
+			else
+				it->second->step();
+		}
+		int i;
+		for (i = 0; i < trashed.size(); i++)
+			objects_delete(trashed[i]);
 	}
 	else
 	{
+		std::vector<unsigned int> trashed;
 		std::map<unsigned int,Object*>::iterator it;
 		for (it = pause_objects.begin(); it != pause_objects.end(); ++it)
-			it->second->step();
+		{
+			if (it->second->get_trashed())
+				trashed.push_back(it->first);
+			else
+				it->second->step();
+		}
+		int i;
+		for (i = 0; i < trashed.size(); i++)
+			pause_objects_delete(trashed[i]);
 	}
 }
 
@@ -115,7 +169,7 @@ void ObjectManager::events(SDL_Event *event)
 void ObjectManager::draw()
 {
 	screen_manager->clear(global_background[0],global_background[1],global_background[2]);
-	screen_manager->texture_apply(0,0, 640, 480, global_background_key,0);
+	screen_manager->texture_apply(0,0, 1, 640, 480, global_background_key,0);
 	if (global_paused == 0)
 	{
 		std::map<unsigned int,Object*>::iterator it;
@@ -147,9 +201,9 @@ void ObjectManager::load_surfaces()
 	}
 }
 
-std::vector<unsigned int>* ObjectManager::get_collisions(unsigned int OID)
+std::vector<ObjectManager::Collision>* ObjectManager::get_collisions(unsigned int OID)
 {
-	std::vector<unsigned int>* collisions = new std::vector<unsigned int>;
+	std::vector<Collision>* collisions = new std::vector<Collision>;
     
 	Rectangle bound = objects[OID]->get_rectangle();
     
@@ -158,9 +212,12 @@ std::vector<unsigned int>* ObjectManager::get_collisions(unsigned int OID)
 	{
 		if (it->second->get_oid() != OID && it->second->get_solid() == 1)
 		{
-			if (bound.get_collision(it->second->get_rectangle()) == 1)
+			Collision collision;
+			collision.type = bound.get_collision(it->second->get_rectangle());
+			if (collision.type != 4)
 			{
-				collisions->push_back(it->first);
+				collision.oid = it->first;
+				collisions->push_back(collision);
 			}
 		}
 	}

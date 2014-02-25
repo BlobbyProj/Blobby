@@ -8,7 +8,7 @@ BDIR = bin
 CC = g++
 OS = 
 
-_OBJ = main.o globals.o console.o levelmanager.o screenmanager.o texture.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o
+_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 vpath %.h $(IDIR)
@@ -16,10 +16,10 @@ vpath %.cxx $(SDIR)
 
 #OSX
 ifeq ($(OS),OSX)
-CFLAGS = -I$(IDIR) -std=c++0x -g -I/Library/Frameworks/SDL2.framework/Headers
+CFLAGS = -I$(IDIR) -std=c++0x -g 
 LFLAGS = -g
 LIBS =
-FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2
+FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2 /Library/Frameworks/SDL2_image.framework/Versions/Current/SDL2_image /Library/Frameworks/SDL2_mixer.framework/Versions/Current/SDL2_mixer
 endif
 
 #WINDOWS
@@ -43,16 +43,13 @@ _DEP = sed -n '/include "/p' test.txt | sed 's/.*"\(.*\)".*/\1/'
 $(BDIR)/$(NAME): $(OBJ) $(FRAMEWORKS)
 	$(CC) -o $@ $^ $(LIBS) $(LFLAGS)
 
-$(ODIR)/main.o: main.cxx globals.h levelmanager.h screenmanager.h objectmanager.h console.h
+$(ODIR)/main.o: main.cxx globals.h levelmanager.h screenmanager.h objectmanager.h musicmanager.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 $(ODIR)/globals.o: globals.cxx globals.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(ODIR)/console.o: console.cxx globals.h console.h
-	$(CC) -c -o $@ $< $(CFLAGS)
-
-$(ODIR)/levelmanager.o: levelmanager.cxx globals.h levelmanager.h button.h image.h
+$(ODIR)/levelmanager.o: levelmanager.cxx globals.h levelmanager.h button.h image.h flag.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 $(ODIR)/screenmanager.o: screenmanager.cxx globals.h texture.h screenmanager.h
@@ -84,7 +81,13 @@ $(ODIR)/enemy.o: enemy.cxx globals.h screenmanager.h rectangle.h object.h enemy.
     
 $(ODIR)/block.o: block.cxx globals.h screenmanager.h rectangle.h object.h block.h
 	$(CC) -c -o $@ $< $(CFLAGS)
-	
+
+$(ODIR)/flag.o: flag.cxx globals.h screenmanager.h rectangle.h object.h flag.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+$(ODIR)/musicmanager.o: musicmanager.cxx globals.h musicmanager.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+
 .PHONY: clean
 	
 clean:

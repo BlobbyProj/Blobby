@@ -1,7 +1,11 @@
 #include "playercharacter.h"
+#include "image.h"
+#include "musicmanager.h"
 
-PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string filename)
+PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string *fnames)
 {	
+	type = 1;
+	
 	position.x = X;
 	position.y = Y;
 	previous_x = (int)X;
@@ -10,15 +14,18 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
     width = W;
     height = H;
     
-	filenames = new std::string;
-	filenames[0] = filename;
+    filenames = fnames;
 	
-	num_keys = 1;
+	num_keys = 3;
 	keys = new unsigned int[num_keys];
     
 	xvel = 0;
 	yvel = 0;
 	vel = 300;
+	dir = 1;
+	blocked[0] = blocked[1] = blocked[2] = blocked[3] = 0;
+	pressed[0] = pressed[1] = pressed[2] = 0;
+	lives = 3;
 
 	solid = 1;
 }
@@ -31,7 +38,7 @@ PlayerCharacter::~PlayerCharacter()
 		screen_manager->texture_dereference(keys[i]);
 	}
 
-	delete filenames;
+	delete[] filenames;
 	delete[] keys;
 }
 
@@ -42,63 +49,161 @@ void PlayerCharacter::events(SDL_Event *event)
 		//Set the proper message surface
 		switch( event->key.keysym.sym )
 		{
-		    case SDLK_UP:
-            if (position.y >= 450-height)
-            {
-                yvel = -vel*2;
-            }
-            break;
-			case SDLK_LEFT:
-                // ensure it doesn't get going to fast (300 is max speed)
-                if (xvel > -300 )
-                    xvel -= vel;
+			case SDLK_UP:
+		    	pressed[1] = 1;
+            	break;
+            case SDLK_LEFT:
+                pressed[0] = 1;
                 break;
-			case SDLK_RIGHT:
-                if (xvel < 300)
-                    xvel += vel;
+            case SDLK_RIGHT:
+                pressed[2] = 1;
                 break;
 		}
 	}
-    else if (event->type == SDL_KEYUP) {
+    else if (event->type == SDL_KEYUP)
+    {
         switch( event->key.keysym.sym )
         {
+			case SDLK_UP:
+		    	pressed[1] = 0;
+            	break;
             case SDLK_LEFT:
-                xvel += vel;
+                pressed[0] = 0;
                 break;
             case SDLK_RIGHT:
-                xvel -= vel;
+                pressed[2] = 0;
                 break;
         }
-    }
+    }/*
+    else if (event->key.state == SDL_PRESSED)
+    {
+    	if (event->key.keysym.sym == SDLK_UP)
+    	{
+        	if (blocked[3] == 1)
+               	yvel = -vel*2;
+        }
+    }*/
 }
 
 void PlayerCharacter::step()
 {
-	int i;
+	if (lives < 1) //If dead
+	{
+		yvel += global_gravity*global_timestep;
+		position.y = position.y + yvel*global_timestep;
+		if (position.y > HEIGHT)
+			//trashed = 1;
+			global_gamestate = 0;
+		return;
+	}
 
-	position.x = position.x + xvel*global_timestep;
-	position.y = position.y + yvel*global_timestep;
-	
+	//If not dead
+	int i;
+	blocked[0] = blocked[1] = blocked[2] = blocked[3] = 0;
+	std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
+	for (i = 0; i < collisions->size(); i++)
+	{
+		unsigned int key = (*collisions)[i].oid;
+		switch(object_manager->objects_type(key))
+		{
+			case 4: //Enemy
+				lives--;
+				object_manager->objects_get(key)->set_solid(0);
+				break;
+			case 5: //Block
+				blocked[(*collisions)[i].type] = 1;
+				break;
+			case 6: //Flag
+                music_manager->stop();
+				object_manager->objects_get(key)->set_solid(0);
+				break;
+		}
+	}
+	delete collisions;
+
+	//Apply gravity
 	if (position.y < 460-height)
 	{
 		yvel += global_gravity*global_timestep;
 	}
 	else
 	{
-		if (yvel > 0)
-			yvel = 0;
-		position.y = 460-height;
+		blocked[3] = 1;
 	}
-	std::vector<unsigned int>* collisions = object_manager->get_collisions(oid);
-	for (i = 0; i < collisions->size(); i++)
-		object_manager->objects_delete((*collisions)[i]);
-	delete collisions;
+
+	//Apply velocity
+	if (pressed[1] == 1)
+		if (blocked[3] == 1)
+			yvel = -vel*2;
+	xvel = (pressed[2]*300)-(pressed[0]*300);
+
+	//Apply direction
+	if (xvel > 0)
+		dir = 1;
+	if (xvel < 0)
+		dir = 0;
+
+	//Apply movement
+	if ((xvel*global_timestep > 0 && blocked[2] == 0) || (xvel*global_timestep < 0 && blocked[0] == 0))
+		position.x = position.x + xvel*global_timestep;
+
+	if ((yvel*global_timestep > 0 && blocked[3] == 0) || (yvel*global_timestep < 0 && blocked[1] == 0))
+		position.y = position.y + yvel*global_timestep;
+	if ((yvel*global_timestep > 0 && blocked[3] == 1) || (yvel*global_timestep < 0 && blocked[1] == 1))
+		yvel = 0;
+
+	//Contain blobby
+	if (position.x < 0)
+		position.x = 0;
+	if (position.x > level_manager->get_level_width()-width)
+		position.x = level_manager->get_level_width()-width;
+	if (position.y > level_manager->get_level_height()-20-height)
+	{
+		position.y = level_manager->get_level_height()-20-height;
+		yvel = 0;
+	}
+
+	if (lives == 0)
+	{
+		//object_manager->objects_add(new Image(level_manager->get_level_x(),0, WIDTH, HEIGHT, "media/backgrounds/lose.bmp"));
+		yvel = -500;
+	}
+
+	//Move screen
+	level_manager->set_level_x( position.x );
 }
 
 void PlayerCharacter::draw()
 {
 	if (visible == 1 && loaded == 1)
 	{
+		//Draw lives
+		if (screen_manager->texture_exist(keys[1]))
+		{
+			int i;
+			for (i = 0; i < lives; i++)
+				screen_manager->texture_apply( 10+(64*i), 10, 1, 32, 32, keys[1], 0, 255 );
+		}
+		else
+		{
+			ERROR("Image " << keys[1] << " failed to load")
+		}
+
+		//Draw lose screen if dead
+		if (lives < 1)
+		{
+			if (screen_manager->texture_exist(keys[2]))
+			{	
+				screen_manager->texture_apply( 0, 0, 1, WIDTH, HEIGHT, keys[2], 0, 255 );
+			}
+            else
+            {
+                ERROR("Image " << keys[2] << " failed to load")
+            }
+		}
+		
+
+		//Draw Blobby
 		if (screen_manager->texture_exist(keys[0]))
 		{	
 			int averaged_x = (previous_x+(int)position.x)/2;
@@ -106,16 +211,16 @@ void PlayerCharacter::draw()
 			
 			if (averaged_x != (int)position.x || averaged_y != (int)position.y)
                 // this affects blur
-				screen_manager->texture_apply( averaged_x, averaged_y, width, height, keys[0], 0, 50 );
+				screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[0], dir, 50 );
 				
-			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], 0, 255 );
-				
+			screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], dir, 255 );
+
 			previous_x = (int)position.x;
 			previous_y = (int)position.y;
 		}
 		else
 		{
-ERROR("Image " << keys[0] << " failed to load")
+			ERROR("Image " << keys[0] << " failed to load")
 		}
 	}
 }
@@ -125,11 +230,15 @@ void PlayerCharacter::load_surfaces()
 	if (loaded == 0)
 	{
 		int i;
-		for (i = 0; i < num_keys; i++)
-		{
-			keys[i] = screen_manager->texture_load(filenames,1,0,255,0);
-			screen_manager->texture_reference(keys[i]);
-		}
+
+		keys[0] = screen_manager->texture_load(filenames,2,0,255,0);
+		screen_manager->texture_reference(keys[0]);
+
+		keys[1] = screen_manager->texture_load(&(filenames[2]),1,0,255,0);
+		screen_manager->texture_reference(keys[1]);
+
+		keys[2] = screen_manager->texture_load(&(filenames[3]),1,0,255,0);
+		screen_manager->texture_reference(keys[2]);
 		
 		width = screen_manager->texture_width(keys[0],0);
 		height = screen_manager->texture_height(keys[0],0);

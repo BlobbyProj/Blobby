@@ -1,7 +1,9 @@
 #include "enemy.h"
 
 Enemy::Enemy(double X, double Y, int W, int H, std::string filename)
-{	
+{
+	type = 4;
+
 	position.x = X;
 	position.y = Y;
 	previous_x = (int)X;
@@ -16,11 +18,12 @@ Enemy::Enemy(double X, double Y, int W, int H, std::string filename)
 	num_keys = 1;
 	keys = new unsigned int[num_keys];
 	
-	xvel = 0;
+	xvel = 80;
 	yvel = 0;
-	vel = 0;
+	vel = 80;
 
 	solid = 1;
+	lives = 1;
 }
 
 Enemy::~Enemy()
@@ -35,30 +38,71 @@ Enemy::~Enemy()
 	delete[] keys;
 }
 
-void Enemy::events(SDL_Event *event)
-{
-	//events code?
-}
-
-
-
 void Enemy::step()
 {
-    // set veloctiy based on position
-    if(position.x >= 500){
-		xvel = -80;
-	}else if(position.x <= 300){
-		xvel = 80;
+	if (lives < 1) //If dead
+	{
+		yvel += global_gravity*global_timestep;
+		position.y = position.y + yvel*global_timestep;
+		if (position.y > HEIGHT)
+			trashed = 1;
+		return;
 	}
-	
+
+	//If not dead
+	int i;
+	bool blocked[4] = {0,0,0,0};
     // if enemy collided with something, reverse velocity
-    std::vector<unsigned int>* collisions = object_manager->get_collisions(oid);
-    if (!collisions->empty()){
-        xvel = xvel * (-1);
-    }
-    delete collisions;
+	std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
+	for (i = 0; i < collisions->size(); i++)
+	{
+		unsigned int key = (*collisions)[i].oid;
+		switch(object_manager->objects_type(key))
+		{
+			case 1: //Player
+				lives--;
+				break;
+			case 5: //Block
+				blocked[(*collisions)[i].type] = 1;
+				break;
+		}
+	}
+	delete collisions;
+
+	//Apply gravity
+	if (position.y < 460-height)
+	{
+		yvel += global_gravity*global_timestep;
+	}
     
-    position.x +=  xvel*global_timestep;
+	//Apply movement
+	if ((xvel*global_timestep > 0 && blocked[2] == 0) || (xvel*global_timestep < 0 && blocked[0] == 0))
+		position.x = position.x + xvel*global_timestep;
+
+	if (blocked[0] == 1)
+		xvel = vel;
+	if (blocked[2] == 1)
+		xvel = -vel;
+
+
+	if ((yvel*global_timestep > 0 && blocked[3] == 0) || (yvel*global_timestep < 0 && blocked[1] == 0))
+		position.y = position.y + yvel*global_timestep;
+	if ((yvel*global_timestep > 0 && blocked[3] == 1) || (yvel*global_timestep < 0 && blocked[1] == 1))
+		yvel = 0;
+
+	//Contain enemy
+	if (position.x < 0)
+		position.x = 0;
+	if (position.x > level_manager->get_level_width()-width)
+		position.x = level_manager->get_level_width()-width;
+	if (position.y > level_manager->get_level_height()-20-height)
+	{
+		position.y = level_manager->get_level_height()-20-height;
+		yvel = 0;
+	}
+
+	if (lives == 0)
+		yvel = -200;
 }
 
 void Enemy::draw()
@@ -72,9 +116,9 @@ void Enemy::draw()
 			
 			if (averaged_x != (int)position.x || averaged_y != (int)position.y)
                 // this affects blur
-				screen_manager->texture_apply( averaged_x, averaged_y, width, height, keys[0], 0, 50 );
+				screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[0], 0, 50 );
 				
-			screen_manager->texture_apply( (int)position.x, (int)position.y, width, height, keys[0], 0, 255 );
+			screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], 0, 255 );
 				
 			previous_x = (int)position.x;
 			previous_y = (int)position.y;

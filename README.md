@@ -24,6 +24,15 @@ To Run on Linux OS
 
 To Run on Mac OS
 
+1. Make sure you have SDL2 Library Installed (if not, see 'downloading SDL2 for Mac below').
+
+2. Go into the main blobby directory that contains the makefile
+
+3. Type "make OS=OSX (this should successfully compile the Blobby game)
+
+4. Upon completion, the executable file will be inside of the bin directory
+
+5. Type "bin/blobby" to run the executable
 
 ========================
 
@@ -66,3 +75,18 @@ Downloading SDL2 for Linux
 **Note: If you want to remove all the installed SDL libraries
 	Command: sudo apt-get purge libsdl*
 	Command: sudo apt-get autoremove --purge 
+
+===============================
+
+Downloading SDL2 for Mac
+
+1. Download SDL2 from http://libsdl.org/download-2.0.php
+
+2. Install and save the framework in /Library/Frameworks
+
+
+
+
+
+
+

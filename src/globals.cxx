@@ -2,7 +2,7 @@
 #include "screenmanager.h"
 #include "objectmanager.h"
 #include "levelmanager.h"
-#include "console.h"
+#include "musicmanager.h"
 
 //Initialize screen manager
 ScreenManager *screen_manager = 0;
@@ -12,6 +12,9 @@ ObjectManager *object_manager = 0;
 
 //Initialize level manager
 LevelManager *level_manager = 0;
+
+//Initialize music manager
+MusicManager *music_manager = 0;
 
 //Initialize console
 Console *console = 0;
