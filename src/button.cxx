@@ -29,8 +29,8 @@ void ButtonPause(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/buttons/PauseUnpressed.bmp";
-		filenames[1] = "media/buttons/PausePressed.bmp";
+		filenames[0] = "media/buttons/PauseUnpressed.png";
+		filenames[1] = "media/buttons/PausePressed.png";
 		return;
 	}
 	
