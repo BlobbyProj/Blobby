@@ -2,7 +2,11 @@
 #define SCREENMANAGER_H
 
 #include "SDL2/SDL.h"
+#ifdef LINUX
+#include <SDL2/SDL_image.h>
+#else
 #include <SDL2_image/SDL_image.h>
+#endif
 #include <string>
 #include <vector>
 #include <map>

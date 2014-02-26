@@ -3,8 +3,12 @@
 
 #include <string>
 #include <map>
-
+#ifdef LINUX
+#include <SDL2/SDL_mixer.h>
+#else
 #include <SDL2_mixer/SDL_mixer.h>
+#endif
+
 
 class MusicManager {
 private:
