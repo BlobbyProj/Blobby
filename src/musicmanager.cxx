@@ -20,9 +20,11 @@ void MusicManager::add_track(std::string filename){
 }
 
 void MusicManager::play(std::string filename){
-    // -1 says to loop music
-    if (Mix_PlayMusic( tracks[filename], -1 ) != 0){
-        FLAG
+    if (music){
+         // -1 says to loop music
+        if (Mix_PlayMusic( tracks[filename], -1 ) != 0){
+            FLAG
+        }
     }
 }
 void MusicManager::pause(){
@@ -34,4 +36,8 @@ void MusicManager::stop(){
 
 void MusicManager::resume(){
     Mix_ResumeMusic();
+}
+
+void MusicManager::set_music(bool m){
+    music = m;
 }
