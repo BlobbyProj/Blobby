@@ -127,10 +127,10 @@ class ScreenManager {
         // pre-conditions  texture exists
 		int texture_height( unsigned int key, unsigned int frame );
 		
-        // moves reference for texture/key pair up
+        // One more object is using the object
 		void texture_reference( unsigned int key ) { (*(*images)[key])++; }
     
-        // moves reference for texture/key pair down
+        // One less object is using the object
 		void texture_dereference( unsigned int key ) { (*(*images)[key])--; }
     
         // deletes unnecessary textures
