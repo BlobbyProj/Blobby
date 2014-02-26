@@ -23,7 +23,7 @@ Group Project; a game.
 
 To Run on Mac OS
 
-1. Make sure you have SDL2 Library Installed (if not, see 'downloading SDL2 for Mac below').
+1. Make sure you have SDL2, SDL2_Image, and SDL2_Mixer Libraries Installed (if not, see downloading information for Mac below).
 
 2. Go into the main blobby directory that contains the makefile
 
@@ -107,13 +107,15 @@ To Run on Windows OS
 	Comand: sudo ldconfig<br>
 
 ===============================
-Downloading SDL2 for Mac
+Downloading Frameworks for Mac
 
 1. Download SDL2 from http://libsdl.org/download-2.0.php
 
-2. Install and save the framework in /Library/Frameworks
+2. Download SDL2_image from https://www.libsdl.org/projects/SDL_image/
 
+3. Download SDL2_mixer from http://www.libsdl.org/projects/SDL_mixer/
 
+4. Install and save all three the frameworks in /Library/Frameworks
 
 
 
