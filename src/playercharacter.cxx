@@ -25,6 +25,7 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string *
 	blocked[0] = blocked[1] = blocked[2] = blocked[3] = 0;
 	pressed[0] = pressed[1] = pressed[2] = 0;
 	lives = 3;
+    score = 0;
 
 	solid = 1;
 }

@@ -17,6 +17,7 @@ class PlayerCharacter : public Object {
 		bool blocked[4];
 		bool pressed[3]; //0 = left, 1 = up, 2 = right
 		char lives;
+        int score;
 
 	public:
         // constructor for PlayerCharacter - creates new instance of PlayerCharacter object
