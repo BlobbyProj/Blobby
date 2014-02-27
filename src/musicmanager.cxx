@@ -20,7 +20,7 @@ void MusicManager::add_track(std::string filename){
 }
 
 void MusicManager::play(std::string filename){
-    if (silent){
+    if (!silent){
          // -1 says to loop music
         if (Mix_PlayMusic( tracks[filename], -1 ) != 0){
             FLAG
@@ -38,6 +38,21 @@ void MusicManager::resume(){
     Mix_ResumeMusic();
 }
 
-void MusicManager::set_silent(bool m){
-    silent = m;
+bool MusicManager::toggle(){
+    if (silent) {
+        silent = false;
+        return true;
+    }
+    else {
+        silent = true;
+        return false;
+    }
+}
+
+void MusicManager::fade_in(std::string filename, int ms){
+    Mix_FadeInMusic(tracks[filename], -1, ms);
+}
+
+void MusicManager::fade_out(int ms){
+    Mix_FadeOutMusic(ms);
 }

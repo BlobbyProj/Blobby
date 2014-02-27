@@ -43,9 +43,13 @@ public:
     // unpauses the music
     void resume();
     
-    // determines of musicmanager will play music
-    // param m: true - won't play music, false - will play music
-    void set_silent(bool m);
+    // sets silent to opposite value
+    // returns previous state of silent
+    bool toggle();
+    
+    void fade_in(std::string filename, int ms);
+    
+    void fade_out(int ms);
     
 };
 

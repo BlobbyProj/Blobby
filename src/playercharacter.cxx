@@ -28,6 +28,9 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string *
 	lives = 3;
 
 	solid = 1;
+    
+    music_manager->add_track("media/music/complete.mid");
+    music_manager->add_track("media/music/death.mid");
 }
 
 PlayerCharacter::~PlayerCharacter()
@@ -108,6 +111,9 @@ void PlayerCharacter::step()
 		{
 			case 4: //Enemy
 				lives--;
+                if (lives < 1) {
+                    music_manager->play("media/music/death.mid");
+                }
 				object_manager->objects_get(key)->set_solid(0);
 				break;
 			case 5: //Block
@@ -115,6 +121,7 @@ void PlayerCharacter::step()
 				break;
 			case 6: //Flag
                 music_manager->stop();
+                music_manager->play("media/music/complete.mid");
 				object_manager->objects_get(key)->set_solid(0);
 				break;
 		}

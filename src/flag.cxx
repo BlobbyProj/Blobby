@@ -35,7 +35,7 @@ void Flag::step()
 {
 	if (solid == 0)
 		timed += global_timestep;
-	if (timed >= 2)
+	if (timed >= 4)
 		global_gamestate = 0;
 }
 
