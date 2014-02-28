@@ -16,7 +16,7 @@ vpath %.cxx $(SDIR)
 
 #OSX
 ifeq ($(OS),OSX)
-CFLAGS = -I$(IDIR) -std=c++0x -g 
+CFLAGS = -I$(IDIR) -std=c++0x -g -DOSX
 LFLAGS = -g
 LIBS =
 FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2 /Library/Frameworks/SDL2_image.framework/Versions/Current/SDL2_image /Library/Frameworks/SDL2_mixer.framework/Versions/Current/SDL2_mixer
@@ -24,9 +24,9 @@ endif
 
 #WINDOWS
 ifeq ($(OS),WINDOWS)
-CFLAGS = -I$(IDIR) -std=c++0x -g
-LFLAGS = -static-libgcc -static-libstdc++ -g
-LIBS = -lmingw32 -lSDL2main -lSDL2 -mwindows
+CFLAGS = -I$(IDIR) -std=c++0x -g -DWINDOWS
+LFLAGS = -static-libgcc -static-libstdc++ -g -lSDL2_mixer
+LIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -mwindows
 FRAMEWORKS = 
 endif
 

@@ -3,6 +3,11 @@
 
 // Instance of this object will hold and control the music
 
+MusicManager::MusicManager()
+{
+    silent = false;
+}
+
 MusicManager::~MusicManager(){
     std::map<std::string,Mix_Music*>::iterator it;
 	for (it = tracks.begin(); it != tracks.end(); ++it)

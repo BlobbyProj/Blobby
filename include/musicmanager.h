@@ -3,10 +3,10 @@
 
 #include <string>
 #include <map>
-#ifdef LINUX
-#include <SDL2/SDL_mixer.h>
-#else
+#ifdef OSX
 #include <SDL2_mixer/SDL_mixer.h>
+#else
+#include <SDL2/SDL_mixer.h>
 #endif
 
 class MusicManager {
@@ -14,12 +14,13 @@ private:
     // Map holds music tracks, with their filenams as the keys
     std::map< std::string, Mix_Music* > tracks;
     // determines if music will be played
-    bool silent = false;
+    bool silent;
     
 public:
     // destructor for MusicManager - deletes instance of MusicManager object
     // pre-conditions  MusicManager exists
     // post-conditions MusicManager no longer exists and all the music is freed
+    MusicManager();
     ~MusicManager();
     
     // adds a track to the tracks map
