@@ -2,4 +2,4 @@
 1
 media/objects/flag.png
 1
-media/backgrounds/success.bmp
+media/backgrounds/success.png

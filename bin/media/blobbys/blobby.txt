@@ -5,4 +5,4 @@ media/blobbys/blobbyrightSmaller.png
 1
 media/blobbys/life.png
 1
-media/backgrounds/lose.bmp
+media/backgrounds/lose.png

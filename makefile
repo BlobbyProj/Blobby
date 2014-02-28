@@ -94,10 +94,8 @@ $(ODIR)/musicmanager.o: musicmanager.cxx globals.h musicmanager.h
 .PHONY: clean
 	
 clean:
-ifeq ($(OS),OSX)
-#MAC
-	rm -f $(ODIR)/*.o
-else
-#WINDOWS
+ifeq ($(OS),WINDOWS)
 	del $(ODIR)\*.o
+else
+	rm -f $(ODIR)/*.o
 endif

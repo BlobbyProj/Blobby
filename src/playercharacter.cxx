@@ -110,7 +110,8 @@ void PlayerCharacter::step()
 		{
 			case 4: //Enemy
 				lives--;
-                if (lives < 1) {
+                if (lives < 1)
+                {
                     music_manager->play("media/music/death.mid");
                 }
 				object_manager->objects_get(key)->set_solid(0);
