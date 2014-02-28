@@ -5,6 +5,7 @@
 #include "screenmanager.h"
 #include "objectmanager.h"
 #include "levelmanager.h"
+#include "musicmanager.h"
 
 int main( int argc, char* args[] )
 {
@@ -14,7 +15,12 @@ int main( int argc, char* args[] )
 	    FLAG
 	}
 
-
+    
+    //Initialize SDL_mixer
+    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+    {
+        FLAG
+    }
 
 	//Create screen manager
 	screen_manager = new ScreenManager(WIDTH,HEIGHT);
@@ -24,6 +30,9 @@ int main( int argc, char* args[] )
 
 	//Create level manager
 	level_manager = new LevelManager;
+    
+    //Create music manager
+    music_manager = new MusicManager;
 
 	//std::ofstream cout;
 	//cout.open("CON");
@@ -37,7 +46,6 @@ int main( int argc, char* args[] )
 	int steps_since_last_frame = 0;
 	
 	SDL_Event event;
-	
 	
     //While the user hasn't quit
     while( global_gamestate != -1 )
@@ -93,6 +101,10 @@ int main( int argc, char* args[] )
 	delete object_manager;
 	delete level_manager;
 	delete screen_manager;
+    delete music_manager;
+    
+    Mix_Quit();
+    IMG_Quit();
 	SDL_Quit();
 
     return 0;

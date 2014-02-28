@@ -29,8 +29,8 @@ void ButtonPause(bool init, std::string *filenames)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/buttons/PauseUnpressed.bmp";
-		filenames[1] = "media/buttons/PausePressed.bmp";
+		filenames[0] = "media/buttons/PauseUnpressed.png";
+		filenames[1] = "media/buttons/PausePressed.png";
 		return;
 	}
 	
@@ -86,25 +86,37 @@ void ButtonInstructions(bool init, std::string *filenames)
 }
 
 
+void ButtonVolume(bool init, std::string *filenames)
+{
+	if (init == 1)
+	{
+		filenames[0] = "media/buttons/volume.png";
+		filenames[1] = "media/buttons/mute.png";
+		return;
+	}
+}
+
+
 Button::Button(double X, double Y, int W, int H, void (*otherFunction)(bool,std::string*))
 {	
-	type = 2;
-	
-	position.x = X;
-	position.y = Y;
+    type = 2;
+
+    position.x = X;
+    position.y = Y;
     width = W;
     height = H;
-	
-	function = otherFunction;
-	
-	filenames = new std::string[2];
-	(*function)(1,filenames);
-	
-	num_keys = 1;
-	keys = new unsigned int[num_keys];
-	
-	pressed = 0;
-	fixed = 1;
+
+    function = otherFunction;
+
+    filenames = new std::string[2];
+    (*function)(1,filenames);
+
+    num_keys = 1;
+    keys = new unsigned int[num_keys];
+
+    pressed = 0;
+    fixed = 1;
+    togglable = 0;
 }
 
 Button::~Button()
@@ -121,6 +133,9 @@ Button::~Button()
 
 void Button::events(SDL_Event *event)
 {
+    if (togglable){
+        togglable = !togglable;
+    }
 	if ( event->type == SDL_MOUSEBUTTONDOWN )
 	{
 		if ( pressed == 0 && event->button.button == SDL_BUTTON_LEFT )
@@ -150,7 +165,7 @@ void Button::draw()
 	{
 		if (screen_manager->texture_exist(keys[0]))
 		{
-			screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], pressed );
+                screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], pressed );
 		}
 		else
 		{

@@ -37,13 +37,17 @@ void ButtonInstructions(bool init,std::string *filenames);
 // post-conditions  global_gamestate equals 0
 void ButtonGoBack(bool init,std::string *filenames);
 
+// toggles volume
+void ButtonVolume(bool init, std::string *filenames);
+
 class Button : public Object {
 	private:
 		bool pressed;
+        bool togglable;
 		void (*function)(bool,std::string*);
 		
 	public:
-        // constructor for Button - creates new instance of Button object
+        // constructor for Button - creates new instance of Button ob;ject
         // param X         x coordinate for location of upper-left corner of Button
         // param Y         y coordinate for location of upper-left corner of Button
         // param width     width of Button in pixels

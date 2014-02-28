@@ -1,5 +1,6 @@
 #include "playercharacter.h"
 #include "image.h"
+#include "musicmanager.h"
 
 PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string *fnames)
 {	
@@ -28,6 +29,9 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string *
     score = 0;
 
 	solid = 1;
+    
+    music_manager->add_track("media/music/complete.mid");
+    music_manager->add_track("media/music/death.mid");
 }
 
 PlayerCharacter::~PlayerCharacter()
@@ -108,13 +112,26 @@ void PlayerCharacter::step()
 		{
 			case 4: //Enemy
 				lives--;
+                if (lives < 1) {
+                    music_manager->play("media/music/death.mid");
+                }
 				object_manager->objects_get(key)->set_solid(0);
 				break;
 			case 5: //Block
 				blocked[(*collisions)[i].type] = 1;
 				break;
 			case 6: //Flag
+                music_manager->stop();
+                music_manager->play("media/music/complete.mid");
 				object_manager->objects_get(key)->set_solid(0);
+				break;
+			case 7: //Gloop
+				score += 1;
+				//make the score on the screen change!
+				//make Blobby grow in size--> blobbyRight and blobbyLeft
+				//~ Change left image to :"media/blobbys/blobbyleft.png";
+				//~ Change right image to :"media/blobbys/blobbyright.png";
+
 				break;
 		}
 	}

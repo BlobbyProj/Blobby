@@ -19,6 +19,9 @@ extern ObjectManager *object_manager;
 class LevelManager;
 extern LevelManager *level_manager;
 
+class MusicManager;
+extern MusicManager *music_manager;
+
 class Console;
 extern Console *console;
 
