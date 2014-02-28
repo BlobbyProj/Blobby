@@ -19,7 +19,7 @@ public:
 	// param filename  filename of Flag object image
 	// pre-conditions  Flag does not yet exist
 	// post-conditions Flag exists
-    Flag(double X, double Y, int width, int height, std::string *fnames);
+    Flag(double X, double Y, int width, int height, std::string fname);
 
 	// destructor for PlayerCharacter - deletes instance of PlayerCharacter object
 	// pre-conditions  PlayerCharacter exists
@@ -37,10 +37,6 @@ public:
 	// pre-conditions  flag object is visible and loaded
 	// post-conditions flag object appears on texture
     void draw();
-	// instructs screenmanager to load the images for the Flag
-	// pre-conditions  Flag's filename is valid
-	// post-conditions Flag is ready to be shown
-    void load_surfaces();
 };
 
 #endif

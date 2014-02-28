@@ -1,6 +1,6 @@
 #include "block.h"
 
-Block::Block(double X, double Y, int W, int H, std::string filename)
+Block::Block(double X, double Y, int W, int H, std::string fname)
 {
 	type = 5;
 	
@@ -9,11 +9,7 @@ Block::Block(double X, double Y, int W, int H, std::string filename)
     width = W;
     height = H;
 	
-	filenames = new std::string[1];
-	filenames[0] = filename;
-	
-	num_keys = 1;
-	keys = new unsigned int[num_keys];
+	filename = fname;
     
     solid = 1;
 }
@@ -26,8 +22,7 @@ Block::~Block()
 		screen_manager->texture_dereference(keys[i]);
 	}
     
-	delete[] filenames;
-	delete keys;
+	delete[] keys;
 }
 
 void Block::draw()
@@ -42,23 +37,5 @@ void Block::draw()
 		{
             ERROR("Block " << keys[0] << " failed to load")
 		}
-	}
-}
-
-void Block::load_surfaces()
-{
-	if (loaded == 0)
-	{
-		int i;
-		for (i = 0; i < num_keys; i++)
-		{
-			keys[i] = screen_manager->texture_load(filenames,1);
-			screen_manager->texture_reference(keys[i]);
-		}
-		
-		width = screen_manager->texture_width(keys[0],0);
-		height = screen_manager->texture_height(keys[0],0);
-		
-		loaded = 1;
 	}
 }

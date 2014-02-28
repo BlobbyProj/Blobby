@@ -1,0 +1,4 @@
+1
+2
+media/buttons/resumeBtn.bmp
+media/buttons/resumeClick.bmp

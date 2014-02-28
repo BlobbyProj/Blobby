@@ -28,7 +28,7 @@ class PlayerCharacter : public Object {
         // param filename  filename of PlayerCharacter object image
         // pre-conditions  PlayerCharacter does not yet exist
         // post-conditions PlayerCharacter exists
-		PlayerCharacter(double X, double Y, int width, int height, std::string *fnames);
+		PlayerCharacter(double X, double Y, int width, int height, std::string fname);
     
         // destructor for PlayerCharacter - deletes instance of PlayerCharacter object
         // pre-conditions  PlayerCharacter exists

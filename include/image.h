@@ -15,7 +15,7 @@ class Image : public Object {
         // param filename  filename of object image
         // pre-conditions  Image does not yet exist
         // post-conditions Image exists
-		Image(double X, double Y, int width, int height, std::string filename);
+		Image(double X, double Y, int width, int height, std::string fname);
     
         // destructor for Image - deletes instance of Image object
         // pre-conditions  Image exists
@@ -34,11 +34,6 @@ class Image : public Object {
         // pre-conditions  object is visible and loaded
         // post-conditions object appears on texture
 		void draw();
-    
-        // instructs screenmanager to load the images for the Image
-        // pre-conditions  Image's filename is valid
-        // post-conditions Image is ready to be shown
-		void load_surfaces();
 };
 
 #endif

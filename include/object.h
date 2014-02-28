@@ -13,7 +13,7 @@ class Object {
 		Point position;
 		unsigned int oid;
 		unsigned int type;
-		std::string *filenames;
+		std::string filename;
 		unsigned int num_keys;
 		unsigned int *keys;
 		int width;
@@ -50,7 +50,7 @@ class Object {
 		unsigned int get_type() { return type; }
     
         // returns the filenames of the images
-		std::string *get_filenames() { return filenames; }
+		//std::string *get_filenames() { return filenames; }
     
         // returns the num_keys of the Object
 		unsigned int get_num_keys() { return (num_keys*loaded); }
@@ -84,9 +84,9 @@ class Object {
     
         // Object will be drawn to screen; each subclass implements
 		virtual void draw()=0;
-    
-        // called to load the images for the Object; each subclass implements
-		virtual void load_surfaces()=0;
+
+		// called to load the images for the Object;
+		void load_surfaces();
     
 };
 

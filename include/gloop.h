@@ -22,7 +22,7 @@ class Gloop : public Object {
         // param filename  filename of object image
         // pre-conditions  Enemy does not yet exist
         // post-conditions Enemy exists
-		Gloop(double X, double Y, int width, int height, std::string filename);
+		Gloop(double X, double Y, int width, int height, std::string fname);
     
         // destructor for Enemy - deletes instance of Enemy object
         // pre-conditions  Enemy exists
@@ -43,11 +43,6 @@ class Gloop : public Object {
         // pre-conditions  object is visible and loaded
         // post-conditions object appears on texture
 		void draw();
-    
-        // instructs screenmanager to load the images for the Enemy
-        // pre-conditions  Enemy's image filename is valid
-        // post-conditions Enemy's image is ready to be shown
-		void load_surfaces();
 };
 
 #endif

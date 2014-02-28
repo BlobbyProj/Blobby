@@ -2,7 +2,7 @@
 #include "image.h"
 #include "musicmanager.h"
 
-PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string *fnames)
+PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string fname)
 {	
 	type = 1;
 	
@@ -14,10 +14,7 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string *
     width = W;
     height = H;
     
-    filenames = fnames;
-	
-	num_keys = 3;
-	keys = new unsigned int[num_keys];
+    filename = fname;
     
 	xvel = 0;
 	yvel = 0;
@@ -32,6 +29,8 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string *
     
     music_manager->add_track("media/music/complete.mid");
     music_manager->add_track("media/music/death.mid");
+
+
 }
 
 PlayerCharacter::~PlayerCharacter()
@@ -42,7 +41,6 @@ PlayerCharacter::~PlayerCharacter()
 		screen_manager->texture_dereference(keys[i]);
 	}
 
-	delete[] filenames;
 	delete[] keys;
 }
 
@@ -238,27 +236,5 @@ void PlayerCharacter::draw()
 		{
 			ERROR("Image " << keys[0] << " failed to load")
 		}
-	}
-}
-
-void PlayerCharacter::load_surfaces()
-{
-	if (loaded == 0)
-	{
-		int i;
-
-		keys[0] = screen_manager->texture_load(filenames,2,0,255,0);
-		screen_manager->texture_reference(keys[0]);
-
-		keys[1] = screen_manager->texture_load(&(filenames[2]),1,0,255,0);
-		screen_manager->texture_reference(keys[1]);
-
-		keys[2] = screen_manager->texture_load(&(filenames[3]),1,0,255,0);
-		screen_manager->texture_reference(keys[2]);
-		
-		width = screen_manager->texture_width(keys[0],0);
-		height = screen_manager->texture_height(keys[0],0);
-		
-		loaded = 1;
 	}
 }

@@ -2,7 +2,7 @@
 
 #include "gloop.h"
 
-Gloop::Gloop(double X, double Y, int W, int H, std::string filename)
+Gloop::Gloop(double X, double Y, int W, int H, std::string fname)
 {
 	type = 7;
 
@@ -14,11 +14,7 @@ Gloop::Gloop(double X, double Y, int W, int H, std::string filename)
     width = W;
     height = H;
     
-	filenames = new std::string;
-	filenames[0] = filename;
-	
-	num_keys = 1;
-	keys = new unsigned int[num_keys];
+	filename = fname;
 
 	solid = 1;
 }
@@ -31,7 +27,6 @@ Gloop::~Gloop()
 		screen_manager->texture_dereference(keys[i]);
 	}
 
-	delete filenames;
 	delete[] keys;
 }
 
@@ -84,23 +79,5 @@ void Gloop::draw()
 		{
 ERROR("Image " << keys[0] << " failed to load")
 		}
-	}
-}
-
-void Gloop::load_surfaces()
-{
-	if (loaded == 0)
-	{
-		int i;
-		for (i = 0; i < num_keys; i++)
-		{
-			keys[i] = screen_manager->texture_load(filenames,1,0,255,0);
-			screen_manager->texture_reference(keys[i]);
-		}
-		
-		width = screen_manager->texture_width(keys[0],0);
-		height = screen_manager->texture_height(keys[0],0);
-		
-		loaded = 1;
 	}
 }

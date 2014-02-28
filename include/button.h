@@ -11,34 +11,34 @@
 
 // controls Button to begin playing game; fetches image files if not initially available
 // post-conditions  standard game play begins, global_gamestate does not equal 0
-void ButtonPlay(bool init,std::string *filenames);
+void ButtonPlay(bool init,std::string *filename);
 
 // controls Button to quit game; fetches image files if not initially available
 // post-conditions  game is closed, global_gamestate equals -1
-void ButtonQuit(bool init,std::string *filenames);
+void ButtonQuit(bool init,std::string *filename);
 
 // controls Button to pause game; fetches image files if not initially available
 // post-conditions  game is paused, global_paused equals 1
-void ButtonPause(bool init,std::string *filenames);
+void ButtonPause(bool init,std::string *filename);
 
 // controls Button to resume game; fetches image files if not initially available
 // post-conditions  game is resumed, global_paused equals 0
-void ButtonResume(bool init,std::string *filenames);
+void ButtonResume(bool init,std::string *filename);
 
 // controls Button to redirect to main menu; fetches image files if not initially available
 // post-conditions  global_paused equals 0 and global_gamestate equals 0
-void ButtonMainMenu(bool init,std::string *filenames);
+void ButtonMainMenu(bool init,std::string *filename);
 
 // controls Button to redirect to intructions; fetches image files if not initially available
 // post-conditions  global_gamestate equals 1
-void ButtonInstructions(bool init,std::string *filenames);
+void ButtonInstructions(bool init,std::string *filename);
 
 // controls Button to go back to previous screen; fetches image files if not initially available
 // post-conditions  global_gamestate equals 0
-void ButtonGoBack(bool init,std::string *filenames);
+void ButtonGoBack(bool init,std::string *filename);
 
 // toggles volume
-void ButtonVolume(bool init, std::string *filenames);
+void ButtonVolume(bool init, std::string *filename);
 
 class Button : public Object {
 	private:
@@ -76,11 +76,6 @@ class Button : public Object {
         // pre-conditions  object is visible and loaded
         // post-conditions object appears on texture
 		void draw();
-    
-        // instructs screenmanager to load the images for the Button
-        // pre-conditions  Button's image filenames are valid
-        // post-conditions Button's image is ready to be shown
-		void load_surfaces();
 };
 
 #endif

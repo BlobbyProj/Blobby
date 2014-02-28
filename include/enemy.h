@@ -45,11 +45,6 @@ class Enemy : public Object {
         // pre-conditions  object is visible and loaded
         // post-conditions object appears on texture
 		void draw();
-    
-        // instructs screenmanager to load the images for the Enemy
-        // pre-conditions  Enemy's image filename is valid
-        // post-conditions Enemy's image is ready to be shown
-		void load_surfaces();
 };
 
 #endif

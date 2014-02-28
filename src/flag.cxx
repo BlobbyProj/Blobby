@@ -1,6 +1,6 @@
 #include "flag.h"
 
-Flag::Flag(double X, double Y, int W, int H, std::string *fnames)
+Flag::Flag(double X, double Y, int W, int H, std::string fname)
 {
 	type = 6;
 	
@@ -11,10 +11,7 @@ Flag::Flag(double X, double Y, int W, int H, std::string *fnames)
 
     timed = 0;
 	
-	filenames = fnames;
-	
-	num_keys = 2;
-	keys = new unsigned int[num_keys];
+	filename = fname;
     
     solid = 1;
 }
@@ -27,7 +24,6 @@ Flag::~Flag()
 		screen_manager->texture_dereference(keys[i]);
 	}
     
-	delete[] filenames;
 	delete[] keys;
 }
 
@@ -62,24 +58,5 @@ void Flag::draw()
 	            ERROR("Flag " << keys[1] << " failed to load")
 			}
 		}
-	}
-}
-
-void Flag::load_surfaces()
-{
-	if (loaded == 0)
-	{
-		int i;
-
-		keys[0] = screen_manager->texture_load(filenames,1,0,255,0);
-		screen_manager->texture_reference(keys[0]);
-
-		keys[1] = screen_manager->texture_load(&(filenames[1]),1,0,255,0);
-		screen_manager->texture_reference(keys[1]);
-		
-		width = screen_manager->texture_width(keys[0],0);
-		height = screen_manager->texture_height(keys[0],0);
-		
-		loaded = 1;
 	}
 }

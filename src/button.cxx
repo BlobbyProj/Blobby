@@ -1,84 +1,76 @@
 #include "button.h"
 
-void ButtonPlay(bool init, std::string *filenames)
+void ButtonPlay(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/buttons/playBtn.bmp";
-		filenames[1] = "media/buttons/playClick.bmp";
+		*filename = "media/buttons/play.txt";
 		return;
 	}
 
 	global_gamestate = 2;
 }
 
-void ButtonQuit(bool init, std::string *filenames)
+void ButtonQuit(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/buttons/quitBtn.bmp";
-		filenames[1] = "media/buttons/quitClick.bmp";
-
+		*filename = "media/buttons/quit.txt";
 		return;
 	}
 	
 	global_gamestate = -1;
 }
 
-void ButtonPause(bool init, std::string *filenames)
+void ButtonPause(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/buttons/PauseUnpressed.png";
-		filenames[1] = "media/buttons/PausePressed.png";
+		*filename = "media/buttons/pause.txt";
 		return;
 	}
 	
 	global_paused = 1;
 }
 
-void ButtonResume(bool init, std::string *filenames)
+void ButtonResume(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/buttons/resumeBtn.bmp";
-		filenames[1] = "media/buttons/resumeClick.bmp";
+		*filename = "media/buttons/resume.txt";
 		return;
 	}
 	
 	global_paused = 0;
 }
 
-void ButtonMainMenu(bool init, std::string *filenames)
+void ButtonMainMenu(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/buttons/mainMenuBtn.bmp";
-		filenames[1] = "media/buttons/mainMenuClick.bmp";
+		*filename = "media/buttons/menu.txt";
 		return;
 	}
 	
 	global_paused = 0;
 	global_gamestate = 0;
 }
-void ButtonGoBack(bool init, std::string *filenames)
+void ButtonGoBack(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/buttons/backBtn.bmp";
-		filenames[1] = "media/buttons/backClick.bmp";
+		*filename = "media/buttons/back.txt";
 		return;
 	}
 	
 	global_gamestate = 0;
 }
 
-void ButtonInstructions(bool init, std::string *filenames)
+void ButtonInstructions(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/buttons/instructionsBtn.bmp";
-		filenames[1] = "media/buttons/instructionsClick.bmp";
+		*filename = "media/buttons/instructions.txt";
 		return;
 	}
 
@@ -86,12 +78,11 @@ void ButtonInstructions(bool init, std::string *filenames)
 }
 
 
-void ButtonVolume(bool init, std::string *filenames)
+void ButtonVolume(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		filenames[0] = "media/buttons/volume.png";
-		filenames[1] = "media/buttons/mute.png";
+		*filename = "media/buttons/volume.txt";
 		return;
 	}
 }
@@ -107,12 +98,7 @@ Button::Button(double X, double Y, int W, int H, void (*otherFunction)(bool,std:
     height = H;
 
     function = otherFunction;
-
-    filenames = new std::string[2];
-    (*function)(1,filenames);
-
-    num_keys = 1;
-    keys = new unsigned int[num_keys];
+    (*function)(1,&filename);
 
     pressed = 0;
     fixed = 1;
@@ -127,8 +113,7 @@ Button::~Button()
 		screen_manager->texture_dereference(keys[i]);
 	}
 
-	delete[] filenames;
-	delete keys;
+	delete[] keys;
 }
 
 void Button::events(SDL_Event *event)
@@ -171,23 +156,5 @@ void Button::draw()
 		{
 			ERROR("Image " << keys[pressed] << " failed to load")
 		}
-	}
-}
-
-void Button::load_surfaces()
-{
-	if (loaded == 0)
-	{
-		int i;
-		for (i = 0; i < num_keys; i++)
-		{
-			keys[i] = screen_manager->texture_load(filenames,2,255,255,255);
-			screen_manager->texture_reference(keys[i]);
-		}
-	
-		width = screen_manager->texture_width(keys[0],0);
-		height = screen_manager->texture_height(keys[0],0);
-		
-		loaded = 1;
 	}
 }
