@@ -99,6 +99,7 @@ class Object {
 	4 = Enemy
 	5 = Block
 	6 = Flag
+	7 = Gloop
 
 */
 

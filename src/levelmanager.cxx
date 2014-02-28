@@ -8,6 +8,7 @@
 #include "enemy.h"
 #include "block.h"
 #include "flag.h"
+#include "gloop.h"
 
 void LevelManager::set_level_x( double x )
 {
@@ -139,8 +140,10 @@ void LevelManager::step()
                 object_manager->objects_add(new Enemy(1900,0, 64, 78, "media/enemies/goon.png"));
                 object_manager->objects_add(new Enemy(500,200, 64, 78, "media/enemies/torto2.png"));
                 object_manager->objects_add(new Enemy(900,0, 64, 72, "media/enemies/goon.png"));
-                object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, blobby));
-                object_manager->objects_add(new Flag(2900, HEIGHT-20-128, 64, 128, flag));
+                object_manager->objects_add(new Gloop(700,HEIGHT-20-128, 64, 72, "media/blobbys/gloop.bmp"));
+                
+				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, blobby));
+				object_manager->objects_add(new Flag(2900, HEIGHT-20-128, 64, 128, flag));
                 object_manager->objects_add(new Button(580,30, 400, 100, ButtonPause));
 
                 level_width = 3000;
