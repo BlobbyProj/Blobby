@@ -10,6 +10,7 @@ class PlayerCharacter : public Object {
 	private:
 		int previous_x;
 		int previous_y;
+		int score;
 		double vel;
 		double xvel;
 		double yvel;

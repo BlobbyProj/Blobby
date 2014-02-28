@@ -124,6 +124,14 @@ void PlayerCharacter::step()
                 music_manager->play("media/music/complete.mid");
 				object_manager->objects_get(key)->set_solid(0);
 				break;
+			case 7: //Gloop
+				score += 1;
+				//make the score on the screen change!
+				//make Blobby grow in size--> blobbyRight and blobbyLeft
+				//~ Change left image to :"media/blobbys/blobbyleft.png";
+				//~ Change right image to :"media/blobbys/blobbyright.png";
+
+				break;
 		}
 	}
 	delete collisions;

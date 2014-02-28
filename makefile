@@ -8,7 +8,7 @@ BDIR = bin
 CC = g++
 OS = 
 
-_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o
+_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o gloop.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 vpath %.h $(IDIR)
@@ -49,7 +49,7 @@ $(ODIR)/main.o: main.cxx globals.h levelmanager.h screenmanager.h objectmanager.
 $(ODIR)/globals.o: globals.cxx globals.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(ODIR)/levelmanager.o: levelmanager.cxx globals.h levelmanager.h button.h image.h flag.h
+$(ODIR)/levelmanager.o: levelmanager.cxx globals.h levelmanager.h button.h image.h flag.h gloop.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 $(ODIR)/screenmanager.o: screenmanager.cxx globals.h texture.h screenmanager.h
@@ -83,6 +83,9 @@ $(ODIR)/block.o: block.cxx globals.h screenmanager.h rectangle.h object.h block.
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/flag.o: flag.cxx globals.h screenmanager.h rectangle.h object.h flag.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+	
+$(ODIR)/gloop.o: gloop.cxx globals.h screenmanager.h rectangle.h object.h gloop.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/musicmanager.o: musicmanager.cxx globals.h musicmanager.h
