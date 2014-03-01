@@ -105,6 +105,7 @@ void PlayerCharacter::step()
 				lives--;
                 if (lives < 1)
                 {
+                    time = level_manager->stop_timer();
                     music_manager->play("media/music/death.mid");
                 }
 				object_manager->objects_get(key)->set_solid(0);
@@ -113,6 +114,7 @@ void PlayerCharacter::step()
 				blocked[(*collisions)[i].type] = 1;
 				break;
 			case 6: //Flag
+                time = level_manager->stop_timer();
                 music_manager->stop();
                 music_manager->play("media/music/complete.mid");
 				object_manager->objects_get(key)->set_solid(0);

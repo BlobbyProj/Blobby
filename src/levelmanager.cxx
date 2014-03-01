@@ -105,6 +105,9 @@ void LevelManager::set_level_y( double y )
 
 void LevelManager::step()
 {
+    if (timer){
+        time += global_timestep;
+    }
 	if (global_paused != previous_paused)
 	{
         music_manager->pause();
@@ -157,6 +160,7 @@ void LevelManager::step()
 
                 load_level("media/levels/level1.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+                timer = true;
 
                 level_width = 3000;
 				level_height = HEIGHT;
@@ -170,4 +174,9 @@ void LevelManager::step()
 	
 	previous_paused = global_paused;
 	previous_gamestate = global_gamestate;
+}
+
+double LevelManager::stop_timer(){
+    timer = false;
+    return time;
 }
