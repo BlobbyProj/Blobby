@@ -52,6 +52,9 @@ class LevelManager {
         // stop the level timer and return the time
         double stop_timer();
     
+        // designed for playercharacter to signal end of level
+        // stops music and timer, prints out score
+        // param score earned
         void level_end(int score);
     
 };

@@ -186,5 +186,4 @@ void LevelManager::level_end(int score){
     std::cout << "time = " << time << std::endl;
     std::cout << "score = " << score << std::endl;
     music_manager->stop();
-    music_manager->play("media/music/complete.mid");
 }

@@ -121,6 +121,7 @@ void PlayerCharacter::step()
                 time = level_manager->stop_timer();
                 score += 60-time;
                 level_manager->level_end(score);
+                music_manager->play("media/music/complete.mid");
 				object_manager->objects_get(key)->set_solid(0);
 				break;
 			case 7: //Gloop
