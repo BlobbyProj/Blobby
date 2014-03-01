@@ -25,7 +25,7 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
 	dir = 1;
 	blocked[0] = blocked[1] = blocked[2] = blocked[3] = 0;
 	pressed[0] = pressed[1] = pressed[2] = 0;
-	lives = 3;
+	lives = 1;
     score = 0;
 
 	solid = 1;
@@ -128,7 +128,9 @@ void PlayerCharacter::step()
 				object_manager->objects_get(key)->set_solid(0);
 				break;
 			case 7: //Gloop
-				score += 1;
+				lives += 1;
+				position.y -= 16;
+				object_manager->objects_get(key)->set_solid(0);
 				//make the score on the screen change!
 				//make Blobby grow in size--> blobbyRight and blobbyLeft
 				//~ Change left image to :"media/blobbys/blobbyleft.png";
@@ -189,6 +191,9 @@ void PlayerCharacter::step()
 
 	//Move screen
 	level_manager->set_level_x( position.x );
+
+	width = 16+16*lives;
+	height = 16+16*lives;
 }
 
 void PlayerCharacter::draw()

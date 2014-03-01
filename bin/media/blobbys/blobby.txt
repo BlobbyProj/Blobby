@@ -1,7 +1,7 @@
 3
 2
-media/blobbys/blobbyleftSmaller.png
-media/blobbys/blobbyrightSmaller.png
+media/blobbys/blobbyleft.png
+media/blobbys/blobbyright.png
 1
 media/blobbys/life.png
 1

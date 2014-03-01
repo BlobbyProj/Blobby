@@ -133,6 +133,8 @@ void LevelManager::step()
                 object_manager->objects_add(new Enemy(500,200, -1, -1, "media/enemies/torto2.txt"));
                 object_manager->objects_add(new Enemy(900,0, -1, -1, "media/enemies/goon.txt"));
                 object_manager->objects_add(new Gloop(700, HEIGHT-20-128, -1, -1, "media/objects/gloop.txt"));
+				object_manager->objects_add(new Gloop(1400, HEIGHT-20-208, -1, -1, "media/objects/gloop.txt"));
+				object_manager->objects_add(new Gloop(2200, HEIGHT-20-128, -1, -1, "media/objects/gloop.txt"));
                 
 				object_manager->objects_add(new PlayerCharacter(10,10, 64, 64, "media/blobbys/blobby.txt"));
 				object_manager->objects_add(new Flag(2900, HEIGHT-20-128, -1, -1, "media/objects/flag.txt"));
