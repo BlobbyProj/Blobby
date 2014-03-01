@@ -52,6 +52,8 @@ class LevelManager {
         // stop the level timer and return the time
         double stop_timer();
     
+        void level_end(int score);
+    
 };
 
 #endif

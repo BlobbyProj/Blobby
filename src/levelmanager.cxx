@@ -180,3 +180,11 @@ double LevelManager::stop_timer(){
     timer = false;
     return time;
 }
+
+void LevelManager::level_end(int score){
+    timer = false;
+    std::cout << "time = " << time << std::endl;
+    std::cout << "score = " << score << std::endl;
+    music_manager->stop();
+    music_manager->play("media/music/complete.mid");
+}
