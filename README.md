@@ -33,7 +33,9 @@ To Run on Mac OS
 
 4. Upon completion, the executable file will be inside of the bin directory
 
-5. Type "bin/blobby" to run the executable
+5. Open the bin directory ("cd bin") 
+
+6. Type "./blobby" to run the executable
 
 ========================
 
