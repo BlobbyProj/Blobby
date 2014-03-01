@@ -1,6 +1,8 @@
 #ifndef LEVELMANAGER_H
 #define LEVELMANAGER_H
 
+#include <string>
+
 class LevelManager {
 	private:
 		int previous_gamestate;
@@ -16,6 +18,9 @@ class LevelManager {
         // pre-conditions  LeveltManager does not yet exist
         // post-conditions LevelManager exists, variables have default values
 		LevelManager() : previous_gamestate(-1), previous_paused(0), level_x(0), level_y(0) {};
+
+		// loads level from file fname
+		bool load_level(std::string fname);
 
         // gets level_x
 		int get_level_x() { return (int)level_x; }

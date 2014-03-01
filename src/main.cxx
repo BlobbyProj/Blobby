@@ -12,14 +12,14 @@ int main( int argc, char* args[] )
 	//Initialize all SDL subsystems
 	if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
 	{
-	    FLAG
+	    MARK
 	}
 
     
     //Initialize SDL_mixer
     if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
     {
-        FLAG
+        MARK
     }
 
 	//Create screen manager

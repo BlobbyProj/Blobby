@@ -21,7 +21,7 @@ void MusicManager::add_track(std::string filename)
 {
     Mix_Music * m = Mix_LoadMUS( filename.c_str());
     if (m == NULL)
-        FLAG
+        MARK
     tracks[filename] = m;
 }
 
@@ -32,7 +32,7 @@ void MusicManager::play(std::string filename)
          // -1 says to loop music
         if (Mix_PlayMusic( tracks[filename], -1 ) != 0)
         {
-            FLAG
+            MARK
         }
     }
 }

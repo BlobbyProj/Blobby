@@ -8,6 +8,14 @@
 #define CONSOLE_WIDTH 200
 #define CONSOLE_HEIGHT 400
 
+#define PLAYERCHARACTER 1
+#define BUTTON 2
+#define IMAGE 3
+#define ENEMY 4
+#define BLOCK 5
+#define FLAG 6
+#define GLOOP 7
+
 //global variables used throughout the rest of the files
 
 class ScreenManager;
@@ -39,12 +47,12 @@ const int global_fps = 60;
 
 #ifdef DEBUG
 #include <iostream>
-#define FLAG std::cerr<<__LINE__<<": Flagged"<<std::endl;
+#define MARK std::cerr<<__LINE__<<": Flagged"<<std::endl;
 #define ERROR(a) std::cerr<<__LINE__<<": "<<a<<std::endl;
 #define PRINT(a) std::cout<<a<<std::endl;
 #define EQUAL(a,b) std::cerr<<(#a)<<(a==b?"==":"=/=")<<(#b)<<std::endl;
 #else
-#define FLAG 
+#define MARK 
 #define ERROR(a) 
 #define PRINT(a)
 #define EQUAL(a,b)

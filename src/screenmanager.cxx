@@ -28,7 +28,7 @@ ScreenManager::ScreenManager(int Width, int Height)
     //If there was an error in setting up the screen
     if( screen == NULL )
     {
-        FLAG
+        MARK
     }
 }
 

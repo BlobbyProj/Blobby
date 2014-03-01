@@ -32,8 +32,6 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
     
     music_manager->add_track("media/music/complete.mid");
     music_manager->add_track("media/music/death.mid");
-
-
 }
 
 PlayerCharacter::~PlayerCharacter()
@@ -79,15 +77,7 @@ void PlayerCharacter::events(SDL_Event *event)
                 pressed[2] = 0;
                 break;
         }
-    }/*
-    else if (event->key.state == SDL_PRESSED)
-    {
-    	if (event->key.keysym.sym == SDLK_UP)
-    	{
-        	if (blocked[3] == 1)
-               	yvel = -vel*2;
-        }
-    }*/
+    }
 }
 
 void PlayerCharacter::step()
@@ -232,8 +222,8 @@ void PlayerCharacter::draw()
 			int averaged_x = (previous_x+(int)position.x)/2;
 			int averaged_y = (previous_y+(int)position.y)/2;
 			
+			//If moved add blur
 			if (averaged_x != (int)position.x || averaged_y != (int)position.y)
-                // this affects blur
 				screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[0], dir, 50 );
 				
 			screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], dir, 255 );

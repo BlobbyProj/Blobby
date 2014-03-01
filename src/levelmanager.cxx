@@ -1,5 +1,7 @@
 #include "levelmanager.h"
 
+#include <fstream>
+#include <sstream>
 #include "objectmanager.h"
 #include "screenmanager.h"
 #include "musicmanager.h"
@@ -10,6 +12,74 @@
 #include "block.h"
 #include "flag.h"
 #include "gloop.h"
+
+bool LevelManager::load_level(std::string fname)
+{
+/* Object types:
+
+	0 = Undefined
+	1 = PlayerCharacter
+	2 = Button
+	3 = Image
+	4 = Enemy
+	5 = Block
+	6 = Flag
+	7 = Gloop
+
+*/
+	int i;
+	std::string buff;
+
+	std::fstream file;
+	file.open(fname.c_str());
+
+	int obj_num;
+	std::getline(file, buff);
+
+	obj_num = atoi(buff.c_str());
+	for (i = 0; i < obj_num; i++)
+	{
+		std::getline(file, buff);
+		std::stringstream buffer;
+		buffer << buff;
+
+		int obj_type;
+		buffer >> obj_type;
+
+		int obj_x, obj_y;
+		buffer >> obj_x;
+		buffer >> obj_y;
+
+		int obj_width, obj_height;
+		buffer >> obj_width;
+		buffer >> obj_height;
+
+		std::getline(file, buff);
+
+		switch(obj_type)
+		{
+			case PLAYERCHARACTER:
+				object_manager->objects_add(new PlayerCharacter(obj_x, obj_y, obj_width, obj_height, buff));
+				break;
+			case IMAGE:
+				object_manager->objects_add(new Image(obj_x, obj_y, obj_width, obj_height, buff));
+				break;
+			case ENEMY:
+				object_manager->objects_add(new Enemy(obj_x, obj_y, obj_width, obj_height, buff));
+				break;
+			case BLOCK:
+				object_manager->objects_add(new Block(obj_x, obj_y, obj_width, obj_height, buff));
+				break;
+			case FLAG:
+				object_manager->objects_add(new Flag(obj_x, obj_y, obj_width, obj_height, buff));
+				break;
+			case GLOOP:
+				object_manager->objects_add(new Gloop(obj_x, obj_y, obj_width, obj_height, buff));
+				break;
+		}
+	}
+	file.close();
+}
 
 void LevelManager::set_level_x( double x )
 {
@@ -71,6 +141,7 @@ void LevelManager::step()
 				level_x = 0;
 				level_y = 0;
 				break;
+
 			case 1: //Instructions
 				object_manager->objects_add(new Image(0 , 0, 640, 480, "media/menus/instructions.txt"));
 				object_manager->objects_add(new Button(100,355, -1, -1, ButtonGoBack));
@@ -79,65 +150,12 @@ void LevelManager::step()
 				level_x = 0;
 				level_y = 0;
 				break;
+
 			case 2: //Level 1
                 music_manager->add_track("media/music/level1.wav");
                 music_manager->play("media/music/level1.wav");
 
-                object_manager->objects_add(new Image(0,0, 3000, 480, "media/backgrounds/level1.txt"));
-                object_manager->objects_add(new Block(200, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(300, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(300, HEIGHT-20-128, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(400, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(400, HEIGHT-20-128, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(500, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(500, HEIGHT-20-128, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1000, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1000, HEIGHT-20-128, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1100, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1100, 0, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1100, 64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1100, 128, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1200, 0, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1200, 64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1200, 128, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1200, 192, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1300, 0, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1300, 64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1400, 0, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1400, 64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1500, 0, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1500, 64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1600, 0, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1600, 64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1600, 128, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1600, 192, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1700, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1700, 0, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1700, 64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1700, 128, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1800, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1800, HEIGHT-20-128, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(1900, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(2000, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(2100, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(2200, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(2300, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(2400, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(2500, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(2600, HEIGHT-20-128, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(2600, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Block(2700, HEIGHT-20-64, -1, -1, "media/objects/block.txt"));
-                object_manager->objects_add(new Enemy(300,200, -1, -1, "media/enemies/torto.txt"));
-                object_manager->objects_add(new Enemy(2200,0, -1, -1, "media/enemies/torto.txt"));
-                object_manager->objects_add(new Enemy(1900,0, -1, -1, "media/enemies/goon.txt"));
-                object_manager->objects_add(new Enemy(500,200, -1, -1, "media/enemies/torto2.txt"));
-                object_manager->objects_add(new Enemy(900,0, -1, -1, "media/enemies/goon.txt"));
-                object_manager->objects_add(new Gloop(400, HEIGHT-20-192, -1, -1, "media/objects/gloop.txt"));
-				object_manager->objects_add(new Gloop(1400, HEIGHT-20-208, -1, -1, "media/objects/gloop.txt"));
-				object_manager->objects_add(new Gloop(2200, HEIGHT-20-128, -1, -1, "media/objects/gloop.txt"));
-                
-				object_manager->objects_add(new PlayerCharacter(10,10, 64, 64, "media/blobbys/blobby.txt"));
-				object_manager->objects_add(new Flag(2900, HEIGHT-20-128, -1, -1, "media/objects/flag.txt"));
+                load_level("media/levels/level1.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 
                 level_width = 3000;
@@ -145,7 +163,6 @@ void LevelManager::step()
 				level_x = 0;
 				level_y = 0;
 				break;
-
 		}
 		screen_manager->texture_pare();
 		object_manager->load_surfaces();
