@@ -72,9 +72,11 @@ int main( int argc, char* args[] )
             	switch(event.window.event)
             	{
             	case SDL_WINDOWEVENT_FOCUS_LOST:
+                    music_manager->pause();
             		global_focus = 0;
             		break;
             	case SDL_WINDOWEVENT_FOCUS_GAINED:
+                    music_manager->resume();
             		global_focus = event.window.windowID;
             		break;
             	case SDL_WINDOWEVENT_CLOSE:
