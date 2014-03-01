@@ -1,19 +1,19 @@
 #include "globals.h"
-#include "screenmanager.h"
-#include "objectmanager.h"
-#include "levelmanager.h"
-#include "musicmanager.h"
 
 //Initialize screen manager
+class ScreenManager;
 ScreenManager *screen_manager = 0;
 
 //Initialize object manager
+class ObjectManager;
 ObjectManager *object_manager = 0;
 
 //Initialize level manager
+class LevelManager;
 LevelManager *level_manager = 0;
 
 //Initialize music manager
+class MusicManager;
 MusicManager *music_manager = 0;
 
 //Initialize console

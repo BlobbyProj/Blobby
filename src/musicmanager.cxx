@@ -1,5 +1,4 @@
 #include "musicmanager.h"
-#include "globals.h"
 
 // Instance of this object will hold and control the music
 

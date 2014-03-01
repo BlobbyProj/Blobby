@@ -1,8 +1,6 @@
 #ifndef FLAG_H
 #define FLAG_H
 
-#include "globals.h"
-#include "screenmanager.h"
 #include "object.h"
 
 class Flag : public Object {

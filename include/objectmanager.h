@@ -4,9 +4,7 @@
 #include <vector>
 #include <map>
 #include "globals.h"
-#include "screenmanager.h"
 #include "object.h"
-#include "rectangle.h"
 
 class ObjectManager {
 	private:

@@ -1,8 +1,6 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
-#include "globals.h"
-#include "screenmanager.h"
 #include "object.h"
 
 class Block : public Object {

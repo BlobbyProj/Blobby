@@ -1,5 +1,7 @@
 #include "rectangle.h"
 
+#include "globals.h"
+
 Rectangle::Rectangle()
 {
 	position.x = 0;

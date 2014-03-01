@@ -1,8 +1,6 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "globals.h"
-#include "screenmanager.h"
 #include "object.h"
 
 // param init        represents whether or not the method has been run before

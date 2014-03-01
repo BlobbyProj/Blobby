@@ -1,5 +1,7 @@
 #include "texture.h"
 
+#include "globals.h"
+
 Texture::Texture()
 {
 	num_references = 0;

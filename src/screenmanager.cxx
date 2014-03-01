@@ -1,4 +1,8 @@
 #include "screenmanager.h"
+
+#include <vector>
+#include <functional>
+#include "globals.h"
 #include "levelmanager.h"
 #include "rectangle.h"
 

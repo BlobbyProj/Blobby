@@ -1,5 +1,8 @@
 #include "objectmanager.h"
 
+#include "screenmanager.h"
+#include "rectangle.h"
+
 ObjectManager::~ObjectManager()
 {
 	objects_clear();

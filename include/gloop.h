@@ -4,9 +4,6 @@
 #ifndef GLOOP_H
 #define GLOOP_H
 
-#include "globals.h"
-#include "screenmanager.h"
-#include "objectmanager.h"
 #include "object.h"
 
 class Gloop : public Object {

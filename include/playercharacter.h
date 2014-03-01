@@ -1,9 +1,6 @@
 #ifndef PLAYERCHARACTER_H
 #define PLAYERCHARACTER_H
 
-#include "globals.h"
-#include "screenmanager.h"
-#include "objectmanager.h"
 #include "object.h"
 
 class PlayerCharacter : public Object {

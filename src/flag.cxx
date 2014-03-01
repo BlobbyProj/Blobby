@@ -1,5 +1,8 @@
 #include "flag.h"
 
+#include "globals.h"
+#include "screenmanager.h"
+
 Flag::Flag(double X, double Y, int W, int H, std::string fname)
 {
 	type = 6;

@@ -1,5 +1,8 @@
 #include "block.h"
 
+#include "globals.h"
+#include "screenmanager.h"
+
 Block::Block(double X, double Y, int W, int H, std::string fname)
 {
 	type = 5;

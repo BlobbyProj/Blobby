@@ -8,10 +8,7 @@
 #include <SDL2/SDL_image.h>
 #endif
 #include <string>
-#include <vector>
 #include <map>
-#include <functional>
-#include "globals.h"
 #include "texture.h"
 
 class ScreenManager {

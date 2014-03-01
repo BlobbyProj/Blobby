@@ -1,8 +1,6 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include "globals.h"
-#include "screenmanager.h"
 #include "object.h"
 
 class Image : public Object {

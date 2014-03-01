@@ -8,6 +8,7 @@
 #else
 #include <SDL2/SDL_mixer.h>
 #endif
+#include "globals.h"
 
 class MusicManager {
 private:

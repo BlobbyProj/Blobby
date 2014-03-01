@@ -1,7 +1,6 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
-#include "globals.h"
 #include "point.h"
 
 class Rectangle {

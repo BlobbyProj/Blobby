@@ -1,5 +1,9 @@
 #include "enemy.h"
 
+#include "globals.h"
+#include "screenmanager.h"
+#include "objectmanager.h"
+
 Enemy::Enemy(double X, double Y, int W, int H, std::string fname)
 {
 	type = 4;

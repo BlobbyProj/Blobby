@@ -3,10 +3,23 @@
 
 #include <string>
 #include "globals.h"
-#include "screenmanager.h"
 #include "levelmanager.h"
+#include "screenmanager.h"
 #include "point.h"
 #include "rectangle.h"
+
+/* Object types:
+
+	0 = Undefined
+	1 = PlayerCharacter
+	2 = Button
+	3 = Image
+	4 = Enemy
+	5 = Block
+	6 = Flag
+	7 = Gloop
+
+*/
 
 class Object {
 	protected:
@@ -49,9 +62,6 @@ class Object {
         // returns type of object as int (defined below)
 		unsigned int get_type() { return type; }
     
-        // returns the filenames of the images
-		//std::string *get_filenames() { return filenames; }
-    
         // returns the num_keys of the Object
 		unsigned int get_num_keys() { return (num_keys*loaded); }
     
@@ -89,18 +99,5 @@ class Object {
 		void load_surfaces();
     
 };
-
-/* Object types:
-
-	0 = Undefined
-	1 = PlayerCharacter
-	2 = Button
-	3 = Image
-	4 = Enemy
-	5 = Block
-	6 = Flag
-	7 = Gloop
-
-*/
 
 #endif

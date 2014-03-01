@@ -4,7 +4,6 @@
 #include "SDL2/SDL.h"
 #include <string>
 #include <vector>
-#include "globals.h"
 
 class Texture {
 	private:
