@@ -21,7 +21,6 @@ public:
     // destructor for MusicManager - deletes instance of MusicManager object
     // pre-conditions  MusicManager exists
     // post-conditions MusicManager no longer exists and all the music is freed
-    MusicManager();
     ~MusicManager();
     
     // adds a track to the tracks map
@@ -45,9 +44,8 @@ public:
     // unpauses the music
     void resume();
     
-    // sets silent to opposite value
-    // returns previous state of silent
-    bool toggle();
+    // sets muted to opposite value
+    void toggle();
     
     void fade_in(std::string filename, int ms);
     

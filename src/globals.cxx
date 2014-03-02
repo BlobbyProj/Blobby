@@ -28,3 +28,5 @@ unsigned int global_background_key = 0;
 
 double global_timestep = 0;
 double global_gravity = 1000;
+
+bool muted = false;
