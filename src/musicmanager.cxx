@@ -24,14 +24,13 @@ void MusicManager::add_track(std::string filename)
 
 void MusicManager::play(std::string filename)
 {
-    if (!muted)
+    // -1 says to loop music
+    if (Mix_PlayMusic( tracks[filename], -1 ) != 0)
     {
-         // -1 says to loop music
-        if (Mix_PlayMusic( tracks[filename], -1 ) != 0)
-        {
-            MARK
-        }
+        MARK
     }
+    if (muted)
+        pause();
 }
 void MusicManager::pause()
 {
@@ -44,15 +43,21 @@ void MusicManager::stop()
 
 void MusicManager::resume()
 {
-    Mix_ResumeMusic();
+    if (!muted)
+        Mix_ResumeMusic();
 }
 
 void MusicManager::toggle()
 {
-    if (muted)
+    if (muted) {
         muted = false;
-    else
+        resume();
+        
+    }
+    else {
         muted = true;
+        pause();
+    }
 }
 
 void MusicManager::fade_in(std::string filename, int ms)

@@ -138,7 +138,7 @@ void LevelManager::step()
 				object_manager->objects_add(new Button(180,220, -1, -1, ButtonPlay));
 				object_manager->objects_add(new Button(240,290, -1, -1, ButtonInstructions));
 				object_manager->objects_add(new Button(240,355, -1, -1, ButtonQuit));
-                object_manager->objects_add(new Button(500,50, 50, 50, ButtonVolume));
+                object_manager->objects_add(new Button(530,55, -1, -1, ButtonVolume));
 				level_width = WIDTH;
 				level_height = HEIGHT;
 				level_x = 0;
@@ -160,6 +160,7 @@ void LevelManager::step()
 
                 load_level("media/levels/level1.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+                object_manager->objects_add(new Button(530,25, -1, -1, ButtonVolume));
                 timer = true;
 
                 level_width = 3000;
