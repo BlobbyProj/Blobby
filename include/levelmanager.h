@@ -20,9 +20,6 @@ class LevelManager {
 		LevelManager() : previous_gamestate(-1), previous_paused(0), level_x(0), level_y(0) {};
 
 		// loads level from file fname
-		bool load_level_old(std::string fname);
-
-		// loads level from file fname
 		bool load_level(std::string fname);
 
         // gets level_x
