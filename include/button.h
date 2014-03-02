@@ -41,6 +41,7 @@ void ButtonVolume(bool init, std::string *filename);
 class Button : public Object {
 	private:
 		bool pressed;
+        // set to -1 if button should not toggle
         int toggle;
 		void (*function)(bool,std::string*);
 		
