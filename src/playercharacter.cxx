@@ -86,9 +86,10 @@ void PlayerCharacter::step()
 	{
 		yvel += global_gravity*global_timestep;
 		position.y = position.y + yvel*global_timestep;
-		if (position.y > HEIGHT)
+		if (position.y > HEIGHT) {
 			//trashed = 1;
 			global_gamestate = 0;
+        }
 		return;
 	}
 
@@ -103,8 +104,12 @@ void PlayerCharacter::step()
 		{
 			case 4: //Enemy
 				lives--;
+                score -= 5;
                 if (lives < 1)
                 {
+                    if (score < 0)
+                        score = 0;
+                    level_manager->level_end(score);
                     music_manager->play("media/music/death.mid");
                 }
 				object_manager->objects_get(key)->set_solid(0);
@@ -113,7 +118,9 @@ void PlayerCharacter::step()
 				blocked[(*collisions)[i].type] = 1;
 				break;
 			case 6: //Flag
-                music_manager->stop();
+                time = level_manager->stop_timer();
+                score += 60-time;
+                level_manager->level_end(score);
                 music_manager->play("media/music/complete.mid");
 				object_manager->objects_get(key)->set_solid(0);
 				break;
@@ -121,6 +128,7 @@ void PlayerCharacter::step()
 				lives += 1;
 				position.y -= 16;
 				object_manager->objects_get(key)->set_solid(0);
+                score += 10;
 				//make the score on the screen change!
 				//make Blobby grow in size--> blobbyRight and blobbyLeft
 				//~ Change left image to :"media/blobbys/blobbyleft.png";

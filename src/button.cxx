@@ -2,6 +2,7 @@
 
 #include "globals.h"
 #include "screenmanager.h"
+#include "musicmanager.h"
 
 void ButtonPlay(bool init, std::string *filename)
 {
@@ -88,6 +89,7 @@ void ButtonVolume(bool init, std::string *filename)
 		*filename = "media/buttons/volume.txt";
 		return;
 	}
+    music_manager->toggle();
 }
 
 
@@ -105,7 +107,14 @@ Button::Button(double X, double Y, int W, int H, void (*otherFunction)(bool,std:
 
     pressed = 0;
     fixed = 1;
-    togglable = 0;
+    if (function == ButtonVolume){
+        if (muted)
+            toggle = 1;
+        else
+            toggle = 0;
+    }
+    else
+        toggle = -1;
 }
 
 Button::~Button()
@@ -121,9 +130,6 @@ Button::~Button()
 
 void Button::events(SDL_Event *event)
 {
-    if (togglable){
-        togglable = !togglable;
-    }
 	if ( event->type == SDL_MOUSEBUTTONDOWN )
 	{
 		if ( pressed == 0 && event->button.button == SDL_BUTTON_LEFT )
@@ -143,6 +149,8 @@ void Button::events(SDL_Event *event)
 			{
 				(*function)(0,0);
 			}
+            if (toggle != -1)
+                toggle = !toggle;
         }        
 	}
 }
@@ -153,7 +161,11 @@ void Button::draw()
 	{
 		if (screen_manager->texture_exist(keys[0]))
 		{
+            if (toggle == -1)
                 screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], pressed );
+            else {
+                screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], toggle );
+            }
 		}
 		else
 		{

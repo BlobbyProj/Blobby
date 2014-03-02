@@ -13,7 +13,7 @@
 #include "flag.h"
 #include "gloop.h"
 
-bool LevelManager::load_level(std::string fname)
+bool LevelManager::load_level_old(std::string fname)
 {
 /* Object types:
 
@@ -81,6 +81,67 @@ bool LevelManager::load_level(std::string fname)
 	file.close();
 }
 
+bool LevelManager::load_level(std::string fname)
+{
+/* Object types:
+
+	0 = Undefined
+	1 = PlayerCharacter
+	2 = Button
+	3 = Image
+	4 = Enemy
+	5 = Block
+	6 = Flag
+	7 = Gloop
+
+*/
+	int i, j;
+	std::string buff;
+
+	std::fstream file;
+	file.open(fname.c_str());
+
+	std::getline(file, buff);
+	int row_num = atoi(buff.c_str());
+
+	std::getline(file, buff);
+	int col_num = atoi(buff.c_str());
+
+
+	for (i = 0; i < row_num; i++)
+	{
+		std::getline(file, buff);
+		std::stringstream buffer;
+		buffer << buff;
+
+		for (j = 0; j < col_num; j++)
+		{
+			int obj_type;
+			buffer >> obj_type;
+
+			switch(obj_type)
+			{
+				case PLAYERCHARACTER:
+					object_manager->objects_add(new PlayerCharacter(80*j, 80*i, 80, 80, "media/blobbys/blobby.txt"));
+					break;
+				case ENEMY:
+					object_manager->objects_add(new Enemy(80*j+8, 80*i+3, 64, 74, "media/enemies/torto.txt"));
+					break;
+				case BLOCK:
+					object_manager->objects_add(new Block(80*j, 80*i, 80, 80, "media/objects/block.txt"));
+					break;
+				case FLAG:
+					object_manager->objects_add(new Flag(80*j+20, 80*i, 40, 80, "media/objects/flag.txt"));
+					break;
+				case GLOOP:
+					object_manager->objects_add(new Gloop(80*j+20, 80*i+20, 40, 40, "media/objects/gloop.txt"));
+					break;
+			}
+		}
+	}
+	file.close();
+}
+
 void LevelManager::set_level_x( double x )
 {
 	x -= WIDTH/2.0;
@@ -135,6 +196,7 @@ void LevelManager::step()
 				object_manager->objects_add(new Button(180,220, -1, -1, ButtonPlay));
 				object_manager->objects_add(new Button(240,290, -1, -1, ButtonInstructions));
 				object_manager->objects_add(new Button(240,355, -1, -1, ButtonQuit));
+                object_manager->objects_add(new Button(530,55, -1, -1, ButtonVolume));
                 //object_manager->objects_add(new Button(100,355, 400, 100, ButtonVolume));
 				level_width = WIDTH;
 				level_height = HEIGHT;
@@ -155,13 +217,16 @@ void LevelManager::step()
                 music_manager->add_track("media/music/level1.wav");
                 music_manager->play("media/music/level1.wav");
 
-                load_level("media/levels/level1.txt");
-                object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
-
-                level_width = 3000;
+				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
 				level_y = 0;
+
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));
+                load_level("media/levels/level1.txt");
+                object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+                object_manager->objects_add(new Button(530,25, -1, -1, ButtonVolume));
+
 				break;
 		}
 		screen_manager->texture_pare();
@@ -170,4 +235,18 @@ void LevelManager::step()
 	
 	previous_paused = global_paused;
 	previous_gamestate = global_gamestate;
+}
+
+double LevelManager::stop_timer()
+{
+    timer = false;
+    return time;
+}
+
+void LevelManager::level_end(int score)
+{
+    timer = false;
+    std::cout << "time = " << time << std::endl;
+    std::cout << "score = " << score << std::endl;
+    music_manager->stop();
 }

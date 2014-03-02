@@ -45,6 +45,8 @@ extern double global_gravity;
 extern double global_timestep;
 const int global_fps = 60;
 
+extern bool muted;
+
 #ifdef DEBUG
 #include <iostream>
 #define MARK std::cerr<<__LINE__<<": Flagged"<<std::endl;

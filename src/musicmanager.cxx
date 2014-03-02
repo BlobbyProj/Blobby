@@ -1,11 +1,8 @@
 #include "musicmanager.h"
 
-// Instance of this object will hold and control the music
+#include "globals.h"
 
-MusicManager::MusicManager()
-{
-    silent = false;
-}
+// Instance of this object will hold and control the music
 
 MusicManager::~MusicManager()
 {
@@ -27,14 +24,13 @@ void MusicManager::add_track(std::string filename)
 
 void MusicManager::play(std::string filename)
 {
-    if (!silent)
+    // -1 says to loop music
+    if (Mix_PlayMusic( tracks[filename], -1 ) != 0)
     {
-         // -1 says to loop music
-        if (Mix_PlayMusic( tracks[filename], -1 ) != 0)
-        {
-            MARK
-        }
+        MARK
     }
+    if (muted)
+        pause();
 }
 void MusicManager::pause()
 {
@@ -47,20 +43,20 @@ void MusicManager::stop()
 
 void MusicManager::resume()
 {
-    Mix_ResumeMusic();
+    if (!muted)
+        Mix_ResumeMusic();
 }
 
-bool MusicManager::toggle()
+void MusicManager::toggle()
 {
-    if (silent)
-    {
-        silent = false;
-        return true;
+    if (muted) {
+        muted = false;
+        resume();
+        
     }
-    else
-    {
-        silent = true;
-        return false;
+    else {
+        muted = true;
+        pause();
     }
 }
 
