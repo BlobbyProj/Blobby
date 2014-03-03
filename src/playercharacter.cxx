@@ -141,7 +141,6 @@ void PlayerCharacter::step()
 		}
 	}
 	delete collisions;
-
 	//Apply gravity
 	if (position.y < 460-height)
 	{
