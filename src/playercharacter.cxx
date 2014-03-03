@@ -184,6 +184,12 @@ void PlayerCharacter::step()
 		yvel = 0;
 	}
 
+	if (lives == 0)
+	{
+		//object_manager->objects_add(new Image(level_manager->get_level_x(),0, WIDTH, HEIGHT, "media/backgrounds/lose.bmp"));
+		yvel = -500;
+	}
+
 	//Move screen
 	level_manager->set_level_x( position.x );
 
