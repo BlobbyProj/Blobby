@@ -32,7 +32,7 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
 
 	solid = 1;
     
-    music_manager->add_track("media/music/complete.mid");
+    music_manager->add_track("media/music/success_short.mid");
     music_manager->add_track("media/music/death.mid");
 }
 
@@ -124,7 +124,7 @@ void PlayerCharacter::step()
                 time = level_manager->stop_timer();
                 score += 60-time;
                 level_manager->level_end(score);
-                music_manager->play("media/music/complete.mid");
+                music_manager->play("media/music/success_short.mid");
 				object_manager->objects_get(key)->set_solid(0);
 				break;
 			case 7: //Gloop
