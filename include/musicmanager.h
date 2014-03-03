@@ -33,7 +33,7 @@ public:
     // param filename of track that should be played
     // pre-conditions the music file has been added to tracks
     // post-conditions the correct music is playing
-    void play(std::string filename, int loops=-1);
+    void play(std::string filename);
     
     // pauses the currently playing music
     void pause();
