@@ -32,8 +32,8 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
 
 	solid = 1;
     
-    music_manager->add_track("media/music/success_short.mid");
-    music_manager->add_track("media/music/death.mid");
+    music_manager->add_track("media/music/success_short.wav");
+    music_manager->add_track("media/music/death.wav");
 }
 
 PlayerCharacter::~PlayerCharacter()
@@ -112,7 +112,7 @@ void PlayerCharacter::step()
                     if (score < 0)
                         score = 0;
                     level_manager->level_end(score);
-                    music_manager->play("media/music/death.mid");
+                    music_manager->play("media/music/death.wav");
                     object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/lose.txt", Object::FIXED));
                 }
 				object_manager->objects_get(key)->set_solid(0);
@@ -124,7 +124,7 @@ void PlayerCharacter::step()
                 time = level_manager->stop_timer();
                 score += 60-time;
                 level_manager->level_end(score);
-                music_manager->play("media/music/success_short.mid");
+                music_manager->play("media/music/success_short.wav");
 				object_manager->objects_get(key)->set_solid(0);
 				break;
 			case 7: //Gloop
