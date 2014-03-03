@@ -21,7 +21,7 @@ class Enemy : public Object {
         // param filename  filename of object image
         // pre-conditions  Enemy does not yet exist
         // post-conditions Enemy exists
-		Enemy(double X, double Y, int width, int height, std::string filename);
+		Enemy(double X, double Y, int width, int height, std::string filename, int flags=0);
     
         // destructor for Enemy - deletes instance of Enemy object
         // pre-conditions  Enemy exists

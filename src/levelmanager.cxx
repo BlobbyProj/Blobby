@@ -125,7 +125,7 @@ bool LevelManager::load_level(std::string fname)
 					object_manager->objects_add(new PlayerCharacter(80*j, 80*i, 80, 80, "media/blobbys/blobby.txt"));
 					break;
 				case ENEMY:
-					object_manager->objects_add(new Enemy(80*j+8, 80*i+3, 64, 74, "media/enemies/torto.txt"));
+					object_manager->objects_add(new Enemy(80*j+8, 80*i, 64, 74, "media/enemies/torto.txt"));
 					break;
 				case BLOCK:
 					object_manager->objects_add(new Block(80*j, 80*i, 80, 80, "media/objects/block.txt"));
@@ -180,6 +180,7 @@ void LevelManager::step()
 				object_manager->pause_objects_add(new Image(0+level_x, 0+level_y, 640, 480, "media/menus/pause.txt"));
 				object_manager->pause_objects_add(new Button(180,220, -1, -1, ButtonResume));
 				object_manager->pause_objects_add(new Button(180,300, -1, -1, ButtonMainMenu));
+                object_manager->pause_objects_add(new Button(530,55, -1, -1, ButtonVolume));
 				break;
 		}
 		screen_manager->texture_pare();
@@ -225,7 +226,6 @@ void LevelManager::step()
                 object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));
                 load_level("media/levels/level1.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
-                object_manager->objects_add(new Button(530,25, -1, -1, ButtonVolume));
 
 				break;
 		}

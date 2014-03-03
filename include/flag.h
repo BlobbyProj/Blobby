@@ -17,7 +17,7 @@ public:
 	// param filename  filename of Flag object image
 	// pre-conditions  Flag does not yet exist
 	// post-conditions Flag exists
-    Flag(double X, double Y, int width, int height, std::string fname);
+    Flag(double X, double Y, int width, int height, std::string fname, int flags=0);
 
 	// destructor for PlayerCharacter - deletes instance of PlayerCharacter object
 	// pre-conditions  PlayerCharacter exists

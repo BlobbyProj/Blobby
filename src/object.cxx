@@ -49,3 +49,13 @@ void Object::load_surfaces()
 		loaded = 1;
 	}
 }
+
+void Object::apply_flags(int flags)
+{
+	if (flags & INVISIBLE)
+		visible = 0;
+	if (flags & SOLID)
+		solid = 1;
+	if (flags & FIXED)
+		fixed = 1;
+}

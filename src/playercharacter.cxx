@@ -1,14 +1,18 @@
 #include "playercharacter.h"
 
 #include "globals.h"
+#include "image.h"
 #include "screenmanager.h"
 #include "objectmanager.h"
 #include "musicmanager.h"
 
-PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string fname)
-{	
+PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string fname, int flags)
+{
+	apply_flags(flags);
 	type = 1;
 	
+    filename = fname;
+
 	position.x = X;
 	position.y = Y;
 	previous_x = (int)X;
@@ -16,9 +20,7 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
 	
     width = W;
     height = H;
-    
-    filename = fname;
-    
+     
 	xvel = 0;
 	yvel = 0;
 	vel = 300;
@@ -111,6 +113,7 @@ void PlayerCharacter::step()
                         score = 0;
                     level_manager->level_end(score);
                     music_manager->play("media/music/death.mid");
+                    object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/lose.txt", Object::FIXED));
                 }
 				object_manager->objects_get(key)->set_solid(0);
 				break;
@@ -196,52 +199,45 @@ void PlayerCharacter::step()
 
 void PlayerCharacter::draw()
 {
-	if (visible == 1 && loaded == 1)
+	if (visible == 1)
 	{
-		//Draw lives
-		if (screen_manager->texture_exist(keys[1]))
+		if (loaded == 1)
 		{
-			int i;
-			for (i = 0; i < lives; i++)
-				screen_manager->texture_apply( 10+(64*i), 10, 1, 32, 32, keys[1], 0, 255 );
-		}
-		else
-		{
-			ERROR("Image " << keys[1] << " failed to load")
-		}
-
-		//Draw lose screen if dead
-		if (lives < 1)
-		{
-			if (screen_manager->texture_exist(keys[2]))
-			{	
-				screen_manager->texture_apply( 0, 0, 1, WIDTH, HEIGHT, keys[2], 0, 255 );
+			//Draw lives
+			if (screen_manager->texture_exist(keys[1]))
+			{
+				int i;
+				for (i = 0; i < lives; i++)
+					screen_manager->texture_apply( 10+(64*i), 10, 1, 32, 32, keys[1], 0, 255 );
 			}
-            else
-            {
-                ERROR("Image " << keys[2] << " failed to load")
-            }
-		}
-		
+			else
+			{
+				ERROR("Image " << keys[1] << " failed to load")
+			}
 
-		//Draw Blobby
-		if (screen_manager->texture_exist(keys[0]))
-		{	
-			int averaged_x = (previous_x+(int)position.x)/2;
-			int averaged_y = (previous_y+(int)position.y)/2;
-			
-			//If moved add blur
-			if (averaged_x != (int)position.x || averaged_y != (int)position.y)
-				screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[0], dir, 50 );
+			//Draw Blobby
+			if (screen_manager->texture_exist(keys[0]))
+			{	
+				int averaged_x = (previous_x+(int)position.x)/2;
+				int averaged_y = (previous_y+(int)position.y)/2;
 				
-			screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], dir, 255 );
+				//If moved add blur
+				if (averaged_x != (int)position.x || averaged_y != (int)position.y)
+					screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[0], dir, 50 );
+					
+				screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], dir, 255 );
 
-			previous_x = (int)position.x;
-			previous_y = (int)position.y;
+				previous_x = (int)position.x;
+				previous_y = (int)position.y;
+			}
+			else
+			{
+				ERROR("Image " << keys[0] << " failed to load")
+			}
 		}
 		else
 		{
-			ERROR("Image " << keys[0] << " failed to load")
+			load_surfaces();
 		}
 	}
 }

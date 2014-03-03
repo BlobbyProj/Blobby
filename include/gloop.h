@@ -19,7 +19,7 @@ class Gloop : public Object {
         // param filename  filename of object image
         // pre-conditions  Enemy does not yet exist
         // post-conditions Enemy exists
-		Gloop(double X, double Y, int width, int height, std::string fname);
+		Gloop(double X, double Y, int width, int height, std::string fname, int flags=0);
     
         // destructor for Enemy - deletes instance of Enemy object
         // pre-conditions  Enemy exists

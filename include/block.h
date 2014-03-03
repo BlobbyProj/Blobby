@@ -13,7 +13,7 @@ public:
 	// param filename  filename of object image
 	// pre-conditions  Block does not yet exist
 	// post-conditions Block exists
-    Block(double X, double Y, int width, int height, std::string filename);
+    Block(double X, double Y, int width, int height, std::string filename, int flags=0);
     
     // destructor for Block - deletes instance of Block object
     // pre-conditions  Block exists
@@ -32,11 +32,6 @@ public:
     // pre-conditions  object is visible and loaded
     // post-conditions object appears on texture
     void draw();
-    
-    // instructs screenmanager to load the images for the Block
-    // pre-conditions  Block's image filename is valid
-    // post-conditions Block's image is ready to be shown
-    void load_surfaces();
 };
 
 #endif

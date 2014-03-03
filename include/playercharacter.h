@@ -26,7 +26,7 @@ class PlayerCharacter : public Object {
         // param filename  filename of PlayerCharacter object image
         // pre-conditions  PlayerCharacter does not yet exist
         // post-conditions PlayerCharacter exists
-		PlayerCharacter(double X, double Y, int width, int height, std::string fname);
+		PlayerCharacter(double X, double Y, int width, int height, std::string fname, int flags=0);
     
         // destructor for PlayerCharacter - deletes instance of PlayerCharacter object
         // pre-conditions  PlayerCharacter exists
@@ -47,11 +47,6 @@ class PlayerCharacter : public Object {
         // pre-conditions  PlayerCharacter is visible and loaded
         // post-conditions PlayerCharacter appears on texture
 		void draw();
-    
-        // instructs screenmanager to load the images for the PlayerCharacter
-        // pre-conditions  PlayerCharacter's image filename is valid
-        // post-conditions PlayerCharacter's image is ready to be shown
-		void load_surfaces();
 };
 
 #endif

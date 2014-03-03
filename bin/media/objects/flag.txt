@@ -1,5 +1,3 @@
-2
+1
 1
 media/objects/flag.png
-1
-media/backgrounds/success.png

@@ -40,6 +40,12 @@ class Object {
 		bool fixed;
 		
 	public:
+
+		enum Value{
+        INVISIBLE	= 0x01,
+        SOLID		= 0x02,
+        FIXED		= 0x04
+    	};
         // constructor for Object; sets all variables to default values
         // pre-conditions  Object does not yet exist
         // post-conditions Object exists
@@ -49,7 +55,7 @@ class Object {
         // pre-conditions  Object exists
         // post-conditions Object no longer exists
 		virtual ~Object() {};
-	
+
         // returns x coordinate of position of Object's upper-left corner
 		double get_x() { return position.x; }
     
@@ -95,9 +101,11 @@ class Object {
         // Object will be drawn to screen; each subclass implements
 		virtual void draw()=0;
 
-		// called to load the images for the Object;
-		void load_surfaces();
+		// Applies flags to characteristics
+		void apply_flags(int flags);
     
+    	// called to load the images for the Object;
+		void load_surfaces();
 };
 
 #endif

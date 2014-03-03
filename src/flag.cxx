@@ -1,10 +1,14 @@
 #include "flag.h"
 
 #include "globals.h"
+#include "image.h"
+#include "levelmanager.h"
+#include "objectmanager.h"
 #include "screenmanager.h"
 
-Flag::Flag(double X, double Y, int W, int H, std::string fname)
+Flag::Flag(double X, double Y, int W, int H, std::string fname, int flags)
 {
+	apply_flags(flags);
 	type = 6;
 	
 	position.x = X;
@@ -33,33 +37,33 @@ Flag::~Flag()
 void Flag::step()
 {
 	if (solid == 0)
+	{
+		if (timed == 0)
+			object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/success.txt", Object::FIXED));
 		timed += global_timestep;
-	if (timed >= 4)
+	}
+	if (timed >= 2)
 		global_gamestate = 0;
 }
 
 void Flag::draw()
 {
-	if (visible == 1 && loaded == 1)
+	if (visible == 1)
 	{
-		if (screen_manager->texture_exist(keys[0]))
+		if (loaded == 1)
 		{
-			screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], 0);
-		}
-		else
-		{
-            ERROR("Flag " << keys[0] << " failed to load")
-		}
-		if (solid == 0)
-		{
-			if (screen_manager->texture_exist(keys[1]))
+			if (screen_manager->texture_exist(keys[0]))
 			{
-				screen_manager->texture_apply( 0, 0, 1, WIDTH, HEIGHT, keys[1], 0);
+				screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], 0);
 			}
 			else
 			{
-	            ERROR("Flag " << keys[1] << " failed to load")
+	            ERROR("Image " << keys[0] << " failed to load")
 			}
+		}
+		else
+		{
+			load_surfaces();
 		}
 	}
 }

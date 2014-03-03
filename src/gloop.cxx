@@ -6,10 +6,13 @@
 #include "screenmanager.h"
 #include "objectmanager.h"
 
-Gloop::Gloop(double X, double Y, int W, int H, std::string fname)
+Gloop::Gloop(double X, double Y, int W, int H, std::string fname, int flags)
 {
+	apply_flags(flags);
 	type = 7;
-
+    
+	filename = fname;
+	
 	position.x = X;
 	position.y = Y;
 	previous_x = (int)X;
@@ -17,8 +20,7 @@ Gloop::Gloop(double X, double Y, int W, int H, std::string fname)
 	
     width = W;
     height = H;
-    
-	filename = fname;
+
 
 	solid = 1;
 }
@@ -81,7 +83,7 @@ void Gloop::draw()
 		}
 		else
 		{
-ERROR("Image " << keys[0] << " failed to load")
+			load_surfaces();
 		}
 	}
 }

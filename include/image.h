@@ -13,7 +13,7 @@ class Image : public Object {
         // param filename  filename of object image
         // pre-conditions  Image does not yet exist
         // post-conditions Image exists
-		Image(double X, double Y, int width, int height, std::string fname);
+		Image(double X, double Y, int width, int height, std::string fname, int flags=0);
     
         // destructor for Image - deletes instance of Image object
         // pre-conditions  Image exists

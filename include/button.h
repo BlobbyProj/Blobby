@@ -54,7 +54,7 @@ class Button : public Object {
         // param (*otherFunction)(bool,std::string*) pointer to the function which contains Button information
         // pre-conditions  Button does not yet exist
         // post-conditions Button exists
-		Button(double X, double Y, int width, int height, void (*otherFunction)(bool,std::string*));
+		Button(double X, double Y, int width, int height, void (*otherFunction)(bool,std::string*), int flags=0);
     
         // destructor for Button - deletes instance of Button object
         // pre-conditions  Button exists

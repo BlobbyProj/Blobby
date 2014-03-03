@@ -93,8 +93,9 @@ void ButtonVolume(bool init, std::string *filename)
 }
 
 
-Button::Button(double X, double Y, int W, int H, void (*otherFunction)(bool,std::string*))
-{	
+Button::Button(double X, double Y, int W, int H, void (*otherFunction)(bool,std::string*), int flags)
+{
+	apply_flags(flags);
     type = 2;
 
     position.x = X;
@@ -157,19 +158,26 @@ void Button::events(SDL_Event *event)
 
 void Button::draw()
 {
-	if (visible == 1 && loaded == 1)
+	if (visible == 1)
 	{
-		if (screen_manager->texture_exist(keys[0]))
+		if (loaded == 1)
 		{
-            if (toggle == -1)
-                screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], pressed );
-            else {
-                screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], toggle );
-            }
+			if (screen_manager->texture_exist(keys[0]))
+			{
+	            if (toggle == -1)
+	                screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], pressed );
+	            else {
+	                screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], toggle );
+	            }
+			}
+			else
+			{
+				ERROR("Image " << keys[0] << " failed to load")
+			}
 		}
 		else
 		{
-			ERROR("Image " << keys[pressed] << " failed to load")
+			load_surfaces();
 		}
 	}
 }
