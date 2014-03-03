@@ -112,7 +112,7 @@ void PlayerCharacter::step()
                     if (score < 0)
                         score = 0;
                     level_manager->level_end(score);
-                    music_manager->play("media/music/death.mid");
+                    music_manager->play("media/music/death.mid",1);
                     object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/lose.txt", Object::FIXED));
                 }
 				object_manager->objects_get(key)->set_solid(0);
@@ -124,7 +124,7 @@ void PlayerCharacter::step()
                 time = level_manager->stop_timer();
                 score += 60-time;
                 level_manager->level_end(score);
-                music_manager->play("media/music/success_short.mid");
+                music_manager->play("media/music/success_short.mid",1);
 				object_manager->objects_get(key)->set_solid(0);
 				break;
 			case 7: //Gloop

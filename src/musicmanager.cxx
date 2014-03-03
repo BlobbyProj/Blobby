@@ -22,23 +22,23 @@ void MusicManager::add_track(std::string filename)
     tracks[filename] = m;
 }
 
-void MusicManager::play(std::string filename)
+void MusicManager::play(std::string filename, int loops)
 {
     // -1 says to loop music
-    if (!muted)
+    if (Mix_PlayMusic( tracks[filename], loops ) != 0)
     {
-        if (Mix_PlayMusic( tracks[filename], -1 ) != 0)
-        {
-            MARK
-        }
+        MARK
     }
+    while(Mix_PlayingMusic()==0);
     if (muted)
         pause();
 }
+
 void MusicManager::pause()
 {
     Mix_PauseMusic();
 }
+
 void MusicManager::stop()
 {
     Mix_HaltMusic();
