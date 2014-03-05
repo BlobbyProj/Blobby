@@ -25,12 +25,9 @@ void MusicManager::add_track(std::string filename)
 void MusicManager::play(std::string filename)
 {
     // -1 says to loop music
-    if (!muted)
+    if (Mix_PlayMusic( tracks[filename], -1 ) != 0)
     {
-        if (Mix_PlayMusic( tracks[filename], -1 ) != 0)
-        {
-            MARK
-        }
+        MARK
     }
     if (muted)
         pause();

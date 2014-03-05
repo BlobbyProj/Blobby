@@ -23,7 +23,7 @@ Music composed by Cindy Shen
 
 ========================
 
-To Run on Mac OS
+**To Run on Mac OS**
 
 1. Make sure you have SDL2, SDL2_Image, and SDL2_Mixer Libraries Installed (if not, see downloading information for Mac below).
 
@@ -111,7 +111,7 @@ To Run on Windows OS
 	Comand: sudo ldconfig<br>
 
 ===============================
-Downloading Frameworks for Mac
+**Downloading Frameworks for Mac**
 
 1. Download SDL2 from http://libsdl.org/download-2.0.php
 

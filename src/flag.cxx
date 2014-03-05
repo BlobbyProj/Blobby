@@ -43,7 +43,7 @@ void Flag::step()
 		timed += global_timestep;
 	}
 	if (timed >= 2)
-        if (global_gamestate!=4)
+		if (global_gamestate < NUM_LEVELS+1) // +1 because global_gamestate 2 is first level
             global_gamestate++;
         else
             global_gamestate = 0;
