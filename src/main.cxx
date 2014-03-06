@@ -100,6 +100,9 @@ int main( int argc, char* args[] )
 							global_gamestate = 2;
 						}
 						break;
+					case SDLK_q:
+						global_gamestate = -1;
+						break;
 					}
 					break;
             }
