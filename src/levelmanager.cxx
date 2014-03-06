@@ -187,7 +187,8 @@ void LevelManager::step()
 		screen_manager->texture_pare();
 		object_manager->load_surfaces();
 	}
-	if (global_gamestate != previous_gamestate)
+	//~ if (global_gamestate != previous_gamestate)
+	if (global_gamestate != global_previous_gamestate)
 	{
         music_manager->stop();
 		object_manager->objects_clear();
@@ -278,10 +279,13 @@ void LevelManager::step()
 		screen_manager->texture_pare();
 		object_manager->load_surfaces();
 	}
+
 	if (timer)
         time += global_timestep;
-	previous_paused = global_paused;
-	previous_gamestate = global_gamestate;
+		previous_paused = global_paused;
+		global_previous_gamestate = global_gamestate;
+		//~ previous_gamestate = global_gamestate;
+	
 }
 
 double LevelManager::stop_timer()
