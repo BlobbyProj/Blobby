@@ -8,11 +8,12 @@ class FallingObj : public Object {
         double yvel;
         bool init;
         double orig_y;
+        bool playercharacter;
     public:
         // constructor for FallingObj; sets variables to default values
         // pre-conditions  FallingObj does not yet exist
         // post-conditions FallingObj exists
-        FallingObj() : yvel(0), init(true) {};
+        FallingObj() : yvel(0), init(true), playercharacter(false) {};
     
         // called every iteration of the game loop; inherited from Object
         // moves the FallingObj up and then has it fall off the screen
