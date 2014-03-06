@@ -90,15 +90,20 @@ int main( int argc, char* args[] )
 					switch(event.key.keysym.sym)
 					{
 					case SDLK_p:
-						if(global_gamestate != 0 ||global_gamestate != 1){
-							global_paused = 1;
+						//~ if(global_gamestate!=0 || global_gamestate!=1){
+						if(global_gamestate == 0 || global_gamestate == 1){
+							break;
 						}
+						global_paused = 1;
 						break;
 					case SDLK_RETURN:
 						if(global_gamestate == 0){
 							//eventually should make this go to the current level the user is on
 							global_gamestate = 2;
 						}
+						break;
+					case SDLK_m:
+						music_manager->toggle();
 						break;
 					case SDLK_q:
 						global_gamestate = -1;
