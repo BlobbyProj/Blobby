@@ -131,28 +131,38 @@ Button::~Button()
 
 void Button::events(SDL_Event *event)
 {
-	if ( event->type == SDL_MOUSEBUTTONDOWN )
-	{
-		if ( pressed == 0 && event->button.button == SDL_BUTTON_LEFT )
-		{
-			if ( event->button.x >= position.x && event->button.x <= position.x+width && event->button.y >= position.y && event->button.y <= position.y+height)
+	switch(event->type){
+		case SDL_MOUSEBUTTONDOWN:
+			if ( pressed == 0 && event->button.button == SDL_BUTTON_LEFT )
 			{
-				pressed = 1;
+				if ( event->button.x >= position.x && event->button.x <= position.x+width && event->button.y >= position.y && event->button.y <= position.y+height)
+				{
+					pressed = 1;
+				}
 			}
-		}
-	}
-	else if( event->type == SDL_MOUSEBUTTONUP )
-    {
-        if( pressed == 1 && event->button.button == SDL_BUTTON_LEFT )
-        {
-			pressed = 0;
-			if ( event->button.x >= position.x && event->button.x <= position.x+width && event->button.y >= position.y && event->button.y <= position.y+height)
+			break;
+		case SDL_MOUSEBUTTONUP:
+			if( pressed == 1 && event->button.button == SDL_BUTTON_LEFT )
 			{
-				(*function)(0,0);
+				pressed = 0;
+				if ( event->button.x >= position.x && event->button.x <= position.x+width && event->button.y >= position.y && event->button.y <= position.y+height)
+				{
+					(*function)(0,0);
+				}
+				if (toggle != -1)
+					toggle = !toggle;
 			}
-            if (toggle != -1)
-                toggle = !toggle;
-        }        
+			break;
+		//In order to deal with the mute button getting toggled upon "m" getting pressed
+		case SDL_KEYDOWN:
+			if(event->key.keysym.sym ==SDLK_m){
+				if ( event->button.x >= position.x && event->button.x <= position.x+width && event->button.y >= position.y && event->button.y <= position.y+height)
+				{
+					(*function)(0,0);
+				}
+				if (toggle != -1)
+					toggle = !toggle;
+			}
 	}
 }
 
