@@ -1,9 +1,9 @@
 #ifndef PLAYERCHARACTER_H
 #define PLAYERCHARACTER_H
 
-#include "object.h"
+#include "fallingobj.h"
 
-class PlayerCharacter : public Object {
+class PlayerCharacter : public FallingObj {
 	private:
 		int previous_x;
 		int previous_y;

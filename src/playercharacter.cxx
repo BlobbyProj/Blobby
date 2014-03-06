@@ -86,12 +86,7 @@ void PlayerCharacter::step()
 {
 	if (lives < 1) //If dead
 	{
-		yvel += global_gravity*global_timestep;
-		position.y = position.y + yvel*global_timestep;
-		if (position.y > HEIGHT) {
-			//trashed = 1;
-			global_gamestate = 0;
-        }
+        FallingObj::step();
 		return;
 	}
 
@@ -105,15 +100,20 @@ void PlayerCharacter::step()
 		switch(object_manager->objects_type(key))
 		{
 			case 4: //Enemy
-				lives--;
-                score -= 5;
+                if (lives < 4) // smaller than enemy
+                {
+                    lives--;
+                    score -= 5;
+                }
+                else //larger than enemy
+                {
+                    score += 5;
+                }
                 if (lives < 1)
                 {
                     if (score < 0)
                         score = 0;
-                    level_manager->level_end(score);
-                    music_manager->play("media/music/death.wav");
-                    object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/lose.txt", Object::FIXED));
+                    level_manager->level_end(score, 0);
                 }
 				object_manager->objects_get(key)->set_solid(0);
 				break;
@@ -123,8 +123,7 @@ void PlayerCharacter::step()
 			case 6: //Flag
                 time = level_manager->stop_timer();
                 score += 60-time;
-                level_manager->level_end(score);
-                music_manager->play("media/music/success_short.wav");
+                level_manager->level_end(score, 1);
 				object_manager->objects_get(key)->set_solid(0);
 				break;
 			case 7: //Gloop
@@ -141,7 +140,6 @@ void PlayerCharacter::step()
 		}
 	}
 	delete collisions;
-
 	//Apply gravity
 	if (position.y < 460-height)
 	{

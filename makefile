@@ -8,7 +8,7 @@ BDIR = bin
 CC = g++
 OS = 
 
-_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o gloop.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o
+_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o gloop.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o fallingobj.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 OBJECTS = playercharacter.h button.h image.h enemy.h block.h flag.h gloop.h
@@ -81,7 +81,7 @@ $(ODIR)/button.o: button.cxx globals.h screenmanager.h object.h button.h
 $(ODIR)/image.o: image.cxx globals.h screenmanager.h object.h image.h
 	$(CC) -c -o $@ $< $(CFLAGS)
     
-$(ODIR)/enemy.o: enemy.cxx globals.h screenmanager.h object.h enemy.h
+$(ODIR)/enemy.o: enemy.cxx globals.h screenmanager.h object.h enemy.h  fallingobj.h
 	$(CC) -c -o $@ $< $(CFLAGS)
     
 $(ODIR)/block.o: block.cxx globals.h screenmanager.h object.h block.h
@@ -91,6 +91,9 @@ $(ODIR)/flag.o: flag.cxx globals.h screenmanager.h object.h flag.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 $(ODIR)/gloop.o: gloop.cxx globals.h screenmanager.h object.h gloop.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+    
+$(ODIR)/fallingobj.o: fallingobj.cxx globals.h fallingobj.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 .PHONY: clean

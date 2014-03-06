@@ -58,7 +58,8 @@ class LevelManager {
         // designed for playercharacter to signal end of level
         // stops music and timer, prints out score
         // param score earned
-        void level_end(int score);
+        // param win: 0 if lose, 1 if win
+        void level_end(int score, int win);
     
 };
 

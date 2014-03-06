@@ -1,9 +1,9 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include "object.h"
+#include "fallingobj.h"
 
-class Enemy : public Object {
+class Enemy : public FallingObj {
 	private:
 		int previous_x;
 		int previous_y;

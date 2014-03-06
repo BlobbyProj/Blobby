@@ -290,11 +290,18 @@ double LevelManager::stop_timer()
     return time;
 }
 
-void LevelManager::level_end(int score)
+void LevelManager::level_end(int score, int win)
 {
     timer = false;
     std::cout << "time = " << time << std::endl;
     std::cout << "score = " << score << std::endl;
     music_manager->stop();
+    if (!win) {
+        object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/lose.txt", Object::FIXED));
+        music_manager->play("media/music/death.wav");
+    }
+    else {
+        music_manager->play("media/music/success_short.wav");
+    }
     time = 0;
 }
