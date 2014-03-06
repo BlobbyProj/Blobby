@@ -81,7 +81,7 @@ $(ODIR)/button.o: button.cxx globals.h screenmanager.h object.h button.h
 $(ODIR)/image.o: image.cxx globals.h screenmanager.h object.h image.h
 	$(CC) -c -o $@ $< $(CFLAGS)
     
-$(ODIR)/enemy.o: enemy.cxx globals.h screenmanager.h object.h enemy.h
+$(ODIR)/enemy.o: enemy.cxx globals.h screenmanager.h object.h enemy.h  fallingobj.h
 	$(CC) -c -o $@ $< $(CFLAGS)
     
 $(ODIR)/block.o: block.cxx globals.h screenmanager.h object.h block.h
@@ -91,6 +91,9 @@ $(ODIR)/flag.o: flag.cxx globals.h screenmanager.h object.h flag.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 $(ODIR)/gloop.o: gloop.cxx globals.h screenmanager.h object.h gloop.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+    
+$(ODIR)/fallingobj.o: fallingobj.cxx globals.h fallingobj.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 .PHONY: clean
