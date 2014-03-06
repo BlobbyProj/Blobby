@@ -1,7 +1,6 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-//#include "object.h"
 #include "fallingobj.h"
 
 class Enemy : public FallingObj {

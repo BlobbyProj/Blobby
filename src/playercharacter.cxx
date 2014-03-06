@@ -86,12 +86,7 @@ void PlayerCharacter::step()
 {
 	if (lives < 1) //If dead
 	{
-		yvel += global_gravity*global_timestep;
-		position.y = position.y + yvel*global_timestep;
-		if (position.y > HEIGHT) {
-			//trashed = 1;
-			global_gamestate = 0;
-        }
+        FallingObj::step();
 		return;
 	}
 

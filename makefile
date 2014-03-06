@@ -8,7 +8,7 @@ BDIR = bin
 CC = g++
 OS = 
 
-_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o gloop.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o
+_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o gloop.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o fallingobj.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 OBJECTS = playercharacter.h button.h image.h enemy.h block.h flag.h gloop.h
