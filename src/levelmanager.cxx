@@ -168,14 +168,15 @@ void LevelManager::step()
 {
 	if (global_paused != previous_paused)
 	{
-        music_manager->pause();
 		switch(global_paused)
 		{
 			case 0:
                 music_manager->resume();
 				object_manager->pause_objects_clear();
+                timer = true;
 				break;
 			case 1:
+                timer = false;
                 music_manager->pause();
 				object_manager->pause_objects_add(new Image(0+level_x, 0+level_y, 640, 480, "media/menus/pause.txt"));
 				object_manager->pause_objects_add(new Button(180,220, -1, -1, ButtonResume));
@@ -226,13 +227,43 @@ void LevelManager::step()
                 object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));
                 load_level("media/levels/level1.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
-
+                
 				break;
+            case 3: //Level 2
+                music_manager->add_track("media/music/level1.wav");
+                music_manager->play("media/music/level1.wav");
+                
+				level_width = 2960;
+				level_height = HEIGHT;
+				level_x = 0;
+				level_y = 0;
+                
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));
+                load_level("media/levels/level2.txt");
+                object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+                
+				break;
+            case 4: //Level 3
+                music_manager->add_track("media/music/level1.wav");
+                music_manager->play("media/music/level1.wav");
+                
+				level_width = 2960;
+				level_height = HEIGHT;
+				level_x = 0;
+				level_y = 0;
+                
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));
+                load_level("media/levels/level3.txt");
+                object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+                
+				break;
+                
 		}
 		screen_manager->texture_pare();
 		object_manager->load_surfaces();
 	}
-	
+	if (timer)
+        time += global_timestep;
 	previous_paused = global_paused;
 	previous_gamestate = global_gamestate;
 }
@@ -249,4 +280,5 @@ void LevelManager::level_end(int score)
     std::cout << "time = " << time << std::endl;
     std::cout << "score = " << score << std::endl;
     music_manager->stop();
+    time = 0;
 }
