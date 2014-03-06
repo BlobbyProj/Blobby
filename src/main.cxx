@@ -66,24 +66,45 @@ int main( int argc, char* args[] )
         //While there's an event to handle
         while( SDL_PollEvent( &event ) )
         {
-        	//If the user has Xed out the window
-        	if( event.type == SDL_WINDOWEVENT )
+        	//switch between event types
+        	switch(event.type)
             {
-            	switch(event.window.event)
-            	{
-            	case SDL_WINDOWEVENT_FOCUS_LOST:
-                    music_manager->pause();
-            		global_focus = 0;
-            		break;
-            	case SDL_WINDOWEVENT_FOCUS_GAINED:
-                    music_manager->resume();
-            		global_focus = event.window.windowID;
-            		break;
-            	case SDL_WINDOWEVENT_CLOSE:
-                	//Quit the program
-                	global_gamestate = -1;
-                	break;
-            	}
+				case SDL_WINDOWEVENT:
+					switch(event.window.event)
+					{
+					case SDL_WINDOWEVENT_FOCUS_LOST:
+						music_manager->pause();
+						global_focus = 0;
+						break;
+					case SDL_WINDOWEVENT_FOCUS_GAINED:
+						music_manager->resume();
+						global_focus = event.window.windowID;
+						break;
+					case SDL_WINDOWEVENT_CLOSE:
+						//Quit the program
+						global_gamestate = -1;
+						break;
+					}
+					break;
+				case SDL_KEYDOWN:
+					switch(event.key.keysym.sym)
+					{
+					case SDLK_p:
+						if(global_gamestate == 2){
+							global_paused = 1;
+						}
+						break;
+					case SDLK_RETURN:
+						if(global_gamestate == 0){
+							//eventually should make this go to the current level the user is on
+							global_gamestate = 2;
+						}
+						break;
+					case SDLK_q:
+						global_gamestate = -1;
+						break;
+					}
+					break;
             }
             if (global_focus != 0)
             {
