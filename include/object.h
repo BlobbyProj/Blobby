@@ -18,6 +18,7 @@
 	5 = Block
 	6 = Flag
 	7 = Gloop
+    8 = Powerup
 
 */
 

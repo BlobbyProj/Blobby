@@ -16,6 +16,7 @@
 #define BLOCK 5
 #define FLAG 6
 #define GLOOP 7
+#define POWERUP 8
 
 //global variables used throughout the rest of the files
 

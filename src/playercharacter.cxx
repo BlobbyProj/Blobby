@@ -30,6 +30,7 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
 	lives = 1;
     score = 0;
     time = 0;
+    powerup = false;
     
 	solid = 1;
     
@@ -103,15 +104,12 @@ void PlayerCharacter::step()
 		switch(object_manager->objects_type(key))
 		{
 			case 4: //Enemy
-                if (lives < 4) // smaller than enemy
-                {
-                    lives--;
-                    score -= 5;
+                if (powerup){
+                    object_manager->objects_get(key)->set_solid(0);
+                    break;
                 }
-                else //larger than enemy
-                {
-                    score += 5;
-                }
+                lives--;
+                score -= 5;
                 if (lives < 1)
                 {
                     if (score < 0)
@@ -139,6 +137,10 @@ void PlayerCharacter::step()
 				//~ Change right image to :"media/blobbys/blobbyright.png";
 
 				break;
+            case 8: //Powerup
+                std::cout << "Powerup!" << std::endl;
+                object_manager->objects_get(key)->set_solid(0);
+                break;
 		}
 	}
 	delete collisions;
@@ -240,4 +242,8 @@ void PlayerCharacter::draw()
 			load_surfaces();
 		}
 	}
+}
+
+void PlayerCharacter::set_powerup(bool p) {
+    powerup = p;
 }

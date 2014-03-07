@@ -12,6 +12,7 @@
 #include "block.h"
 #include "flag.h"
 #include "gloop.h"
+#include "powerup.h"
 
 bool LevelManager::load_level_old(std::string fname)
 {
@@ -135,6 +136,9 @@ bool LevelManager::load_level(std::string fname)
 					break;
 				case GLOOP:
 					object_manager->objects_add(new Gloop(80*j+20, 80*i+20, 40, 40, "media/objects/gloop.txt"));
+					break;
+                case POWERUP:
+					object_manager->objects_add(new Powerup(80*j+20, 80*i+20, 40, 40, "media/objects/powerup.txt"));
 					break;
 			}
 		}
