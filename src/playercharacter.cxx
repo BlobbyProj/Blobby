@@ -29,8 +29,10 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
 	pressed[0] = pressed[1] = pressed[2] = 0;
 	lives = 1;
     score = 0;
-
+    time = 0;
+    
 	solid = 1;
+    
     
     music_manager->add_track("media/music/success_short.wav");
     music_manager->add_track("media/music/death.wav");
@@ -84,6 +86,7 @@ void PlayerCharacter::events(SDL_Event *event)
 
 void PlayerCharacter::step()
 {
+    time += global_timestep;
 	if (lives < 1) //If dead
 	{
         FallingObj::step();
@@ -113,7 +116,7 @@ void PlayerCharacter::step()
                 {
                     if (score < 0)
                         score = 0;
-                    level_manager->level_end(score, 0);
+                    level_manager->level_end(score, time, 0);
                 }
 				object_manager->objects_get(key)->set_solid(0);
 				break;
@@ -121,9 +124,8 @@ void PlayerCharacter::step()
 				blocked[(*collisions)[i].type] = 1;
 				break;
 			case 6: //Flag
-                time = level_manager->stop_timer();
                 score += 60-time;
-                level_manager->level_end(score, 1);
+                level_manager->level_end(score, time, 1);
 				object_manager->objects_get(key)->set_solid(0);
 				break;
 			case 7: //Gloop
