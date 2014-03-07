@@ -103,15 +103,8 @@ void PlayerCharacter::step()
 		switch(object_manager->objects_type(key))
 		{
 			case 4: //Enemy
-                if (lives < 4) // smaller than enemy
-                {
-                    lives--;
-                    score -= 5;
-                }
-                else //larger than enemy
-                {
-                    score += 5;
-                }
+                lives--;
+                score -= 5;
                 if (lives < 1)
                 {
                     if (score < 0)
