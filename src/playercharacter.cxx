@@ -138,7 +138,6 @@ void PlayerCharacter::step()
 
 				break;
             case 8: //Powerup
-                std::cout << "Powerup!" << std::endl;
                 object_manager->objects_get(key)->set_solid(0);
                 break;
 		}

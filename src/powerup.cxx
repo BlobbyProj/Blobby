@@ -13,9 +13,12 @@ Powerup::Powerup(double X, double Y, int W, int H, std::string fname, int flags,
     width = W;
     height = H;
     
+    solid = 1;
+    
     ability = 1;
-    time = time;
+    this->time = time;
     collected_time = 0;
+    collected = false;
     p = NULL;
 }
 
@@ -35,27 +38,33 @@ int Powerup::get_ability(){
 }
 
 void Powerup::step(){
-    if (collected) {
-        collected_time += global_timestep;
-    }
-    if (collected_time >= time){
+    if (collected_time > 2){
         p->set_powerup(false);
         p = NULL;
         collected_time = 0;
+        collected = false;
+        trashed = 1;
     }
-    int i;
-	std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
-	for (i = 0; i < collisions->size(); i++)
-	{
-		unsigned int key = (*collisions)[i].oid;
-		switch(object_manager->objects_type(key))
-		{
-            case 1:
-                p = (PlayerCharacter *) object_manager->objects_get(key);
-                p->set_powerup(true);
-                collected = true;
-                break;
+    if (collected) {
+        collected_time += global_timestep;
+    }
+    else {
+        int i;
+        std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
+        for (i = 0; i < collisions->size(); i++)
+        {
+            unsigned int key = (*collisions)[i].oid;
+            switch(object_manager->objects_type(key))
+            {
+                case 1: //Player
+                    p = (PlayerCharacter *) object_manager->objects_get(key);
+                    p->set_powerup(true);
+                    collected = true;
+                    visible = 0;
+                    break;
+            }
         }
+        delete collisions;
     }
 }
 
@@ -79,4 +88,18 @@ void Powerup::draw()
 			load_surfaces();
 		}
 	}
+    /*if (collected)
+    {
+        if (loaded == 1)
+        {
+            if (screen_manager->texture_exist(keys[0]))
+			{
+				screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], 0);
+			}
+			else
+			{
+				ERROR("Image " << keys[0] << " failed to load")
+			}
+        }
+    }*/
 }
