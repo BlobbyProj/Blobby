@@ -177,15 +177,15 @@ void LevelManager::step()
 			case 1:
                 music_manager->pause();
 				object_manager->pause_objects_add(new Image(0+level_x, 0+level_y, 640, 480, "media/menus/pause.txt"));
-				object_manager->pause_objects_add(new Button(180,220, -1, -1, ButtonResume));
-				object_manager->pause_objects_add(new Button(180,300, -1, -1, ButtonMainMenu));
+				object_manager->pause_objects_add(new Button(180,200, -1, -1, ButtonResume));
+				object_manager->pause_objects_add(new Button(180,280, -1, -1, ButtonMainMenu));
+				object_manager->pause_objects_add(new Button(200,358, -1, -1, ButtonReplay));
                 object_manager->pause_objects_add(new Button(530,55, -1, -1, ButtonVolume));
 				break;
 		}
 		screen_manager->texture_pare();
 		object_manager->load_surfaces();
 	}
-	//~ if (global_gamestate != previous_gamestate)
 	if (global_gamestate != global_previous_gamestate)
 	{
         music_manager->stop();
@@ -308,4 +308,8 @@ void LevelManager::level_end(int score, double time, int win)
     else {
         music_manager->play("media/music/success_short.wav");
     }
+}
+
+void LevelManager::level_replay(){
+	//refresh the level somehow?
 }

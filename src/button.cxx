@@ -47,6 +47,18 @@ void ButtonResume(bool init, std::string *filename)
 	
 	global_paused = 0;
 }
+void ButtonReplay(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/replay.txt";
+		return;
+	}
+	global_paused = 0;
+	global_gamestate = global_previous_gamestate;
+	//~ level_manager->level_replay();
+	//~ level_manager->step();
+}
 
 void ButtonMainMenu(bool init, std::string *filename)
 {
