@@ -7,7 +7,7 @@
 #define HEIGHT 480
 #define CONSOLE_WIDTH 200
 #define CONSOLE_HEIGHT 400
-#define NUM_LEVELS 4
+#define NUM_LEVELS 5
 
 #define PLAYERCHARACTER 1
 #define BUTTON 2
