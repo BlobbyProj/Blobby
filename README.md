@@ -39,12 +39,6 @@ Music composed by Cindy Shen
 
 ========================
 
-To Run on Windows OS
-
-
-
-===============================
-
 **Downloading SDL2 for Linux**
 
 1. To install SDL2 you can either download it from the mercurial repository online or through the source code archive.<br>

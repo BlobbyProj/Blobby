@@ -191,7 +191,8 @@ void LevelManager::step()
 		screen_manager->texture_pare();
 		object_manager->load_surfaces();
 	}
-	if (global_gamestate != previous_gamestate)
+	//~ if (global_gamestate != previous_gamestate)
+	if (global_gamestate != global_previous_gamestate)
 	{
         music_manager->stop();
 		object_manager->objects_clear();
@@ -283,17 +284,17 @@ void LevelManager::step()
 				level_x = 0;
 				level_y = 0;
                 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));;
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));
                 load_level("media/levels/level5.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
-                
-				break;
 		}
 		screen_manager->texture_pare();
 		object_manager->load_surfaces();
 	}
-	previous_paused = global_paused;
-	previous_gamestate = global_gamestate;
+		previous_paused = global_paused;
+		global_previous_gamestate = global_gamestate;
+		//~ previous_gamestate = global_gamestate;
+	
 }
 
 void LevelManager::level_end(int score, double time, int win)
