@@ -309,7 +309,3 @@ void LevelManager::level_end(int score, double time, int win)
         music_manager->play("media/music/success_short.wav");
     }
 }
-
-void LevelManager::level_replay(){
-	//refresh the level somehow?
-}

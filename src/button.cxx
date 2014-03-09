@@ -55,9 +55,8 @@ void ButtonReplay(bool init, std::string *filename)
 		return;
 	}
 	global_paused = 0;
-	global_gamestate = global_previous_gamestate;
-	//~ level_manager->level_replay();
-	//~ level_manager->step();
+	global_previous_gamestate = -2;
+
 }
 
 void ButtonMainMenu(bool init, std::string *filename)

@@ -55,7 +55,6 @@ class LevelManager {
         // param win: 0 if lose, 1 if win
         void level_end(int score, double time, int win);
         
-        void level_replay();
 };
 
 #endif
