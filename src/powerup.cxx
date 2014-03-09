@@ -88,18 +88,4 @@ void Powerup::draw()
 			load_surfaces();
 		}
 	}
-    /*if (collected)
-    {
-        if (loaded == 1)
-        {
-            if (screen_manager->texture_exist(keys[0]))
-			{
-				screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], 0);
-			}
-			else
-			{
-				ERROR("Image " << keys[0] << " failed to load")
-			}
-        }
-    }*/
 }

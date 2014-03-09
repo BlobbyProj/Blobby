@@ -204,26 +204,47 @@ void PlayerCharacter::draw()
 			{
 				ERROR("Image " << keys[1] << " failed to load")
 			}
+            // Draw Blobby
+            if (powerup){ // draw powerup Blobby
+                if (screen_manager->texture_exist(keys[2]))
+                {
+                    int averaged_x = (previous_x+(int)position.x)/2;
+                    int averaged_y = (previous_y+(int)position.y)/2;
+                    
+                    //If moved add blur
+                    if (averaged_x != (int)position.x || averaged_y != (int)position.y)
+                        screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[2], dir, 50 );
+                    
+                    screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[2], dir, 255 );
+                    
+                    previous_x = (int)position.x;
+                    previous_y = (int)position.y;
+                }
+                else
+                {
+                    ERROR("Image " << keys[0] << " failed to load")
+                }
+            }
+            else { // draw normal Blobby
+                if (screen_manager->texture_exist(keys[0]))
+                {	
+                    int averaged_x = (previous_x+(int)position.x)/2;
+                    int averaged_y = (previous_y+(int)position.y)/2;
+                    
+                    //If moved add blur
+                    if (averaged_x != (int)position.x || averaged_y != (int)position.y)
+                        screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[0], dir, 50 );
+                        
+                    screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], dir, 255 );
 
-			//Draw Blobby
-			if (screen_manager->texture_exist(keys[0]))
-			{	
-				int averaged_x = (previous_x+(int)position.x)/2;
-				int averaged_y = (previous_y+(int)position.y)/2;
-				
-				//If moved add blur
-				if (averaged_x != (int)position.x || averaged_y != (int)position.y)
-					screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[0], dir, 50 );
-					
-				screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], dir, 255 );
-
-				previous_x = (int)position.x;
-				previous_y = (int)position.y;
-			}
-			else
-			{
-				ERROR("Image " << keys[0] << " failed to load")
-			}
+                    previous_x = (int)position.x;
+                    previous_y = (int)position.y;
+                }
+                else
+                {
+                    ERROR("Image " << keys[0] << " failed to load")
+                }
+            }
 		}
 		else
 		{
