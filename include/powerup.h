@@ -10,8 +10,6 @@
 class Powerup : public Object {
 private:
     double time;
-    // 1 for ability to kill enemy (default)
-    int ability;
     bool collected;
     double collected_time;
     PlayerCharacter *p;
@@ -23,7 +21,6 @@ public:
     void step();
     void events(SDL_Event *event) {};
     void draw();
-    int get_ability();
     
 };
 

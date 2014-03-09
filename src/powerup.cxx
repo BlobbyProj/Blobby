@@ -15,7 +15,6 @@ Powerup::Powerup(double X, double Y, int W, int H, std::string fname, double tim
     
     solid = 1;
     
-    ability = 1;
     this->time = time;
     collected_time = 0;
     collected = false;
@@ -31,10 +30,6 @@ Powerup::~Powerup()
 	}
     
 	delete[] keys;
-}
-
-int Powerup::get_ability(){
-    return ability;
 }
 
 void Powerup::step(){
