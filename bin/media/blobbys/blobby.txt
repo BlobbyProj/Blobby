@@ -5,5 +5,5 @@ media/blobbys/blobbyright.png
 1
 media/blobbys/life.png
 2
-media/blobbys/blobbyPower.png
-media/blobbys/blobbyPower.png
+media/blobbys/blobbyPowerLeft.png
+media/blobbys/blobbyPowerRight.png
