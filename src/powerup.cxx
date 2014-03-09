@@ -1,7 +1,7 @@
 #include "powerup.h"
 #include "objectmanager.h"
 
-Powerup::Powerup(double X, double Y, int W, int H, std::string fname, int flags, double time)
+Powerup::Powerup(double X, double Y, int W, int H, std::string fname, double time, int flags)
 {
 	apply_flags(flags);
 	type = 8;
@@ -38,7 +38,7 @@ int Powerup::get_ability(){
 }
 
 void Powerup::step(){
-    if (collected_time > 2){
+    if (collected_time > time){
         p->set_powerup(false);
         p = NULL;
         collected_time = 0;

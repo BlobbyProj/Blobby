@@ -18,8 +18,7 @@ private:
 
 public:
     // param time is how long the powerup will last
-    Powerup(double X, double Y, int width, int height, std::string fname, int flags=0, double time=2.0);
-    //Powerup(double time);
+    Powerup(double X, double Y, int width, int height, std::string fname, double time, int flags=0);
     ~Powerup();
     void step();
     void events(SDL_Event *event) {};
