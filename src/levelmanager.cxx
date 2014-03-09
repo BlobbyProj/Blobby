@@ -203,7 +203,6 @@ void LevelManager::step()
 				object_manager->objects_add(new Button(240,290, -1, -1, ButtonInstructions));
 				object_manager->objects_add(new Button(240,355, -1, -1, ButtonQuit));
                 object_manager->objects_add(new Button(530,55, -1, -1, ButtonVolume));
-                //object_manager->objects_add(new Button(100,355, 400, 100, ButtonVolume));
 				level_width = WIDTH;
 				level_height = HEIGHT;
 				level_x = 0;

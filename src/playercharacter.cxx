@@ -133,11 +133,13 @@ void PlayerCharacter::step()
 
 				break;
             case 8: //Powerup
+                position.y -= 14;
                 object_manager->objects_get(key)->set_solid(0);
                 break;
 		}
 	}
 	delete collisions;
+    
 	//Apply gravity
 	if (position.y < 460-height)
 	{
@@ -147,7 +149,7 @@ void PlayerCharacter::step()
 	{
 		blocked[3] = 1;
 	}
-
+    
 	//Apply velocity
 	if (pressed[1] == 1)
 		if (blocked[3] == 1)
@@ -182,9 +184,15 @@ void PlayerCharacter::step()
 
 	//Move screen
 	level_manager->set_level_x( position.x );
-
-	width = 16+16*lives;
-	height = 16+16*lives;
+    
+    if (powerup){
+        width = 40+16*lives;
+        height = 30+16*lives;
+    }
+    else {
+        width = 16+16*lives;
+        height = 16+16*lives;
+    }
 }
 
 void PlayerCharacter::draw()
@@ -222,7 +230,7 @@ void PlayerCharacter::draw()
                 }
                 else
                 {
-                    ERROR("Image " << keys[0] << " failed to load")
+                    ERROR("Image " << keys[2] << " failed to load")
                 }
             }
             else { // draw normal Blobby

@@ -9,7 +9,7 @@
  */
 class Powerup : public Object {
 private:
-    double time;
+    double total_time;
     bool collected;
     double collected_time;
     PlayerCharacter *p;

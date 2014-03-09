@@ -15,7 +15,7 @@ Powerup::Powerup(double X, double Y, int W, int H, std::string fname, double tim
     
     solid = 1;
     
-    this->time = time;
+    total_time = time;
     collected_time = 0;
     collected = false;
     p = NULL;
@@ -33,11 +33,9 @@ Powerup::~Powerup()
 }
 
 void Powerup::step(){
-    if (collected_time > time){
+    if (collected_time > total_time){
         p->set_powerup(false);
         p = NULL;
-        collected_time = 0;
-        collected = false;
         trashed = 1;
     }
     if (collected) {
