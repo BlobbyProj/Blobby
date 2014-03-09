@@ -4,7 +4,6 @@
 #include "image.h"
 #include "screenmanager.h"
 #include "objectmanager.h"
-#include "musicmanager.h"
 
 PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string fname, int flags)
 {
@@ -33,10 +32,6 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
     powerup = false;
     
 	solid = 1;
-    
-    
-    music_manager->add_track("media/music/success_short.wav");
-    music_manager->add_track("media/music/death.wav");
 }
 
 PlayerCharacter::~PlayerCharacter()
@@ -88,7 +83,7 @@ void PlayerCharacter::events(SDL_Event *event)
 void PlayerCharacter::step()
 {
     time += global_timestep;
-	if (lives < 1) //If dead
+	if (lives == 0) //If dead
 	{
         FallingObj::step();
 		return;
@@ -183,12 +178,6 @@ void PlayerCharacter::step()
 	{
 		position.y = level_manager->get_level_height()-20-height;
 		yvel = 0;
-	}
-
-	if (lives == 0)
-	{
-		//object_manager->objects_add(new Image(level_manager->get_level_x(),0, WIDTH, HEIGHT, "media/backgrounds/lose.bmp"));
-		yvel = -500;
 	}
 
 	//Move screen

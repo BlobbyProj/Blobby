@@ -144,6 +144,8 @@ bool LevelManager::load_level(std::string fname)
 		}
 	}
 	file.close();
+    music_manager->add_track("media/music/success_short.wav");
+    music_manager->add_track("media/music/death.wav");
 }
 
 void LevelManager::set_level_x( double x )
