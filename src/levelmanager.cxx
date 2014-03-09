@@ -228,9 +228,7 @@ void LevelManager::step()
 				level_x = 0;
 				level_y = 0;
 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));
-                //~ object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level4.txt"));
-                //~ load_level("media/levels/level1.txt");
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));;
                 load_level("media/levels/level1.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
@@ -277,7 +275,20 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
+            case 6: //Level 5
+                music_manager->add_track("media/music/level1.wav");
+                music_manager->play("media/music/level1.wav");
                 
+				level_width = 2960;
+				level_height = HEIGHT;
+				level_x = 0;
+				level_y = 0;
+                
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));;
+                load_level("media/levels/level5.txt");
+                object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+                
+				break;
 		}
 		screen_manager->texture_pare();
 		object_manager->load_surfaces();
