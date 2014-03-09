@@ -19,9 +19,9 @@ public:
 	// post-conditions Flag exists
     Flag(double X, double Y, int width, int height, std::string fname, int flags=0);
 
-	// destructor for PlayerCharacter - deletes instance of PlayerCharacter object
-	// pre-conditions  PlayerCharacter exists
-	// post-conditions PlayerCharacter no longer exists
+	// destructor for Flag - deletes instance of Flag object
+	// pre-conditions  Flag exists
+	// post-conditions Flag no longer exists
     ~Flag();
 
 	// called every iteration of the game loop; inherited from Object

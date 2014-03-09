@@ -1,5 +1,3 @@
-//TODO: Fix Comments ***
-
 #include "gloop.h"
 
 #include "globals.h"
@@ -42,7 +40,7 @@ void Gloop::step()
 	int i;
 	//{left, top, right, bottom}
 	bool blocked[4] = {0,0,0,0};
-    // if enemy collided with something, reverse velocity
+    // if gloop collided with something, reverse velocity
 	std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
 	for (i = 0; i < collisions->size(); i++)
 	{
