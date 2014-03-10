@@ -132,7 +132,8 @@ bool LevelManager::load_level(std::string fname)
 					object_manager->objects_add(new Block(80*j, 80*i, 80, 80, "media/objects/block.txt"));
 					break;
 				case FLAG:
-					object_manager->objects_add(new Flag(80*j+20, 80*i, 40, 80, "media/objects/flag.txt"));
+                    // height is -80(5-i) to compensate for flag's height being HEIGHT
+					object_manager->objects_add(new Flag(80*j+20, -80*(5-i), 64, HEIGHT, "media/objects/flag.txt"));
 					break;
 				case GLOOP:
 					object_manager->objects_add(new Gloop(80*j+20, 80*i+20, 40, 40, "media/objects/gloop.txt"));
