@@ -47,8 +47,10 @@ public:
     // sets muted to opposite value
     void toggle();
     
+    //fades in the music
     void fade_in(std::string filename, int ms);
     
+    //fades out the music
     void fade_out(int ms);
     
 };

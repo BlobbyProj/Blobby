@@ -30,6 +30,7 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
 	lives = 1;
     score = 0;
     time = 0;
+    powerup = false;
     
 	solid = 1;
     
@@ -103,6 +104,10 @@ void PlayerCharacter::step()
 		switch(object_manager->objects_type(key))
 		{
 			case 4: //Enemy
+                if (powerup){
+                    object_manager->objects_get(key)->set_solid(0);
+                    break;
+                }
                 lives--;
                 score -= 5;
                 if (lives < 1)
@@ -151,9 +156,14 @@ void PlayerCharacter::step()
 				//~ Change right image to :"media/blobbys/blobbyright.png";
 
 				break;
+            case 8: //Powerup
+                position.y -= 14;
+                object_manager->objects_get(key)->set_solid(0);
+                break;
 		}
 	}
 	delete collisions;
+    
 	//Apply gravity
 	if (position.y < 460-height)
 	{
@@ -163,7 +173,7 @@ void PlayerCharacter::step()
 	{
 		blocked[3] = 1;
 	}
-
+    
 	//Apply velocity
 	if (pressed[1] == 1)
 		if (blocked[3] == 1)
@@ -205,9 +215,15 @@ void PlayerCharacter::step()
 
 	//Move screen
 	level_manager->set_level_x( position.x );
-
-	width = 16+16*lives;
-	height = 16+16*lives;
+    
+    if (powerup){
+        width = 40+16*lives;
+        height = 30+16*lives;
+    }
+    else {
+        width = 16+16*lives;
+        height = 16+16*lives;
+    }
 }
 
 void PlayerCharacter::draw()
@@ -227,30 +243,55 @@ void PlayerCharacter::draw()
 			{
 				ERROR("Image " << keys[1] << " failed to load")
 			}
+            // Draw Blobby
+            if (powerup){ // draw powerup Blobby
+                if (screen_manager->texture_exist(keys[2]))
+                {
+                    int averaged_x = (previous_x+(int)position.x)/2;
+                    int averaged_y = (previous_y+(int)position.y)/2;
+                    
+                    //If moved add blur
+                    if (averaged_x != (int)position.x || averaged_y != (int)position.y)
+                        screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[2], dir, 50 );
+                    
+                    screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[2], dir, 255 );
+                    
+                    previous_x = (int)position.x;
+                    previous_y = (int)position.y;
+                }
+                else
+                {
+                    ERROR("Image " << keys[2] << " failed to load")
+                }
+            }
+            else { // draw normal Blobby
+                if (screen_manager->texture_exist(keys[0]))
+                {	
+                    int averaged_x = (previous_x+(int)position.x)/2;
+                    int averaged_y = (previous_y+(int)position.y)/2;
+                    
+                    //If moved add blur
+                    if (averaged_x != (int)position.x || averaged_y != (int)position.y)
+                        screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[0], dir, 50 );
+                        
+                    screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], dir, 255 );
 
-			//Draw Blobby
-			if (screen_manager->texture_exist(keys[0]))
-			{	
-				int averaged_x = (previous_x+(int)position.x)/2;
-				int averaged_y = (previous_y+(int)position.y)/2;
-				
-				//If moved add blur
-				if (averaged_x != (int)position.x || averaged_y != (int)position.y)
-					screen_manager->texture_apply( averaged_x, averaged_y, fixed, width, height, keys[0], dir, 50 );
-					
-				screen_manager->texture_apply( (int)position.x, (int)position.y, fixed, width, height, keys[0], dir, 255 );
-
-				previous_x = (int)position.x;
-				previous_y = (int)position.y;
-			}
-			else
-			{
-				ERROR("Image " << keys[0] << " failed to load")
-			}
+                    previous_x = (int)position.x;
+                    previous_y = (int)position.y;
+                }
+                else
+                {
+                    ERROR("Image " << keys[0] << " failed to load")
+                }
+            }
 		}
 		else
 		{
 			load_surfaces();
 		}
 	}
+}
+
+void PlayerCharacter::set_powerup(bool p) {
+    powerup = p;
 }

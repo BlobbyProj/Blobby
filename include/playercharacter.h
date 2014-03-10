@@ -16,6 +16,7 @@ class PlayerCharacter : public FallingObj {
 		bool pressed[3]; //0 = left, 1 = up, 2 = right
 		char lives;
         double time;
+        bool powerup;
 
 	public:
         // constructor for PlayerCharacter - creates new instance of PlayerCharacter object
@@ -47,6 +48,8 @@ class PlayerCharacter : public FallingObj {
         // pre-conditions  PlayerCharacter is visible and loaded
         // post-conditions PlayerCharacter appears on texture
 		void draw();
+    
+        void set_powerup(bool p);
 };
 
 #endif

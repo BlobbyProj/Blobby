@@ -8,7 +8,7 @@ BDIR = bin
 CC = g++
 OS = 
 
-_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o gloop.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o fallingobj.o
+_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o gloop.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o fallingobj.o powerup.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 OBJECTS = playercharacter.h button.h image.h enemy.h block.h flag.h gloop.h
@@ -94,6 +94,9 @@ $(ODIR)/gloop.o: gloop.cxx globals.h screenmanager.h object.h gloop.h
 	$(CC) -c -o $@ $< $(CFLAGS)
     
 $(ODIR)/fallingobj.o: fallingobj.cxx globals.h fallingobj.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+    
+$(ODIR)/powerup.o: powerup.cxx object.h powerup.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 .PHONY: clean

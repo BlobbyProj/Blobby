@@ -12,6 +12,7 @@
 #include "block.h"
 #include "flag.h"
 #include "gloop.h"
+#include "powerup.h"
 
 bool LevelManager::load_level_old(std::string fname)
 {
@@ -136,10 +137,15 @@ bool LevelManager::load_level(std::string fname)
 				case GLOOP:
 					object_manager->objects_add(new Gloop(80*j+20, 80*i+20, 40, 40, "media/objects/gloop.txt"));
 					break;
+                case POWERUP:
+					object_manager->objects_add(new Powerup(80*j+20, 80*i+20, 40, 40, "media/objects/powerup.txt", 2));
+					break;
 			}
 		}
 	}
 	file.close();
+    music_manager->add_track("media/music/success_short.wav");
+    music_manager->add_track("media/music/death.wav");
 }
 
 void LevelManager::set_level_x( double x )
@@ -198,7 +204,6 @@ void LevelManager::step()
 				object_manager->objects_add(new Button(240,290, -1, -1, ButtonInstructions));
 				object_manager->objects_add(new Button(240,355, -1, -1, ButtonQuit));
                 object_manager->objects_add(new Button(530,55, -1, -1, ButtonVolume));
-                //object_manager->objects_add(new Button(100,355, 400, 100, ButtonVolume));
 				level_width = WIDTH;
 				level_height = HEIGHT;
 				level_x = 0;
@@ -223,9 +228,7 @@ void LevelManager::step()
 				level_x = 0;
 				level_y = 0;
 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));
-                //~ object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level4.txt"));
-                //~ load_level("media/levels/level1.txt");
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));;
                 load_level("media/levels/level1.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
@@ -284,8 +287,6 @@ void LevelManager::step()
                 object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));
                 load_level("media/levels/level5.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
-                
-				break;
 		}
 		screen_manager->texture_pare();
 		object_manager->load_surfaces();

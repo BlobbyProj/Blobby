@@ -15,7 +15,7 @@ class LevelManager {
 		
 	public:
         // constructor for LevelManager - controls the levels in the game
-        // pre-conditions  LeveltManager does not yet exist
+        // pre-conditions  LevelManager does not yet exist
         // post-conditions LevelManager exists, variables have default values
 		LevelManager() : previous_gamestate(-1), previous_paused(0), level_x(0), level_y(0) {};
 

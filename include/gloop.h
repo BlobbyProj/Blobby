@@ -11,29 +11,29 @@ class Gloop : public Object {
 		int previous_x;
 		int previous_y;
 	public:
-        // constructor for Enemy - creates new instance of Enemy object
-        // param X         x coordinate for location of upper-left corner of Enemy
-        // param Y         y coordinate for location of upper-left corner of Enemy
-        // param width     width of Enemy in pixels
-        // param height    height of Enemy in pixels
+        // constructor for Gloop - creates new instance of Gloop object
+        // param X         x coordinate for location of upper-left corner of Gloop
+        // param Y         y coordinate for location of upper-left corner of Gloop
+        // param width     width of Gloop in pixels
+        // param height    height of Gloop in pixels
         // param filename  filename of object image
-        // pre-conditions  Enemy does not yet exist
-        // post-conditions Enemy exists
+        // pre-conditions  Gloop does not yet exist
+        // post-conditions Gloop exists
 		Gloop(double X, double Y, int width, int height, std::string fname, int flags=0);
     
-        // destructor for Enemy - deletes instance of Enemy object
-        // pre-conditions  Enemy exists
-        // post-conditions Enemy no longer exists
+        // destructor for Gloop - deletes instance of Enemy object
+        // pre-conditions  Gloop exists
+        // post-conditions Gloop no longer exists
 		~Gloop();
 		
         // called every iteration of the game loop; inherited from Object
-        // checks if enemy has collided with anything and adjusts velocity to compensate
-        // pre-conditions  Enemy exists and level currently running
-        // post-conditions Enemy is moving properly
+        // checks if Gloop has collided with anything
+        // pre-conditions  Gloop exists and level currently running
+        // post-conditions Gloop is moving properly
 		void step();
     
         // called every time there is an event; inherited from Object
-        // Enemies are not effected by events so this function does nothing
+        // Gloops are not effected by events so this function does nothing
 		void events(SDL_Event *event) {};
     
         // calls screenmanager->texture_apply to add object to texture at specified (x,y) position and with specified width, height; blurs movement
