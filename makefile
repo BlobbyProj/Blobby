@@ -8,7 +8,7 @@ BDIR = bin
 CC = g++
 OS = 
 
-_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o
+_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 vpath %.h $(IDIR)
@@ -16,10 +16,10 @@ vpath %.cxx $(SDIR)
 
 #OSX
 ifeq ($(OS),OSX)
-CFLAGS = -I$(IDIR) -std=c++0x -g -I/Library/Frameworks/SDL2.framework/Headers
+CFLAGS = -I$(IDIR) -std=c++0x -g 
 LFLAGS = -g
 LIBS =
-FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2
+FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2 /Library/Frameworks/SDL2_image.framework/Versions/Current/SDL2_image /Library/Frameworks/SDL2_mixer.framework/Versions/Current/SDL2_mixer
 endif
 
 #WINDOWS
@@ -32,9 +32,9 @@ endif
 
 #LINUX
 ifeq ($(OS),LINUX)
-CFLAGS = -I$(IDIR) -std=c++0x -g
+CFLAGS = -I$(IDIR) -std=c++0x -g -DLINUX
 LFLAGS = -static-libgcc -static-libstdc++ -g
-LIBS = -lSDL2
+LIBS = -lSDL2 -lSDL2_image -lSDL2_mixer
 FRAMEWORKS = 
 endif
 
@@ -43,7 +43,7 @@ _DEP = sed -n '/include "/p' test.txt | sed 's/.*"\(.*\)".*/\1/'
 $(BDIR)/$(NAME): $(OBJ) $(FRAMEWORKS)
 	$(CC) -o $@ $^ $(LIBS) $(LFLAGS)
 
-$(ODIR)/main.o: main.cxx globals.h levelmanager.h screenmanager.h objectmanager.h
+$(ODIR)/main.o: main.cxx globals.h levelmanager.h screenmanager.h objectmanager.h musicmanager.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 $(ODIR)/globals.o: globals.cxx globals.h
@@ -84,7 +84,10 @@ $(ODIR)/block.o: block.cxx globals.h screenmanager.h rectangle.h object.h block.
 
 $(ODIR)/flag.o: flag.cxx globals.h screenmanager.h rectangle.h object.h flag.h
 	$(CC) -c -o $@ $< $(CFLAGS)
-	
+
+$(ODIR)/musicmanager.o: musicmanager.cxx globals.h musicmanager.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+
 .PHONY: clean
 	
 clean:

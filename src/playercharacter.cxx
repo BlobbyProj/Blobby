@@ -1,5 +1,6 @@
 #include "playercharacter.h"
 #include "image.h"
+#include "musicmanager.h"
 
 PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string *fnames)
 {	
@@ -113,6 +114,7 @@ void PlayerCharacter::step()
 				blocked[(*collisions)[i].type] = 1;
 				break;
 			case 6: //Flag
+                music_manager->stop();
 				object_manager->objects_get(key)->set_solid(0);
 				break;
 		}

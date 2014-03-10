@@ -8,6 +8,8 @@
 #define CONSOLE_WIDTH 200
 #define CONSOLE_HEIGHT 400
 
+//global variables used throughout the rest of the files
+
 class ScreenManager;
 extern ScreenManager *screen_manager;
 
@@ -16,6 +18,9 @@ extern ObjectManager *object_manager;
 
 class LevelManager;
 extern LevelManager *level_manager;
+
+class MusicManager;
+extern MusicManager *music_manager;
 
 class Console;
 extern Console *console;

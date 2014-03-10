@@ -1,6 +1,7 @@
 #include "levelmanager.h"
 #include "objectmanager.h"
 #include "screenmanager.h"
+#include "musicmanager.h"
 #include "playercharacter.h"
 #include "button.h"
 #include "image.h"
@@ -34,12 +35,15 @@ void LevelManager::step()
 {
 	if (global_paused != previous_paused)
 	{
+        music_manager->pause();
 		switch(global_paused)
 		{
 			case 0:
+                music_manager->resume();
 				object_manager->pause_objects_clear();
 				break;
 			case 1:
+                music_manager->pause();
 				object_manager->pause_objects_add(new Image(20+level_x ,20+level_y, 600, 440, "media/Menu.bmp"));
 				object_manager->pause_objects_add(new Image(0+level_x, 0+level_y, 400, 100, "media/PauseMenu.bmp"));
 				object_manager->pause_objects_add(new Button(180,220, 400, 100, ButtonResume));
@@ -51,6 +55,7 @@ void LevelManager::step()
 	}
 	if (global_gamestate != previous_gamestate)
 	{
+        music_manager->stop();
 		object_manager->objects_clear();
 		switch(global_gamestate)
 		{
@@ -73,16 +78,18 @@ void LevelManager::step()
 				level_y = 0;
 				break;
 			case 2: //Level 1
+                music_manager->add_track("media/music/blobby.wav");
+                music_manager->play("media/music/blobby.wav");
 				std::string *blobby = new std::string[4];
 				std::string *flag = new std::string[2];
-				blobby[0] = "media/blobbys/blobbyleftSmaller.bmp";
-				blobby[1] = "media/blobbys/blobbyrightSmaller.bmp";
-				blobby[2] = "media/blobbys/life.bmp";
+				blobby[0] = "media/blobbys/blobbyleftSmaller.png";
+				blobby[1] = "media/blobbys/blobbyrightSmaller.png";
+				blobby[2] = "media/blobbys/life.png";
 				blobby[3] = "media/backgrounds/lose.bmp";
 				flag[0] = "media/flag.bmp";
 				flag[1] = "media/backgrounds/success.bmp";
                 object_manager->objects_add(new Image(0,0, 3000, 440, "media/backgrounds/bg1long.bmp"));
-                object_manager->objects_add(new Button(580,30, 400, 100, ButtonPause));
+                
 				object_manager->objects_add(new Block(200, HEIGHT-20-64, 100, 64, "media/block.bmp"));
                 object_manager->objects_add(new Block(300, HEIGHT-20-64, 100, 64, "media/block.bmp"));
                 object_manager->objects_add(new Block(300, HEIGHT-20-128, 100, 64, "media/block.bmp"));
@@ -126,14 +133,14 @@ void LevelManager::step()
                 object_manager->objects_add(new Block(2600, HEIGHT-20-128, 100, 64, "media/block.bmp"));
                 object_manager->objects_add(new Block(2600, HEIGHT-20-64, 100, 64, "media/block.bmp"));
 				object_manager->objects_add(new Block(2700, HEIGHT-20-64, 100, 64, "media/block.bmp"));
-				object_manager->objects_add(new Enemy(300,200, 64, 78, "media/enemies/torto.bmp"));
-				object_manager->objects_add(new Enemy(2200,0, 64, 78, "media/enemies/torto.bmp"));
-				object_manager->objects_add(new Enemy(1900,0, 64, 78, "media/enemies/goon.bmp"));
+				object_manager->objects_add(new Enemy(300,200, 64, 78, "media/enemies/torto.png"));
+				object_manager->objects_add(new Enemy(2200,0, 64, 78, "media/enemies/torto.png"));
+				object_manager->objects_add(new Enemy(1900,0, 64, 78, "media/enemies/goon.png"));
                 object_manager->objects_add(new Enemy(500,200, 64, 78, "media/enemies/torto2.bmp"));
-                object_manager->objects_add(new Enemy(900,0, 64, 72, "media/enemies/goon.bmp"));
+                object_manager->objects_add(new Enemy(900,0, 64, 72, "media/enemies/goon.png"));
 				object_manager->objects_add(new PlayerCharacter(10,10, 32, 32, blobby));
 				object_manager->objects_add(new Flag(2900, HEIGHT-20-128, 64, 128, flag));
-
+                object_manager->objects_add(new Button(580,30, 400, 100, ButtonPause));
 
                 level_width = 3000;
 				level_height = HEIGHT;
