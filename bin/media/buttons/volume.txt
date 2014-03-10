@@ -1,0 +1,4 @@
+1
+2
+media/buttons/volume.png
+media/buttons/volumePressed.png

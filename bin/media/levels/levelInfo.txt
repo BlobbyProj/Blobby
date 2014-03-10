@@ -1,0 +1,7 @@
+Level Info
+
+// first number = how many blocks height
+// second number = how many blocks long
+// a block is an 80 by 80 pixel region
+// the number in each space specifies the type of object in that 80 by 80 pixel region
+
