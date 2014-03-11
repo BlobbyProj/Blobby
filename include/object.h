@@ -62,6 +62,12 @@ class Object {
     
         // returns y coordinate of position of Object's upper-left corner
 		double get_y() { return position.y; }
+		
+		// returns the Object's width
+		double get_width() { return width; }
+    
+        // returns the Object's height
+		double get_height() { return height; }
     
         // returns OID of Object
 		unsigned int get_oid() { return oid; }

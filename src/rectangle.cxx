@@ -70,7 +70,7 @@ unsigned int Rectangle::get_collision(Rectangle bound)
     
     if (overlapX && overlapY) //If collision
     {
-        if (overlapX > overlapY) //Collision is from top/bottom
+        if (overlapX >= overlapY) //Collision is from top/bottom
         {
             if (top)
                 return 1;

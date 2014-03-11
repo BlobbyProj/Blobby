@@ -4,6 +4,7 @@
 #include "image.h"
 #include "screenmanager.h"
 #include "objectmanager.h"
+#include "musicmanager.h"
 
 PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string fname, int flags)
 {
@@ -32,6 +33,10 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
     powerup = false;
     
 	solid = 1;
+    
+    
+    music_manager->add_track("media/music/success_short.wav");
+    music_manager->add_track("media/music/death.wav");
 }
 
 PlayerCharacter::~PlayerCharacter()
@@ -83,7 +88,7 @@ void PlayerCharacter::events(SDL_Event *event)
 void PlayerCharacter::step()
 {
     time += global_timestep;
-	if (lives == 0) //If dead
+	if (lives < 1) //If dead
 	{
         FallingObj::step();
 		return;
@@ -115,6 +120,25 @@ void PlayerCharacter::step()
 				break;
 			case 5: //Block
 				blocked[(*collisions)[i].type] = 1;
+				switch((*collisions)[i].type)
+				{
+					case 0:
+						if (object_manager->objects_get(key)->get_x()+object_manager->objects_get(key)->get_width() > position.x)
+							position.x = object_manager->objects_get(key)->get_x()+object_manager->objects_get(key)->get_width();
+						break;
+					case 1:
+						if (object_manager->objects_get(key)->get_y()+object_manager->objects_get(key)->get_height() > position.y)
+							position.y = object_manager->objects_get(key)->get_y()+object_manager->objects_get(key)->get_height();
+						break;
+					case 2:
+						if (object_manager->objects_get(key)->get_x()-width < position.x)
+							position.x = object_manager->objects_get(key)->get_x()-width;
+						break;
+					case 3:
+						if (object_manager->objects_get(key)->get_y()-height < position.y)
+							position.y = object_manager->objects_get(key)->get_y()-height;
+						break;
+				}
 				break;
 			case 6: //Flag
                 score += 60-time;
@@ -166,10 +190,11 @@ void PlayerCharacter::step()
 	if ((xvel*global_timestep > 0 && blocked[2] == 0) || (xvel*global_timestep < 0 && blocked[0] == 0))
 		position.x = position.x + xvel*global_timestep;
 
+	if ((yvel > 0 && blocked[3] == 1) || (yvel < 0 && blocked[1] == 1))
+		yvel = 0;
 	if ((yvel*global_timestep > 0 && blocked[3] == 0) || (yvel*global_timestep < 0 && blocked[1] == 0))
 		position.y = position.y + yvel*global_timestep;
-	if ((yvel*global_timestep > 0 && blocked[3] == 1) || (yvel*global_timestep < 0 && blocked[1] == 1))
-		yvel = 0;
+
 
 	//Contain blobby
 	if (position.x < 0)
@@ -180,6 +205,12 @@ void PlayerCharacter::step()
 	{
 		position.y = level_manager->get_level_height()-20-height;
 		yvel = 0;
+	}
+
+	if (lives == 0)
+	{
+		//object_manager->objects_add(new Image(level_manager->get_level_x(),0, WIDTH, HEIGHT, "media/backgrounds/lose.bmp"));
+		yvel = -500;
 	}
 
 	//Move screen

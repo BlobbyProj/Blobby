@@ -130,7 +130,7 @@ bool LevelManager::load_level(std::string fname)
 					object_manager->objects_add(new Enemy(80*j+8, 80*i, 64, 74, "media/enemies/torto.txt"));
 					break;
 				case BLOCK:
-					object_manager->objects_add(new Block(80*j, 80*i, 80, 80, "media/objects/block.txt"));
+					object_manager->objects_add(new Block(80*j-2, 80*i, 84, 80, "media/objects/block.txt"));
 					break;
 				case FLAG:
                     // height is -80(5-i) to compensate for flag's height being HEIGHT
