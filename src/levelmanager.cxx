@@ -197,6 +197,7 @@ void LevelManager::step()
 	{
         music_manager->stop();
 		object_manager->objects_clear();
+		global_invalid_level = false;
 		switch(global_gamestate)
 		{
 			case 0: //Main Menu
@@ -220,7 +221,32 @@ void LevelManager::step()
 				level_y = 0;
 				break;
 
-			case 2: //Level 1
+            case 2: //Scoreboard
+            	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/scoreboard.txt"));
+				object_manager->objects_add(new Button(340,290, -1, -1, ButtonContinue));
+				object_manager->objects_add(new Button(130,290, -1, -1, ButtonReplay));
+				object_manager->objects_add(new Button(240,400, -1, -1, ButtonQuit));
+                object_manager->objects_add(new Button(340,350, -1, -1, ButtonLevelMap));
+				object_manager->objects_add(new Button(130,350, -1, -1, ButtonMainMenuSmall));
+				level_width = WIDTH;
+				level_height = HEIGHT;
+				level_x = 0;
+				level_y = 0;
+
+				break;
+            case 3: //Level Map
+            	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/levelMap.txt"));
+				object_manager->objects_add(new Button(50,150, -1, -1, ButtonIsland1));
+				object_manager->objects_add(new Button(410,160, -1, -1, ButtonIsland3));
+				object_manager->objects_add(new Button(230,280, -1, -1, ButtonIsland2));
+				level_width = WIDTH;
+				level_height = HEIGHT;
+				level_x = 0;
+				level_y = 0;
+
+				break;
+				
+			case 4: //Level 1
                 music_manager->add_track("media/music/level1.wav");
                 music_manager->play("media/music/level1.wav");
 
@@ -234,7 +260,7 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
-            case 3: //Level 2
+            case 5: //Level 2
                 music_manager->add_track("media/music/level1.wav");
                 music_manager->play("media/music/level1.wav");
                 
@@ -248,7 +274,7 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
-            case 4: //Level 3
+            case 6: //Level 3
                 music_manager->add_track("media/music/level1.wav");
                 music_manager->play("media/music/level1.wav");
                 
@@ -262,7 +288,7 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
-            case 5: //Level 4
+            case 7: //Level 4
                 music_manager->add_track("media/music/level1.wav");
                 music_manager->play("media/music/level1.wav");
                 
@@ -276,7 +302,7 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
-            case 6: //Level 5
+            case 8: //Level 5
                 music_manager->add_track("media/music/level1.wav");
                 music_manager->play("media/music/level1.wav");
                 
@@ -290,7 +316,7 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 
                 break;
-            case 8: //Level 7
+            case 10: //Level 7
                 music_manager->add_track("media/music/level1.wav");
                 music_manager->play("media/music/level1.wav");
                 
@@ -304,37 +330,17 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 
                 break;
-            case 11: //Scoreboard
-            	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/scoreboard.txt"));
-				object_manager->objects_add(new Button(340,290, -1, -1, ButtonContinue));
-				object_manager->objects_add(new Button(130,290, -1, -1, ButtonReplay2));
-				object_manager->objects_add(new Button(240,400, -1, -1, ButtonQuit));
-                object_manager->objects_add(new Button(340,350, -1, -1, ButtonLevelMap));
-				object_manager->objects_add(new Button(130,350, -1, -1, ButtonMainMenuSmall));
-				level_width = WIDTH;
-				level_height = HEIGHT;
-				level_x = 0;
-				level_y = 0;
-
+             default:
+				//if the gamestate doesn't exist
+				global_invalid_level = true;
 				break;
-            case 12: //Level Map
-            	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/levelMap.txt"));
-				object_manager->objects_add(new Button(50,150, -1, -1, ButtonIsland1));
-				object_manager->objects_add(new Button(410,160, -1, -1, ButtonIsland3));
-				object_manager->objects_add(new Button(230,280, -1, -1, ButtonIsland2));
-				level_width = WIDTH;
-				level_height = HEIGHT;
-				level_x = 0;
-				level_y = 0;
 
-				break;
 		}
 		screen_manager->texture_pare();
 		object_manager->load_surfaces();
 	}
 		previous_paused = global_paused;
 		global_previous_gamestate = global_gamestate;
-		//~ previous_gamestate = global_gamestate;
 	
 }
 
@@ -343,6 +349,7 @@ void LevelManager::level_end(int score, double time, int win)
     std::cout << "time = " << time << std::endl;
     std::cout << "score = " << score << std::endl;
     music_manager->stop();
+    global_previous_level = global_gamestate;
     if (!win) {
         object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/lose.txt", Object::FIXED));
         music_manager->play("media/music/death.wav");

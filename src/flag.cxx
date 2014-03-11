@@ -44,7 +44,7 @@ void Flag::step()
 	timed += global_timestep;
 	}
 	if (timed >= 2){
-		global_gamestate = 11;
+		global_gamestate = 2;
 	}
 //		if (timed >= 2 && screen_loaded != 2){
 //			object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/scoreboard.txt", Object::FIXED));

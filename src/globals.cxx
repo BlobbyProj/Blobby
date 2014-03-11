@@ -26,6 +26,8 @@ bool global_paused = 0;
 char global_background[3] = {(char)170,(char)204,(char)255};
 unsigned int global_background_key = 0;
 int global_previous_gamestate = -1;
+int global_previous_level = 4;
+bool global_invalid_level = false;
 
 double global_timestep = 0;
 double global_gravity = 1000;
