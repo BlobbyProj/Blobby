@@ -4,7 +4,6 @@
 #include "image.h"
 #include "screenmanager.h"
 #include "objectmanager.h"
-#include "musicmanager.h"
 
 PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string fname, int flags)
 {
@@ -33,10 +32,6 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
     powerup = false;
     
 	solid = 1;
-    
-    
-    music_manager->add_track("media/music/success_short.wav");
-    music_manager->add_track("media/music/death.wav");
 }
 
 PlayerCharacter::~PlayerCharacter()
