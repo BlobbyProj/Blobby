@@ -71,6 +71,8 @@ void MusicManager::fade_in(std::string filename, int ms)
         add_track(filename);
     }
     Mix_FadeInMusic(tracks[filename], -1, ms);
+    if (muted)
+        pause();
 }
 
 void MusicManager::fade_out(int ms)
