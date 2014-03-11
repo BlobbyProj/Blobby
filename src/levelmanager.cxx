@@ -14,6 +14,7 @@
 #include "gloop.h"
 #include "powerup.h"
 
+/***** Do we still need this?? *****/
 bool LevelManager::load_level_old(std::string fname)
 {
 /* Object types:
@@ -145,8 +146,6 @@ bool LevelManager::load_level(std::string fname)
 		}
 	}
 	file.close();
-    music_manager->add_track("media/music/success_short.wav");
-    music_manager->add_track("media/music/death.wav");
 }
 
 void LevelManager::set_level_x( double x )
@@ -195,7 +194,6 @@ void LevelManager::step()
 	}
 	if (global_gamestate != global_previous_gamestate)
 	{
-        music_manager->stop();
 		object_manager->objects_clear();
 		switch(global_gamestate)
 		{
@@ -221,10 +219,7 @@ void LevelManager::step()
 				break;
 
 			case 2: //Level 1
-                music_manager->add_track("media/music/level1.wav");
-                music_manager->play("media/music/level1.wav");
-
-				level_width = 2960;
+                level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
 				level_y = 0;
@@ -235,9 +230,6 @@ void LevelManager::step()
                 
 				break;
             case 3: //Level 2
-                music_manager->add_track("media/music/level1.wav");
-                music_manager->play("media/music/level1.wav");
-                
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
@@ -249,8 +241,6 @@ void LevelManager::step()
                 
 				break;
             case 4: //Level 3
-                music_manager->add_track("media/music/level1.wav");
-                music_manager->play("media/music/level1.wav");
                 
 				level_width = 2960;
 				level_height = HEIGHT;
@@ -263,9 +253,6 @@ void LevelManager::step()
                 
 				break;
             case 5: //Level 4
-                music_manager->add_track("media/music/level1.wav");
-                music_manager->play("media/music/level1.wav");
-                
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
@@ -277,9 +264,6 @@ void LevelManager::step()
                 
 				break;
             case 6: //Level 5
-                music_manager->add_track("media/music/level1.wav");
-                music_manager->play("media/music/level1.wav");
-                
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
@@ -291,6 +275,7 @@ void LevelManager::step()
 		}
 		screen_manager->texture_pare();
 		object_manager->load_surfaces();
+        play_music();
 	}
 		previous_paused = global_paused;
 		global_previous_gamestate = global_gamestate;
@@ -310,4 +295,20 @@ void LevelManager::level_end(int score, double time, int win)
     else {
         music_manager->play("media/music/success_short.wav");
     }
+}
+
+void LevelManager::play_music()
+{
+    //std::cout << "global gamestate = " << global_gamestate << ", previous gamestate = " << global_previous_gamestate << std::endl;
+    if (global_gamestate == 0 || global_gamestate == 1) { // if displaying a menu
+        if (global_previous_gamestate != 0 && global_previous_gamestate != 1) { // if it wasn't on a menu before
+            music_manager->stop();
+            music_manager->fade_in("media/music/menu.wav", 500);
+        }
+    }
+    else { // level
+        music_manager->stop();
+        music_manager->fade_in("media/music/level.wav", 500);
+    }
+    
 }

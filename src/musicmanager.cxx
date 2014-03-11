@@ -24,6 +24,10 @@ void MusicManager::add_track(std::string filename)
 
 void MusicManager::play(std::string filename)
 {
+    if ( !loaded(filename) )
+    {
+        add_track(filename);
+    }
     // -1 says to loop music
     if (Mix_PlayMusic( tracks[filename], -1 ) != 0)
     {
@@ -62,10 +66,23 @@ void MusicManager::toggle()
 
 void MusicManager::fade_in(std::string filename, int ms)
 {
+    if ( !loaded(filename) )
+    {
+        add_track(filename);
+    }
     Mix_FadeInMusic(tracks[filename], -1, ms);
 }
 
 void MusicManager::fade_out(int ms)
 {
     Mix_FadeOutMusic(ms);
+}
+
+bool MusicManager::loaded(std::string name)
+{
+    if ( tracks.find(name) != tracks.end() ) {
+        return true;
+    } else {
+        return false;
+    }
 }
