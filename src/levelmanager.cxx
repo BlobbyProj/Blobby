@@ -349,16 +349,20 @@ void LevelManager::play_music()
     if (global_gamestate == 0 || global_gamestate == 1 || global_gamestate == 3) { // if displaying a menu
         if (global_previous_gamestate != 0 && global_previous_gamestate != 1 && global_previous_gamestate != 3) { // if it wasn't on a menu before
             music_manager->stop();
-            music_manager->fade_in("media/music/menu.wav", 500);
+            music_manager->fade_in("media/music/menu.wav", 800);
         }
     }
-    else if (global_gamestate >=4 && global_gamestate <=7) { // island1 or island 2
+    else if (global_gamestate >=4 && global_gamestate <=5) { // island1
         music_manager->stop();
-        music_manager->fade_in("media/music/island1.wav", 500);
+        music_manager->fade_in("media/music/island1.wav", 800);
+    }
+    else if (global_gamestate >=6 && global_gamestate <=7) { // island 2
+        music_manager->stop();
+        music_manager->fade_in("media/music/island2.wav", 800);
     }
     else if (global_gamestate >=8 && global_gamestate <=8){ // island 3
         music_manager->stop();
-        music_manager->fade_in("media/music/island3.wav", 500);
+        music_manager->fade_in("media/music/island3.wav", 800);
     }
     
 }
