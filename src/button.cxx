@@ -1,7 +1,5 @@
 #include "button.h"
 
-#include "globals.h"
-#include "screenmanager.h"
 #include "musicmanager.h"
 
 void ButtonPlay(bool init, std::string *filename)

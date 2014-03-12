@@ -1,8 +1,5 @@
 #include "playercharacter.h"
 
-#include "globals.h"
-#include "image.h"
-#include "screenmanager.h"
 #include "objectmanager.h"
 
 PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string fname, int flags)

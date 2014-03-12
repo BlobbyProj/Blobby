@@ -1,6 +1,3 @@
-
-//TODO: Fix Comments ***
-
 #ifndef GLOOP_H
 #define GLOOP_H
 

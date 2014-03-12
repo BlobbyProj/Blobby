@@ -1,10 +1,7 @@
 #include "flag.h"
 
-#include "globals.h"
 #include "image.h"
-#include "levelmanager.h"
 #include "objectmanager.h"
-#include "screenmanager.h"
 
 Flag::Flag(double X, double Y, int W, int H, std::string fname, int flags)
 {

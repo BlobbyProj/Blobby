@@ -1,7 +1,5 @@
 #include "gloop.h"
 
-#include "globals.h"
-#include "screenmanager.h"
 #include "objectmanager.h"
 
 Gloop::Gloop(double X, double Y, int W, int H, std::string fname, int flags)

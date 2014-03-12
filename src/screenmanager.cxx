@@ -4,7 +4,6 @@
 #include <functional>
 #include "globals.h"
 #include "levelmanager.h"
-#include "rectangle.h"
 
 #include <ciso646>
 #if defined( _LIBCPP_VERSION )
