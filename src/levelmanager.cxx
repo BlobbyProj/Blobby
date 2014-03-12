@@ -130,7 +130,7 @@ bool LevelManager::load_level(std::string fname)
 					object_manager->objects_add(new Enemy(80*j+8, 80*i, 64, 74, "media/enemies/torto.txt"));
 					break;
 				case BLOCK:
-					object_manager->objects_add(new Block(80*j-2, 80*i, 84, 80, "media/objects/block.txt"));
+					object_manager->objects_add(new Block(80*j, 80*i, 80, 80, "media/objects/block.txt"));
 					break;
 				case FLAG:
                     // height is -80(5-i) to compensate for flag's height being HEIGHT
@@ -195,6 +195,7 @@ void LevelManager::step()
 	if (global_gamestate != global_previous_gamestate)
 	{
 		object_manager->objects_clear();
+		global_invalid_level = false;
 		switch(global_gamestate)
 		{
 			case 0: //Main Menu
@@ -217,61 +218,109 @@ void LevelManager::step()
 				level_x = 0;
 				level_y = 0;
 				break;
-
-			case 2: //Level 1
-                level_width = 2960;
+                
+            case 2: //Scoreboard
+            	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/scoreboard.txt"));
+				object_manager->objects_add(new Button(340,290, -1, -1, ButtonContinue));
+				object_manager->objects_add(new Button(130,290, -1, -1, ButtonReplay));
+				object_manager->objects_add(new Button(240,400, -1, -1, ButtonQuit));
+                object_manager->objects_add(new Button(340,350, -1, -1, ButtonLevelMap));
+				object_manager->objects_add(new Button(130,350, -1, -1, ButtonMainMenuSmall));
+				level_width = WIDTH;
+				level_height = HEIGHT;
+				level_x = 0;
+				level_y = 0;
+				break;
+                
+            case 3: //Level Map
+            	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/levelMap.txt"));
+				object_manager->objects_add(new Button(50,150, -1, -1, ButtonIsland1));
+				object_manager->objects_add(new Button(410,160, -1, -1, ButtonIsland3));
+				object_manager->objects_add(new Button(230,280, -1, -1, ButtonIsland2));
+				level_width = WIDTH;
+				level_height = HEIGHT;
+				level_x = 0;
+				level_y = 0;
+				break;
+				
+            // Island 1 begins
+			case 4: //Level 1
+				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
 				level_y = 0;
 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));;
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island1.txt"));;
                 load_level("media/levels/level1.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
-                
 				break;
-            case 3: //Level 2
+
+            case 5: //Level 2
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
 				level_y = 0;
                 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island1.txt"));
                 load_level("media/levels/level2.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
-            case 4: //Level 3
-                
+
+            // Island 2 begins
+            case 6: //Level 3
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
 				level_y = 0;
                 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level2.txt"));
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island2.txt"));
                 load_level("media/levels/level3.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
-            case 5: //Level 4
+
+            case 7: //Level 4
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
 				level_y = 0;
                 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level2.txt"));
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island2.txt"));
                 load_level("media/levels/level4.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
-            case 6: //Level 5
+                
+            // Island 3 begins
+            case 8: //Level 5
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
 				level_y = 0;
                 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level3.txt"));
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island3.txt"));
                 load_level("media/levels/level5.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+
+                break;
+                
+            case 9: //Level 6
+				level_width = 2960;
+				level_height = HEIGHT;
+				level_x = 0;
+				level_y = 0;
+                
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island3.txt"));
+                load_level("media/levels/level6.txt");
+                object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+
+                break;
+             default:
+				//if the gamestate doesn't exist
+				global_invalid_level = true;
+				break;
+
 		}
 		screen_manager->texture_pare();
 		object_manager->load_surfaces();
@@ -279,7 +328,6 @@ void LevelManager::step()
 	}
 		previous_paused = global_paused;
 		global_previous_gamestate = global_gamestate;
-		//~ previous_gamestate = global_gamestate;
 	
 }
 
@@ -288,29 +336,29 @@ void LevelManager::level_end(int score, double time, int win)
     std::cout << "time = " << time << std::endl;
     std::cout << "score = " << score << std::endl;
     music_manager->stop();
+    global_previous_level = global_gamestate;
     if (!win) {
         object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/lose.txt", Object::FIXED));
-        music_manager->play("media/music/death.wav");
+        music_manager->play("media/music/death.wav", 1);
     }
     else {
-        music_manager->play("media/music/success_short.wav");
+        music_manager->play("media/music/success_short.wav", 1);
     }
 }
 
 void LevelManager::play_music()
 {
-    //std::cout << "global gamestate = " << global_gamestate << ", previous gamestate = " << global_previous_gamestate << std::endl;
-    if (global_gamestate == 0 || global_gamestate == 1) { // if displaying a menu
-        if (global_previous_gamestate != 0 && global_previous_gamestate != 1) { // if it wasn't on a menu before
+    if (global_gamestate == 0 || global_gamestate == 1 || global_gamestate == 3) { // if displaying a menu
+        if (global_previous_gamestate != 0 && global_previous_gamestate != 1 && global_previous_gamestate != 3) { // if it wasn't on a menu before
             music_manager->stop();
             music_manager->fade_in("media/music/menu.wav", 500);
         }
     }
-    else if (global_gamestate >=2 && global_gamestate <=5) { // island1 or island 2
+    else if (global_gamestate >=4 && global_gamestate <=7) { // island1 or island 2
         music_manager->stop();
         music_manager->fade_in("media/music/island1.wav", 500);
     }
-    else if (global_gamestate >=6 && global_gamestate <=6){ // island 3
+    else if (global_gamestate >=8 && global_gamestate <=9){ // island 3
         music_manager->stop();
         music_manager->fade_in("media/music/island3.wav", 500);
     }
