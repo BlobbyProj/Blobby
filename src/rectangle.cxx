@@ -17,6 +17,15 @@ Rectangle::Rectangle(Point p, double w, double h)
     height = h;
 }
 
+
+Rectangle::Rectangle(double x, double y, double w, double h)
+{
+    position.x = x;
+    position.y = y;
+    width = w;
+    height = h;
+}
+
 unsigned int Rectangle::get_collision(Rectangle bound)
 {
 /*  

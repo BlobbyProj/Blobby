@@ -88,8 +88,12 @@ void PlayerCharacter::step()
 
 	//If not dead
 	int i;
-	blocked[0] = blocked[1] = blocked[2] = blocked[3] = 0;
-	std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
+	std::vector<ObjectManager::Collision>* collisions;
+
+	bool canjump = false;
+
+	Rectangle newbound(position.x, position.y+1, width, height);
+	collisions = object_manager->get_collisions(oid, newbound);
 	for (i = 0; i < collisions->size(); i++)
 	{
 		unsigned int key = (*collisions)[i].oid;
@@ -111,7 +115,7 @@ void PlayerCharacter::step()
 				object_manager->objects_get(key)->set_solid(0);
 				break;
 			case 5: //Block
-				blocked[(*collisions)[i].type] = 1;
+				canjump = true;
 				break;
 			case 6: //Flag
                 score += 60-time;
@@ -142,14 +146,10 @@ void PlayerCharacter::step()
 	{
 		yvel += global_gravity*global_timestep;
 	}
-	else
-	{
-		blocked[3] = 1;
-	}
     
 	//Apply velocity
 	if (pressed[1] == 1)
-		if (blocked[3] == 1)
+		if (canjump == true || position.y >= 460-height)
 			yvel = -vel*2;
 	xvel = (pressed[2]*300)-(pressed[0]*300);
 
@@ -160,13 +160,55 @@ void PlayerCharacter::step()
 		dir = 0;
 
 	//Apply movement
-	if ((xvel*global_timestep > 0 && blocked[2] == 0) || (xvel*global_timestep < 0 && blocked[0] == 0))
-		position.x = position.x + xvel*global_timestep;
+	if (xvel != 0)
+	{
+		bool block = false;
+		
+		Rectangle newbound(position.x + xvel*global_timestep, position.y, width, height);
+		collisions = object_manager->get_collisions(oid, newbound);
+		for (i = 0; i < collisions->size(); i++)
+		{
+			unsigned int key = (*collisions)[i].oid;
+			if (object_manager->objects_type(key) == 5)
+			{
+				block = true;
+				if (xvel*global_timestep > 0)
+					position.x = object_manager->objects_get(key)->get_x()-width;
+				else
+					position.x = object_manager->objects_get(key)->get_x()+object_manager->objects_get(key)->get_width()-0.1;
+			}
+		}
+		delete collisions;
+		if (block == false)
+			position.x = position.x + xvel*global_timestep;
+		else
+			xvel = 0;
+	}
 
-	if ((yvel*global_timestep > 0 && blocked[3] == 0) || (yvel*global_timestep < 0 && blocked[1] == 0))
-		position.y = position.y + yvel*global_timestep;
-	if ((yvel*global_timestep > 0 && blocked[3] == 1) || (yvel*global_timestep < 0 && blocked[1] == 1))
-		yvel = 0;
+	if (yvel != 0)
+	{
+		Rectangle newbound(position.x, position.y + yvel*global_timestep, width, height);
+		bool block = false;
+
+		collisions = object_manager->get_collisions(oid, newbound);
+		for (i = 0; i < collisions->size(); i++)
+		{
+			unsigned int key = (*collisions)[i].oid;
+			if (object_manager->objects_type(key) == 5)
+			{
+				block = true;
+				if (yvel*global_timestep > 0)
+					position.y = object_manager->objects_get(key)->get_y()-height;
+				else
+					position.y = object_manager->objects_get(key)->get_y()+object_manager->objects_get(key)->get_height()-0.1;
+			}
+		}
+		delete collisions;
+		if (block == false)
+			position.y = position.y + yvel*global_timestep;
+		else
+			yvel = 0;
+	}
 
 	//Contain blobby
 	if (position.x < 0)
