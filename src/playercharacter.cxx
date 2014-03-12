@@ -27,6 +27,7 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
     score = 0;
     time = 0;
     powerup = false;
+    powerup_time = 0;
     
 	solid = 1;
 }
@@ -126,6 +127,7 @@ void PlayerCharacter::step()
 				lives += 1;
 				position.y -= 16;
 				object_manager->objects_get(key)->set_solid(0);
+				object_manager->objects_get(key)->set_trashed(1);
                 score += 10;
 				//make the score on the screen change!
 				//make Blobby grow in size--> blobbyRight and blobbyLeft
@@ -134,13 +136,25 @@ void PlayerCharacter::step()
 
 				break;
             case 8: //Powerup
+            	powerup = true;
                 position.y -= 14;
                 object_manager->objects_get(key)->set_solid(0);
+				object_manager->objects_get(key)->set_trashed(1);
                 break;
 		}
 	}
 	delete collisions;
     
+	//Time powerup
+	if (powerup == true)
+		powerup_time += global_timestep;
+	if (powerup_time >= 2)
+	{
+		powerup = 0;
+		powerup_time = 0;
+	}
+
+
 	//Apply gravity
 	if (position.y < 460-height)
 	{

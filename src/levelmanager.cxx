@@ -140,7 +140,7 @@ bool LevelManager::load_level(std::string fname)
 					object_manager->objects_add(new Gloop(80*j+20, 80*i+20, 40, 40, "media/objects/gloop.txt"));
 					break;
                 case POWERUP:
-					object_manager->objects_add(new Powerup(80*j+20, 80*i+20, 40, 40, "media/objects/powerup.txt", 2));
+					object_manager->objects_add(new Powerup(80*j+20, 80*i+20, 40, 40, "media/objects/powerup.txt"));
 					break;
 			}
 		}

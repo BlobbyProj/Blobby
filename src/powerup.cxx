@@ -1,7 +1,7 @@
 #include "powerup.h"
 #include "objectmanager.h"
 
-Powerup::Powerup(double X, double Y, int W, int H, std::string fname, double time, int flags)
+Powerup::Powerup(double X, double Y, int W, int H, std::string fname, int flags)
 {
 	apply_flags(flags);
 	type = 8;
@@ -14,11 +14,6 @@ Powerup::Powerup(double X, double Y, int W, int H, std::string fname, double tim
     height = H;
     
     solid = 1;
-    
-    total_time = time;
-    collected_time = 0;
-    collected = false;
-    p = NULL;
 }
 
 Powerup::~Powerup()
@@ -30,35 +25,6 @@ Powerup::~Powerup()
 	}
     
 	delete[] keys;
-}
-
-void Powerup::step(){
-    if (collected_time > total_time){
-        p->set_powerup(false);
-        p = NULL;
-        trashed = 1;
-    }
-    if (collected) {
-        collected_time += global_timestep;
-    }
-    else {
-        int i;
-        std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
-        for (i = 0; i < collisions->size(); i++)
-        {
-            unsigned int key = (*collisions)[i].oid;
-            switch(object_manager->objects_type(key))
-            {
-                case 1: //Player
-                    p = (PlayerCharacter *) object_manager->objects_get(key);
-                    p->set_powerup(true);
-                    collected = true;
-                    visible = 0;
-                    break;
-            }
-        }
-        delete collisions;
-    }
 }
 
 void Powerup::draw()

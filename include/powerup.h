@@ -9,10 +9,6 @@
  */
 class Powerup : public Object {
 private:
-    double total_time;
-    bool collected;
-    double collected_time;
-    PlayerCharacter *p;
 
 public:
     // constructor for Powerup - creates new instance of Powerup object
@@ -21,10 +17,9 @@ public:
     // param width     width of Powerup in pixels
     // param height    height of Powerup in pixels
     // param fname     text file with the image paths
-    // param time      how long the powerup will last
     // pre-conditions  Powerup does not yet exist and fname exists and contains the appropriate image paths
     // post-conditions Powerup exists
-    Powerup(double X, double Y, int width, int height, std::string fname, double time, int flags=0);
+    Powerup(double X, double Y, int width, int height, std::string fname, int flags=0);
     
     // destructor for Powerup - deletes instance of Powerup object
     // pre-conditions  Powerup exists
@@ -34,7 +29,7 @@ public:
     // called every iteration of the game loop; inherited from Object
     // Checks for collisions with the player
     // Ensures powerup only lasts for set time
-    void step();
+    void step() {};
     
     // called every time there is an event; inherited from Object
     // Powerup does nothing because once loaded no event affects it

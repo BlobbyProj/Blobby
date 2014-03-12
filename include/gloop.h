@@ -5,8 +5,6 @@
 
 class Gloop : public Object {
 	private:
-		int previous_x;
-		int previous_y;
 	public:
         // constructor for Gloop - creates new instance of Gloop object
         // param X         x coordinate for location of upper-left corner of Gloop
@@ -27,7 +25,7 @@ class Gloop : public Object {
         // checks if Gloop has collided with anything
         // pre-conditions  Gloop exists and level currently running
         // post-conditions Gloop is moving properly
-		void step();
+		void step() {};
     
         // called every time there is an event; inherited from Object
         // Gloops are not effected by events so this function does nothing
