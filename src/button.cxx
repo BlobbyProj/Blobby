@@ -157,7 +157,7 @@ void ButtonIsland3(bool init, std::string *filename)
 		*filename = "media/buttons/island3.txt";
 		return;
 	}
-	global_gamestate = 9;
+	global_gamestate = 8;
 }
 
 void ButtonContinue(bool init, std::string *filename)

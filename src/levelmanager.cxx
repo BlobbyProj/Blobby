@@ -221,8 +221,13 @@ void LevelManager::step()
                 
             case 2: //Scoreboard
             	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/scoreboard.txt"));
-				object_manager->objects_add(new Button(340,290, -1, -1, ButtonContinue));
-				object_manager->objects_add(new Button(130,290, -1, -1, ButtonReplay));
+                if (global_previous_gamestate != NUM_LEVELS+3){
+                    object_manager->objects_add(new Button(340,290, -1, -1, ButtonContinue));
+                    object_manager->objects_add(new Button(130,290, -1, -1, ButtonReplay));
+                }
+                else {
+                    object_manager->objects_add(new Button(235,290, -1, -1, ButtonReplay));
+                }
 				object_manager->objects_add(new Button(240,400, -1, -1, ButtonQuit));
                 object_manager->objects_add(new Button(340,350, -1, -1, ButtonLevelMap));
 				object_manager->objects_add(new Button(130,350, -1, -1, ButtonMainMenuSmall));
@@ -304,18 +309,7 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 
                 break;
-                
-            case 9: //Level 6
-				level_width = 2960;
-				level_height = HEIGHT;
-				level_x = 0;
-				level_y = 0;
-                
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island3.txt"));
-                load_level("media/levels/level6.txt");
-                object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 
-                break;
              default:
 				//if the gamestate doesn't exist
 				global_invalid_level = true;
@@ -328,7 +322,7 @@ void LevelManager::step()
 	}
 		previous_paused = global_paused;
 		global_previous_gamestate = global_gamestate;
-	
+    //std::cout<< "global gamestate = " << global_gamestate << std::endl;
 }
 
 void LevelManager::level_end(int score, double time, int win)
@@ -358,7 +352,7 @@ void LevelManager::play_music()
         music_manager->stop();
         music_manager->fade_in("media/music/island1.wav", 500);
     }
-    else if (global_gamestate >=8 && global_gamestate <=9){ // island 3
+    else if (global_gamestate >=8 && global_gamestate <=8){ // island 3
         music_manager->stop();
         music_manager->fade_in("media/music/island3.wav", 500);
     }
