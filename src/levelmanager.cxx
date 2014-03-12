@@ -229,9 +229,8 @@ void LevelManager::step()
                 else {
                     object_manager->objects_add(new Button(235,290, -1, -1, ButtonReplay));
                 }
-				object_manager->objects_add(new Button(240,400, -1, -1, ButtonQuit));
-                object_manager->objects_add(new Button(340,350, -1, -1, ButtonLevelMap));
-				object_manager->objects_add(new Button(130,350, -1, -1, ButtonMainMenuSmall));
+                object_manager->objects_add(new Button(360,350, -1, -1, ButtonLevelMap));
+				object_manager->objects_add(new Button(150,350, -1, -1, ButtonMainMenuSmall));
 				level_width = WIDTH;
 				level_height = HEIGHT;
 				level_x = 0;
