@@ -308,7 +308,7 @@ void LevelManager::play_music()
     }
     else { // level
         music_manager->stop();
-        music_manager->fade_in("media/music/level.wav", 500);
+        music_manager->fade_in("media/music/island1.wav", 500);
     }
     
 }
