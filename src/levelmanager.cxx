@@ -257,7 +257,12 @@ void LevelManager::step()
 				level_x = 0;
 				level_y = 0;
 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island1.txt"));;
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island1.txt"));
+                object_manager->objects_add(new Image(20,175, -1, -1, "media/tutorial/move.txt"));
+                object_manager->objects_add(new Image(160,150, -1, -1, "media/tutorial/jump.txt"));
+                object_manager->objects_add(new Image(480,250, -1, -1, "media/tutorial/life.txt"));
+                object_manager->objects_add(new Image(640,200, -1, -1, "media/tutorial/powerup.txt"));
+                object_manager->objects_add(new Image(840,150, -1, -1, "media/tutorial/avoid.txt"));
                 load_level("media/levels/level1.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 				break;
