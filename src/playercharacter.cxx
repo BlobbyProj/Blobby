@@ -138,6 +138,11 @@ void PlayerCharacter::step()
                 object_manager->objects_get(key)->set_solid(0);
 				object_manager->objects_get(key)->set_trashed(1);
                 break;
+			case 9: //Spike
+				lives = 0;
+				level_manager->level_end(score, time, 0);
+				object_manager->objects_get(key)->set_solid(0);
+				break;
 		}
 	}
 	delete collisions;

@@ -17,6 +17,7 @@
 #define FLAG 6
 #define GLOOP 7
 #define POWERUP 8
+#define SPIKE 9
 
 //global variables used throughout the rest of the files
 
