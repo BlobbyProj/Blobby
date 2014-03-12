@@ -1,0 +1,4 @@
+1
+2
+media/buttons/scoreboard/mainSmall.png
+media/buttons/scoreboard/mainSmallPressed.png

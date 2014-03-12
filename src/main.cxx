@@ -99,7 +99,7 @@ int main( int argc, char* args[] )
 					case SDLK_RETURN:
 						if(global_gamestate == 0 || global_paused == 1){
 							//eventually should make this go to the current level the user is on
-							if(global_previous_level == 3){
+							if(global_previous_level == 4){
 								global_gamestate = 3;
 							}else{
 								global_paused = 0;

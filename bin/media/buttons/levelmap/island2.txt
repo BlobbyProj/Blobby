@@ -1,0 +1,5 @@
+1
+2
+media/buttons/levelmap/island2.png
+media/buttons/levelmap/island2pressed.png
+
