@@ -221,7 +221,7 @@ void LevelManager::step()
                 
             case 2: //Scoreboard
             	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/scoreboard.txt"));
-                if (global_previous_gamestate != NUM_LEVELS+3){
+                if (global_previous_gamestate != NUM_LEVELS+3){ // don't show continue if completed last level
                     object_manager->objects_add(new Button(340,290, -1, -1, ButtonContinue));
                     object_manager->objects_add(new Button(130,290, -1, -1, ButtonReplay));
                 }
@@ -322,7 +322,6 @@ void LevelManager::step()
 	}
 		previous_paused = global_paused;
 		global_previous_gamestate = global_gamestate;
-    //std::cout<< "global gamestate = " << global_gamestate << std::endl;
 }
 
 void LevelManager::level_end(int score, double time, int win)
