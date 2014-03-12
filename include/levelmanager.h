@@ -54,7 +54,9 @@ class LevelManager {
         // param time the time it took to win or lose
         // param win: 0 if lose, 1 if win
         void level_end(int score, double time, int win);
-        
+    
+        void play_music();
+    
 };
 
 #endif
