@@ -106,6 +106,7 @@ void PlayerCharacter::step()
                     break;
                 }
                 lives--;
+				position.y += 16;
                 score -= 5;
                 if (lives < 1)
                 {
@@ -129,14 +130,10 @@ void PlayerCharacter::step()
 				object_manager->objects_get(key)->set_solid(0);
 				object_manager->objects_get(key)->set_trashed(1);
                 score += 10;
-				//make the score on the screen change!
-				//make Blobby grow in size--> blobbyRight and blobbyLeft
-				//~ Change left image to :"media/blobbys/blobbyleft.png";
-				//~ Change right image to :"media/blobbys/blobbyright.png";
-
 				break;
             case 8: //Powerup
             	powerup = true;
+            	powerup_time = 0;
                 position.y -= 14;
                 object_manager->objects_get(key)->set_solid(0);
 				object_manager->objects_get(key)->set_trashed(1);
@@ -144,15 +141,27 @@ void PlayerCharacter::step()
 		}
 	}
 	delete collisions;
-    
-	//Time powerup
-	if (powerup == true)
-		powerup_time += global_timestep;
-	if (powerup_time >= 2)
+
+	if (powerup)
 	{
-		powerup = 0;
-		powerup_time = 0;
-	}
+        width = 40+16*lives;
+        height = 30+16*lives;
+       	powerup_time += global_timestep;
+		if (powerup_time >= 2)
+		{
+			powerup = 0;
+			powerup_time = 0;
+			width = 16+16*lives;
+        	height = 16+16*lives;
+			position.y += 14;
+		}
+    }
+    else
+    {
+        width = 16+16*lives;
+        height = 16+16*lives;
+    }
+
 
 
 	//Apply gravity
@@ -186,7 +195,7 @@ void PlayerCharacter::step()
 			if (object_manager->objects_type(key) == 5)
 			{
 				block = true;
-				if (xvel*global_timestep > 0)
+				if (object_manager->objects_get(key)->get_x()+(object_manager->objects_get(key)->get_width()/2.0) > position.x+(width/2.0))
 					position.x = object_manager->objects_get(key)->get_x()-width;
 				else
 					position.x = object_manager->objects_get(key)->get_x()+object_manager->objects_get(key)->get_width()-0.1;
@@ -211,7 +220,7 @@ void PlayerCharacter::step()
 			if (object_manager->objects_type(key) == 5)
 			{
 				block = true;
-				if (yvel*global_timestep > 0)
+				if (object_manager->objects_get(key)->get_y()+(object_manager->objects_get(key)->get_height()/2.0) > position.y+(height/2.0))
 					position.y = object_manager->objects_get(key)->get_y()-height;
 				else
 					position.y = object_manager->objects_get(key)->get_y()+object_manager->objects_get(key)->get_height()-0.1;
@@ -237,15 +246,6 @@ void PlayerCharacter::step()
 
 	//Move screen
 	level_manager->set_level_x( position.x );
-    
-    if (powerup){
-        width = 40+16*lives;
-        height = 30+16*lives;
-    }
-    else {
-        width = 16+16*lives;
-        height = 16+16*lives;
-    }
 }
 
 void PlayerCharacter::draw()
