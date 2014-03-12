@@ -247,7 +247,7 @@ void LevelManager::step()
 				level_x = 0;
 				level_y = 0;
                 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level2.txt"));
                 load_level("media/levels/level3.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
@@ -258,7 +258,7 @@ void LevelManager::step()
 				level_x = 0;
 				level_y = 0;
                 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level2.txt"));
                 load_level("media/levels/level4.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
@@ -269,7 +269,7 @@ void LevelManager::step()
 				level_x = 0;
 				level_y = 0;
                 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level1.txt"));
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/level3.txt"));
                 load_level("media/levels/level5.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 		}
@@ -306,9 +306,13 @@ void LevelManager::play_music()
             music_manager->fade_in("media/music/menu.wav", 500);
         }
     }
-    else { // level
+    else if (global_gamestate >=2 && global_gamestate <=5) { // island1 or island 2
         music_manager->stop();
         music_manager->fade_in("media/music/island1.wav", 500);
+    }
+    else if (global_gamestate >=6 && global_gamestate <=6){ // island 3
+        music_manager->stop();
+        music_manager->fade_in("media/music/island3.wav", 500);
     }
     
 }

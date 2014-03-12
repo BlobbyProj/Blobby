@@ -1,4 +1,4 @@
-﻿1
 1
-media/background/level2.png
+1
+media/backgrounds/level2.png
 
