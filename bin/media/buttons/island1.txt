@@ -1,5 +1,0 @@
-1
-2
-media/buttons/island1.png
-media/buttons/island1pressed.png
-

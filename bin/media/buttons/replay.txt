@@ -1,4 +1,0 @@
-1
-2
-media/buttons/replay.png
-media/buttons/replayPressed.png

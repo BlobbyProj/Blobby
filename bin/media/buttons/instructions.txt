@@ -1,4 +1,0 @@
-1
-2
-media/buttons/instructions.png
-media/buttons/instructionsPressed.png

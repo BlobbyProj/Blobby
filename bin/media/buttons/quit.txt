@@ -1,4 +1,0 @@
-1
-2
-media/buttons/quit.png
-media/buttons/quitPressed.png

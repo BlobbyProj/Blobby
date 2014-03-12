@@ -8,18 +8,18 @@ void ButtonPlay(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/play.txt";
+		*filename = "media/buttons/main_menu/play.txt";
 		return;
 	}
 
-	global_gamestate = 2;
+	global_gamestate = 3;
 }
 
 void ButtonQuit(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/quit.txt";
+		*filename = "media/buttons/main_menu/quit.txt";
 		return;
 	}
 	
@@ -41,7 +41,7 @@ void ButtonResume(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/resume.txt";
+		*filename = "media/buttons/pause_menu/resume.txt";
 		return;
 	}
 	
@@ -51,29 +51,23 @@ void ButtonReplay(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/replay.txt";
+		*filename = "media/buttons/pause_menu/replay.txt";
 		return;
 	}
+	
 	global_paused = 0;
+	
+	//to ensure that levelmanager->step() reloads the level
 	global_previous_gamestate = -2;
+	global_gamestate = global_previous_level;
 
-}
-
-void ButtonReplay2(bool init, std::string *filename)
-{
-	if (init == 1)
-	{
-		*filename = "media/buttons/replay.txt";
-		return;
-	}
-	global_gamestate = global_previous_gamestate;
 }
 
 void ButtonMainMenu(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/menu.txt";
+		*filename = "media/buttons/pause_menu/menu.txt";
 		return;
 	}
 	
@@ -85,7 +79,7 @@ void ButtonMainMenuSmall(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/mainSmall.txt";
+		*filename = "media/buttons/scoreboard/mainSmall.txt";
 		return;
 	}
 	
@@ -97,7 +91,7 @@ void ButtonGoBack(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/back.txt";
+		*filename = "media/buttons/instructions/back.txt";
 		return;
 	}
 	
@@ -108,7 +102,7 @@ void ButtonInstructions(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/instructions.txt";
+		*filename = "media/buttons/main_menu/instructions.txt";
 		return;
 	}
 
@@ -130,27 +124,27 @@ void ButtonIsland1(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/island1.txt";
+		*filename = "media/buttons/levelmap/island1.txt";
 		return;
 	}
-	global_gamestate = 2;
+	global_gamestate = 4;
 }
 
 void ButtonIsland2(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/island2.txt";
+		*filename = "media/buttons/levelmap/island2.txt";
 		return;
 	}
-	global_gamestate = 5;
+	global_gamestate = 6;
 }
 
 void ButtonIsland3(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/island3.txt";
+		*filename = "media/buttons/levelmap/island3.txt";
 		return;
 	}
 	global_gamestate = 8;
@@ -160,19 +154,27 @@ void ButtonContinue(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/continue.txt";
+		*filename = "media/buttons/scoreboard/continue.txt";
 		return;
 	}
+	int next_level = global_previous_level + 1;
+	//if there is a next level
+	if(!global_invalid_level){
+		global_gamestate = next_level;
+	}else{
+		global_gamestate = 0;
+	}
+
 }
 
 void ButtonLevelMap(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/levelMap.txt";
+		*filename = "media/buttons/scoreboard/levelMap.txt";
 		return;
 	}
-	global_gamestate = 12;
+	global_gamestate = 3;
 }
 
 Button::Button(double X, double Y, int W, int H, void (*otherFunction)(bool,std::string*), int flags)

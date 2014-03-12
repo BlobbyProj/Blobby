@@ -22,14 +22,14 @@ void MusicManager::add_track(std::string filename)
     tracks[filename] = m;
 }
 
-void MusicManager::play(std::string filename)
+void MusicManager::play(std::string filename, int loop)
 {
     if ( !loaded(filename) )
     {
         add_track(filename);
     }
     // -1 says to loop music
-    if (Mix_PlayMusic( tracks[filename], -1 ) != 0)
+    if (Mix_PlayMusic( tracks[filename], loop ) != 0)
     {
         MARK
     }

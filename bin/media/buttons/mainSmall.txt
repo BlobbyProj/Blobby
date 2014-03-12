@@ -1,4 +1,0 @@
-1
-2
-media/buttons/mainSmall.png
-media/buttons/mainSmallPressed.png

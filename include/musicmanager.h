@@ -30,9 +30,10 @@ public:
  
     // plays the specified track
     // param filename of track that should be played
+    // param the number of times the music should loop; -1 to loop continuously
     // pre-conditions there is no currently playing music
     // post-conditions the correct music is playing
-    void play(std::string filename);
+    void play(std::string filename, int loop);
     
     // pauses the currently playing music
     void pause();
