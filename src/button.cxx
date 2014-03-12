@@ -57,7 +57,8 @@ void ButtonReplay(bool init, std::string *filename)
 	
 	global_paused = 0;
 	
-	//at end of level
+	//to ensure that levelmanager->step() reloads the level
+	global_previous_gamestate = -2;
 	global_gamestate = global_previous_level;
 
 }

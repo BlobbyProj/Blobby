@@ -196,6 +196,7 @@ void LevelManager::step()
 	{
 		object_manager->objects_clear();
 		global_invalid_level = false;
+		    
 		switch(global_gamestate)
 		{
 			case 0: //Main Menu
@@ -250,6 +251,7 @@ void LevelManager::step()
 				
             // Island 1 begins
 			case 4: //Level 1
+				global_previous_level = global_gamestate;
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
@@ -261,6 +263,7 @@ void LevelManager::step()
 				break;
 
             case 5: //Level 2
+   				global_previous_level = global_gamestate;
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
@@ -274,6 +277,7 @@ void LevelManager::step()
 
             // Island 2 begins
             case 6: //Level 3
+   				global_previous_level = global_gamestate;
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
@@ -286,6 +290,7 @@ void LevelManager::step()
 				break;
 
             case 7: //Level 4
+   				global_previous_level = global_gamestate;            
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
@@ -299,6 +304,7 @@ void LevelManager::step()
                 
             // Island 3 begins
             case 8: //Level 5
+   				global_previous_level = global_gamestate;            
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
@@ -329,7 +335,6 @@ void LevelManager::level_end(int score, double time, int win)
     std::cout << "time = " << time << std::endl;
     std::cout << "score = " << score << std::endl;
     music_manager->stop();
-    global_previous_level = global_gamestate;
     if (!win) {
         object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/lose.txt", Object::FIXED));
         music_manager->play("media/music/death.wav", 1);
