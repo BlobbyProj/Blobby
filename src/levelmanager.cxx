@@ -2,6 +2,8 @@
 
 #include <fstream>
 #include <sstream>
+#include <stdlib.h>
+#include <time.h>
 #include "objectmanager.h"
 #include "screenmanager.h"
 #include "musicmanager.h"
@@ -120,14 +122,18 @@ bool LevelManager::load_level(std::string fname)
 		{
 			int obj_type;
 			buffer >> obj_type;
-
+            std::string enemy = "";
+            int randIndex;
 			switch(obj_type)
 			{
 				case PLAYERCHARACTER:
 					object_manager->objects_add(new PlayerCharacter(80*j, 80*i, 80, 80, "media/blobbys/blobby.txt"));
 					break;
 				case ENEMY:
-					object_manager->objects_add(new Enemy(80*j+8, 80*i, 64, 74, "media/enemies/torto.txt"));
+                    srand ( time(NULL) );
+                    randIndex = rand() % (e_list_len-1);
+                    enemy = enemy_list[randIndex];
+                    object_manager->objects_add(new Enemy(80*j+8, 80*i, 64, 74, "media/enemies/"+enemy+".txt"));
 					break;
 				case BLOCK:
 					object_manager->objects_add(new Block(80*j, 80*i, 80, 80, "media/objects/block.txt"));
