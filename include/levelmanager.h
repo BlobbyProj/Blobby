@@ -21,6 +21,13 @@ class LevelManager {
 
         int score;
         int time;
+    
+        int island;
+    
+        std::string enemy_list[7] = {"goon", "goon2", "torto", "torto2", "spikee", "vacuur", "vacuur2"};
+        std::string get_enemy();
+    
+        void set_progress();
 		
 	public:
         // constructor for LevelManager - controls the levels in the game

@@ -1,5 +1,5 @@
 #include "fallingobj.h"
-#include "globals.h"
+
 #include "playercharacter.h"
 
 void FallingObj::step() {

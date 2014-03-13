@@ -1,8 +1,5 @@
 #include "playercharacter.h"
 
-#include "globals.h"
-#include "image.h"
-#include "screenmanager.h"
 #include "objectmanager.h"
 
 PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string fname, int flags)
@@ -30,6 +27,7 @@ PlayerCharacter::PlayerCharacter(double X, double Y, int W, int H, std::string f
     score = 0;
     time = 0;
     powerup = false;
+    powerup_time = 0;
     
 	solid = 1;
 }
@@ -91,8 +89,12 @@ void PlayerCharacter::step()
 
 	//If not dead
 	int i;
-	blocked[0] = blocked[1] = blocked[2] = blocked[3] = 0;
-	std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
+	std::vector<ObjectManager::Collision>* collisions;
+
+	bool canjump = false;
+
+	Rectangle newbound(position.x, position.y+1, width, height);
+	collisions = object_manager->get_collisions(oid, newbound);
 	for (i = 0; i < collisions->size(); i++)
 	{
 		unsigned int key = (*collisions)[i].oid;
@@ -104,6 +106,7 @@ void PlayerCharacter::step()
                     break;
                 }
                 lives--;
+				position.y += 16;
                 score -= 5;
                 if (lives < 1)
                 {
@@ -114,7 +117,7 @@ void PlayerCharacter::step()
 				object_manager->objects_get(key)->set_solid(0);
 				break;
 			case 5: //Block
-				blocked[(*collisions)[i].type] = 1;
+				canjump = true;
 				break;
 			case 6: //Flag
                 score += 60-time;
@@ -125,34 +128,56 @@ void PlayerCharacter::step()
 				lives += 1;
 				position.y -= 16;
 				object_manager->objects_get(key)->set_solid(0);
+				object_manager->objects_get(key)->set_trashed(1);
                 score += 10;
-				//make the score on the screen change!
-				//make Blobby grow in size--> blobbyRight and blobbyLeft
-				//~ Change left image to :"media/blobbys/blobbyleft.png";
-				//~ Change right image to :"media/blobbys/blobbyright.png";
-
 				break;
             case 8: //Powerup
+            	powerup = true;
+            	powerup_time = 0;
                 position.y -= 14;
                 object_manager->objects_get(key)->set_solid(0);
+				object_manager->objects_get(key)->set_trashed(1);
                 break;
+			case 9: //Spike
+				lives = 0;
+				level_manager->level_end(score, time, 0);
+				object_manager->objects_get(key)->set_solid(0);
+				break;
 		}
 	}
 	delete collisions;
-    
+
+	if (powerup)
+	{
+        width = 40+16*lives;
+        height = 30+16*lives;
+       	powerup_time += global_timestep;
+		if (powerup_time >= 2)
+		{
+			powerup = 0;
+			powerup_time = 0;
+			width = 16+16*lives;
+        	height = 16+16*lives;
+			position.y += 14;
+		}
+    }
+    else
+    {
+        width = 16+16*lives;
+        height = 16+16*lives;
+    }
+
+
+
 	//Apply gravity
 	if (position.y < 460-height)
 	{
 		yvel += global_gravity*global_timestep;
 	}
-	else
-	{
-		blocked[3] = 1;
-	}
     
 	//Apply velocity
 	if (pressed[1] == 1)
-		if (blocked[3] == 1)
+		if (canjump == true || position.y >= 460-height)
 			yvel = -vel*2;
 	xvel = (pressed[2]*300)-(pressed[0]*300);
 
@@ -163,13 +188,55 @@ void PlayerCharacter::step()
 		dir = 0;
 
 	//Apply movement
-	if ((xvel*global_timestep > 0 && blocked[2] == 0) || (xvel*global_timestep < 0 && blocked[0] == 0))
-		position.x = position.x + xvel*global_timestep;
+	if (xvel != 0)
+	{
+		bool block = false;
+		
+		Rectangle newbound(position.x + xvel*global_timestep, position.y, width, height);
+		collisions = object_manager->get_collisions(oid, newbound);
+		for (i = 0; i < collisions->size(); i++)
+		{
+			unsigned int key = (*collisions)[i].oid;
+			if (object_manager->objects_type(key) == 5)
+			{
+				block = true;
+				if (object_manager->objects_get(key)->get_x()+(object_manager->objects_get(key)->get_width()/2.0) > position.x+(width/2.0))
+					position.x = object_manager->objects_get(key)->get_x()-width;
+				else
+					position.x = object_manager->objects_get(key)->get_x()+object_manager->objects_get(key)->get_width()-0.1;
+			}
+		}
+		delete collisions;
+		if (block == false)
+			position.x = position.x + xvel*global_timestep;
+		else
+			xvel = 0;
+	}
 
-	if ((yvel*global_timestep > 0 && blocked[3] == 0) || (yvel*global_timestep < 0 && blocked[1] == 0))
-		position.y = position.y + yvel*global_timestep;
-	if ((yvel*global_timestep > 0 && blocked[3] == 1) || (yvel*global_timestep < 0 && blocked[1] == 1))
-		yvel = 0;
+	if (yvel != 0)
+	{
+		Rectangle newbound(position.x, position.y + yvel*global_timestep, width, height);
+		bool block = false;
+
+		collisions = object_manager->get_collisions(oid, newbound);
+		for (i = 0; i < collisions->size(); i++)
+		{
+			unsigned int key = (*collisions)[i].oid;
+			if (object_manager->objects_type(key) == 5)
+			{
+				block = true;
+				if (object_manager->objects_get(key)->get_y()+(object_manager->objects_get(key)->get_height()/2.0) > position.y+(height/2.0))
+					position.y = object_manager->objects_get(key)->get_y()-height;
+				else
+					position.y = object_manager->objects_get(key)->get_y()+object_manager->objects_get(key)->get_height()-0.1;
+			}
+		}
+		delete collisions;
+		if (block == false)
+			position.y = position.y + yvel*global_timestep;
+		else
+			yvel = 0;
+	}
 
 	//Contain blobby
 	if (position.x < 0)
@@ -184,15 +251,6 @@ void PlayerCharacter::step()
 
 	//Move screen
 	level_manager->set_level_x( position.x );
-    
-    if (powerup){
-        width = 40+16*lives;
-        height = 30+16*lives;
-    }
-    else {
-        width = 16+16*lives;
-        height = 16+16*lives;
-    }
 }
 
 void PlayerCharacter::draw()

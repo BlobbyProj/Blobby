@@ -247,3 +247,4 @@ std::vector<ObjectManager::Collision>* ObjectManager::get_collisions(unsigned in
 	}
 	return collisions;
 }
+

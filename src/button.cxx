@@ -1,7 +1,5 @@
 #include "button.h"
 
-#include "globals.h"
-#include "screenmanager.h"
 #include "musicmanager.h"
 
 void ButtonPlay(bool init, std::string *filename)
@@ -52,6 +50,21 @@ void ButtonReplay(bool init, std::string *filename)
 	if (init == 1)
 	{
 		*filename = "media/buttons/pause_menu/replay.txt";
+		return;
+	}
+	
+	global_paused = 0;
+	
+	//to ensure that levelmanager->step() reloads the level
+	global_previous_gamestate = -2;
+	global_gamestate = global_previous_level;
+
+}
+void ButtonReplaySmall(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/pause_menu/replaySmaller.txt";
 		return;
 	}
 	
@@ -174,6 +187,17 @@ void ButtonLevelMap(bool init, std::string *filename)
 		*filename = "media/buttons/scoreboard/levelMap.txt";
 		return;
 	}
+	global_gamestate = 3;
+}
+
+void ButtonLevelMapPause(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/pause_menu/levelMap.txt";
+		return;
+	}
+    global_paused = 0;
 	global_gamestate = 3;
 }
 

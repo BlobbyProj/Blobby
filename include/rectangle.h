@@ -17,12 +17,22 @@ public:
     
     // constructor for Rectangle - creates new instance of a Rectangle
     // param position  position of upper-left corner using Point with double coordinates (x,y)
-    // param width     width of Rectangle in pixels
-    // param height    height of Rectangle in pixels
+    // param w     width of Rectangle in pixels
+    // param h    height of Rectangle in pixels
     // returns Rectangle object
     // pre-conditions   Rectangle does not yet exist
     // post-conditions  Rectangle exists
-    Rectangle(Point position, double width, double height);
+    Rectangle(Point position, double w, double h);
+
+    // constructor for Rectangle - creates new instance of a Rectangle
+    // param x  x position of upper-left corner
+    // param x  y position of upper-left corner
+    // param w     width of Rectangle in pixels
+    // param h    height of Rectangle in pixels
+    // returns Rectangle object
+    // pre-conditions   Rectangle does not yet exist
+    // post-conditions  Rectangle exists
+    Rectangle(double x, double y, double w, double h);
 
     // setter for position of Rectangle object
     // param Position  position of upper-left corner using Point with double coordinates (x,y)

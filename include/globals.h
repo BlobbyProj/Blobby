@@ -7,7 +7,7 @@
 #define HEIGHT 480
 #define CONSOLE_WIDTH 200
 #define CONSOLE_HEIGHT 400
-#define NUM_LEVELS 5
+#define NUM_LEVELS 7
 
 #define PLAYERCHARACTER 1
 #define BUTTON 2
@@ -17,6 +17,7 @@
 #define FLAG 6
 #define GLOOP 7
 #define POWERUP 8
+#define SPIKE 9
 
 //global variables used throughout the rest of the files
 
@@ -44,6 +45,7 @@ extern char global_background[3];
 extern unsigned int global_background_key;
 extern int global_previous_gamestate;
 extern int global_previous_level;
+extern int global_island_progress;
 extern bool global_invalid_level;
 
 extern double global_gravity;

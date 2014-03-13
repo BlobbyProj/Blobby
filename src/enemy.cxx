@@ -1,7 +1,5 @@
 #include "enemy.h"
 
-#include "globals.h"
-#include "screenmanager.h"
 #include "objectmanager.h"
 
 Enemy::Enemy(double X, double Y, int W, int H, std::string fname, int flags)
@@ -48,8 +46,6 @@ void Enemy::step()
 
 	//If not dead
 	int i;
-	bool blocked[4] = {0,0,0,0};
-    // if enemy collided with something, reverse velocity
 	std::vector<ObjectManager::Collision>* collisions = object_manager->get_collisions(oid);
 	for (i = 0; i < collisions->size(); i++)
 	{
@@ -58,9 +54,6 @@ void Enemy::step()
 		{
 			case 1: //Player
 				lives--;
-				break;
-			case 5: //Block
-				blocked[(*collisions)[i].type] = 1;
 				break;
 		}
 	}
@@ -72,20 +65,57 @@ void Enemy::step()
 		yvel += global_gravity*global_timestep;
 	}
     
+
 	//Apply movement
-	if ((xvel*global_timestep > 0 && blocked[2] == 0) || (xvel*global_timestep < 0 && blocked[0] == 0))
-		position.x = position.x + xvel*global_timestep;
+	if (xvel != 0)
+	{
+		bool block = false;
+		
+		Rectangle newbound(position.x + xvel*global_timestep, position.y, width, height);
+		collisions = object_manager->get_collisions(oid, newbound);
+		for (i = 0; i < collisions->size(); i++)
+		{
+			unsigned int key = (*collisions)[i].oid;
+			if (object_manager->objects_type(key) == 5)
+			{
+				block = true;
+				if (object_manager->objects_get(key)->get_x()+(object_manager->objects_get(key)->get_width()/2.0) > position.x+(width/2.0))
+					position.x = object_manager->objects_get(key)->get_x()-width;
+				else
+					position.x = object_manager->objects_get(key)->get_x()+object_manager->objects_get(key)->get_width();
+			}
+		}
+		delete collisions;
+		if (block == false)
+			position.x = position.x + xvel*global_timestep;
+		else
+			xvel = -xvel;
+	}
 
-	if (blocked[0] == 1)
-		xvel = vel;
-	if (blocked[2] == 1)
-		xvel = -vel;
+	if (yvel != 0)
+	{
+		Rectangle newbound(position.x, position.y + yvel*global_timestep, width, height);
+		bool block = false;
 
-
-	if ((yvel*global_timestep > 0 && blocked[3] == 0) || (yvel*global_timestep < 0 && blocked[1] == 0))
-		position.y = position.y + yvel*global_timestep;
-	if ((yvel*global_timestep > 0 && blocked[3] == 1) || (yvel*global_timestep < 0 && blocked[1] == 1))
-		yvel = 0;
+		collisions = object_manager->get_collisions(oid, newbound);
+		for (i = 0; i < collisions->size(); i++)
+		{
+			unsigned int key = (*collisions)[i].oid;
+			if (object_manager->objects_type(key) == 5)
+			{
+				block = true;
+				if (object_manager->objects_get(key)->get_y()+(object_manager->objects_get(key)->get_height()/2.0) > position.y+(height/2.0))
+					position.y = object_manager->objects_get(key)->get_y()-height;
+				else
+					position.y = object_manager->objects_get(key)->get_y()+object_manager->objects_get(key)->get_height()-0.1;
+			}
+		}
+		delete collisions;
+		if (block == false)
+			position.y = position.y + yvel*global_timestep;
+		else
+			yvel = 0;
+	}
 
 	//Contain enemy
 	if (position.x < 0)

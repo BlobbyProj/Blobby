@@ -15,8 +15,10 @@ class PlayerCharacter : public FallingObj {
 		bool blocked[4];
 		bool pressed[3]; //0 = left, 1 = up, 2 = right
 		char lives;
-        double time;
-        bool powerup;
+                double time;
+                
+                bool powerup;
+                double powerup_time;
 
 	public:
         // constructor for PlayerCharacter - creates new instance of PlayerCharacter object

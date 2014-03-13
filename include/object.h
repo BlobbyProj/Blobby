@@ -98,7 +98,10 @@ class Object {
     
         // sets value of solid
 		void set_solid( bool val ) { solid = val; }
-		
+
+        // sets value of solid
+		void set_trashed( bool val ) { trashed = val; }
+
         // called every iteration of the game loop; each subclass implements
 		virtual void step()=0;
     

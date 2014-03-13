@@ -8,10 +8,16 @@ BDIR = bin
 CC = g++
 OS = 
 
+
 _OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o gloop.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o fallingobj.o powerup.o text.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 OBJECTS = playercharacter.h button.h image.h enemy.h block.h flag.h gloop.h text.h
+
+_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o gloop.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o fallingobj.o powerup.o spike.o
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+
+OBJECTS = playercharacter.h button.h image.h enemy.h block.h flag.h gloop.h spike.h
 
 vpath %.h $(IDIR)
 vpath %.cxx $(SDIR)
@@ -97,6 +103,9 @@ $(ODIR)/fallingobj.o: fallingobj.cxx globals.h fallingobj.h
 	$(CC) -c -o $@ $< $(CFLAGS)
     
 $(ODIR)/powerup.o: powerup.cxx object.h powerup.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+	
+$(ODIR)/spike.o: spike.cxx object.h spike.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/text.o: text.cxx object.h text.h

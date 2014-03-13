@@ -1,8 +1,5 @@
 #include "image.h"
 
-#include "globals.h"
-#include "screenmanager.h"
-
 Image::Image(double X, double Y, int W, int H, std::string fname, int flags)
 {
 	apply_flags(flags);

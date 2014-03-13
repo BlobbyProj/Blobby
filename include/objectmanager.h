@@ -147,8 +147,6 @@ class ObjectManager {
         // return std::vector<Collisions>* - returns a struct that contains the Object id and the direction of collision
         // post-conditions - know which objects have collided with the object who's id is OID
 		std::vector<Collision>* get_collisions(unsigned int OID, Rectangle bound);
-
-
 };
 
 #endif
