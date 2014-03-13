@@ -60,10 +60,10 @@ void ButtonLevelMapPause(bool init, std::string *filename);
 
 class Button : public Object {
         private:
-                bool pressed;
-        // set to -1 if button should not toggle
-        int toggle;
-                void (*function)(bool,std::string*);
+            bool pressed;
+            // set to -1 if button should not toggle
+            int toggle;
+            void (*function)(bool,std::string*);
                 
         public:
         // constructor for Button - creates new instance of Button ob;ject
