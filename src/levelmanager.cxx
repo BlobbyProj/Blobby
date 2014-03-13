@@ -244,7 +244,7 @@ void LevelManager::step()
 				object_manager->objects_add(new Button(50,150, -1, -1, ButtonIsland1));
 				object_manager->objects_add(new Button(410,160, -1, -1, ButtonIsland3));
 				object_manager->objects_add(new Button(230,280, -1, -1, ButtonIsland2));
-                object_manager->objects_add(new Button(5,426, -1, -1, ButtonGoBack));
+                object_manager->objects_add(new Button(20,400, -1, -1, ButtonMainMenuSmall));
 				level_width = WIDTH;
 				level_height = HEIGHT;
 				level_x = 0;

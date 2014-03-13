@@ -182,6 +182,7 @@ void ButtonLevelMapPause(bool init, std::string *filename)
 		*filename = "media/buttons/pause_menu/levelMap.txt";
 		return;
 	}
+    global_paused = 0;
 	global_gamestate = 3;
 }
 
