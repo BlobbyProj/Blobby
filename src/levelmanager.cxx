@@ -190,10 +190,11 @@ void LevelManager::step()
 			case 1:
                 music_manager->pause();
 				object_manager->pause_objects_add(new Image(0+level_x, 0+level_y, 640, 480, "media/menus/pause.txt"));
-				object_manager->pause_objects_add(new Button(180,160, -1, -1, ButtonResume));
-                object_manager->pause_objects_add(new Button(180,245, -1, -1, ButtonLevelMapPause));
-				object_manager->pause_objects_add(new Button(180,290, -1, -1, ButtonMainMenu));
-				object_manager->pause_objects_add(new Button(180,380, -1, -1, ButtonReplay));
+				object_manager->pause_objects_add(new Button(190,150, -1, -1, ButtonResume));
+				object_manager->pause_objects_add(new Button(190,220, -1, -1, ButtonReplay));
+                object_manager->pause_objects_add(new Button(190,290, -1, -1, ButtonLevelMapPause));
+				object_manager->pause_objects_add(new Button(190,360, -1, -1, ButtonMainMenu));
+
                 object_manager->pause_objects_add(new Button(530,55, -1, -1, ButtonVolume));
 				break;
 		}
@@ -232,10 +233,10 @@ void LevelManager::step()
             	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/scoreboard.txt"));
                 if (global_previous_gamestate != NUM_LEVELS+3){ // don't show continue if completed last level
                     object_manager->objects_add(new Button(340,290, -1, -1, ButtonContinue));
-                    object_manager->objects_add(new Button(130,290, -1, -1, ButtonReplay));
+                    object_manager->objects_add(new Button(130,290, 180, 45, ButtonReplaySmall));
                 }
                 else {
-                    object_manager->objects_add(new Button(235,290, -1, -1, ButtonReplay));
+                    object_manager->objects_add(new Button(190,270, -1, -1, ButtonReplay));
                 }
                 object_manager->objects_add(new Button(360,350, -1, -1, ButtonLevelMap));
 				object_manager->objects_add(new Button(150,350, -1, -1, ButtonMainMenuSmall));

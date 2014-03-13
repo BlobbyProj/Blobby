@@ -60,6 +60,21 @@ void ButtonReplay(bool init, std::string *filename)
 	global_gamestate = global_previous_level;
 
 }
+void ButtonReplaySmall(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/pause_menu/replaySmaller.txt";
+		return;
+	}
+	
+	global_paused = 0;
+	
+	//to ensure that levelmanager->step() reloads the level
+	global_previous_gamestate = -2;
+	global_gamestate = global_previous_level;
+
+}
 
 void ButtonMainMenu(bool init, std::string *filename)
 {

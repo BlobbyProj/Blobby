@@ -91,7 +91,7 @@ int main( int argc, char* args[] )
 					{
 					case SDLK_p:
 						//~ if(global_gamestate!=0 || global_gamestate!=1){
-						if(global_gamestate == 0 || global_gamestate == 1){
+						if(global_gamestate == 0 || global_gamestate == 1 || global_gamestate == 2 || global_gamestate == 3){
 							break;
 						}
 						global_paused = 1;

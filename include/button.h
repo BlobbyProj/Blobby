@@ -27,7 +27,7 @@ void ButtonResume(bool init,std::string *filename);
 // post-conditions  the level that was just failed is started again, global_gamestate equals global_previous_gamestate
 void ButtonReplay(bool init,std::string *filename);
 
-void ButtonReplay2(bool init,std::string *filename);
+void ButtonReplaySmall(bool init,std::string *filename);
 
 // controls Button to redirect to main menu; fetches image files if not initially available
 // post-conditions  global_paused equals 0 and global_gamestate equals 0
