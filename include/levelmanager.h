@@ -20,7 +20,7 @@ class LevelManager {
         double level_height;
 
         int score;
-        int time;
+        int timeT;
     
         int island;
     

@@ -248,9 +248,7 @@ void LevelManager::step()
 				object_manager->objects_add(new Button(150,350, -1, -1, ButtonMainMenuSmall));
 				std::cout << "error before text" << std::endl;
 				object_manager->objects_add(new Text(100, 100, sc));
-                object_manager->objects_add(new Button(360,350, -1, -1, ButtonLevelMap));
-				object_manager->objects_add(new Button(150,350, -1, -1, ButtonMainMenuSmall));
-				level_width = WIDTH;
+                level_width = WIDTH;
 				level_height = HEIGHT;
 				level_x = 0;
 				level_y = 0;
@@ -398,7 +396,7 @@ void LevelManager::step()
 
 void LevelManager::level_end(int score, double time, int win)
 {
-    std::cout << "time = " << time << std::endl;
+    std::cout << "time = " << timeT << std::endl;
     std::cout << "score = " << score << std::endl;
     music_manager->stop();
     if (!win) {
