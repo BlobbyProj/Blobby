@@ -2,10 +2,16 @@
 #define TEXT_H
 
 #include "object.h"
+#ifdef OSX
+#include <SDL2_ttf/SDL_ttf.h>
+#else
+#include <SDL2/SDL_ttf.h>
+#endif
 
 class Text : public Object {
 	private:
                 std::string textStr;
+                TTF_Font* font;
 
         public:
         // constructor for Image - creates new instance of Text object
@@ -17,6 +23,8 @@ class Text : public Object {
         // pre-conditions  Image does not yet exist
         // post-conditions Image exists
 		Text(double X, double Y, std::string text, int flags=0);
+
+                ~Text();
 		
         // called every iteration of the game loop; inherited from Object
         // Text does nothing because it does not change with each iteration

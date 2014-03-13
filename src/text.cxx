@@ -2,18 +2,21 @@
 
 Text::Text(double x, double y, std::string text, int flags)
 {
-	std::cout << "error with ctor" << std::endl;
 	apply_flags(flags);
 	type = 10;
 
 	textStr = text;
+	font = TTF_OpenFont("Vera.ttf", 30);
 
 	position.x = x;
 	position.y = y;
 }
 
+Text::~Text()
+{
+	TTF_CloseFont(font);
+}
 void Text::draw()
 {
-	std::cout << "error with draw" << std::endl;
-	screen_manager->text_apply(position.x, position.y, textStr);
+	screen_manager->text_apply(position.x, position.y, textStr, font);
 }

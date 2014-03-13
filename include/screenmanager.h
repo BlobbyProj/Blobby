@@ -148,7 +148,7 @@ public:
         // pre-conditions  texture exists
         void print();
 
-        void text_apply(double x, double y, std::string score);
+        void text_apply(double x, double y, std::string score, TTF_Font* font);
 };
 
 #endif

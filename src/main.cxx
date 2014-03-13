@@ -22,6 +22,10 @@ int main( int argc, char* args[] )
         MARK
     }
 
+    if (TTF_Init() != 0){
+        std::cout << "error with text" << TTF_GetError() << std::endl;
+    }
+
 	//Create screen manager
 	screen_manager = new ScreenManager(WIDTH,HEIGHT);
 
@@ -160,6 +164,7 @@ int main( int argc, char* args[] )
     Mix_Quit();
     IMG_Quit();
 	SDL_Quit();
+	TTF_Quit();
 
     return 0;
 }

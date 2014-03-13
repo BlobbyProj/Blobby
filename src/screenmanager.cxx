@@ -279,24 +279,18 @@ void ScreenManager::print()
 	}
 }
 
-void ScreenManager::text_apply(double x, double y, std::string score)
+void ScreenManager::text_apply(double x, double y, std::string score, TTF_Font* font)
 {
-	if (TTF_Init() != 0){
-        std::cout << "error with text" << std::endl;
-    }
-    else {
-		SDL_Color color = { 255, 255, 255 };
-    	std::cout << "error before font" << std::endl;
-    	TTF_Font* font = TTF_OpenFont("Vera.ttf", 22);
-    	if (!font)
-    		std::cout << "error with font" << std::endl;
-    	SDL_Surface* surf = TTF_RenderText_Blended( font, score.c_str(), color );
-    	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surf);
-		SDL_Rect dst;
-		dst.x = x;
-		dst.y = y;
-		SDL_RenderCopy(renderer, texture, NULL, &dst);
-		delete surf;
-		delete texture;
+	SDL_Color color = { 0, 0, 0 };
+	if (font == NULL) {
+		std::cout << "error with font: " << TTF_GetError() << std::endl;
 	}
+	SDL_Surface* surf = TTF_RenderText_Blended( font, score.c_str(), color );
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surf);
+	SDL_Rect dst;
+	dst.x = x;
+	dst.y = y;
+	SDL_QueryTexture(texture, NULL, NULL, &dst.w, &dst.h);
+	SDL_RenderCopy(renderer, texture, NULL, &dst);
+	SDL_FreeSurface(surf);
 }
