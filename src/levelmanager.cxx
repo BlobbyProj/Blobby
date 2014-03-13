@@ -2,6 +2,8 @@
 
 #include <fstream>
 #include <sstream>
+#include <stdlib.h>
+#include <time.h>
 #include "objectmanager.h"
 #include "screenmanager.h"
 #include "musicmanager.h"
@@ -123,14 +125,13 @@ bool LevelManager::load_level(std::string fname)
 		{
 			int obj_type;
 			buffer >> obj_type;
-
 			switch(obj_type)
 			{
 				case PLAYERCHARACTER:
 					object_manager->objects_add(new PlayerCharacter(80*j, 80*i, 80, 80, "media/blobbys/blobby.txt"));
 					break;
 				case ENEMY:
-					object_manager->objects_add(new Enemy(80*j+8, 80*i, 64, 74, "media/enemies/torto.txt"));
+                    object_manager->objects_add(new Enemy(80*j+8, 80*i, 64, 74, "media/enemies/"+get_enemy()+".txt"));
 					break;
 				case BLOCK:
 					object_manager->objects_add(new Block(80*j, 80*i, 80, 80, "media/objects/block.txt"));
@@ -235,9 +236,8 @@ void LevelManager::step()
                 else {
                     object_manager->objects_add(new Button(235,290, -1, -1, ButtonReplay));
                 }
-				object_manager->objects_add(new Button(240,400, -1, -1, ButtonQuit));
-                object_manager->objects_add(new Button(340,350, -1, -1, ButtonLevelMap));
-				object_manager->objects_add(new Button(130,350, -1, -1, ButtonMainMenuSmall));
+                object_manager->objects_add(new Button(360,350, -1, -1, ButtonLevelMap));
+				object_manager->objects_add(new Button(150,350, -1, -1, ButtonMainMenuSmall));
 				level_width = WIDTH;
 				level_height = HEIGHT;
 				level_x = 0;
@@ -249,6 +249,7 @@ void LevelManager::step()
 				object_manager->objects_add(new Button(50,150, -1, -1, ButtonIsland1));
 				object_manager->objects_add(new Button(410,160, -1, -1, ButtonIsland3));
 				object_manager->objects_add(new Button(230,280, -1, -1, ButtonIsland2));
+                object_manager->objects_add(new Button(5,426, -1, -1, ButtonGoBack));
 				level_width = WIDTH;
 				level_height = HEIGHT;
 				level_x = 0;
@@ -257,6 +258,7 @@ void LevelManager::step()
 				
             // Island 1 begins
 			case 4: //Level 1
+                island = 1;
 				global_previous_level = global_gamestate;
 				level_width = 2960;
 				level_height = HEIGHT;
@@ -271,9 +273,11 @@ void LevelManager::step()
                 object_manager->objects_add(new Image(840,150, -1, -1, "media/tutorial/avoid.txt"));
                 load_level("media/levels/level1.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+            
 				break;
 
             case 5: //Level 2
+                island = 1;
    				global_previous_level = global_gamestate;
 				level_width = 2960;
 				level_height = HEIGHT;
@@ -288,6 +292,7 @@ void LevelManager::step()
 
             // Island 2 begins
             case 6: //Level 3
+                island = 2;
    				global_previous_level = global_gamestate;
 				level_width = 2960;
 				level_height = HEIGHT;
@@ -301,6 +306,7 @@ void LevelManager::step()
 				break;
 
             case 7: //Level 4
+                island = 2;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
 				level_height = HEIGHT;
@@ -315,6 +321,7 @@ void LevelManager::step()
                 
             // Island 3 begins
             case 8: //Level 5
+                island = 3;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
 				level_height = HEIGHT;
@@ -363,17 +370,38 @@ void LevelManager::play_music()
             music_manager->fade_in("media/music/menu.wav", 800);
         }
     }
-    else if (global_gamestate >=4 && global_gamestate <=5) { // island1
+    else if (island == 1) {
         music_manager->stop();
         music_manager->fade_in("media/music/island1.wav", 800);
     }
-    else if (global_gamestate >=6 && global_gamestate <=7) { // island 2
+    else if (island == 2) {
         music_manager->stop();
         music_manager->fade_in("media/music/island2.wav", 800);
     }
-    else if (global_gamestate >=8 && global_gamestate <=8){ // island 3
+    else if (island == 3){
         music_manager->stop();
         music_manager->fade_in("media/music/island3.wav", 800);
     }
     
+}
+
+std::string LevelManager::get_enemy() {
+    srand ( time(NULL) );
+    int randIndex;
+    switch (island) {
+        case 1:
+            randIndex = rand() % 2 + 2;
+            return enemy_list[randIndex];
+        
+        case 2:
+            randIndex = rand() % 2;
+            return enemy_list[randIndex];
+        
+        case 3:
+            randIndex = rand() % 3 + 4;
+            return enemy_list[randIndex];
+        default:
+            randIndex = rand() % 6;
+            return enemy_list[randIndex];
+    }
 }

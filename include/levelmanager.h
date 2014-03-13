@@ -12,6 +12,10 @@ class LevelManager {
 		double level_y;
 		double level_width;
         double level_height;
+    
+        int island;
+    
+        std::string enemy_list[7] = {"goon", "goon2", "torto", "torto2", "spikee", "vacuur", "vacuur2"};
 		
 	public:
         // constructor for LevelManager - controls the levels in the game
@@ -56,6 +60,8 @@ class LevelManager {
         void level_end(int score, double time, int win);
     
         void play_music();
+    
+        std::string get_enemy();
     
 };
 

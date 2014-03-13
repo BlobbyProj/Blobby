@@ -106,6 +106,13 @@ int main( int argc, char* args[] )
 								global_gamestate = global_previous_gamestate;
 							}
 						}
+						if(global_gamestate == 2){
+							int next_level = global_previous_level + 1;
+							if (global_previous_level == NUM_LEVELS +3)	
+								global_gamestate = 0;
+							else
+								global_gamestate = next_level;
+						}
 						break;
 					case SDLK_m:
 						music_manager->toggle();
