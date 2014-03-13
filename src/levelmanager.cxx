@@ -236,12 +236,13 @@ void LevelManager::step()
             	sc = "Score = " + std::to_string(score);
             	t = "Time = " + std::to_string(timeT) + " seconds";
             	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/scoreboard.txt"));
-                if (global_previous_gamestate != NUM_LEVELS+3){ // don't show continue if completed last level
-                    object_manager->objects_add(new Button(340,290, -1, -1, ButtonContinue));
-                    object_manager->objects_add(new Button(130,290, 180, 45, ButtonReplaySmall));
+                //~ if (global_previous_gamestate != NUM_LEVELS+3 || !levelFailed){ // don't show continue if completed last level
+                if (global_previous_gamestate == NUM_LEVELS+3 || levelFailed == true){ // don't show continue if completed last level
+                    object_manager->objects_add(new Button(190,270, -1, -1, ButtonReplay));
                 }
                 else {
-                    object_manager->objects_add(new Button(190,270, -1, -1, ButtonReplay));
+                    object_manager->objects_add(new Button(340,290, -1, -1, ButtonContinue));
+                    object_manager->objects_add(new Button(130,290, 180, 45, ButtonReplaySmall));
                 }
                 object_manager->objects_add(new Button(360,350, -1, -1, ButtonLevelMap));
 				object_manager->objects_add(new Button(150,350, -1, -1, ButtonMainMenuSmall));
@@ -395,18 +396,18 @@ void LevelManager::step()
 
 void LevelManager::level_end(int score, double time, int win)
 {
-    std::cout << "time = " << timeT << std::endl;
-    std::cout << "score = " << score << std::endl;
+	this->score = score;
+	timeT = time;
     music_manager->stop();
     if (!win) {
+		levelFailed = true;
         object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/lose.txt", Object::FIXED));
         music_manager->play("media/music/death.wav", 1);
     }
     else {
+		levelFailed = false;
         music_manager->play("media/music/success_short.wav", 1);
         set_progress();
-        this->score = score;
-        timeT = time;
     }
 }
 
