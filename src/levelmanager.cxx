@@ -460,5 +460,13 @@ void LevelManager::set_progress() {
     }
     if (progress != 0) {
         global_island_progress = progress;
+        std::ofstream file;
+        file.open("media/levels/save.txt");
+        if (!file.is_open()) {
+            FLAG;
+        }
+        file << global_island_progress;
+        file.close();
+        
     }
 }
