@@ -5,6 +5,13 @@ Group Project; a game.
 Created by Katya Fomenko, Deanna Hartsook, Sam Heinz and Natasha Issayeva
 Music composed by Cindy Shen
 
+Hot Keys
+-------------
+Main Menu: enter to Play
+Scoreboard: enter to Continue
+p to pause
+m to mute
+
 ========================
 **To Run on Linux OS**
 
