@@ -122,18 +122,13 @@ bool LevelManager::load_level(std::string fname)
 		{
 			int obj_type;
 			buffer >> obj_type;
-            std::string enemy = "";
-            int randIndex;
 			switch(obj_type)
 			{
 				case PLAYERCHARACTER:
 					object_manager->objects_add(new PlayerCharacter(80*j, 80*i, 80, 80, "media/blobbys/blobby.txt"));
 					break;
 				case ENEMY:
-                    srand ( time(NULL) );
-                    randIndex = rand() % (e_list_len-1);
-                    enemy = enemy_list[randIndex];
-                    object_manager->objects_add(new Enemy(80*j+8, 80*i, 64, 74, "media/enemies/"+enemy+".txt"));
+                    object_manager->objects_add(new Enemy(80*j+8, 80*i, 64, 74, "media/enemies/"+get_enemy()+".txt"));
 					break;
 				case BLOCK:
 					object_manager->objects_add(new Block(80*j, 80*i, 80, 80, "media/objects/block.txt"));
@@ -257,6 +252,7 @@ void LevelManager::step()
 				
             // Island 1 begins
 			case 4: //Level 1
+                island = 1;
 				global_previous_level = global_gamestate;
 				level_width = 2960;
 				level_height = HEIGHT;
@@ -271,9 +267,11 @@ void LevelManager::step()
                 object_manager->objects_add(new Image(840,150, -1, -1, "media/tutorial/avoid.txt"));
                 load_level("media/levels/level1.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+            
 				break;
 
             case 5: //Level 2
+                island = 1;
    				global_previous_level = global_gamestate;
 				level_width = 2960;
 				level_height = HEIGHT;
@@ -288,6 +286,7 @@ void LevelManager::step()
 
             // Island 2 begins
             case 6: //Level 3
+                island = 2;
    				global_previous_level = global_gamestate;
 				level_width = 2960;
 				level_height = HEIGHT;
@@ -301,6 +300,7 @@ void LevelManager::step()
 				break;
 
             case 7: //Level 4
+                island = 2;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
 				level_height = HEIGHT;
@@ -315,6 +315,7 @@ void LevelManager::step()
                 
             // Island 3 begins
             case 8: //Level 5
+                island = 3;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
 				level_height = HEIGHT;
@@ -363,17 +364,38 @@ void LevelManager::play_music()
             music_manager->fade_in("media/music/menu.wav", 800);
         }
     }
-    else if (global_gamestate >=4 && global_gamestate <=5) { // island1
+    else if (island == 1) {
         music_manager->stop();
         music_manager->fade_in("media/music/island1.wav", 800);
     }
-    else if (global_gamestate >=6 && global_gamestate <=7) { // island 2
+    else if (island == 2) {
         music_manager->stop();
         music_manager->fade_in("media/music/island2.wav", 800);
     }
-    else if (global_gamestate >=8 && global_gamestate <=8){ // island 3
+    else if (island == 3){
         music_manager->stop();
         music_manager->fade_in("media/music/island3.wav", 800);
     }
     
+}
+
+std::string LevelManager::get_enemy() {
+    srand ( time(NULL) );
+    int randIndex;
+    switch (island) {
+        case 1:
+            randIndex = rand() % 2 + 2;
+            return enemy_list[randIndex];
+        
+        case 2:
+            randIndex = rand() % 2;
+            return enemy_list[randIndex];
+        
+        case 3:
+            randIndex = rand() % 3 + 4;
+            return enemy_list[randIndex];
+        default:
+            randIndex = rand() % 6;
+            return enemy_list[randIndex];
+    }
 }
