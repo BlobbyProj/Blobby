@@ -279,3 +279,25 @@ void ScreenManager::print()
 			PRINT("   "<<it->second->get_filename(i))
 	}
 }
+
+void ScreenManager::text_apply(double x, double y, std::string score)
+{
+	if (TTF_Init() != 0){
+        std::cout << "error with text" << std::endl;
+    }
+    else {
+		SDL_Color color = { 255, 255, 255 };
+    	std::cout << "error before font" << std::endl;
+    	TTF_Font* font = TTF_OpenFont("Vera.ttf", 22);
+    	if (!font)
+    		std::cout << "error with font" << std::endl;
+    	SDL_Surface* surf = TTF_RenderText_Blended( font, score.c_str(), color );
+    	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surf);
+		SDL_Rect dst;
+		dst.x = x;
+		dst.y = y;
+		SDL_RenderCopy(renderer, texture, NULL, &dst);
+		delete surf;
+		delete texture;
+	}
+}

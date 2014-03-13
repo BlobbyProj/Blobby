@@ -10,6 +10,12 @@
 #include <string>
 #include <map>
 #include "texture.h"
+#ifdef OSX
+#include <SDL2_ttf/SDL_ttf.h>
+#else
+#include <SDL2/SDL_ttf.h>
+#endif
+
 
 class ScreenManager {
 private:
@@ -141,6 +147,8 @@ public:
         // prints filenames of all images in texture
         // pre-conditions  texture exists
         void print();
+
+        void text_apply(double x, double y, std::string score);
 };
 
 #endif

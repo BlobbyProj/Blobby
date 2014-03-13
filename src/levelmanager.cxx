@@ -13,6 +13,7 @@
 #include "flag.h"
 #include "gloop.h"
 #include "powerup.h"
+#include "text.h"
 
 /***** Do we still need this?? *****/
 bool LevelManager::load_level_old(std::string fname)
@@ -172,6 +173,7 @@ void LevelManager::set_level_y( double y )
 
 void LevelManager::step()
 {
+	std::string sc;
 	if (global_paused != previous_paused)
 	{
 		switch(global_paused)
@@ -221,6 +223,7 @@ void LevelManager::step()
 				break;
                 
             case 2: //Scoreboard
+            	sc = "score = " + score;
             	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/scoreboard.txt"));
                 if (global_previous_gamestate != NUM_LEVELS+3){ // don't show continue if completed last level
                     object_manager->objects_add(new Button(340,290, -1, -1, ButtonContinue));
@@ -232,6 +235,10 @@ void LevelManager::step()
 				object_manager->objects_add(new Button(240,400, -1, -1, ButtonQuit));
                 object_manager->objects_add(new Button(340,350, -1, -1, ButtonLevelMap));
 				object_manager->objects_add(new Button(130,350, -1, -1, ButtonMainMenuSmall));
+                object_manager->objects_add(new Button(360,350, -1, -1, ButtonLevelMap));
+				object_manager->objects_add(new Button(150,350, -1, -1, ButtonMainMenuSmall));
+				std::cout << "error before text" << std::endl;
+				object_manager->objects_add(new Text(100, 100, sc));
 				level_width = WIDTH;
 				level_height = HEIGHT;
 				level_x = 0;

@@ -5,6 +5,12 @@
 #include <map>
 #include "globals.h"
 #include "object.h"
+#include <string>
+#ifdef OSX
+#include <SDL2_ttf/SDL_ttf.h>
+#else
+#include <SDL2/SDL_ttf.h>
+#endif
 
 class ObjectManager {
 	private:
@@ -134,6 +140,15 @@ class ObjectManager {
         // return std::vector<Collisions>* - returns a struct that contains the Object id and the direction of collision
         // post-conditions - know which objects have collided with the object who's id is OID
 		std::vector<Collision>* get_collisions(unsigned int OID);
+
+		// method to check for collisions between objects
+        // param OID - the object id that you want to check
+        // param bound - the boundary of the object you want to check
+        // return std::vector<Collisions>* - returns a struct that contains the Object id and the direction of collision
+        // post-conditions - know which objects have collided with the object who's id is OID
+		std::vector<Collision>* get_collisions(unsigned int OID, Rectangle bound);
+
+
 };
 
 #endif

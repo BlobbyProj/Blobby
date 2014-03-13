@@ -226,3 +226,24 @@ std::vector<ObjectManager::Collision>* ObjectManager::get_collisions(unsigned in
 	}
 	return collisions;
 }
+
+std::vector<ObjectManager::Collision>* ObjectManager::get_collisions(unsigned int OID, Rectangle bound)
+{
+	std::vector<Collision>* collisions = new std::vector<Collision>;
+    
+	std::map<unsigned int,Object*>::iterator it;
+	for (it = objects.begin(); it != objects.end(); ++it)
+	{
+		if (it->second->get_oid() != OID && it->second->get_solid() == 1)
+		{
+			Collision collision;
+			collision.type = bound.get_collision(it->second->get_rectangle());
+			if (collision.type != 4)
+			{
+				collision.oid = it->first;
+				collisions->push_back(collision);
+			}
+		}
+	}
+	return collisions;
+}
