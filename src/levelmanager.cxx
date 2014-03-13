@@ -409,15 +409,15 @@ void LevelManager::play_music()
             music_manager->fade_in("media/music/menu.wav", 800);
         }
     }
-    else if (island == 1) {
+    else if (island == 1 && global_gamestate != 2) {
         music_manager->stop();
         music_manager->fade_in("media/music/island1.wav", 800);
     }
-    else if (island == 2) {
+    else if (island == 2 && global_gamestate != 2) {
         music_manager->stop();
         music_manager->fade_in("media/music/island2.wav", 800);
     }
-    else if (island == 3){
+    else if (island == 3 && global_gamestate != 2){
         music_manager->stop();
         music_manager->fade_in("media/music/island3.wav", 800);
     }
