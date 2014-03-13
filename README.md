@@ -5,8 +5,8 @@ Group Project; a game.
 Created by Katya Fomenko, Deanna Hartsook, Sam Heinz and Natasha Issayeva
 Music composed by Cindy Shen
 
-Hot Keys
--------------
+**Hot Keys**
+
 Main Menu: enter to Play
 Scoreboard: enter to Continue
 p to pause
