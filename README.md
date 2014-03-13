@@ -113,7 +113,9 @@ Music composed by Cindy Shen
 
 3. Download SDL2_mixer from http://www.libsdl.org/projects/SDL_mixer/
 
-4. Install and save all three the frameworks in /Library/Frameworks
+4. Download SDL_ttf from https://www.libsdl.org/projects/SDL_ttf/ 
+
+5. Install and save all four the frameworks in /Library/Frameworks
 
 
 
