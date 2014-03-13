@@ -44,6 +44,16 @@ int main( int argc, char* args[] )
 	time = clock();
 	double time_since_last_frame = 0;
 	int steps_since_last_frame = 0;
+    
+    std::ifstream file;
+    file.open("media/levels/save.txt");
+    std::string buff;
+    if (file.is_open()) {
+        while (!file.eof()) {
+            file >> global_island_progress;
+        }
+    }
+    file.close();
 	
 	SDL_Event event;
 	
