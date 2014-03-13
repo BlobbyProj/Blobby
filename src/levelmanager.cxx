@@ -248,8 +248,10 @@ void LevelManager::step()
             case 3: //Level Map
             	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/levelMap.txt"));
 				object_manager->objects_add(new Button(50,150, -1, -1, ButtonIsland1));
-				object_manager->objects_add(new Button(410,160, -1, -1, ButtonIsland3));
-				object_manager->objects_add(new Button(230,280, -1, -1, ButtonIsland2));
+                if (global_island_progress > 1)
+                    object_manager->objects_add(new Button(230,280, -1, -1, ButtonIsland2));
+                if (global_island_progress > 2)
+                    object_manager->objects_add(new Button(410,160, -1, -1, ButtonIsland3));
                 object_manager->objects_add(new Button(20,400, -1, -1, ButtonMainMenuSmall));
 				level_width = WIDTH;
 				level_height = HEIGHT;
@@ -360,6 +362,7 @@ void LevelManager::level_end(int score, double time, int win)
     }
     else {
         music_manager->play("media/music/success_short.wav", 1);
+        set_progress();
     }
 }
 
@@ -404,5 +407,23 @@ std::string LevelManager::get_enemy() {
         default:
             randIndex = rand() % 6;
             return enemy_list[randIndex];
+    }
+}
+
+void LevelManager::set_progress() {
+    int progress;
+    switch (global_gamestate) {
+        case 5:
+            progress = 2;
+            break;
+        case 7:
+            progress = 3;
+            break;
+        default:
+            progress = 0;
+            break;
+    }
+    if (progress != 0) {
+        global_island_progress = progress;
     }
 }
