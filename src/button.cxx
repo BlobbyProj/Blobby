@@ -175,6 +175,17 @@ void ButtonLevelMap(bool init, std::string *filename)
 	global_gamestate = 3;
 }
 
+void ButtonLevelMapPause(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/pause_menu/levelMap.txt";
+		return;
+	}
+    global_paused = 0;
+	global_gamestate = 3;
+}
+
 Button::Button(double X, double Y, int W, int H, void (*otherFunction)(bool,std::string*), int flags)
 {
 	apply_flags(flags);

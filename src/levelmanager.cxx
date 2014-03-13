@@ -190,9 +190,10 @@ void LevelManager::step()
 			case 1:
                 music_manager->pause();
 				object_manager->pause_objects_add(new Image(0+level_x, 0+level_y, 640, 480, "media/menus/pause.txt"));
-				object_manager->pause_objects_add(new Button(180,200, -1, -1, ButtonResume));
-				object_manager->pause_objects_add(new Button(180,280, -1, -1, ButtonMainMenu));
-				object_manager->pause_objects_add(new Button(200,358, -1, -1, ButtonReplay));
+				object_manager->pause_objects_add(new Button(180,160, -1, -1, ButtonResume));
+                object_manager->pause_objects_add(new Button(180,245, -1, -1, ButtonLevelMapPause));
+				object_manager->pause_objects_add(new Button(180,290, -1, -1, ButtonMainMenu));
+				object_manager->pause_objects_add(new Button(180,380, -1, -1, ButtonReplay));
                 object_manager->pause_objects_add(new Button(530,55, -1, -1, ButtonVolume));
 				break;
 		}
@@ -249,7 +250,7 @@ void LevelManager::step()
 				object_manager->objects_add(new Button(50,150, -1, -1, ButtonIsland1));
 				object_manager->objects_add(new Button(410,160, -1, -1, ButtonIsland3));
 				object_manager->objects_add(new Button(230,280, -1, -1, ButtonIsland2));
-                object_manager->objects_add(new Button(5,426, -1, -1, ButtonGoBack));
+                object_manager->objects_add(new Button(20,400, -1, -1, ButtonMainMenuSmall));
 				level_width = WIDTH;
 				level_height = HEIGHT;
 				level_x = 0;
