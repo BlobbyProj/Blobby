@@ -15,6 +15,7 @@
 #include "flag.h"
 #include "gloop.h"
 #include "powerup.h"
+#include "spike.h"
 
 /***** Do we still need this?? *****/
 bool LevelManager::load_level_old(std::string fname)
@@ -97,6 +98,8 @@ bool LevelManager::load_level(std::string fname)
 	5 = Block
 	6 = Flag
 	7 = Gloop
+	8 = Powerup
+	9 = Spike
 
 */
 	int i, j;
@@ -142,6 +145,9 @@ bool LevelManager::load_level(std::string fname)
 					break;
                 case POWERUP:
 					object_manager->objects_add(new Powerup(80*j+20, 80*i+20, 40, 40, "media/objects/powerup.txt"));
+					break;
+                case SPIKE:
+					object_manager->objects_add(new Spike(80*j, 80*i, 80, 80, "media/objects/spike.txt"));
 					break;
 			}
 		}
