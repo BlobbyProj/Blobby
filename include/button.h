@@ -56,6 +56,8 @@ void ButtonContinue(bool init, std::string *filename);
 
 void ButtonLevelMap(bool init, std::string *filename);
 
+void ButtonLevelMapPause(bool init, std::string *filename);
+
 class Button : public Object {
         private:
                 bool pressed;
