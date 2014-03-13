@@ -1,8 +1,8 @@
 Blobby
 ======
 
-Group Project; a game.
-Created by Katya Fomenko, Deanna Hartsook, Sam Heinz and Natasha Issayeva
+Group Project; a game.<br>
+Created by Katya Fomenko, Deanna Hartsook, Sam Heinz and Natasha Issayeva<br>
 Music composed by Cindy Shen
 
 **Hot Keys**<br>
