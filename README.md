@@ -115,7 +115,7 @@ Music composed by Cindy Shen
 
 4. Download SDL_ttf from https://www.libsdl.org/projects/SDL_ttf/ 
 
-5. Install and save all four the frameworks in /Library/Frameworks
+5. Install and save all four frameworks in /Library/Frameworks (you can use command-g to get to the folder)
 
 
 
