@@ -164,8 +164,8 @@ void LevelManager::step()
 				break;
                 
             case 2: //Scoreboard
-            	sc = "Score = " + std::to_string(score);
-            	t = "Time = " + std::to_string(timeT) + " seconds";
+	          //sc = "Score = " + std::to_string(score);
+	          //t = "Time = " + std::to_string(timeT) + " seconds";
             	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/scoreboard.txt"));
                 //check if last level or player has failed the level
                 if (global_previous_gamestate == NUM_LEVELS+3 || global_level_failed == true){

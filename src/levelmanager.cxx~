@@ -164,11 +164,11 @@ void LevelManager::step()
 				break;
                 
             case 2: //Scoreboard
-            	sc = "Score = " + std::to_string(score);
-            	t = "Time = " + std::to_string(timeT) + " seconds";
+	      //    sc = "Score = " + std::to_string(score);
+	      //    t = "Time = " + std::to_string(timeT) + " seconds";
             	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/scoreboard.txt"));
-                //~ if (global_previous_gamestate != NUM_LEVELS+3 || !levelFailed){ // don't show continue if completed last level
-                if (global_previous_gamestate == NUM_LEVELS+3 || levelFailed == true){ // don't show continue if completed last level
+                //check if last level or player has failed the level
+                if (global_previous_gamestate == NUM_LEVELS+3 || global_level_failed == true){
                     object_manager->objects_add(new Button(190,270, -1, -1, ButtonReplay));
                 }
                 else {
@@ -238,9 +238,24 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
+                
+            case 6: //Level 3
+                island = 1;
+   				global_previous_level = global_gamestate;
+				level_width = 2960;
+				level_height = HEIGHT;
+				level_x = 0;
+				level_y = 0;
+                
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island1.txt"));
+                object_manager->objects_add(new Image(720,150, -1, -1, "media/tutorial/spikes.txt"));
+                load_level("media/levels/level3.txt");
+                object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+                
+				break;
 
             // Island 2 begins
-            case 6: //Level 4
+            case 7: //Level 4
                 island = 2;
    				global_previous_level = global_gamestate;
 				level_width = 2960;
@@ -254,7 +269,7 @@ void LevelManager::step()
                 
 				break;
 
-            case 7: //Level 5
+            case 8: //Level 5
                 island = 2;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
@@ -267,9 +282,23 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
+
+			case 9: //Level 6
+                island = 2;
+   				global_previous_level = global_gamestate;            
+				level_width = 2960;
+				level_height = HEIGHT;
+				level_x = 0;
+				level_y = 0;
                 
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island2.txt"));
+                load_level("media/levels/level6.txt");
+                object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+                
+				break;
+				
             // Island 3 begins
-            case 8: //Level 7
+            case 10: //Level 7
                 island = 3;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
@@ -282,7 +311,8 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 
                 break;
-            case 9: //Level 8
+				
+            case 11: //Level 8
                 island = 3;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
@@ -295,7 +325,8 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 
                 break;
-            case 10: //Level 9
+				
+            case 12: //Level 9
                 island = 3;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
@@ -331,13 +362,13 @@ void LevelManager::level_end(int score, double time, int win)
 	timeT = time;
     music_manager->stop();
     if (!win) {
-		levelFailed = true;
+		global_level_failed = true;
         object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/lose.txt", Object::FIXED));
         music_manager->play("media/music/death.wav", 1);
     }
     else {
-		levelFailed = false;
-        music_manager->play("media/music/success_short.wav", 1);
+		global_level_failed = false;
+        music_manager->play("media/music/success.wav", 1);
         set_progress();
     }
 }
@@ -389,10 +420,10 @@ std::string LevelManager::get_enemy() {
 void LevelManager::set_progress() {
     int progress;
     switch (global_gamestate) {
-        case 5:
+        case 6:
             progress = 2;
             break;
-        case 7:
+        case 8:
             progress = 3;
             break;
         default:

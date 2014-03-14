@@ -1,0 +1,5 @@
+1
+2
+media/buttons/levelmap/level2.png
+media/buttons/levelmap/level2pressed.png
+
