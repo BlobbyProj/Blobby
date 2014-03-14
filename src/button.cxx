@@ -150,7 +150,7 @@ void ButtonIsland2(bool init, std::string *filename)
 		*filename = "media/buttons/levelmap/island2.txt";
 		return;
 	}
-	global_gamestate = 6;
+	global_gamestate = 7;
 }
 
 void ButtonIsland3(bool init, std::string *filename)
@@ -160,7 +160,7 @@ void ButtonIsland3(bool init, std::string *filename)
 		*filename = "media/buttons/levelmap/island3.txt";
 		return;
 	}
-	global_gamestate = 8;
+	global_gamestate = 9;
 }
 
 void ButtonContinue(bool init, std::string *filename)
