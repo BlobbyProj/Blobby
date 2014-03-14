@@ -10,21 +10,22 @@
 
 class Text : public Object {
 	private:
-                std::string textStr;
-                TTF_Font* font;
+            std::string textStr;
+            TTF_Font* font;
 
-        public:
-        // constructor for Image - creates new instance of Text object
+    public:
+        // constructor for Text - creates new instance of Text object
         // param X         x coordinate for location of upper-left corner of Text
         // param Y         y coordinate for location of upper-left corner of Text
-        // param width     width of Text in pixels
-        // param height    height of Text in pixels
-        // param filename  filename of object image
-        // pre-conditions  Image does not yet exist
-        // post-conditions Image exists
+        // param text      text to be displayed
+        // pre-conditions  Text does not yet exist
+        // post-conditions Text exists
 		Text(double X, double Y, std::string text, int flags=0);
 
-                ~Text();
+        // destructor for Text - deletes instance of Text object
+        // pre-conditions  Text exists
+        // post-conditions Text no longer exists
+        ~Text();
 		
         // called every iteration of the game loop; inherited from Object
         // Text does nothing because it does not change with each iteration
