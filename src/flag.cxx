@@ -36,26 +36,19 @@ void Flag::step()
 	if (solid == 0)
 	{
 		if (timed == 0) {
-			object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/success.txt", Object::FIXED));
+			if (global_gamestate == NUM_LEVELS + 3){
+				object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/win.txt", Object::FIXED));
+			}
+			else {
+				object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/success.txt", Object::FIXED));
+		
+			}
 		}
 	timed += global_timestep;
 	}
 	if (timed >= 2){
 		global_gamestate = 2;
 	}
-//		if (timed >= 2 && screen_loaded != 2){
-//			object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/scoreboard.txt", Object::FIXED));
-//			screen_loaded = 2;
-//		}
-//		timed += global_timestep;
-//	}
-//	if (timed >= 6)
-//	{
-//		if (global_gamestate < NUM_LEVELS+1) // +1 because global_gamestate 2 is first level
-//         	global_gamestate++;
-//       else
-//           global_gamestate = 0;
-//  }
 }
 
 void Flag::draw()
