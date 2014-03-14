@@ -28,6 +28,7 @@ class LevelManager {
         std::string enemy_list[7] = {"goon", "goon2", "torto", "torto2", "spikee", "vacuur", "vacuur2"};
         std::string get_enemy();
     
+        void play_music();
         void set_progress();
 		
 	public:
@@ -35,9 +36,6 @@ class LevelManager {
         // pre-conditions  LevelManager does not yet exist
         // post-conditions LevelManager exists, variables have default values
 		LevelManager() : previous_gamestate(-1), previous_paused(0), level_x(0), level_y(0) {};
-
-		// loads level from file fname
-		bool load_level_old(std::string fname);
 
 		// loads level from file fname
 		bool load_level(std::string fname);
@@ -71,8 +69,6 @@ class LevelManager {
         // param time the time it took to win or lose
         // param win: 0 if lose, 1 if win
         void level_end(int score, double time, int win);
-    
-        void play_music();
     
 };
 
