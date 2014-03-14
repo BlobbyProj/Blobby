@@ -42,6 +42,8 @@ m to mute<br>
 5. Open the bin directory ("cd bin") 
 
 6. Type "./blobby" to run the executable
+ 
+* Note: Terminal must be used to run the executable. Double-clicking does not work.
 
 ========================
 
