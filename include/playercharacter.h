@@ -15,10 +15,10 @@ class PlayerCharacter : public FallingObj {
 		bool blocked[4];
 		bool pressed[3]; //0 = left, 1 = up, 2 = right
 		char lives;
-                double time;
-                
-                bool powerup;
-                double powerup_time;
+        double time;
+        
+        bool powerup;
+        double powerup_time;
 
 	public:
         // constructor for PlayerCharacter - creates new instance of PlayerCharacter object
@@ -51,6 +51,8 @@ class PlayerCharacter : public FallingObj {
         // post-conditions PlayerCharacter appears on texture
 		void draw();
     
+        // sets the powerup instance variable
+        // param the value to set powerup to
         void set_powerup(bool p);
 };
 

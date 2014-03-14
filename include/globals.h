@@ -45,7 +45,6 @@ extern char global_background[3];
 extern unsigned int global_background_key;
 extern int global_previous_gamestate;
 extern int global_previous_level;
-extern int global_island_progress;
 extern int global_level_progress;
 extern bool global_invalid_level;
 extern bool global_level_failed;

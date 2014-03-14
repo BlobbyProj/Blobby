@@ -10,20 +10,23 @@
 
 class Text : public Object {
 	private:
-                std::string textStr;
-                TTF_Font* font;
+            std::string textStr;
+            TTF_Font* font;
 
-        public:
+    public:
         // constructor for Text - creates new instance of Text object
         // param X         x coordinate for location of upper-left corner of Text
         // param Y         y coordinate for location of upper-left corner of Text
-        // pre-conditions  Text object does not yet exist
-        // post-conditions Text is set with specific font and given x,y coordinates
+        // param text      text to be displayed
+        // pre-conditions  Text does not yet exist
+        // post-conditions Text exists
 		Text(double X, double Y, std::string text, int flags=0);
 
-        // destructor for Text - destroys instance of Text object
+        // destructor for Text - deletes instance of Text object
+        // pre-conditions  Text exists
+        // post-conditions Text no longer exists
                 ~Text();
-		
+        		
         // called every iteration of the game loop; inherited from Object
         // Text does nothing because it does not change with each iteration
 		void step() {};
