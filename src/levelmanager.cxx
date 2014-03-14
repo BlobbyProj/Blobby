@@ -18,75 +18,6 @@
 #include "text.h"
 #include "spike.h"
 
-/***** Do we still need this?? *****/
-bool LevelManager::load_level_old(std::string fname)
-{
-/* Object types:
-
-	0 = Undefined
-	1 = PlayerCharacter
-	2 = Button
-	3 = Image
-	4 = Enemy
-	5 = Block
-	6 = Flag
-	7 = Gloop
-
-*/
-	int i;
-	std::string buff;
-
-	std::fstream file;
-	file.open(fname.c_str());
-
-	int obj_num;
-	std::getline(file, buff);
-
-	obj_num = atoi(buff.c_str());
-	for (i = 0; i < obj_num; i++)
-	{
-		std::getline(file, buff);
-		std::stringstream buffer;
-		buffer << buff;
-
-		int obj_type;
-		buffer >> obj_type;
-
-		int obj_x, obj_y;
-		buffer >> obj_x;
-		buffer >> obj_y;
-
-		int obj_width, obj_height;
-		buffer >> obj_width;
-		buffer >> obj_height;
-
-		std::getline(file, buff);
-
-		switch(obj_type)
-		{
-			case PLAYERCHARACTER:
-				object_manager->objects_add(new PlayerCharacter(obj_x, obj_y, obj_width, obj_height, buff));
-				break;
-			case IMAGE:
-				object_manager->objects_add(new Image(obj_x, obj_y, obj_width, obj_height, buff));
-				break;
-			case ENEMY:
-				object_manager->objects_add(new Enemy(obj_x, obj_y, obj_width, obj_height, buff));
-				break;
-			case BLOCK:
-				object_manager->objects_add(new Block(obj_x, obj_y, obj_width, obj_height, buff));
-				break;
-			case FLAG:
-				object_manager->objects_add(new Flag(obj_x, obj_y, obj_width, obj_height, buff));
-				break;
-			case GLOOP:
-				object_manager->objects_add(new Gloop(obj_x, obj_y, obj_width, obj_height, buff));
-				break;
-		}
-	}
-	file.close();
-}
-
 bool LevelManager::load_level(std::string fname)
 {
 /* Object types:
@@ -307,25 +238,26 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
-
-            // Island 2 begins
+                
             case 6: //Level 3
-                island = 2;
+                island = 1;
    				global_previous_level = global_gamestate;
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
 				level_y = 0;
                 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island2.txt"));
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island1.txt"));
+                object_manager->objects_add(new Image(720,150, -1, -1, "media/tutorial/spikes.txt"));
                 load_level("media/levels/level3.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
 
+            // Island 2 begins
             case 7: //Level 4
                 island = 2;
-   				global_previous_level = global_gamestate;            
+   				global_previous_level = global_gamestate;
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
@@ -336,22 +268,23 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
-                
-            // Island 3 begins
+
             case 8: //Level 5
-                island = 3;
+                island = 2;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
 				level_height = HEIGHT;
 				level_x = 0;
 				level_y = 0;
                 
-                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island3.txt"));
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island2.txt"));
                 load_level("media/levels/level5.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
-
-                break;
-            case 9: //Level 5
+                
+				break;
+                
+            // Island 3 begins
+            case 9: //Level 7
                 island = 3;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
@@ -360,11 +293,24 @@ void LevelManager::step()
 				level_y = 0;
                 
                 object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island3.txt"));
-                load_level("media/levels/level6.txt");
+                load_level("media/levels/level7.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 
                 break;
-            case 10: //Level 5
+            case 10: //Level 8
+                island = 3;
+   				global_previous_level = global_gamestate;            
+				level_width = 2960;
+				level_height = HEIGHT;
+				level_x = 0;
+				level_y = 0;
+                
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island3.txt"));
+                load_level("media/levels/level8.txt");
+                object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+
+                break;
+            case 11: //Level 9
                 island = 3;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
@@ -374,7 +320,7 @@ void LevelManager::step()
 
 
                 object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island3.txt"));
-                load_level("media/levels/level7.txt");
+                load_level("media/levels/level9.txt");
                 object_manager->objects_add(new Image(360,25, -1, -1, "media/tutorial/tunnel.txt"));
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 
