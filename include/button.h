@@ -58,6 +58,24 @@ void ButtonLevelMap(bool init, std::string *filename);
 
 void ButtonLevelMapPause(bool init, std::string *filename);
 
+void ButtonLevel1(bool init, std::string *filename);
+
+void ButtonLevel2(bool init, std::string *filename);
+
+void ButtonLevel3(bool init, std::string *filename);
+
+void ButtonLevel4(bool init, std::string *filename);
+
+void ButtonLevel5(bool init, std::string *filename);
+
+void ButtonLevel6(bool init, std::string *filename);
+
+void ButtonLevel7(bool init, std::string *filename);
+
+void ButtonLevel8(bool init, std::string *filename);
+
+void ButtonLevel9(bool init, std::string *filename);
+
 class Button : public Object {
         private:
             bool pressed;

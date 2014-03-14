@@ -188,7 +188,7 @@ void LevelManager::step()
             case 3: //Level Map
             	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/levelMap.txt"));
 				object_manager->objects_add(new Button(50,150, -1, -1, ButtonIsland1));
-                
+    
                 if (global_island_progress > 1)
                     object_manager->objects_add(new Button(230,280, -1, -1, ButtonIsland2));
                 else

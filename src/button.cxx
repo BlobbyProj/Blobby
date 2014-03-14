@@ -201,6 +201,86 @@ void ButtonLevelMapPause(bool init, std::string *filename)
 	global_gamestate = 3;
 }
 
+void ButtonLevel1(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/levelmap/island1.txt";
+		return;
+	}
+	global_gamestate = 4;
+}
+
+void ButtonLevel2(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/levelmap/island1.txt";
+		return;
+	}
+	global_gamestate = 5;
+}
+
+void ButtonLevel3(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/levelmap/island1.txt";
+		return;
+	}
+	global_gamestate = 6;
+}
+
+void ButtonLevel4(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/levelmap/island2.txt";
+		return;
+	}
+	global_gamestate = 7;
+}
+
+void ButtonLevel5(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/levelmap/island2.txt";
+		return;
+	}
+	global_gamestate = 8;
+}
+
+void ButtonLevel7(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/levelmap/island3.txt";
+		return;
+	}
+	global_gamestate = 9;
+}
+
+void ButtonLevel8(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/levelmap/island3.txt";
+		return;
+	}
+	global_gamestate = 10;
+}
+
+void ButtonLevel9(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/levelmap/island3.txt";
+		return;
+	}
+	global_gamestate = 11;
+}
+
 Button::Button(double X, double Y, int W, int H, void (*otherFunction)(bool,std::string*), int flags)
 {
 	apply_flags(flags);
