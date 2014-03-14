@@ -148,7 +148,14 @@ public:
         // pre-conditions  texture exists
         void print();
 
-        void text_apply(double x, double y, std::string score, TTF_Font* font);
+        // adds a string to the renderer
+        // param x    x coordinate of upper-left corner of text
+        // param y    y coordinate of upper-left corner of text
+        // param text text to be applied
+        // param font font to be used
+        // pre-conditions  font loaded
+        // post-conditions text ready to be displayed
+        void text_apply(double x, double y, std::string text, TTF_Font* font);
 };
 
 #endif
