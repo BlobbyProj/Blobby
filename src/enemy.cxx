@@ -119,9 +119,11 @@ void Enemy::step()
 
 	//Contain enemy
 	if (position.x < 0)
-		position.x = 0;
+        xvel = -1*xvel;
+		//position.x = 0;
 	if (position.x > level_manager->get_level_width()-width)
-		position.x = level_manager->get_level_width()-width;
+		//position.x = level_manager->get_level_width()-width;
+        xvel = -1*xvel;
 	if (position.y > level_manager->get_level_height()-20-height)
 	{
 		position.y = level_manager->get_level_height()-20-height;

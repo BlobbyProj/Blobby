@@ -220,7 +220,7 @@ void LevelManager::step()
                 object_manager->objects_add(new Image(480,250, -1, -1, "media/tutorial/life.txt"));
                 object_manager->objects_add(new Image(640,200, -1, -1, "media/tutorial/powerup.txt"));
                 object_manager->objects_add(new Image(840,150, -1, -1, "media/tutorial/avoid.txt"));
-                load_level("media/levels/level1.txt");
+                load_level("media/levels/level3.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
             
 				break;
@@ -238,9 +238,23 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
 				break;
+                
+            case 6: //Level 3
+                island = 1;
+   				global_previous_level = global_gamestate;
+				level_width = 2960;
+				level_height = HEIGHT;
+				level_x = 0;
+				level_y = 0;
+                
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island1.txt"));
+                load_level("media/levels/level3.txt");
+                object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+                
+				break;
 
             // Island 2 begins
-            case 6: //Level 4
+            case 7: //Level 4
                 island = 2;
    				global_previous_level = global_gamestate;
 				level_width = 2960;
@@ -254,7 +268,7 @@ void LevelManager::step()
                 
 				break;
 
-            case 7: //Level 5
+            case 8: //Level 5
                 island = 2;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
@@ -269,7 +283,7 @@ void LevelManager::step()
 				break;
                 
             // Island 3 begins
-            case 8: //Level 7
+            case 9: //Level 7
                 island = 3;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
@@ -282,7 +296,7 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 
                 break;
-            case 9: //Level 8
+            case 10: //Level 8
                 island = 3;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
@@ -295,7 +309,7 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 
                 break;
-            case 10: //Level 9
+            case 11: //Level 9
                 island = 3;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
