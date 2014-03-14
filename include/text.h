@@ -14,16 +14,14 @@ class Text : public Object {
                 TTF_Font* font;
 
         public:
-        // constructor for Image - creates new instance of Text object
+        // constructor for Text - creates new instance of Text object
         // param X         x coordinate for location of upper-left corner of Text
         // param Y         y coordinate for location of upper-left corner of Text
-        // param width     width of Text in pixels
-        // param height    height of Text in pixels
-        // param filename  filename of object image
-        // pre-conditions  Image does not yet exist
-        // post-conditions Image exists
+        // pre-conditions  Text object does not yet exist
+        // post-conditions Text is set with specific font and given x,y coordinates
 		Text(double X, double Y, std::string text, int flags=0);
 
+        // destructor for Text - destroys instance of Text object
                 ~Text();
 		
         // called every iteration of the game loop; inherited from Object

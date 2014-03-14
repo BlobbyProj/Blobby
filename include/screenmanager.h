@@ -148,6 +148,12 @@ public:
         // pre-conditions  texture exists
         void print();
 
+        // applies text obect to screen
+        // param x position x of upper-left corner
+        // param y position y of upper-left corner
+        // param score  string to be applied as texture
+        // param font  font of text
+        // create surface from text, then texture from surface to apply to screen
         void text_apply(double x, double y, std::string score, TTF_Font* font);
 };
 
