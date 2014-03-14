@@ -2,6 +2,7 @@
 #define LEVELMANAGER_H
 
 #include <string>
+#include <vector>
 #ifdef OSX
 #include <SDL2_ttf/SDL_ttf.h>
 #else
@@ -29,12 +30,14 @@ class LevelManager {
     
         void play_music();
         void set_progress();
+    
+        std::vector<void (*)(bool,std::string*)> button_list;
 		
 	public:
         // constructor for LevelManager - controls the levels in the game
         // pre-conditions  LevelManager does not yet exist
         // post-conditions LevelManager exists, variables have default values
-		LevelManager() : previous_gamestate(-1), previous_paused(0), level_x(0), level_y(0) {};
+		LevelManager();
 
 		// loads level from file fname
 		bool load_level(std::string fname);

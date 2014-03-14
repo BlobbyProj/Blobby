@@ -133,36 +133,6 @@ void ButtonVolume(bool init, std::string *filename)
     music_manager->toggle();
 }
 
-void ButtonIsland1(bool init, std::string *filename)
-{
-	if (init == 1)
-	{
-		*filename = "media/buttons/levelmap/island1.txt";
-		return;
-	}
-	global_gamestate = 4;
-}
-
-void ButtonIsland2(bool init, std::string *filename)
-{
-	if (init == 1)
-	{
-		*filename = "media/buttons/levelmap/island2.txt";
-		return;
-	}
-	global_gamestate = 7;
-}
-
-void ButtonIsland3(bool init, std::string *filename)
-{
-	if (init == 1)
-	{
-		*filename = "media/buttons/levelmap/island3.txt";
-		return;
-	}
-	global_gamestate = 9;
-}
-
 void ButtonContinue(bool init, std::string *filename)
 {
 	if (init == 1)
@@ -251,17 +221,17 @@ void ButtonLevel5(bool init, std::string *filename)
 	global_gamestate = 8;
 }
 
-void ButtonLevel7(bool init, std::string *filename)
+void ButtonLevel6(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/levelmap/island3.txt";
+		*filename = "media/buttons/levelmap/island2.txt";
 		return;
 	}
 	global_gamestate = 9;
 }
 
-void ButtonLevel8(bool init, std::string *filename)
+void ButtonLevel7(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
@@ -271,7 +241,7 @@ void ButtonLevel8(bool init, std::string *filename)
 	global_gamestate = 10;
 }
 
-void ButtonLevel9(bool init, std::string *filename)
+void ButtonLevel8(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
@@ -279,6 +249,16 @@ void ButtonLevel9(bool init, std::string *filename)
 		return;
 	}
 	global_gamestate = 11;
+}
+
+void ButtonLevel9(bool init, std::string *filename)
+{
+	if (init == 1)
+	{
+		*filename = "media/buttons/levelmap/island3.txt";
+		return;
+	}
+	global_gamestate = 12;
 }
 
 Button::Button(double X, double Y, int W, int H, void (*otherFunction)(bool,std::string*), int flags)

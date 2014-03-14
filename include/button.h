@@ -46,12 +46,6 @@ void ButtonGoBack(bool init,std::string *filename);
 // toggles volume
 void ButtonVolume(bool init, std::string *filename);
 
-void ButtonIsland1(bool init, std::string *filename);
-
-void ButtonIsland2(bool init, std::string *filename);
-
-void ButtonIsland3(bool init, std::string *filename);
-
 void ButtonContinue(bool init, std::string *filename);
 
 void ButtonLevelMap(bool init, std::string *filename);

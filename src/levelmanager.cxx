@@ -18,6 +18,24 @@
 #include "text.h"
 #include "spike.h"
 
+LevelManager::LevelManager(): previous_gamestate(-1), previous_paused(0), level_x(0), level_y(0) {
+    std::string temp[7] = {"goon", "goon2", "torto", "torto2", "spikee", "vacuur", "vacuur2"};
+    for (int i=0; i<7; i++){
+        enemy_list[i] = temp[i];
+    }
+    button_list.resize(9);
+    button_list[0] = ButtonLevel1;
+    button_list[1] = ButtonLevel2;
+    button_list[2] = ButtonLevel3;
+    button_list[3] = ButtonLevel4;
+    button_list[4] = ButtonLevel5;
+    button_list[5] = ButtonLevel6;
+    button_list[6] = ButtonLevel7;
+    button_list[7] = ButtonLevel8;
+    button_list[8] = ButtonLevel9;
+    
+}
+
 bool LevelManager::load_level(std::string fname)
 {
 /* Object types:
@@ -187,16 +205,42 @@ void LevelManager::step()
                 
             case 3: //Level Map
             	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/levelMap.txt"));
-				object_manager->objects_add(new Button(50,150, -1, -1, ButtonIsland1));
-    
-                if (global_island_progress > 1)
-                    object_manager->objects_add(new Button(230,280, -1, -1, ButtonIsland2));
-                else
-                    object_manager->objects_add(new Image(230,280, -1, -1, "media/buttons/levelmap/island2img.txt"));
-                if (global_island_progress > 2)
-                    object_manager->objects_add(new Button(410,160, -1, -1, ButtonIsland3));
-                else
-                    object_manager->objects_add(new Image(410,160, -1, -1, "media/buttons/levelmap/island3img.txt"));
+                // display island1 buttons
+                if (global_level_progress <= 3 ) {
+                    for (int i = 0; i < global_level_progress; i++) {
+                        object_manager->objects_add( new Button(60 + 50*i, 335, 40, 40, button_list[i]) );
+                    }
+                }
+                else {
+                    for (int i = 0; i < 3; i++) {
+                        object_manager->objects_add( new Button(60 + 50*i, 335, 40, 40, button_list[i]) );
+                    }
+                }
+                // display island2 buttons
+                if (global_level_progress <= 6 && global_level_progress > 3) {
+                    for (int i = 3; i < global_level_progress; i++) {
+                        object_manager->objects_add( new Button(95 + 50*i, 235, 40, 40, button_list[i]) );
+                    }
+                }
+                else if (global_level_progress > 6) {
+                    for (int i = 3; i < 6; i++) {
+                        object_manager->objects_add( new Button(95 + 50*i, 235, 40, 40, button_list[i]) );
+                    }
+                }
+                // display island3 buttons
+                if (global_level_progress <= 9 && global_level_progress > 6) {
+                    for (int i = 6; i < global_level_progress; i++) {
+                        object_manager->objects_add( new Button(135 + 50*i, 350, 40, 40, button_list[i]) );
+                    }
+                }
+                else if (global_level_progress > 9){
+                    for (int i = 6; i < 9; i++) {
+                        object_manager->objects_add( new Button(135 + 50*i, 350, 40, 40, button_list[i]) );
+                    }
+                }
+                object_manager->objects_add(new Image(50,150, -1, -1, "media/buttons/levelmap/island1img.txt"));
+                object_manager->objects_add(new Image(230,280, -1, -1, "media/buttons/levelmap/island2img.txt"));
+                object_manager->objects_add(new Image(410,160, -1, -1, "media/buttons/levelmap/island3img.txt"));
                 
                 object_manager->objects_add(new Button(20,400, -1, -1, ButtonMainMenuSmall));
 				level_width = WIDTH;
@@ -283,8 +327,22 @@ void LevelManager::step()
                 
 				break;
                 
+            case 9: //Level 6
+                island = 2;
+   				global_previous_level = global_gamestate;
+				level_width = 2960;
+				level_height = HEIGHT;
+				level_x = 0;
+				level_y = 0;
+                
+                object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island2.txt"));
+                load_level("media/levels/level5.txt");
+                object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
+                
+				break;
+                
             // Island 3 begins
-            case 9: //Level 7
+            case 10: //Level 7
                 island = 3;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
@@ -297,7 +355,7 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 
                 break;
-            case 10: //Level 8
+            case 11: //Level 8
                 island = 3;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
@@ -310,7 +368,7 @@ void LevelManager::step()
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
 
                 break;
-            case 11: //Level 9
+            case 12: //Level 9
                 island = 3;
    				global_previous_level = global_gamestate;            
 				level_width = 2960;
@@ -402,27 +460,18 @@ std::string LevelManager::get_enemy() {
 }
 
 void LevelManager::set_progress() {
-    int progress;
-    switch (global_gamestate) {
-        case 6:
-            progress = 2;
-            break;
-        case 8:
-            progress = 3;
-            break;
-        default:
-            progress = 0;
-            break;
-    }
+    int progress = 0;
+    std::cout << "global gamestate = " << global_gamestate << ", level progress = " << global_level_progress << std::endl;
+    if (global_gamestate-2 > global_level_progress)
+        progress = global_gamestate - 2;
     if (progress != 0) {
-        global_island_progress = progress;
+        global_level_progress = progress;
         std::ofstream file;
         file.open("media/levels/save.txt");
         if (!file.is_open()) {
             FLAG;
         }
-        file << global_island_progress;
+        file << global_level_progress;
         file.close();
-        
     }
 }

@@ -54,7 +54,7 @@ int main( int argc, char* args[] )
     std::string buff;
     if (file.is_open()) {
         while (!file.eof()) {
-            file >> global_island_progress;
+            file >> global_level_progress;
         }
     }
     file.close();

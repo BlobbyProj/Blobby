@@ -7,7 +7,7 @@
 #define HEIGHT 480
 #define CONSOLE_WIDTH 200
 #define CONSOLE_HEIGHT 400
-#define NUM_LEVELS 7
+#define NUM_LEVELS 9
 
 #define PLAYERCHARACTER 1
 #define BUTTON 2
@@ -46,6 +46,7 @@ extern unsigned int global_background_key;
 extern int global_previous_gamestate;
 extern int global_previous_level;
 extern int global_island_progress;
+extern int global_level_progress;
 extern bool global_invalid_level;
 extern bool global_level_failed;
 
