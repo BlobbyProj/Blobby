@@ -2,6 +2,12 @@
 #define LEVELMANAGER_H
 
 #include <string>
+#ifdef OSX
+#include <SDL2_ttf/SDL_ttf.h>
+#else
+#include <SDL2/SDL_ttf.h>
+#endif
+
 
 class LevelManager {
 	private:
@@ -12,6 +18,10 @@ class LevelManager {
 		double level_y;
 		double level_width;
         double level_height;
+
+        int score;
+        int timeT;
+        bool levelFailed;
     
         int island;
     

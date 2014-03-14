@@ -8,10 +8,11 @@ BDIR = bin
 CC = g++
 OS = 
 
-_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o gloop.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o fallingobj.o powerup.o spike.o
+
+_OBJ = main.o globals.o levelmanager.o screenmanager.o texture.o gloop.o objectmanager.o object.o rectangle.o playercharacter.o button.o image.o enemy.o block.o flag.o musicmanager.o fallingobj.o powerup.o text.o spike.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-OBJECTS = playercharacter.h button.h image.h enemy.h block.h flag.h gloop.h spike.h
+OBJECTS = playercharacter.h button.h image.h enemy.h block.h flag.h gloop.h spike.h text.h
 
 vpath %.h $(IDIR)
 vpath %.cxx $(SDIR)
@@ -21,14 +22,14 @@ ifeq ($(OS),OSX)
 CFLAGS = -I$(IDIR) -std=c++0x -g -DOSX
 LFLAGS = -g
 LIBS =
-FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2 /Library/Frameworks/SDL2_image.framework/Versions/Current/SDL2_image /Library/Frameworks/SDL2_mixer.framework/Versions/Current/SDL2_mixer
+FRAMEWORKS = /Library/Frameworks/SDL2.framework/Versions/Current/SDL2 /Library/Frameworks/SDL2_image.framework/Versions/Current/SDL2_image /Library/Frameworks/SDL2_mixer.framework/Versions/Current/SDL2_mixer /Library/Frameworks/SDL2_ttf.framework/Versions/Current/SDL2_ttf
 endif
 
 #WINDOWS
 ifeq ($(OS),WINDOWS)
 CFLAGS = -I$(IDIR) -std=c++0x -g -DWINDOWS
 LFLAGS = -static-libgcc -static-libstdc++ -g -lSDL2_mixer
-LIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -mwindows
+LIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image - lSDL2_ttf -mwindows
 FRAMEWORKS = 
 endif
 
@@ -36,7 +37,7 @@ endif
 ifeq ($(OS),LINUX)
 CFLAGS = -I$(IDIR) -std=c++0x -g -DLINUX
 LFLAGS = -static-libgcc -static-libstdc++ -g
-LIBS = -lSDL2 -lSDL2_image -lSDL2_mixer
+LIBS = -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
 FRAMEWORKS = 
 endif
 
@@ -51,7 +52,7 @@ $(ODIR)/main.o: main.cxx globals.h levelmanager.h screenmanager.h objectmanager.
 $(ODIR)/globals.o: globals.cxx globals.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(ODIR)/levelmanager.o: levelmanager.cxx globals.h levelmanager.h screenmanager.h objectmanager.h musicmanager.h $(OBJECTS)
+$(ODIR)/levelmanager.o: levelmanager.cxx globals.h levelmanager.h screenmanager.h objectmanager.h musicmanager.h text.h $(OBJECTS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 $(ODIR)/screenmanager.o: screenmanager.cxx globals.h levelmanager.h screenmanager.h texture.h rectangle.h
@@ -100,6 +101,9 @@ $(ODIR)/powerup.o: powerup.cxx object.h powerup.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 	
 $(ODIR)/spike.o: spike.cxx object.h spike.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+$(ODIR)/text.o: text.cxx object.h text.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 .PHONY: clean

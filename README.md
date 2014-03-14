@@ -1,14 +1,20 @@
 Blobby
 ======
 
-Group Project; a game.
-Created by Katya Fomenko, Deanna Hartsook, Sam Heinz and Natasha Issayeva
+Group Project; a game.<br>
+Created by Katya Fomenko, Deanna Hartsook, Sam Heinz and Natasha Issayeva<br>
 Music composed by Cindy Shen
+
+**Hot Keys**<br>
+Main Menu: enter to Play<br>
+Scoreboard: enter to Continue<br>
+p to pause<br>
+m to mute<br>
 
 ========================
 **To Run on Linux OS**
 
-1. Make sure you have SDL2 Library, SDL2_Image, and SDL2_Mixer Installed (if not, see the downloading information section below).
+1. Make sure you have SDL2 Library, SDL2_Image, SDL2_Mixer, and SDL_ttf 2.0 Installed (if not, see the downloading information section below).
 
 2. Go into the main blobby directory that contains the makefile
 
@@ -105,6 +111,20 @@ Music composed by Cindy Shen
 	Comand: sudo ldconfig<br>
 
 ===============================
+**Downloading SDL_ttf 2.0 for Linux**
+
+1. To install SDL_ttf 2.0, go to https://www.libsdl.org/projects/SDL_ttf/<br>
+2. Download "SDL2_ttf-2.0.12.tar.gz"<br>
+3. Extract the archive (You can do this using tar)<br>
+	Command: tar -xvzf SDL2_ttf-2.0.12.tar.gz<br>
+4. Then build & install the libs<br>
+	Command: ./configure<br>
+	Command: make<br>
+	Command: sudo make install<br>
+5. Make sure to update links and cache to the libraries<br>
+	Comand: sudo ldconfig<br>
+
+===============================
 **Downloading Frameworks for Mac**
 
 1. Download SDL2 from http://libsdl.org/download-2.0.php
@@ -113,7 +133,9 @@ Music composed by Cindy Shen
 
 3. Download SDL2_mixer from http://www.libsdl.org/projects/SDL_mixer/
 
-4. Install and save all three the frameworks in /Library/Frameworks
+4. Download SDL_ttf from https://www.libsdl.org/projects/SDL_ttf/ 
+
+5. Install and save all four frameworks in /Library/Frameworks (you can use command-g to get to the folder)
 
 
 

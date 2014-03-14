@@ -19,7 +19,7 @@ void FallingObj::step() {
     if (position.y > HEIGHT) {
         trashed = 1;
         if(playercharacter) {
-            global_gamestate = 0;
+            global_gamestate = 2;
         }
     }
     return;

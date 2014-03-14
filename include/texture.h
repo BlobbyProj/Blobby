@@ -67,6 +67,7 @@ class Texture {
         // param val       index value in vector of frames
         // pre-conditions  vector of frames exists
 		const SDL_Texture *operator[](unsigned int val) const { return (*frames)[val]; }
+
 };
 
 #endif

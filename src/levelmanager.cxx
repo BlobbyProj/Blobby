@@ -15,6 +15,7 @@
 #include "flag.h"
 #include "gloop.h"
 #include "powerup.h"
+#include "text.h"
 #include "spike.h"
 
 /***** Do we still need this?? *****/
@@ -179,6 +180,8 @@ void LevelManager::set_level_y( double y )
 
 void LevelManager::step()
 {
+	std::string sc;
+	std::string t;
 	if (global_paused != previous_paused)
 	{
 		switch(global_paused)
@@ -230,17 +233,22 @@ void LevelManager::step()
 				break;
                 
             case 2: //Scoreboard
+            	sc = "Score = " + std::to_string(score);
+            	t = "Time = " + std::to_string(timeT) + " seconds";
             	object_manager->objects_add(new Image(0,0, 640, 480, "media/menus/scoreboard.txt"));
-                if (global_previous_gamestate != NUM_LEVELS+3){ // don't show continue if completed last level
+                //~ if (global_previous_gamestate != NUM_LEVELS+3 || !levelFailed){ // don't show continue if completed last level
+                if (global_previous_gamestate == NUM_LEVELS+3 || levelFailed == true){ // don't show continue if completed last level
+                    object_manager->objects_add(new Button(190,270, -1, -1, ButtonReplay));
+                }
+                else {
                     object_manager->objects_add(new Button(340,290, -1, -1, ButtonContinue));
                     object_manager->objects_add(new Button(130,290, 180, 45, ButtonReplaySmall));
                 }
-                else {
-                    object_manager->objects_add(new Button(190,270, -1, -1, ButtonReplay));
-                }
                 object_manager->objects_add(new Button(360,350, -1, -1, ButtonLevelMap));
 				object_manager->objects_add(new Button(150,350, -1, -1, ButtonMainMenuSmall));
-				level_width = WIDTH;
+				object_manager->objects_add(new Text(240, 180, sc));
+				object_manager->objects_add(new Text(180, 220, t));
+                level_width = WIDTH;
 				level_height = HEIGHT;
 				level_x = 0;
 				level_y = 0;
@@ -388,14 +396,16 @@ void LevelManager::step()
 
 void LevelManager::level_end(int score, double time, int win)
 {
-    std::cout << "time = " << time << std::endl;
-    std::cout << "score = " << score << std::endl;
+	this->score = score;
+	timeT = time;
     music_manager->stop();
     if (!win) {
+		levelFailed = true;
         object_manager->objects_add(new Image(0, 0, WIDTH, HEIGHT, "media/backgrounds/lose.txt", Object::FIXED));
         music_manager->play("media/music/death.wav", 1);
     }
     else {
+		levelFailed = false;
         music_manager->play("media/music/success_short.wav", 1);
         set_progress();
     }

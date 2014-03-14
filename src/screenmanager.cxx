@@ -278,3 +278,19 @@ void ScreenManager::print()
 			PRINT("   "<<it->second->get_filename(i))
 	}
 }
+
+void ScreenManager::text_apply(double x, double y, std::string score, TTF_Font* font)
+{
+	SDL_Color color = { 0, 0, 0 };
+	if (font == NULL) {
+		std::cout << "error with font: " << TTF_GetError() << std::endl;
+	}
+	SDL_Surface* surf = TTF_RenderText_Blended( font, score.c_str(), color );
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surf);
+	SDL_Rect dst;
+	dst.x = x;
+	dst.y = y;
+	SDL_QueryTexture(texture, NULL, NULL, &dst.w, &dst.h);
+	SDL_RenderCopy(renderer, texture, NULL, &dst);
+	SDL_FreeSurface(surf);
+}

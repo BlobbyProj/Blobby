@@ -22,6 +22,10 @@ int main( int argc, char* args[] )
         MARK
     }
 
+    if (TTF_Init() != 0){
+        std::cout << "error with text" << TTF_GetError() << std::endl;
+    }
+
 	//Create screen manager
 	screen_manager = new ScreenManager(WIDTH,HEIGHT);
 
@@ -116,12 +120,16 @@ int main( int argc, char* args[] )
 								global_gamestate = global_previous_gamestate;
 							}
 						}
-						if(global_gamestate == 2){
+						if(global_gamestate == 2)
+						{
 							int next_level = global_previous_level + 1;
-							if (global_previous_level == NUM_LEVELS +3)	
+							//if there is a next level
+							if(global_previous_level == NUM_LEVELS + 3){
 								global_gamestate = 0;
-							else
+							}
+							else{
 								global_gamestate = next_level;
+							}
 						}
 						break;
 					case SDLK_m:
@@ -156,6 +164,7 @@ int main( int argc, char* args[] )
     Mix_Quit();
     IMG_Quit();
 	SDL_Quit();
+	TTF_Quit();
 
     return 0;
 }

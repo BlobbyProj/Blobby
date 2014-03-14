@@ -5,6 +5,12 @@
 #include <map>
 #include "globals.h"
 #include "object.h"
+#include <string>
+#ifdef OSX
+#include <SDL2_ttf/SDL_ttf.h>
+#else
+#include <SDL2/SDL_ttf.h>
+#endif
 
 class ObjectManager {
 	private:
