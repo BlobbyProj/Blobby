@@ -14,7 +14,7 @@ m to mute<br>
 ========================
 **To Run on Linux OS**
 
-1. Make sure you have SDL2 Library, SDL2_Image, and SDL2_Mixer Installed (if not, see the downloading information section below).
+1. Make sure you have SDL2 Library, SDL2_Image, SDL2_Mixer, and SDL_ttf 2.0 Installed (if not, see the downloading information section below).
 
 2. Go into the main blobby directory that contains the makefile
 
@@ -103,6 +103,20 @@ m to mute<br>
 2. Download "SDL2_mixer-2.0.0.tar.gz"<br>
 3. Extract the archive (You can do this using tar)<br>
 	Command: tar -xvzf SDL2_mixer-2.0.0.tar.gz<br>
+4. Then build & install the libs<br>
+	Command: ./configure<br>
+	Command: make<br>
+	Command: sudo make install<br>
+5. Make sure to update links and cache to the libraries<br>
+	Comand: sudo ldconfig<br>
+
+===============================
+**Downloading SDL_ttf 2.0 for Linux**
+
+1. To install SDL_ttf 2.0, go to https://www.libsdl.org/projects/SDL_ttf/<br>
+2. Download "SDL2_ttf-2.0.12.tar.gz"<br>
+3. Extract the archive (You can do this using tar)<br>
+	Command: tar -xvzf SDL2_ttf-2.0.12.tar.gz<br>
 4. Then build & install the libs<br>
 	Command: ./configure<br>
 	Command: make<br>
