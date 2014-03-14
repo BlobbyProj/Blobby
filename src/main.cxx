@@ -123,13 +123,17 @@ int main( int argc, char* args[] )
 						//if you are on the scoreboard
 						if(global_gamestate == 2)
 						{
-							int next_level = global_previous_level + 1;
-							//if there is a next level
-							if(global_previous_level == NUM_LEVELS + 3){
-								global_gamestate = 0;
-							}
-							else{
-								global_gamestate = next_level;
+							if(global_level_failed){
+								global_gamestate = global_previous_level;
+							}else{
+								int next_level = global_previous_level + 1;
+								//if there is a next level
+								if(global_previous_level == NUM_LEVELS + 3){
+									global_gamestate = 0;
+								}
+								else{
+									global_gamestate = next_level;
+								}
 							}
 						}
 						break;

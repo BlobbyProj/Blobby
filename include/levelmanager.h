@@ -21,7 +21,6 @@ class LevelManager {
 
         int score;
         int timeT;
-        bool levelFailed;
     
         int island;
     

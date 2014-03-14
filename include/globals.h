@@ -47,6 +47,7 @@ extern int global_previous_gamestate;
 extern int global_previous_level;
 extern int global_island_progress;
 extern bool global_invalid_level;
+extern bool global_level_failed;
 
 extern double global_gravity;
 extern double global_timestep;
