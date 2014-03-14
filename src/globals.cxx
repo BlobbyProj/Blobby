@@ -27,7 +27,6 @@ char global_background[3] = {(char)170,(char)204,(char)255};
 unsigned int global_background_key = 0;
 int global_previous_gamestate = -1;
 int global_previous_level = 4;
-int global_island_progress = 1;
 int global_level_progress = 1;
 bool global_invalid_level = false;
 bool global_level_failed = false;
