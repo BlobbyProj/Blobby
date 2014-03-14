@@ -352,7 +352,7 @@ void LevelManager::level_end(int score, double time, int win)
     }
     else {
 		global_level_failed = false;
-        music_manager->play("media/music/success_short.wav", 1);
+        music_manager->play("media/music/success.wav", 1);
         set_progress();
     }
 }
@@ -404,10 +404,10 @@ std::string LevelManager::get_enemy() {
 void LevelManager::set_progress() {
     int progress;
     switch (global_gamestate) {
-        case 5:
+        case 6:
             progress = 2;
             break;
-        case 7:
+        case 8:
             progress = 3;
             break;
         default:
