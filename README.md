@@ -1,7 +1,7 @@
 Blobby
 ======
 
-Group Project; a game.<br>
+Group Project; a side-scrolling game.<br>
 Created by Katya Fomenko, Deanna Hartsook, Sam Heinz and Natasha Issayeva<br>
 Music composed by Cindy Shen
 
