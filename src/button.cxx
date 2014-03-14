@@ -175,7 +175,7 @@ void ButtonLevel1(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/levelmap/island1.txt";
+		*filename = "media/buttons/levelmap/level1.txt";
 		return;
 	}
 	global_gamestate = 4;
@@ -185,7 +185,7 @@ void ButtonLevel2(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/levelmap/island1.txt";
+		*filename = "media/buttons/levelmap/level2.txt";
 		return;
 	}
 	global_gamestate = 5;
@@ -195,7 +195,7 @@ void ButtonLevel3(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/levelmap/island1.txt";
+		*filename = "media/buttons/levelmap/level3.txt";
 		return;
 	}
 	global_gamestate = 6;
@@ -205,7 +205,7 @@ void ButtonLevel4(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/levelmap/island2.txt";
+		*filename = "media/buttons/levelmap/level4.txt";
 		return;
 	}
 	global_gamestate = 7;
@@ -215,7 +215,7 @@ void ButtonLevel5(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/levelmap/island2.txt";
+		*filename = "media/buttons/levelmap/level5.txt";
 		return;
 	}
 	global_gamestate = 8;
@@ -225,7 +225,7 @@ void ButtonLevel6(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/levelmap/island2.txt";
+		*filename = "media/buttons/levelmap/level6.txt";
 		return;
 	}
 	global_gamestate = 9;
@@ -235,7 +235,7 @@ void ButtonLevel7(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/levelmap/island3.txt";
+		*filename = "media/buttons/levelmap/level7.txt";
 		return;
 	}
 	global_gamestate = 10;
@@ -245,7 +245,7 @@ void ButtonLevel8(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/levelmap/island3.txt";
+		*filename = "media/buttons/levelmap/level8.txt";
 		return;
 	}
 	global_gamestate = 11;
@@ -255,7 +255,7 @@ void ButtonLevel9(bool init, std::string *filename)
 {
 	if (init == 1)
 	{
-		*filename = "media/buttons/levelmap/island3.txt";
+		*filename = "media/buttons/levelmap/level9.txt";
 		return;
 	}
 	global_gamestate = 12;

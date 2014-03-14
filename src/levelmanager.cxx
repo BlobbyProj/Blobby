@@ -208,41 +208,38 @@ void LevelManager::step()
                 // display island1 buttons
                 if (global_level_progress <= 3 ) {
                     for (int i = 0; i < global_level_progress; i++) {
-                        object_manager->objects_add( new Button(60 + 50*i, 335, 40, 40, button_list[i]) );
+                        object_manager->objects_add( new Button(200 + 100*i, 80, 40, 40, button_list[i]) );
                     }
                 }
                 else {
                     for (int i = 0; i < 3; i++) {
-                        object_manager->objects_add( new Button(60 + 50*i, 335, 40, 40, button_list[i]) );
+                        object_manager->objects_add( new Button(200 + 100*i, 80, 40, 40, button_list[i]) );
                     }
                 }
                 // display island2 buttons
                 if (global_level_progress <= 6 && global_level_progress > 3) {
                     for (int i = 3; i < global_level_progress; i++) {
-                        object_manager->objects_add( new Button(95 + 50*i, 235, 40, 40, button_list[i]) );
+                        object_manager->objects_add( new Button(200 + 100*(i-3), 225, 40, 40, button_list[i]) );
                     }
                 }
                 else if (global_level_progress > 6) {
                     for (int i = 3; i < 6; i++) {
-                        object_manager->objects_add( new Button(95 + 50*i, 235, 40, 40, button_list[i]) );
+                        object_manager->objects_add( new Button(200 + 100*(i-3), 225, 40, 40, button_list[i]) );
                     }
                 }
                 // display island3 buttons
                 if (global_level_progress <= 9 && global_level_progress > 6) {
                     for (int i = 6; i < global_level_progress; i++) {
-                        object_manager->objects_add( new Button(135 + 50*i, 350, 40, 40, button_list[i]) );
+                        object_manager->objects_add( new Button(200 + 100*(i-6), 375, 40, 40, button_list[i]) );
                     }
                 }
                 else if (global_level_progress > 9){
                     for (int i = 6; i < 9; i++) {
-                        object_manager->objects_add( new Button(135 + 50*i, 350, 40, 40, button_list[i]) );
+                        object_manager->objects_add( new Button(200 + 100*(i-6), 375, 40, 40, button_list[i]) );
                     }
                 }
-                object_manager->objects_add(new Image(50,150, -1, -1, "media/buttons/levelmap/island1img.txt"));
-                object_manager->objects_add(new Image(230,280, -1, -1, "media/buttons/levelmap/island2img.txt"));
-                object_manager->objects_add(new Image(410,160, -1, -1, "media/buttons/levelmap/island3img.txt"));
                 
-                object_manager->objects_add(new Button(20,400, -1, -1, ButtonMainMenuSmall));
+                object_manager->objects_add(new Button(10,440, -1, -1, ButtonMainMenuSmall));
 				level_width = WIDTH;
 				level_height = HEIGHT;
 				level_x = 0;
