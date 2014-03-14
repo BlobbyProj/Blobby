@@ -248,6 +248,7 @@ void LevelManager::step()
 				level_y = 0;
                 
                 object_manager->objects_add(new Image(0,0, level_width, level_height, "media/backgrounds/island1.txt"));
+                object_manager->objects_add(new Image(720,150, -1, -1, "media/tutorial/spikes.txt"));
                 load_level("media/levels/level3.txt");
                 object_manager->objects_add(new Button(580,30, -1, -1, ButtonPause));
                 
