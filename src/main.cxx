@@ -111,15 +111,16 @@ int main( int argc, char* args[] )
 						global_paused = 1;
 						break;
 					case SDLK_RETURN:
-						if(global_gamestate == 0 || global_paused == 1){
-							//eventually should make this go to the current level the user is on
-							if(global_previous_level == 4){
-								global_gamestate = 3;
-							}else{
-								global_paused = 0;
-								global_gamestate = global_previous_gamestate;
-							}
+						//if you're in the main menu
+						if(global_gamestate == 0){
+							global_gamestate = 3;
 						}
+						//if you are on the pause menu
+						if(global_paused == 1){
+							global_paused = 0;
+							global_gamestate = global_previous_gamestate;							
+						}
+						//if you are on the scoreboard
 						if(global_gamestate == 2)
 						{
 							int next_level = global_previous_level + 1;
